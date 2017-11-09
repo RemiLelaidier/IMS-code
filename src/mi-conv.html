@@ -54,14 +54,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <form>
               <h2 class="stepEtuTitle">Étudiant</h2>
               <hr>
-              <paper-dropdown-menu label="Promotion">
+              <paper-dropdown-menu label="Promotion" data-concerning="Étudiant">
                 <paper-listbox slot="dropdown-content" selected="0">
                   <paper-item>Master 2</paper-item>
                   <paper-item>Master 1</paper-item>
                   <paper-item>Licence 3</paper-item>
                 </paper-listbox>
               </paper-dropdown-menu>
-              <paper-dropdown-menu label="Genre">
+              <paper-dropdown-menu label="Genre" data-concerning="Étudiant">
                 <paper-listbox slot="dropdown-content" selected="0">
                   <paper-item>M</paper-item>
                   <paper-item>Mme</paper-item>
@@ -99,7 +99,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               <titanium-address-input required error-message="Adresse invalide" label="Adresse du siège social" api-key="AIzaSyCTiFwEzAkuXWgFQTr4GGAX5VpYR2aVxzw"></titanium-address-input>
               <titanium-address-input required error-message="Adresse invalide" label="Adresse du stage" api-key="AIzaSyCTiFwEzAkuXWgFQTr4GGAX5VpYR2aVxzw"></titanium-address-input>
               <h3>Directeur / Représentant</h3>
-              <paper-dropdown-menu label="Genre">
+              <paper-dropdown-menu label="Genre" data-concerning="Directeur / Représentant">
                 <paper-listbox slot="dropdown-content" selected="0">
                   <paper-item>M</paper-item>
                   <paper-item>Mme</paper-item>
@@ -130,7 +130,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               <h4>Gratification</h4>
               <p>Pour un stage en France, lorsque la durée du stage est supérieure à deux mois consécutifs (ou non), celui-ci fait l'objet d'une gratification, et qui sera due à compter du premier jour du premier mois de stage et devra faire l'objet d'un versement mensuel.</p>
               <paper-input class="longInput" label="Montant de la gratification (en euros)"></paper-input>
-              <paper-dropdown-menu label="Versement">
+              <paper-dropdown-menu label="Versement" data-concerning="Versement">
                 <paper-listbox slot="dropdown-content" selected="0">
                   <paper-item>Virement</paper-item>
                   <paper-item>Chèque</paper-item>
@@ -150,7 +150,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               <h2>Responsables</h2>
               <hr>
               <h3>Encadreur dans l'entreprise</h3>
-              <paper-dropdown-menu label="Genre">
+              <paper-dropdown-menu label="Genre" data-concerning="Encadreur dans l'entreprise">
                 <paper-listbox slot="dropdown-content" selected="0">
                   <paper-item>M</paper-item>
                   <paper-item>Mme</paper-item>
@@ -165,7 +165,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               <paper-input required class="longInput" label="En qualité de"></paper-input>
               <br>
               <h3>Tuteur enseignant</h3>
-              <paper-dropdown-menu label="Genre">
+              <paper-dropdown-menu label="Genre" data-concerning="Tuteur enseignant">
                 <paper-listbox slot="dropdown-content" selected="0">
                   <paper-item>M</paper-item>
                   <paper-item>Mme</paper-item>
@@ -234,6 +234,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       * Called by on-click on "next button" of each step
       */
       _submitStep() {
+        this.endCeremony();
         let clicked = Polymer.dom(event).localTarget; // Getting our button
         const currentStep = clicked.getAttribute('data-step'); // Getting current step, could be useful (to know when it's the last? :troll:)
 
@@ -262,13 +263,54 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       /**
-      * Ending everything
-      * Send everything using iron-ajax to API in JSON
+      * Ending everything, parsing everything..
+      *
+      * TODO : Send everything using iron-ajax to API in JSON
       *
       */
       endCeremony(){
-        console.warn("🚀 Too bad, come back later.");
-        return 42;
+        let forms = this.shadowRoot.querySelectorAll('iron-form');
+        let structuredData = [];
+
+        // Cause forms is a nodeList
+        // We iterate over each form found in steps
+        [].map.call(forms, function (form) {
+          // Getting every field
+          let inputs = form.querySelectorAll(`#${form.id} paper-input`);
+          let textareas = form.querySelectorAll(`#${form.id} paper-textarea`);
+          let dropdowns = form.querySelectorAll(`#${form.id} paper-dropdown-menu`);
+
+          // Creating our new form object, with his title
+          let thisForm = { "title" : form.querySelector(`#${form.id} h2`).innerHTML };
+
+          // Create arrays if needed
+          if(inputs.length)
+            thisForm.inputs = [];
+          if(textareas.length)
+            thisForm.textareas = [];
+          if(dropdowns.length)
+            thisForm.dropdowns = [];
+
+          // Foreach input, we just grab every label + value
+          [].map.call(inputs, function(input){
+            thisForm.inputs.push({ label: input.label, value: input.value });
+          });
+          [].map.call(textareas, function(textarea){
+            thisForm.textareas.push({ label: textarea.label, value: textarea.value });
+          });
+
+          // Cause inputs are most of the time "gender", we need to know for who => concerning
+          [].map.call(dropdowns, function(dropdown){
+            thisForm.dropdowns.push({ label: dropdown.label, value: dropdown.value, concerning: dropdown.getAttribute('data-concerning') });
+          });
+
+          structuredData.push(thisForm);
+        });
+
+        // Voilà ! Everything is extracted beautifully, ready for API !
+        console.warn("Structured data extracted : ", structuredData);
+        console.warn("🚀 Too bad, come back later for a beautiful ajax call!");
+        return structuredData;
       }
 
       /**
