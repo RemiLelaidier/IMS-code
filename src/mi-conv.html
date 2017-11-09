@@ -1,0 +1,289 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-form/iron-form.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/paper-stepper/paper-stepper.html">
+<link rel="import" href="../bower_components/paper-stepper/paper-step.html">
+<link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-toast/paper-toast.html">
+<link rel="import" href="../bower_components/paper-input/paper-textarea.html">
+<link rel="import" href="../bower_components/titanium-address-input/titanium-address-input.html">
+
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="mi-conv">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+
+        padding: 10px;
+      }
+      .shortInput {
+        display: inline-block;
+        width: 13em;
+      }
+      .longInput {
+        display: inline-block;
+        width: 20em;
+      }
+      .submitAll, .nextStep {
+        float: right;
+      }
+      .nextStep {
+        margin: 1em;
+        padding: 1em;
+      }
+    </style>
+
+    <iron-pages selected="[[selected]]">
+        <div id="stepEtu">
+          <iron-form id="formEtu">
+            <form>
+              <h2 class="stepEtuTitle">Étudiant</h2>
+              <hr>
+              <paper-dropdown-menu label="Promotion">
+                <paper-listbox slot="dropdown-content" selected="0">
+                  <paper-item>Master 2</paper-item>
+                  <paper-item>Master 1</paper-item>
+                  <paper-item>Licence 3</paper-item>
+                </paper-listbox>
+              </paper-dropdown-menu>
+              <paper-dropdown-menu label="Genre">
+                <paper-listbox slot="dropdown-content" selected="0">
+                  <paper-item>M</paper-item>
+                  <paper-item>Mme</paper-item>
+                </paper-listbox>
+              </paper-dropdown-menu>
+              <br>
+              <paper-input required auto-validate pattern="[/\D+/]*" error-message="Ne peut contenir que des lettres" class="shortInput" label="Prénom"></paper-input>
+              <paper-input required auto-validate pattern="[/\D+/]*" error-message="Ne peut contenir que des lettres" class="longInput" label="Nom"></paper-input>
+              <br>
+              <paper-input required auto-validate pattern="^[1-3][0-9]{2}(0[1-9]|10|[235-9][0-9]|[14][12])(2[AB]|[0-9]{2})[0-9]{6}$" error-message="Doit être un numéro valide. Ex : 1230606088534"class="longInput" label="Numéro de sécurité sociale"></paper-input>
+              <paper-input required auto-validate pattern="[0-9]{8}" class="shortInput" label="Numéro d'étudiant" error-message="Doit être un numéro d'étudiant valide."></paper-input>
+              <paper-input required class="longInput" label="E-mail">
+                <div slot="suffix">@etu.unice.fr</div>
+              </paper-input>
+              <br>
+              <paper-input required class="shortInput" auto-validate pattern="^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/\-]\d{4}$" error-message="Doit être au format JJ/MM/AAAA" label="Date de naissance"></paper-input>
+              <paper-input required class="longInput" auto-validate pattern="^\+(?:[0-9]●?){6,14}[0-9]$" label="Téléphone" error-message="Doit être au format international. Ex : +33 6 12 23 34 45"></paper-input>
+              <titanium-address-input required label="Adresse" api-key="AIzaSyCTiFwEzAkuXWgFQTr4GGAX5VpYR2aVxzw"></titanium-address-input>
+              <p>
+                Pour votre stage, vous devez être couvert contre le risque "responsabilité civile":
+              </p>
+              <paper-input required label="Compagnie d'assurance"></paper-input>
+              <paper-input required label="Numéro de Police"></paper-input>
+              <paper-button id="submitEtu" class="nextStep" on-click="_submitStep" raised data-step="etudiant">Étape suivante</paper-button>
+            </form>
+         </iron-form>
+        </div>
+        <div id="stepEnt">
+          <iron-form id="formEnt">
+            <form>
+              <h2>Entreprise</h2>
+              <hr>
+              <paper-input required class="longInput" label="Nom"></paper-input>
+              <paper-input class="shortInput" label="Site web"></paper-input>
+              <titanium-address-input required label="Adresse du siège social" api-key="AIzaSyCTiFwEzAkuXWgFQTr4GGAX5VpYR2aVxzw"></titanium-address-input>
+              <titanium-address-input required label="Adresse du stage" api-key="AIzaSyCTiFwEzAkuXWgFQTr4GGAX5VpYR2aVxzw"></titanium-address-input>
+              <h3>Directeur / Représentant</h3>
+              <paper-dropdown-menu label="Genre">
+                <paper-listbox slot="dropdown-content" selected="0">
+                  <paper-item>M</paper-item>
+                  <paper-item>Mme</paper-item>
+                </paper-listbox>
+              </paper-dropdown-menu>
+              <paper-input required auto-validate pattern="[/\D+/]*" error-message="Ne peut contenir que des lettres" class="shortInput" label="Prénom"></paper-input>
+              <paper-input required auto-validate pattern="[/\D+/]*" error-message="Ne peut contenir que des lettres" class="longInput" label="Nom"></paper-input>
+              <br>
+              <paper-input required class="longInput" label="E-mail"></paper-input>
+              <br>
+              <paper-input required class="longInput" auto-validate pattern="^\+(?:[0-9]●?){6,14}[0-9]$" label="Téléphone" error-message="Doit être au format international. Ex : +33 6 12 23 34 45"></paper-input>
+              <paper-input required class="longInput" label="En qualité de"></paper-input>
+              <paper-button id="submitEnt" class="nextStep" on-click="_submitStep" raised data-step="entreprise">Étape suivante</paper-button>
+            </form>
+          </iron-form>
+        </div>
+        <div id="stepStage">
+          <iron-form id="formStage">
+            <form>
+              <h2>Stage</h2>
+              <hr>
+              <paper-input required class="shortInput" label="Date de début" auto-validate pattern="^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/\-]\d{4}$" error-message="Doit être au format JJ/MM/AAAA" ></paper-input>
+              <paper-input required class="shortInput" label="Date de fin" auto-validate pattern="^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/\-]\d{4}$" error-message="Doit être au format JJ/MM/AAAA" ></paper-input>
+              <h4>Horaires</h4>
+              <paper-input required class="longInput" label="Durée hebdomadaire (en heures)"></paper-input>
+              <paper-textarea required label="Horaires"></paper-textarea>
+              <paper-textarea label="Présence la nuit, le dimanche, ou les jours fériés (le cas échéant)"></paper-textarea>
+              <h4>Gratification</h4>
+              <p>Pour un stage en France, lorsque la durée du stage est supérieure à deux mois consécutifs (ou non), celui-ci fait l'objet d'une gratification, et qui sera due à compter du premier jour du premier mois de stage et devra faire l'objet d'un versement mensuel.</p>
+              <paper-input class="longInput" label="Montant de la gratification (en euros)"></paper-input>
+              <paper-dropdown-menu label="Versement">
+                <paper-listbox slot="dropdown-content" selected="0">
+                  <paper-item>Virement</paper-item>
+                  <paper-item>Chèque</paper-item>
+                </paper-listbox>
+              </paper-dropdown-menu>
+              <paper-textarea label="Avantages offerts par l'entreprise (restauration, hébergement, remboursement de frais, ...)"></paper-textarea>
+              <h4>Stage</h4>
+              <paper-input required class="longInput" label="Intitulé du stage"></paper-input>
+              <paper-textarea required label="Description"></paper-textarea>
+              <paper-button id="submitStage" class="nextStep" on-click="_submitStep" raised data-step="stage">Étape suivante</paper-button>
+            </form>
+          </iron-form>
+        </div>
+        <div id="stepResponsables">
+          <iron-form id="formResponsables">
+            <form>
+              <h2>Responsables</h2>
+              <hr>
+              <h3>Encadreur dans l'entreprise</h3>
+              <paper-dropdown-menu label="Genre">
+                <paper-listbox slot="dropdown-content" selected="0">
+                  <paper-item>M</paper-item>
+                  <paper-item>Mme</paper-item>
+                </paper-listbox>
+              </paper-dropdown-menu>
+              <paper-input required auto-validate pattern="[/\D+/]*" error-message="Ne peut contenir que des lettres" class="shortInput" label="Prénom"></paper-input>
+              <paper-input required auto-validate pattern="[/\D+/]*" error-message="Ne peut contenir que des lettres" class="longInput" label="Nom"></paper-input>
+              <br>
+              <paper-input required class="longInput" label="E-mail"></paper-input>
+              <br>
+              <paper-input required class="longInput" auto-validate pattern="^\+(?:[0-9]●?){6,14}[0-9]$" label="Téléphone" error-message="Doit être au format international. Ex : +33 6 12 23 34 45"></paper-input>
+              <paper-input required class="longInput" label="En qualité de"></paper-input>
+              <br>
+              <h3>Tuteur enseignant</h3>
+              <paper-dropdown-menu label="Genre">
+                <paper-listbox slot="dropdown-content" selected="0">
+                  <paper-item>M</paper-item>
+                  <paper-item>Mme</paper-item>
+                </paper-listbox>
+              </paper-dropdown-menu>
+              <paper-input required auto-validate pattern="[/\D+/]*" error-message="Ne peut contenir que des lettres" class="shortInput" label="Prénom"></paper-input>
+              <paper-input required auto-validate pattern="[/\D+/]*" error-message="Ne peut contenir que des lettres" class="longInput" label="Nom"></paper-input>
+              <br>
+              <paper-input required class="longInput" label="E-mail"></paper-input>
+              <br>
+              <paper-input required class="longInput" auto-validate pattern="^\+(?:[0-9]●?){6,14}[0-9]$" label="Téléphone" error-message="Doit être au format international. Ex : +33 6 12 23 34 45"></paper-input>
+              <paper-input required class="longInput" label="En qualité de"></paper-input>
+              <paper-button id="submitResp" class="nextStep" on-click="_submitStep" raised data-step="responsables">Étape suivante</paper-button>
+            </form>
+          </iron-form>
+        </div>
+        <div id="stepEnd">
+          <iron-form id="formEnd">
+            <form>
+              <h2>Informations complémentaires</h2>
+              <paper-textarea label="N'importe quel type d'information à communiquer si nécessaire"></paper-textarea>
+              <br>
+              <p>Un récapitulatif vous sera fourni afin que vous validiez les informations</p>
+              <p>A la fin du processus, votre convention de stage vous sera envoyée et envoyée à l'entreprise</p>
+              <paper-button raised class="submitAll indigo" on-click="_submitStep" data-step="end">Valider la convention de stage</paper-button>
+              <br>
+            </form>
+          </iron-form>
+        </div>
+    </iron-pages>
+    <br><br>
+
+    <paper-stepper id="stepper" progress-bar selected="{{selected}}" back-label="Précédent" next-label="Suivant" no-buttons>
+				<paper-step></paper-step>
+				<paper-step></paper-step>
+				<paper-step></paper-step>
+				<paper-step></paper-step>
+				<paper-step></paper-step>
+			</paper-stepper>
+  </template>
+
+  <script>
+    class MiConv extends Polymer.Element {
+      static get is() {
+        return 'mi-conv';
+      }
+      static get properties() {
+        return {
+          formEtu: Object,
+          stepper: Object
+        }
+      }
+      ready() {
+        super.ready();
+
+        this.stepper = this.shadowRoot.querySelector('#stepper');
+        this.formEtu = this.shadowRoot.querySelector('#formEtu');
+
+        this.stepper.addEventListener('selected-changed', function(event) {
+          console.log("Validated :", event.detail.value);
+        });
+      }
+
+      /**
+      * @function _submitStep
+      * Called by on-click on "next button" of each step
+      */
+      _submitStep() {
+        let clicked = Polymer.dom(event).localTarget; // Getting our button
+        const currentStep = clicked.getAttribute('data-step'); // Getting current step, could be useful (to know when it's the last? :troll:)
+
+        let currentForm = clicked.parentElement.parentElement; // Getting iron-form of this step
+        let active = this.shadowRoot.getElementById(currentForm.id); // with his shadowRoot
+
+        console.log("Submitted step", currentStep); // Ok, need debug
+
+        // .validate() launch validation and return true|false
+        // regexes are defined on paper-inputs, in the pattern attribute
+        if (active.validate()) {
+
+          if(currentStep === "end"){
+            console.warn("Howly shit, it's the end, we need to do something");
+            this.endCeremony();
+            return;
+          }
+
+          console.log("Everything validated, going to next step");
+          this.stepper._tapNext(); // Going to next step.
+
+        } else {
+          // Ooops, let's show a little material toast !
+          this.showToast("Vérifiez votre saisie");
+        }
+      }
+
+      /**
+      * Ending everything
+      * Send everything using iron-ajax to API in JSON
+      *
+      */
+      endCeremony(){
+        console.warn("🚀 Too bad, come back later.");
+        return 42;
+      }
+
+      /**
+      * Create + append paper-toast on the fly
+      * Populate text attribute
+      */
+      showToast(text){
+        let toast = document.createElement('paper-toast');
+        toast.text = text;
+        document.body.appendChild(toast);
+        toast.open();
+      }
+
+    }
+
+    window.customElements.define(MiConv.is, MiConv);
+  </script>
+</dom-module>
