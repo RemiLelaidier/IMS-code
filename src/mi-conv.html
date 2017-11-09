@@ -79,7 +79,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               <br>
               <paper-input required class="shortInput" auto-validate pattern="^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/\-]\d{4}$" error-message="Doit être au format JJ/MM/AAAA" label="Date de naissance"></paper-input>
               <paper-input required class="longInput" auto-validate pattern="^\+(?:[0-9]●?){6,14}[0-9]$" label="Téléphone" error-message="Doit être au format international. Ex : +33 6 12 23 34 45"></paper-input>
-              <titanium-address-input required label="Adresse" api-key="AIzaSyCTiFwEzAkuXWgFQTr4GGAX5VpYR2aVxzw"></titanium-address-input>
+              <titanium-address-input required label="Adresse" error-message="Adresse invalide" api-key="AIzaSyCTiFwEzAkuXWgFQTr4GGAX5VpYR2aVxzw"></titanium-address-input>
               <p>
                 Pour votre stage, vous devez être couvert contre le risque "responsabilité civile":
               </p>
@@ -96,8 +96,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               <hr>
               <paper-input required class="longInput" label="Nom"></paper-input>
               <paper-input class="shortInput" label="Site web"></paper-input>
-              <titanium-address-input required label="Adresse du siège social" api-key="AIzaSyCTiFwEzAkuXWgFQTr4GGAX5VpYR2aVxzw"></titanium-address-input>
-              <titanium-address-input required label="Adresse du stage" api-key="AIzaSyCTiFwEzAkuXWgFQTr4GGAX5VpYR2aVxzw"></titanium-address-input>
+              <titanium-address-input required error-message="Adresse invalide" label="Adresse du siège social" api-key="AIzaSyCTiFwEzAkuXWgFQTr4GGAX5VpYR2aVxzw"></titanium-address-input>
+              <titanium-address-input required error-message="Adresse invalide" label="Adresse du stage" api-key="AIzaSyCTiFwEzAkuXWgFQTr4GGAX5VpYR2aVxzw"></titanium-address-input>
               <h3>Directeur / Représentant</h3>
               <paper-dropdown-menu label="Genre">
                 <paper-listbox slot="dropdown-content" selected="0">
