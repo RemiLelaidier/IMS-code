@@ -234,7 +234,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       * Called by on-click on "next button" of each step
       */
       _submitStep() {
-        this.endCeremony();
         let clicked = Polymer.dom(event).localTarget; // Getting our button
         const currentStep = clicked.getAttribute('data-step'); // Getting current step, could be useful (to know when it's the last? :troll:)
 
