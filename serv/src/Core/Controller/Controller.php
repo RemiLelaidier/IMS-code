@@ -8,6 +8,7 @@ use App\Security\Model\User;
 use App\Security\Jwt\Manager as JwtManager;
 use Awurth\SlimValidation\Validator;
 use Cartalyst\Sentinel\Sentinel;
+use Monolog\Logger;
 use Psr\Container\ContainerInterface;
 use Slim\Exception\NotFoundException;
 use Slim\Http\Request;
@@ -30,6 +31,11 @@ abstract class Controller
     protected $container;
 
     /**
+     * @var Logger
+     */
+    protected $logger;
+
+    /**
      * Constructor.
      *
      * @param ContainerInterface $container
@@ -37,6 +43,7 @@ abstract class Controller
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
+        $this->logger = $container['monolog'];
     }
 
     /**
