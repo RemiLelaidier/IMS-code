@@ -1,6 +1,18 @@
 # IMS API
 Made by Miagists for Miagists
 
+## Todo
+- General :
+    - Database /!\
+    - Documentation
+        - Generate using Postman (collection in assets/)
+        - API.md using cli
+
+- Routes :
+    - Students related
+    - Convention related
+    - Admin related | Admin-convention related
+
 Based on [SlimREST](https://github.com/awurth/SlimREST) | Slim 3
 
 ## Stack
