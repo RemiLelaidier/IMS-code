@@ -1,0 +1,153 @@
+[
+  {
+  "title": "Étudiant",
+  "inputs": [{
+    "label": "Prénom",
+    "value": "Léonard"
+  }, {
+    "label": "Nom",
+    "value": "Cherouvrier"
+  }, {
+    "label": "Numéro de sécurité sociale",
+    "value": "1776766767678"
+  }, {
+    "label": "Numéro d'étudiant",
+    "value": "76776767"
+  }, {
+    "label": "E-mail",
+    "value": "leonard"
+  }, {
+    "label": "Date de naissance",
+    "value": "20/08/1996"
+  }, {
+    "label": "Téléphone",
+    "value": "+33668717002"
+  }, {
+    "label": "Compagnie d'assurance",
+    "value": "GMF"
+  }, {
+    "label": "Numéro de Police",
+    "value": "344"
+  }],
+  "dropdowns": [{
+    "label": "Promotion",
+    "value": "Master 1",
+    "concerning": "Étudiant"
+  }, {
+    "label": "Genre",
+    "value": "M",
+    "concerning": "Étudiant"
+  }]
+}, {
+  "title": "Entreprise",
+  "inputs": [{
+    "label": "Nom",
+    "value": "LeDuc"
+  }, {
+    "label": "Site web",
+    "value": "http://leduc.com"
+  }, {
+    "label": "Prénom",
+    "value": "Hervé"
+  }, {
+    "label": "Nom",
+    "value": "Dubreuil"
+  }, {
+    "label": "E-mail",
+    "value": "herve@test.io"
+  }, {
+    "label": "Téléphone",
+    "value": "+33668717002"
+  }, {
+    "label": "En qualité de",
+    "value": "COO"
+  }],
+  "dropdowns": [{
+    "label": "Genre",
+    "value": "M",
+    "concerning": "Directeur / Représentant"
+  }]
+}, {
+  "title": "Stage",
+  "inputs": [{
+    "label": "Date de début",
+    "value": "20/08/1996"
+  }, {
+    "label": "Date de fin",
+    "value": "20/09/1996"
+  }, {
+    "label": "Durée hebdomadaire (en heures)",
+    "value": "36"
+  }, {
+    "label": "Montant de la gratification (en euros)",
+    "value": "300"
+  }, {
+    "label": "Intitulé du stage",
+    "value": "Héhé"
+  }],
+  "textareas": [{
+    "label": "Horaires",
+    "value": "Lundi au vendredi 10h-20h"
+  }, {
+    "label": "Présence la nuit, le dimanche, ou les jours fériés (le cas échéant)",
+    "value": "Non"
+  }, {
+    "label": "Avantages offerts par l'entreprise (restauration, hébergement, remboursement de frais, ...)",
+    "value": "Aucun."
+  }, {
+    "label": "Description",
+    "value": "Je pue"
+  }],
+  "dropdowns": [{
+    "label": "Versement",
+    "value": "Virement",
+    "concerning": "Versement"
+  }]
+}, {
+  "title": "Responsables",
+  "inputs": [{
+    "label": "Prénom",
+    "value": "Hervé"
+  }, {
+    "label": "Nom",
+    "value": "Miauou"
+  }, {
+    "label": "E-mail",
+    "value": "leonard@test.ommfg"
+  }, {
+    "label": "Téléphone",
+    "value": "+33668717002"
+  }, {
+    "label": "En qualité de",
+    "value": "Chef"
+  }, {
+    "label": "Prénom",
+    "value": "Hervé"
+  }, {
+    "label": "Nom",
+    "value": "Miauou"
+  }, {
+    "label": "E-mail",
+    "value": "leonard@test.ommfg"
+  }, {
+    "label": "Téléphone",
+    "value": "+33668717002"
+  }, {
+    "label": "En qualité de",
+    "value": "Chef-bis"
+  }],
+  "dropdowns": [{
+    "label": "Genre",
+    "value": "Mme",
+    "concerning": "Encadreur dans l'entreprise"
+  }, {
+    "label": "Genre",
+    "value": "M",
+    "concerning": "Tuteur enseignant"
+  }]
+}, {
+  "title": "Informations complémentaires",
+  "textareas": [{
+    "label": "N'importe quel type d'information à communiquer si nécessaire"
+  }]
+}]
