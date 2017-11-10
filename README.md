@@ -12,6 +12,7 @@ Based on [Polymer Starter Kit](https://github.com/PolymerElements/polymer-starte
 - We need a database (MongoDB ?)
 - We also need to make an API using (Slim3?) and JWT to authenticate
 - Check / add validation on convention ceremony
+- Add localization ? Specs ?
 
 ### Setup
 

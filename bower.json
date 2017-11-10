@@ -1,7 +1,7 @@
 {
-  "name": "polymer-starter-kit",
+  "name": "ims-miage",
   "authors": [
-    "The Polymer Authors"
+    "#ProjectStage Team - M1 Miage 2017-2018"
   ],
   "license": "https://polymer.github.io/LICENSE.txt",
   "dependencies": {

@@ -3,6 +3,7 @@
   "shell": "src/mi-app.html",
   "fragments": [
     "src/mi-conv.html",
+    "src/mi-admin.html",
     "src/mi-view404.html"
   ],
   "sources": [
