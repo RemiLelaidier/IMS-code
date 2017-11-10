@@ -215,6 +215,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       static get is() {
         return 'mi-conv';
       }
+
+      /**
+      * @function properties()
+      *
+      * MiConv properties
+      * More on : https://www.polymer-project.org/2.0/docs/devguide/properties
+      *
+      * @return Object
+      */
       static get properties() {
         return {
           formEtu: Object,
@@ -222,6 +231,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           ironAjax: Object
         }
       }
+
+      /**
+      * @function ready
+      *
+      * When MiConv component gets ready
+      * More on : https://www.polymer-project.org/2.0/docs/about_20#lifecycle-changes
+      *
+      * @return void
+      */
       ready() {
         super.ready();
 
@@ -232,7 +250,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       /**
       * @function _submitStep
+      *
       * Called by on-click on "next button" of each step
+      *
+      * @return void
       */
       _submitStep() {
         let clicked = Polymer.dom(event).localTarget; // Getting our button
@@ -256,7 +277,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         } else {
           // @Tool : Uncomment next line to avoid validation and go.
-          this.stepper._tapNext(); // Going to next step.
+          //this.stepper._tapNext(); // Going to next step.
 
           // Ooops, let's show a little material toast !
           this.showToast("Vérifiez votre saisie.");
@@ -266,8 +287,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       /**
       * Ending everything, parsing everything..
       *
-      * TODO : Send everything using iron-ajax to API in JSON
-      *
+      * @return void
       */
       endCeremony(){
         let forms = this.shadowRoot.querySelectorAll('iron-form');
@@ -309,9 +329,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         });
 
         // Voilà ! Everything is extracted beautifully, ready for API !
-        console.warn("Structured data extracted : ", structuredData);
-        console.warn("🚀 Too bad, come back later for a beautiful ajax call!");
+        console.log("Structured data extracted : ", structuredData);
+        console.log("🚀 Sending everything to API!");
 
+        // Send everything
         this.sendConventionAs(structuredData);
 
         this.showToast("Merci d'avoir complété le formulaire, vous recevrez un e-mail après validation des informations.");
@@ -319,6 +340,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         return structuredData;
       }
 
+      /**
+      * @function sendConventionAs
+      * @param structuredData : extracted using endCeremony
+      *
+      * Response in : handleResponse
+      *
+      * @return void
+      */
       sendConventionAs(structuredData){
         this.ironAjax.url = "http://localhost/projetDev/serv/public/student/send/convention";
         this.ironAjax.body = JSON.stringify(structuredData);
@@ -328,8 +357,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       /**
-      * Create + append paper-toast on the fly
+      * @function showToast
+      * @param text
+      *
+      * Create + append a paper-toast on the fly
       * Populate text attribute
+      *
+      * @return void
       */
       showToast(text){
         let toast = document.createElement('paper-toast');
@@ -338,8 +372,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         toast.open();
       }
 
+      /**
+      * Handle ironAjax response
+      * @wip
+      *
+      * @return void
+      */
       handleResponse(data){
-        console.log("got response!", data.detail.response);
+        console.log("🐒 Got response from ironAjax !", data.detail.response);
       }
 
     }
