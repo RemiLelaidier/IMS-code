@@ -7,6 +7,179 @@
 	},
 	"item": [
 		{
+			"name": "Bootstrap",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"postman.setEnvironmentVariable(\"login_url\", jsonData.security.login);",
+							"postman.setEnvironmentVariable(\"refresh_url\", jsonData.security.refresh_token);",
+							"postman.setEnvironmentVariable(\"profile_url\", jsonData.security.user);",
+							"",
+							"tests[\"Should return security routes\"] = jsonData.security !== undefined;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost/projetDev/serv/public/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"projetDev",
+						"serv",
+						"public",
+						""
+					]
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "99489175-3132-4afe-8aee-8f0792b59ea8",
+					"name": "Success",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost/projetDev/serv/public/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"projetDev",
+								"serv",
+								"public",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "X-Requested-With, Content-Type, Accept, Origin, Authorization",
+							"name": "Access-Control-Allow-Headers",
+							"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET, POST, PUT, PATCH, DELETE",
+							"name": "Access-Control-Allow-Methods",
+							"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*",
+							"name": "Access-Control-Allow-Origin",
+							"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "Location, Content-Range",
+							"name": "Access-Control-Expose-Headers",
+							"description": "Lets a server whitelist headers that browsers are allowed to access."
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600",
+							"name": "Access-Control-Max-Age",
+							"description": "Indicates how long the results of a preflight request can be cached in seconds."
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-store, no-cache, must-revalidate",
+							"name": "Cache-Control",
+							"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive",
+							"name": "Connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "Content-Length",
+							"value": "183",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 10 Nov 2017 16:04:12 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Expires",
+							"value": "Thu, 19 Nov 1981 08:52:00 GMT",
+							"name": "Expires",
+							"description": "Gives the date/time after which the response is considered stale"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100",
+							"name": "Keep-Alive",
+							"description": "Custom header"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache",
+							"name": "Pragma",
+							"description": "Implementation-specific headers that may have various effects anywhere along the request-response chain."
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.27 (Unix) OpenSSL/1.0.2l PHP/7.0.22",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.0.22",
+							"name": "X-Powered-By",
+							"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Tue Jan 19 2038 04:14:07 GMT+0100 (CET)",
+							"httpOnly": false,
+							"domain": "localhost",
+							"path": "/",
+							"secure": false,
+							"value": "gderc48t2ojn92tpo6m7g0k3g6",
+							"key": "PHPSESSID"
+						}
+					],
+					"responseTime": 529,
+					"body": "{\"security\":{\"login\":\"\\/projetDev\\/serv\\/public\\/admin\\/login\",\"refresh_token\":\"\\/projetDev\\/serv\\/public\\/admin\\/auth\\/refresh\",\"user\":\"\\/projetDev\\/serv\\/public\\/admin\\/users\\/me\"}}"
+				}
+			]
+		},
+		{
 			"name": "Login",
 			"event": [
 				{
@@ -48,23 +221,20 @@
 					]
 				},
 				"url": {
-					"raw": "http://localhost/ims-slim/public/api/login",
+					"raw": "http://localhost/{{login_url}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"path": [
-						"ims-slim",
-						"public",
-						"api",
-						"login"
+						"{{login_url}}"
 					]
 				},
 				"description": "Login on API"
 			},
 			"response": [
 				{
-					"id": "6ee1a551-45f4-4009-a3f6-43175e592f64",
+					"id": "a9f2346d-ad9b-46e2-ad09-243d99077dc5",
 					"name": "Login success",
 					"originalRequest": {
 						"method": "POST",
@@ -211,7 +381,7 @@
 					"body": "{\"access_token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MTAzMjM2ODgsImV4cCI6MTUxMDMyNzI4OCwiZGF0YSI6eyJ1c2VySWQiOjJ9LCJpc3MiOiJsb2NhbGhvc3QifQ.EJ2y8KxYmtzOUBsHiIvErgOBdvDKG27WOUjBP9Thsng\",\"expires_in\":3600,\"refresh_token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MTAzMjM2ODgsImV4cCI6MTUxMTUzMzI4OCwiZGF0YSI6eyJ0eXBlIjoicmVmcmVzaCIsInVzZXJJZCI6MiwidXNlck5hbWUiOiJ0cm9sbCJ9LCJpc3MiOiJsb2NhbGhvc3QifQ.UxaD3lmAuZsdCdmVirMa9UMAVgSZb4V9Zx_K9YTnSNU\"}"
 				},
 				{
-					"id": "e68cb6be-6d56-4ea3-bb09-c90ed9e238f9",
+					"id": "6d5fe053-d5a2-428b-8006-6218d605cc4f",
 					"name": "Bad credentials",
 					"originalRequest": {
 						"method": "POST",
@@ -370,24 +540,20 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost/ims-slim/public/api/users/me",
+					"raw": "http://localhost/{{profile_url}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"path": [
-						"ims-slim",
-						"public",
-						"api",
-						"users",
-						"me"
+						"{{profile_url}}"
 					]
 				},
 				"description": "Get user info based on his token (example of protected route)"
 			},
 			"response": [
 				{
-					"id": "1b113223-b113-4e38-b4a5-36f8a10431c4",
+					"id": "fe0319e2-d5a6-4345-93a4-ab78411e149f",
 					"name": "Get login info (with Authorization header)",
 					"originalRequest": {
 						"method": "GET",
@@ -517,6 +683,104 @@
 					],
 					"responseTime": 494,
 					"body": "{\"id\":1,\"username\":\"troll\",\"email\":\"troll@troll.io\",\"last_name\":null,\"first_name\":null,\"permissions\":{\"user.delete\":0},\"last_login\":\"2017-11-10 15:29:33\",\"created_at\":\"2017-11-10 14:29:33\",\"updated_at\":\"2017-11-10 14:29:33\"}"
+				},
+				{
+					"id": "0210ce8d-14c6-4067-a0bd-f371907ef826",
+					"name": "No authorization token",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost/{{profile_url}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"{{profile_url}}"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"key": "Cache-Control",
+							"value": "no-store, no-cache, must-revalidate",
+							"name": "Cache-Control",
+							"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive",
+							"name": "Connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "Content-Length",
+							"value": "40",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 10 Nov 2017 17:02:29 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Expires",
+							"value": "Thu, 19 Nov 1981 08:52:00 GMT",
+							"name": "Expires",
+							"description": "Gives the date/time after which the response is considered stale"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100",
+							"name": "Keep-Alive",
+							"description": "Custom header"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache",
+							"name": "Pragma",
+							"description": "Implementation-specific headers that may have various effects anywhere along the request-response chain."
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.27 (Unix) OpenSSL/1.0.2l PHP/7.0.22",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.0.22",
+							"name": "X-Powered-By",
+							"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Tue Jan 19 2038 04:14:07 GMT+0100 (CET)",
+							"httpOnly": false,
+							"domain": "localhost",
+							"path": "/",
+							"secure": false,
+							"value": "gderc48t2ojn92tpo6m7g0k3g6",
+							"key": "PHPSESSID"
+						}
+					],
+					"responseTime": 608,
+					"body": "{\"status\":401,\"message\":\"Unauthorized.\"}"
 				}
 			]
 		}
