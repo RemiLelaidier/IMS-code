@@ -223,10 +223,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         this.stepper = this.shadowRoot.querySelector('#stepper');
         this.formEtu = this.shadowRoot.querySelector('#formEtu');
-
-        this.stepper.addEventListener('selected-changed', function(event) {
-          console.log("Validated :", event.detail.value);
-        });
       }
 
       /**
@@ -239,8 +235,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         let currentForm = clicked.parentElement.parentElement; // Getting iron-form of this step
         let active = this.shadowRoot.getElementById(currentForm.id); // with his shadowRoot
-
-        console.log("Submitted step", currentStep); // Ok, need debug
 
         // .validate() launch validation and return true|false
         // regexes are defined on paper-inputs, in the pattern attribute
@@ -256,8 +250,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           this.stepper._tapNext(); // Going to next step.
 
         } else {
+          // @Tool : Uncomment next line to avoid validation and go.
+          //this.stepper._tapNext(); // Going to next step.
+
           // Ooops, let's show a little material toast !
-          this.showToast("Vérifiez votre saisie");
+          this.showToast("Vérifiez votre saisie.");
         }
       }
 
@@ -309,6 +306,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         // Voilà ! Everything is extracted beautifully, ready for API !
         console.warn("Structured data extracted : ", structuredData);
         console.warn("🚀 Too bad, come back later for a beautiful ajax call!");
+        this.showToast("Merci d'avoir complété le formulaire, vous recevrez un e-mail après validation des informations.");
         return structuredData;
       }
 

@@ -28,6 +28,11 @@ Second, install [Bower](https://bower.io/) using [npm](https://www.npmjs.com)
 
 ### Start the development server
 
+If it's the first time, you need to install required components :
+
+    bower install
+
+
 This command serves the app at `http://127.0.0.1:8081` and provides basic URL
 routing for the app:
 
