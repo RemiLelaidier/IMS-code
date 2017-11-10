@@ -8,5 +8,7 @@ SlimRest - API PHP Slim 3 with JWT / Logs..
 
 Every "client" related code should be in cli folder, same for server
 
-## Todo :
-- Deploy script : Cli using ``polymer build``, serv using git on distant server
+## Global todo :
+- Deploy script (wip) : 
+    - Client using ``polymer build``, 
+    - Server using git on distant server

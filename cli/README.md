@@ -9,8 +9,7 @@ Based on [Polymer Starter Kit](https://github.com/PolymerElements/polymer-starte
 - Need to do an admin panel
 - Need to build a strong auth
 - Polymer front need to make calls to an API when convention ceremony is done.
-- We need a database (MongoDB ?)
-- We also need to make an API using (Slim3?) and JWT to authenticate
+- We need to describe our database (MySQL)
 - Check / add validation on convention ceremony
 - Add localization ? Specs ?
 
