@@ -2,7 +2,8 @@
 
 $controllers = [
     'core.controller' => 'App\Core\Controller\CoreController',
-    'security.auth.controller' => 'App\Security\Controller\AuthController'
+    'security.auth.controller' => 'App\Security\Controller\AuthController',
+    'ims.convention.controller' => 'App\Convention\Controller\ConventionController'
 ];
 
 foreach ($controllers as $key => $class) {

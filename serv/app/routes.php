@@ -12,7 +12,7 @@ $app->options('/{routes:.+}', function ($request, $response) {
 });
 
 /**
- * Authentication
+ * Admin routes
  */
 $app->group('/admin', function () use ($container) {
     //$this->post('/register', 'security.auth.controller:register')->setName('register');
@@ -23,6 +23,15 @@ $app->group('/admin', function () use ($container) {
         ->setName('users.me');
 });
 
+/**
+* Student route
+* fired on submit convention (ending step)
+*/
+$app->post('/student/send/convention', 'ims.convention.controller:submit')->setName('student.convention.send');
+
+/**
+* Bootstrap route
+*/
 $app->get('/', 'core.controller:root')->setName('root');
 
 /**
