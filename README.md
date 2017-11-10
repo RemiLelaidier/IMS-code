@@ -1,8 +1,17 @@
 # IMS - Internship Management System
-## Made by Miagists for Miagists
+#### Made by Miagists for Miagists
 
 Based on [Polymer Starter Kit](https://github.com/PolymerElements/polymer-starter-kit)
 | Polymer 2.0
+
+### Todo
+
+- Need to do an admin panel
+- Need to build a strong auth
+- Polymer front need to make calls to an API when convention ceremony is done.
+- We need a database (MongoDB ?)
+- We also need to make an API using (Slim3?) and JWT to authenticate
+- Check / add validation on convention ceremony
 
 ### Setup
 
@@ -23,6 +32,11 @@ This command serves the app at `http://127.0.0.1:8081` and provides basic URL
 routing for the app:
 
     polymer serve
+
+**Pro-tip :** To open browser in the same time :
+
+    polymer serve -o
+
 
 ### Build
 
