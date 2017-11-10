@@ -12,7 +12,7 @@ class CoreController extends Controller
         return $this->ok($response, [
             'security' => [
                 'login' => $this->path('login'),
-                'register' => $this->path('register'),
+                //'register' => $this->path('register'),
                 'refresh_token' => $this->path('jwt.refresh'),
                 'user' => $this->path('users.me')
             ]

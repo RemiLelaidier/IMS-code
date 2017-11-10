@@ -14,7 +14,7 @@ $app->options('/{routes:.+}', function ($request, $response) {
 /**
  * Authentication
  */
-$app->group('/api', function () use ($container) {
+$app->group('/admin', function () use ($container) {
     //$this->post('/register', 'security.auth.controller:register')->setName('register');
     $this->post('/login', 'security.auth.controller:login')->setName('login');
     $this->post('/auth/refresh', 'security.auth.controller:refresh')->setName('jwt.refresh');
