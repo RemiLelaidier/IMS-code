@@ -14,6 +14,9 @@ Based on [Polymer Starter Kit](https://github.com/PolymerElements/polymer-starte
 - Check / add validation on convention ceremony
 - Add localization ? Specs ?
 
+## Working demo
+[IMS Stage](http://beta.leonard.zone)
+
 ### Setup
 
 ##### Prerequisites
