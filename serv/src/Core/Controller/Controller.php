@@ -255,6 +255,8 @@ abstract class Controller
      * @param string $property
      *
      * @return mixed
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
      */
     public function __get($property)
     {
