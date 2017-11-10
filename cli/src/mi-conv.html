@@ -20,6 +20,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/paper-toast/paper-toast.html">
 <link rel="import" href="../bower_components/paper-input/paper-textarea.html">
 <link rel="import" href="../bower_components/titanium-address-input/titanium-address-input.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 
 <link rel="import" href="shared-styles.html">
 
@@ -205,6 +206,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 				<paper-step></paper-step>
 				<paper-step></paper-step>
 			</paper-stepper>
+
+      <iron-ajax id="requestBucket" on-response="handleResponse"></iron-ajax>
   </template>
 
   <script>
@@ -215,14 +218,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       static get properties() {
         return {
           formEtu: Object,
-          stepper: Object
+          stepper: Object,
+          ironAjax: Object
         }
       }
       ready() {
         super.ready();
 
-        this.stepper = this.shadowRoot.querySelector('#stepper');
-        this.formEtu = this.shadowRoot.querySelector('#formEtu');
+        this.stepper = this.shadowRoot.getElementById('stepper');
+        this.formEtu = this.shadowRoot.getElementById('formEtu');
+        this.ironAjax = this.shadowRoot.getElementById('requestBucket');
       }
 
       /**
@@ -251,7 +256,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         } else {
           // @Tool : Uncomment next line to avoid validation and go.
-          //this.stepper._tapNext(); // Going to next step.
+          this.stepper._tapNext(); // Going to next step.
 
           // Ooops, let's show a little material toast !
           this.showToast("Vérifiez votre saisie.");
@@ -306,8 +311,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         // Voilà ! Everything is extracted beautifully, ready for API !
         console.warn("Structured data extracted : ", structuredData);
         console.warn("🚀 Too bad, come back later for a beautiful ajax call!");
+
+        this.sendConventionAs(structuredData);
+
         this.showToast("Merci d'avoir complété le formulaire, vous recevrez un e-mail après validation des informations.");
+
         return structuredData;
+      }
+
+      sendConventionAs(structuredData){
+        this.ironAjax.url = "http://localhost/projetDev/serv/public/student/send/convention";
+        this.ironAjax.body = JSON.stringify(structuredData);
+        this.ironAjax.handleAs = "json";
+        this.ironAjax.method = "POST";
+        this.ironAjax.generateRequest();
       }
 
       /**
@@ -319,6 +336,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         toast.text = text;
         document.body.appendChild(toast);
         toast.open();
+      }
+
+      handleResponse(data){
+        console.log("got response!", data.detail.response);
       }
 
     }

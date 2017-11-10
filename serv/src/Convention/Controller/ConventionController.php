@@ -12,10 +12,12 @@ class ConventionController extends Controller
 {
     public function submit(Request $request, Response $response)
     {
-        $conventionData = $request->getParams();
+        $conventionData = $request->getBody()->getContents();
+
+        $decoded = json_decode($conventionData, true);
 
         return $this->ok($response, [
-            'convention_data' => $conventionData
+            'convention_data' => $decoded
         ]);
     }
 }
