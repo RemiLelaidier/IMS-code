@@ -41,9 +41,9 @@ return [
     ],
 
     'monolog' => [
-        'name' => 'app',
+        'name' => 'ims',
         'path' => $container['root_dir'] . '/var/logs/' . $container['env'] . '.log',
-        'level' => Logger::ERROR
+        'level' => Logger::DEBUG
     ]
 
 ];
