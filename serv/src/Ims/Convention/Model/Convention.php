@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Convention\Model;
+namespace App\Ims\Convention\Model;
 
 class Convention
 {

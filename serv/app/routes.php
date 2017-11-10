@@ -1,8 +1,19 @@
 <?php
+/**
+ * Routes
+ * Contains main routes for api access
+ *
+ *
+ */
 
 use App\Core\Rest\Router as RestRouter;
 
 $router = new RestRouter($container['router'], $container['config']['rest']);
+
+/**
+ * Bootstrap route
+ */
+$app->get('/', 'core.controller:root')->setName('root');
 
 /**
  * CORS Pre-flight request
@@ -12,6 +23,12 @@ $app->options('/{routes:.+}', function ($request, $response) {
 });
 
 /**
+ * Student route
+ * fired on submit convention (ending step)
+ */
+$app->post('/student/send/convention', 'ims.convention.controller:submit')->setName('student.convention.send');
+
+/**
  * Admin routes
  */
 $app->group('/admin', function () use ($container) {
@@ -19,20 +36,14 @@ $app->group('/admin', function () use ($container) {
     $this->post('/login', 'security.auth.controller:login')->setName('login');
     $this->post('/auth/refresh', 'security.auth.controller:refresh')->setName('jwt.refresh');
     $this->get('/users/me', 'security.auth.controller:me')
-        ->add($container['auth.middleware']())
+        ->add($container['auth.middleware']()) // Adding auth middleware to create a new "protected" endpoint
         ->setName('users.me');
 });
 
-/**
-* Student route
-* fired on submit convention (ending step)
-*/
-$app->post('/student/send/convention', 'ims.convention.controller:submit')->setName('student.convention.send');
 
 /**
-* Bootstrap route
-*/
-$app->get('/', 'core.controller:root')->setName('root');
+ * Router Documentation
+ */
 
 /**
  *         URL          |           CONTROLLER            |     ROUTE
@@ -43,7 +54,7 @@ $app->get('/', 'core.controller:root')->setName('root');
  * PUT /articles/{id}   | article.controller:putArticle    | put_article
  * DELETE /article/{id} | article.controller:deleteArticle | delete_article
  */
-$router->crud('articles', 'article.controller');
+//$router->crud('articles', 'article.controller');
 
 // OR
 
@@ -84,7 +95,7 @@ $router->crud('articles', 'article.controller');
  * PUT /articles/{article_id}/comments/{comment_id}   | ArticleCommentController:putArticleComment    | put_article_comment
  * DELETE /article/{article_id}/comments/{comment_id} | ArticleCommentController:deleteArticleComment | delete_article_comment
  */
-$router->subCrud('articles', 'comments', 'ArticleCommentController');
+//$router->subCrud('articles', 'comments', 'ArticleCommentController');
 
 // OR
 

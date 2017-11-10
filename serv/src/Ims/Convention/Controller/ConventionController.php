@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Convention\Controller;
+namespace App\Ims\Convention\Controller;
 
 use App\Core\Controller\Controller;
 
