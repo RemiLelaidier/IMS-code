@@ -19,17 +19,7 @@ Manager::schema()->create('student', function (Blueprint $table) {
     $table->string('police');
 });
 
-Manager::schema()->create('company_people', function (Blueprint $table) {
-    $table->increments('id');
-    $table->string('name');
-    $table->string('surname');
-    $table->string('gender');
-    $table->string('email');
-    $table->string('phone');
-    $table->string('quality');
-});
-
-Manager::schema()->create('unice_people', function (Blueprint $table) {
+Manager::schema()->create('employee', function (Blueprint $table) {
     $table->increments('id');
     $table->string('name');
     $table->string('surname');
@@ -50,7 +40,7 @@ Manager::schema()->create('company', function (Blueprint $table) {
     $table->string('nationality');
     $table->string('siren');
     $table->string('notes');
-    $table->foreign('people')->references('company_people')->on('id');
+    $table->foreign('people')->references('employee')->on('id');
 });
 
 Manager::schema()->create('internship', function (Blueprint $table) {
@@ -58,6 +48,14 @@ Manager::schema()->create('internship', function (Blueprint $table) {
     $table->dateTime('start');
     $table->dateTime('end');
     $table->string('address');
+    $table->string('working_hours');
+    $table->string('weekly_duration');
+    $table->string('extra_work');
+    $table->string('income');
+    $table->string('payement');
+    $table->string('advantages');
+    $table->string('subject');
+    $table->string('detail');
     $table->longText('contract');
     $table->longText('endorsement_1')->nullable();
     $table->longText('endorsement_2')->nullable();
@@ -66,11 +64,10 @@ Manager::schema()->create('internship', function (Blueprint $table) {
 
 Manager::schema()->create('convention', function (Blueprint $table) {
     $table->increments('id');
+    $table->timestamps();
     $table->unsignedInteger('student_id');
     $table->unsignedInteger('company_id');
     $table->unsignedInteger('internship_id');
-    $table->unsignedInteger('unice_people');
-    $table->unsignedInteger('company_people');
     $table->dateTime('receipt_from_student')->nullable();
     $table->dateTime('company_validate')->nullable();
     $table->dateTime('school_validate')->nullable();
@@ -82,6 +79,34 @@ Manager::schema()->create('convention', function (Blueprint $table) {
     $table->foreign('student_id')->references('id')->on('student');
     $table->foreign('company_id')->references('id')->on('company');
     $table->foreign('internship_id')->references('id')->on('internship');
-    $table->foreign('unice_people')->references('id')->on('unice_people');
-    $table->foreign('company_people')->references('id')->on('company_people');
+});
+
+Manager::schema()->create('unice', function (Blueprint $table) {
+    $table->increments('id');
+    $table->string('name');
+    $table->string('surname');
+    $table->string('gender');
+    $table->string('email');
+    $table->string('phone');
+    $table->string('quality');
+    $table->unsignedInteger('convention_id');
+    $table->foreign('convention_id')->references('id')->on('convention');
+});
+
+Manager::schema()->create('convention_unice', function (Blueprint $table) {
+    $table->unsignedInteger('convention_id');
+    $table->unsignedInteger('unice_id');
+    $table->string('convention_role');
+    $table->primary(['convention_id', 'unice_id']);
+    $table->foreign('convention_id')->references('id')->on('convention');
+    $table->foreign('unice_id')->references('id')->on('unice');
+});
+
+Manager::schema()->create('convention_employee', function (Blueprint $table) {
+    $table->unsignedInteger('convention_id');
+    $table->unsignedInteger('employee_id');
+    $table->string('convention_role');
+    $table->primary(['convention_id', 'employee_id']);
+    $table->foreign('convention_id')->references('id')->on('convention');
+    $table->foreign('employee_id')->references('id')->on('employee');
 });

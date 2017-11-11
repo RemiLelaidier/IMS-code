@@ -16,9 +16,11 @@ $tables = [
     'company',
     'convention',
     'internship',
-    'unice_people',
+    'unice',
     'company',
-    'company_people'
+    'employee',
+    'convention_unice',
+    'convention_employee'
 ];
 
 Manager::schema()->disableForeignKeyConstraints();
