@@ -312,7 +312,18 @@ function generateModel(Blueprint $table, string $primaryKey, array $base, bool $
     /**
      * @var Illuminate\Database\Schema\Blueprint $table
      */
-    $tableName = ucfirst($table->getTable());
+    $rawTableName = $table->getTable();
+
+    $camel = strpos($rawTableName, "_");
+
+    if($camel !== false){
+        $charToReplace = substr($rawTableName, $camel+1, 1);
+        $stringToReplace = "_".$charToReplace;
+        $replace = ucfirst($charToReplace);
+        $tableName = ucfirst(str_replace($stringToReplace, $replace, $rawTableName));
+    } else {
+        $tableName = ucfirst($table->getTable());
+    }
 
     $startModel = "<?php \n
                     namespace App\Ims\\$tableName\Model; \n
