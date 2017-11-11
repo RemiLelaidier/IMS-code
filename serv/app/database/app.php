@@ -325,11 +325,13 @@ function generateModel(Blueprint $table, string $primaryKey, array $base, bool $
         $tableName = ucfirst($table->getTable());
     }
 
-    $startModel = "<?php \n
-                    namespace App\Ims\\$tableName\Model; \n
-                    class $tableName {\n
-                    protected \$table = \"$rawTableName\";\n
-                    protected \$primaryKey = \"$primaryKey\";\n\n";
+    $startModel = <<<TAG
+<?php
+namespace App\Ims\\$tableName\Model; 
+class $tableName {
+    protected \$table = "$rawTableName";
+    protected \$primaryKey = "$primaryKey";
+TAG;
 
     $fillables = [];
     foreach($table->getColumns() as $column){
@@ -338,17 +340,17 @@ function generateModel(Blueprint $table, string $primaryKey, array $base, bool $
         }
     }
 
-    $startFillables = 'protected $fillable = [';
+    $startFillables = "\n\tprotected \$fillable = [\n";
     foreach($fillables as $fillable){
-        $startFillables .= "'" . $fillable->getAttributes()['name'] . "',";
+        $startFillables .= "\t\t\t\t\t'" . $fillable->getAttributes()['name'] . "',\n";
     }
 
     $startFillables = substr($startFillables, 0, -1);
 
-    $startFillables .= "];";
+    $startFillables .= "\n\t\t\t\t];";
     $startModel .= $startFillables;
     $endModel = $startModel;
-    $endModel .= "}";
+    $endModel .= "\n}";
 
     return createFile($tableName, $endModel, true, $overwrite);
 }
