@@ -4,7 +4,7 @@
 
                     class ConventionUnice {
 
-                    protected $table = "ConventionUnice";
+                    protected $table = "convention_unice";
 
                     protected $primaryKey = "id";
 

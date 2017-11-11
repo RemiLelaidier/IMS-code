@@ -4,7 +4,7 @@
 
                     class Unice {
 
-                    protected $table = "Unice";
+                    protected $table = "unice";
 
                     protected $primaryKey = "id";
 

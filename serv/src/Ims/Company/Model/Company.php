@@ -4,7 +4,7 @@
 
                     class Company {
 
-                    protected $table = "Company";
+                    protected $table = "company";
 
                     protected $primaryKey = "id";
 

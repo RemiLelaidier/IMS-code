@@ -4,7 +4,7 @@
 
                     class Student {
 
-                    protected $table = "Student";
+                    protected $table = "student";
 
                     protected $primaryKey = "id";
 

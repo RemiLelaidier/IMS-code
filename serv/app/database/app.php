@@ -328,7 +328,7 @@ function generateModel(Blueprint $table, string $primaryKey, array $base, bool $
     $startModel = "<?php \n
                     namespace App\Ims\\$tableName\Model; \n
                     class $tableName {\n
-                    protected \$table = \"$tableName\";\n
+                    protected \$table = \"$rawTableName\";\n
                     protected \$primaryKey = \"$primaryKey\";\n\n";
 
     $fillables = [];

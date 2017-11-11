@@ -4,7 +4,7 @@
 
                     class ConventionEmployee {
 
-                    protected $table = "ConventionEmployee";
+                    protected $table = "convention_employee";
 
                     protected $primaryKey = "id";
 

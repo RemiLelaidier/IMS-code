@@ -4,7 +4,7 @@
 
                     class Convention {
 
-                    protected $table = "Convention";
+                    protected $table = "convention";
 
                     protected $primaryKey = "id";
 
