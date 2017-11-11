@@ -6,7 +6,7 @@ use App\Core\Controller\Controller;
 use Slim\Http\Request;
 use Slim\Http\Response;
     
-class UniceController  {
+class UniceController  extends Controller {
     /**
      * @param Request  $request
      * @param Response $response

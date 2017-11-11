@@ -6,7 +6,7 @@ use App\Core\Controller\Controller;
 use Slim\Http\Request;
 use Slim\Http\Response;
     
-class StudentController  {
+class StudentController  extends Controller {
     /**
      * @param Request  $request
      * @param Response $response
