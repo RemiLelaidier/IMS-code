@@ -74,9 +74,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               <br>
               <paper-input required auto-validate pattern="^[1-3][0-9]{2}(0[1-9]|10|[235-9][0-9]|[14][12])(2[AB]|[0-9]{2})[0-9]{6}$" error-message="Doit être un numéro valide. Ex : 1230606088534"class="longInput" label="Numéro de sécurité sociale"></paper-input>
               <paper-input required auto-validate pattern="[0-9]{8}" class="shortInput" label="Numéro d'étudiant" error-message="Doit être un numéro d'étudiant valide."></paper-input>
-              <paper-input required class="longInput" label="E-mail">
-                <div slot="suffix">@etu.unice.fr</div>
-              </paper-input>
+              <paper-input required auto-validate class="longInput"  pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?" error-message="E-mail invalide" label="E-mail"></paper-input>
               <br>
               <paper-input required class="shortInput" auto-validate pattern="^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/\-]\d{4}$" error-message="Doit être au format JJ/MM/AAAA" label="Date de naissance"></paper-input>
               <paper-input required class="longInput" auto-validate pattern="^\+(?:[0-9]●?){6,14}[0-9]$" label="Téléphone" error-message="Doit être au format international. Ex : +33612233445"></paper-input>
@@ -109,7 +107,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               <paper-input required auto-validate pattern="[/\D+/]*" error-message="Ne peut contenir que des lettres" class="shortInput" label="Prénom"></paper-input>
               <paper-input required auto-validate pattern="[/\D+/]*" error-message="Ne peut contenir que des lettres" class="longInput" label="Nom"></paper-input>
               <br>
-              <paper-input required class="longInput" label="E-mail"></paper-input>
+              <paper-input required auto-validate class="longInput"  pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?" error-message="E-mail invalide" label="E-mail"></paper-input>
               <br>
               <paper-input required class="longInput" auto-validate pattern="^\+(?:[0-9]●?){6,14}[0-9]$" label="Téléphone" error-message="Doit être au format international. Ex : +33612233445"></paper-input>
               <paper-input required class="longInput" label="En qualité de"></paper-input>
@@ -160,7 +158,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               <paper-input required auto-validate pattern="[/\D+/]*" error-message="Ne peut contenir que des lettres" class="shortInput" label="Prénom"></paper-input>
               <paper-input required auto-validate pattern="[/\D+/]*" error-message="Ne peut contenir que des lettres" class="longInput" label="Nom"></paper-input>
               <br>
-              <paper-input required class="longInput" label="E-mail"></paper-input>
+              <paper-input required auto-validate pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?" class="longInput" error-message="E-mail invalide" label="E-mail"></paper-input>
               <br>
               <paper-input required class="longInput" auto-validate pattern="^\+(?:[0-9]●?){6,14}[0-9]$" label="Téléphone" error-message="Doit être au format international. Ex : +33612233445"></paper-input>
               <paper-input required class="longInput" label="En qualité de"></paper-input>
@@ -175,7 +173,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               <paper-input required auto-validate pattern="[/\D+/]*" error-message="Ne peut contenir que des lettres" class="shortInput" label="Prénom"></paper-input>
               <paper-input required auto-validate pattern="[/\D+/]*" error-message="Ne peut contenir que des lettres" class="longInput" label="Nom"></paper-input>
               <br>
-              <paper-input required class="longInput" label="E-mail"></paper-input>
+              <paper-input required auto-validate class="longInput" pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?" error-message="E-mail invalide" label="E-mail"></paper-input>
               <br>
               <paper-input required class="longInput" auto-validate pattern="^\+(?:[0-9]●?){6,14}[0-9]$" label="Téléphone" error-message="Doit être au format international. Ex : +33612233445"></paper-input>
               <paper-input required class="longInput" label="En qualité de"></paper-input>
@@ -226,9 +224,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       */
       static get properties() {
         return {
-          serverUrl: {
+          server: {
               type: String,
-              value: "http://127.0.0.1/rem/IMS-code/serv/public"
+              value: "http://api.leonard.zone"
           },
           formEtu: Object,
           stepper: Object,
@@ -354,7 +352,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       * @return void
       */
       sendConventionAs(structuredData){
-        this.ironAjax.url = this.serverUrl + "/student/send/convention";
+        this.ironAjax.url = this.server + "/student/send/convention";
         this.ironAjax.body = JSON.stringify(structuredData);
         this.ironAjax.handleAs = "json";
         this.ironAjax.method = "POST";
