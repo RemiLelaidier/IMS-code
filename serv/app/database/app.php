@@ -237,7 +237,7 @@ Manager::schema()->create('convention_employee', function (Blueprint $table) {
     $fillables = [
         'convention_role'
     ];
-    
+
     Generator::generate(true, false, [
         'fillables' => $fillables,
         'primaryKey' => 'id',

@@ -140,7 +140,7 @@ TAG;
 
         $namespace = $isModel ? "Model" :"Controller";
         $fileName = ucfirst($fileName);
-        $dirName = __DIR__ . "/../Ims/$original/$namespace";
+        $dirName = __DIR__ . "/../../Ims/$original/$namespace";
         $nextPath = "$dirName/$fileName.php";
 
         if(is_file($nextPath) && !$overwrite){
