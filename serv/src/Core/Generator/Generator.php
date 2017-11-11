@@ -29,7 +29,7 @@ class Generator {
         /**
          * @var Blueprint $table
          */
-        $tableName = ucfirst($table->getTable());
+        $tableName = self::_toCamel($table);
         $className = $tableName . "Controller";
 
         $startController = <<<TAG
@@ -83,16 +83,7 @@ TAG;
          */
         $rawTableName = $table->getTable();
 
-        $camel = strpos($rawTableName, "_");
-
-        if($camel !== false){
-            $charToReplace = substr($rawTableName, $camel+1, 1);
-            $stringToReplace = "_".$charToReplace;
-            $replace = ucfirst($charToReplace);
-            $tableName = ucfirst(str_replace($stringToReplace, $replace, $rawTableName));
-        } else {
-            $tableName = ucfirst($table->getTable());
-        }
+        $tableName = self::_toCamel($table);
 
         $startModel = <<<TAG
 <?php
@@ -155,5 +146,29 @@ TAG;
         }
 
         return "error";
+    }
+
+    /**
+     * @param Blueprint $table
+     *
+     * @return string
+     */
+    public static function _toCamel (Blueprint $table): string {
+
+        $rawTableName = $table->getTable();
+
+        $camel = strpos($rawTableName, "_");
+
+        if ($camel !== false) {
+            $charToReplace = substr($rawTableName, $camel + 1, 1);
+            $stringToReplace = "_" . $charToReplace;
+            $replace = ucfirst($charToReplace);
+            $tableName = ucfirst(str_replace($stringToReplace, $replace, $rawTableName));
+        }
+        else {
+            $tableName = ucfirst($table->getTable());
+        }
+
+        return $tableName;
     }
 }
