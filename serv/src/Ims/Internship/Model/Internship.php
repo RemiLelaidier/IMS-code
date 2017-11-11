@@ -17,6 +17,6 @@ class Internship {
 					'contract',
 					'endorsement_1',
 					'endorsement_2',
-					'notes
+					'notes'
 				];
 }

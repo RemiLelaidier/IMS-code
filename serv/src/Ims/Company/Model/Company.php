@@ -11,6 +11,6 @@ class Company {
 					'email',
 					'nationality',
 					'siren',
-					'notes
+					'notes'
 				];
 }

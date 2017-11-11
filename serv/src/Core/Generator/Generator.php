@@ -101,10 +101,10 @@ TAG;
         }
 
         $startFillables = "\n\tprotected \$fillable = [\n";
-        $end = "',\n";
+        $end = ",\n";
         
         foreach($fillables as $k => $fillable){
-            $startFillables .= "\t\t\t\t\t'" . $fillable->getAttributes()['name'];
+            $startFillables .= "\t\t\t\t\t'" . $fillable->getAttributes()['name'] . "'";
             if($k !== count($fillables)-1){
                 $startFillables .= $end;
             }

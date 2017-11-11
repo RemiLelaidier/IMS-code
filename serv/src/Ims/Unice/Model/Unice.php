@@ -9,6 +9,6 @@ class Unice {
 					'gender',
 					'email',
 					'phone',
-					'quality
+					'quality'
 				];
 }

@@ -9,6 +9,6 @@ class Employee {
 					'gender',
 					'email',
 					'phone',
-					'quality
+					'quality'
 				];
 }

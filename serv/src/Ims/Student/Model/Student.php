@@ -15,6 +15,6 @@ class Student {
 					'phone',
 					'address',
 					'insurance',
-					'police
+					'police'
 				];
 }
