@@ -228,7 +228,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         return {
           formEtu: Object,
           stepper: Object,
-          ironAjax: Object
+          ironAjax: Object,
+          toast: Object
         }
       }
 
@@ -366,10 +367,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       * @return void
       */
       showToast(text){
-        let toast = document.createElement('paper-toast');
-        toast.text = text;
-        document.body.appendChild(toast);
-        toast.open();
+          if(!this.toast) {
+              this.toast = document.createElement('paper-toast');
+              document.body.appendChild(this.toast);
+          }
+
+          this.toast.text = text;
+          this.toast.open();
       }
 
       /**
