@@ -3,52 +3,6 @@
 use Illuminate\Database\Capsule\Manager;
 use Illuminate\Database\Schema\Blueprint;
 
-function generateModel(Blueprint $table, $primaryKey, $base){
-    /**
-     * @var Illuminate\Database\Schema\Blueprint $table
-     */
-    $tableName = ucfirst($table->getTable());
-
-    $startModel = "<?php \n
-                    namespace App\Ims\\$tableName\Model; \n
-                    class $tableName {\n
-                    protected \$table = \"$tableName\";\n
-                    protected \$primaryKey = \"$primaryKey\";\n\n";
-
-    $fillables = [];
-    foreach($table->getColumns() as $column){
-        if(in_array($column->getAttributes()['name'], $base)){
-            $fillables[] = $column;
-        }
-    }
-
-    $startFillables = 'protected $fillable = [';
-    foreach($fillables as $fillable){
-        $startFillables .= "'" . $fillable->getAttributes()['name'] . "',";
-    }
-
-    $startFillables = substr($startFillables, 0, -1);
-
-    $startFillables .= "];";
-    $startModel .= $startFillables;
-    $endModel = $startModel;
-    $endModel .= "}";
-
-    $tableName = ucfirst($tableName);
-    $dirName = __DIR__ . "/../../src/Ims/$tableName/Model";
-    $nextPath = "$dirName/$tableName.php";
-
-    if(!is_dir($dirName)){
-        mkdir($dirName, 0755, true);
-    }
-
-    if(file_put_contents($nextPath, $endModel)){
-        return "updated";
-    } else {
-        echo "error";
-    }
-}
-
 Manager::schema()->create('student', function (Blueprint $table) {
     $table->increments('id');
     $table->string('name');
@@ -78,7 +32,11 @@ Manager::schema()->create('student', function (Blueprint $table) {
         'insurance',
         'police'
     ];
-    generateModel($table, 'id', $fillables);
+    generate(true, true, [
+        'fillables' => $fillables,
+        'primaryKey' => 'id',
+        'table' => $table
+    ], true);
 });
 
 Manager::schema()->create('company', function (Blueprint $table) {
@@ -104,7 +62,11 @@ Manager::schema()->create('company', function (Blueprint $table) {
         'siren',
         'notes'
     ];
-    generateModel($table, 'id', $fillables);
+    generate(true, true, [
+        'fillables' => $fillables,
+        'primaryKey' => 'id',
+        'table' => $table
+    ], true);
 });
 
 Manager::schema()->create('employee', function (Blueprint $table) {
@@ -126,7 +88,11 @@ Manager::schema()->create('employee', function (Blueprint $table) {
         'phone',
         'quality'
     ];
-    generateModel($table, 'id', $fillables);
+    generate(true, true, [
+        'fillables' => $fillables,
+        'primaryKey' => 'id',
+        'table' => $table
+    ], true);
 });
 
 
@@ -165,7 +131,11 @@ Manager::schema()->create('internship', function (Blueprint $table) {
         'endorsement_2',
         'notes',
     ];
-    generateModel($table, 'id', $fillables);
+    generate(true, true, [
+        'fillables' => $fillables,
+        'primaryKey' => 'id',
+        'table' => $table
+    ], true);
 });
 
 Manager::schema()->create('convention', function (Blueprint $table) {
@@ -196,8 +166,11 @@ Manager::schema()->create('convention', function (Blueprint $table) {
         'return_from_unice',
         'notes'
     ];
-    generateModel($table, 'id', $fillables);
-
+    generate(true, false, [
+        'fillables' => $fillables,
+        'primaryKey' => 'id',
+        'table' => $table
+    ], true);
 
 });
 
@@ -220,7 +193,11 @@ Manager::schema()->create('unice', function (Blueprint $table) {
         'phone',
         'quality'
     ];
-    generateModel($table, 'id', $fillables);
+    generate(true, true, [
+        'fillables' => $fillables,
+        'primaryKey' => 'id',
+        'table' => $table
+    ], true);
 });
 
 Manager::schema()->create('convention_unice', function (Blueprint $table) {
@@ -234,7 +211,11 @@ Manager::schema()->create('convention_unice', function (Blueprint $table) {
     $fillables = [
         'convention_role'
     ];
-    generateModel($table, 'id', $fillables);
+    generate(true, false, [
+        'fillables' => $fillables,
+        'primaryKey' => 'id',
+        'table' => $table
+    ], true);
 });
 
 Manager::schema()->create('convention_employee', function (Blueprint $table) {
@@ -248,5 +229,146 @@ Manager::schema()->create('convention_employee', function (Blueprint $table) {
     $fillables = [
         'convention_role'
     ];
-    generateModel($table, 'id', $fillables);
+    generate(true, false, [
+        'fillables' => $fillables,
+        'primaryKey' => 'id',
+        'table' => $table
+    ], true);
 });
+
+/**
+ * Generate
+ * @param bool $withModel
+ * @param bool $withController
+ * @param bool $overwrite
+ * @param array $options
+ */
+function generate(bool $withModel, bool $withController, array $options = [], bool $overwrite = false){
+    if ($withController){
+        generateController($options['table'], $overwrite);
+    }
+    if ($withModel){
+        generateModel($options['table'], $options['primaryKey'], $options['fillables'], $overwrite);
+    }
+}
+
+/**
+ * @param Blueprint $table
+ * @param bool $overwrite
+ */
+function generateController(Blueprint $table, bool $overwrite){
+    /**
+     * @var Illuminate\Database\Schema\Blueprint $table
+     */
+    $tableName = ucfirst($table->getTable());
+    $className = $tableName . "Controller";
+
+    $startController = <<<TAG
+<?php
+    
+namespace App\Ims\\$tableName\Controller;
+    
+use App\Core\Controller\Controller;
+use Slim\Http\Request;
+use Slim\Http\Response;
+    
+class $className  {
+    /**
+     * @param Request  \$request
+     * @param Response \$response
+     *
+     * @return Response
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
+     */
+    public function dummy(Request \$request, Response \$response)
+    {
+        // Get raw data from stream
+        \$data = \$request->getBody()->getContents();
+        // Decode JSON from raw data
+        \$decoded = json_decode(\$data, true);
+        // Log 
+        \$this->logger->debug('New data on ' . get_class(\$this) . ":submit", [
+            'data' => \$data
+        ]);
+        // Return response
+        return \$this->ok(\$response, [
+            'data' => \$decoded
+        ]);
+    }
+}
+TAG;
+    createFile($tableName, $startController, false, $overwrite);
+}
+
+/**
+ * @param Blueprint $table
+ * @param string $primaryKey
+ * @param array $base
+ * @param bool $overwrite
+ * @return string
+ */
+function generateModel(Blueprint $table, string $primaryKey, array $base, bool $overwrite){
+    /**
+     * @var Illuminate\Database\Schema\Blueprint $table
+     */
+    $tableName = ucfirst($table->getTable());
+
+    $startModel = "<?php \n
+                    namespace App\Ims\\$tableName\Model; \n
+                    class $tableName {\n
+                    protected \$table = \"$tableName\";\n
+                    protected \$primaryKey = \"$primaryKey\";\n\n";
+
+    $fillables = [];
+    foreach($table->getColumns() as $column){
+        if(in_array($column->getAttributes()['name'], $base)){
+            $fillables[] = $column;
+        }
+    }
+
+    $startFillables = 'protected $fillable = [';
+    foreach($fillables as $fillable){
+        $startFillables .= "'" . $fillable->getAttributes()['name'] . "',";
+    }
+
+    $startFillables = substr($startFillables, 0, -1);
+
+    $startFillables .= "];";
+    $startModel .= $startFillables;
+    $endModel = $startModel;
+    $endModel .= "}";
+
+    return createFile($tableName, $endModel, true, $overwrite);
+}
+
+/**
+ * @param $tableName
+ * @param $endModel
+ * @param bool $isModel
+ * @return string
+ */
+function createFile($fileName, $endModel, bool $isModel, $overwrite):string{
+
+    $original = $fileName;
+
+    $fileName = $isModel ? $fileName : $fileName . "Controller";
+
+    $namespace = $isModel ? "Model" :"Controller";
+    $fileName = ucfirst($fileName);
+    $dirName = __DIR__ . "/../../src/Ims/$original/$namespace";
+    $nextPath = "$dirName/$fileName.php";
+
+    if(is_file($nextPath) && !$overwrite){
+        return "";
+    }
+    if (!is_dir($dirName)) {
+        mkdir($dirName, 0755, true);
+    }
+
+    if (file_put_contents($nextPath, $endModel)) {
+        return "updated";
+    }
+
+    return "error";
+}
