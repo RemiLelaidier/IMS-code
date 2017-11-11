@@ -226,6 +226,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       */
       static get properties() {
         return {
+          serverUrl: {
+              type: String,
+              value: "http://127.0.0.1/rem/IMS-code/serv/public"
+          },
           formEtu: Object,
           stepper: Object,
           ironAjax: Object,
@@ -350,7 +354,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       * @return void
       */
       sendConventionAs(structuredData){
-        this.ironAjax.url = "http://api.leonard.zone/student/send/convention";
+        this.ironAjax.url = this.serverUrl + "/student/send/convention";
         this.ironAjax.body = JSON.stringify(structuredData);
         this.ironAjax.handleAs = "json";
         this.ironAjax.method = "POST";
