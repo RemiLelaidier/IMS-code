@@ -7,6 +7,980 @@
 	},
 	"item": [
 		{
+			"name": "Stage",
+			"description": "",
+			"item": [
+				{
+					"name": "Bootstrap",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"postman.setEnvironmentVariable(\"login_url\", jsonData.security.login);",
+									"postman.setEnvironmentVariable(\"refresh_url\", jsonData.security.refresh_token);",
+									"postman.setEnvironmentVariable(\"profile_url\", jsonData.security.user);",
+									"",
+									"tests[\"Should return security routes\"] = jsonData.security !== undefined;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{stage_url}}",
+							"host": [
+								"{{stage_url}}"
+							]
+						},
+						"description": ""
+					},
+					"response": [
+						{
+							"id": "359e6809-52c8-4dde-8089-12f006491f7e",
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "http://localhost/projetDev/serv/public/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"projetDev",
+										"serv",
+										"public",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "X-Requested-With, Content-Type, Accept, Origin, Authorization",
+									"name": "Access-Control-Allow-Headers",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, PATCH, DELETE",
+									"name": "Access-Control-Allow-Methods",
+									"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"key": "Access-Control-Expose-Headers",
+									"value": "Location, Content-Range",
+									"name": "Access-Control-Expose-Headers",
+									"description": "Lets a server whitelist headers that browsers are allowed to access."
+								},
+								{
+									"key": "Access-Control-Max-Age",
+									"value": "3600",
+									"name": "Access-Control-Max-Age",
+									"description": "Indicates how long the results of a preflight request can be cached in seconds."
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-store, no-cache, must-revalidate",
+									"name": "Cache-Control",
+									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive",
+									"name": "Connection",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"key": "Content-Length",
+									"value": "183",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=utf-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 10 Nov 2017 16:04:12 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Expires",
+									"value": "Thu, 19 Nov 1981 08:52:00 GMT",
+									"name": "Expires",
+									"description": "Gives the date/time after which the response is considered stale"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100",
+									"name": "Keep-Alive",
+									"description": "Custom header"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache",
+									"name": "Pragma",
+									"description": "Implementation-specific headers that may have various effects anywhere along the request-response chain."
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.27 (Unix) OpenSSL/1.0.2l PHP/7.0.22",
+									"name": "Server",
+									"description": "A name for the server"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.0.22",
+									"name": "X-Powered-By",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Tue Jan 19 2038 04:14:07 GMT+0100 (CET)",
+									"httpOnly": false,
+									"domain": "localhost",
+									"path": "/",
+									"secure": false,
+									"value": "gderc48t2ojn92tpo6m7g0k3g6",
+									"key": "PHPSESSID"
+								}
+							],
+							"responseTime": 529,
+							"body": "{\"security\":{\"login\":\"\\/projetDev\\/serv\\/public\\/admin\\/login\",\"refresh_token\":\"\\/projetDev\\/serv\\/public\\/admin\\/auth\\/refresh\",\"user\":\"\\/projetDev\\/serv\\/public\\/admin\\/users\\/me\"}}"
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"// Store the token /exp in environment",
+									"postman.setEnvironmentVariable(\"access_token\", jsonData.access_token);",
+									"postman.setEnvironmentVariable(\"expires_in\", jsonData.expires_in);",
+									"postman.setEnvironmentVariable(\"refresh_token\", jsonData.refresh_token);",
+									"",
+									"// Tests cases",
+									"tests[\"Should not return auth\"] = jsonData.auth === undefined;",
+									"tests[\"Sould return access token\"] = jsonData.access_token !== undefined;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "troll",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "cavernes",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{stage_url}}/{{login_url}}",
+							"host": [
+								"{{stage_url}}"
+							],
+							"path": [
+								"{{login_url}}"
+							]
+						},
+						"description": "Login on API"
+					},
+					"response": [
+						{
+							"id": "15a6e89e-1155-46a1-be75-455403cfcb18",
+							"name": "Login success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "troll",
+											"description": "",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "cavernes",
+											"description": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost/ims-slim/public/api/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"ims-slim",
+										"public",
+										"api",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "X-Requested-With, Content-Type, Accept, Origin, Authorization",
+									"name": "Access-Control-Allow-Headers",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, PATCH, DELETE",
+									"name": "Access-Control-Allow-Methods",
+									"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"key": "Access-Control-Expose-Headers",
+									"value": "Location, Content-Range",
+									"name": "Access-Control-Expose-Headers",
+									"description": "Lets a server whitelist headers that browsers are allowed to access."
+								},
+								{
+									"key": "Access-Control-Max-Age",
+									"value": "3600",
+									"name": "Access-Control-Max-Age",
+									"description": "Indicates how long the results of a preflight request can be cached in seconds."
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-store, no-cache, must-revalidate",
+									"name": "Cache-Control",
+									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive",
+									"name": "Connection",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"key": "Content-Length",
+									"value": "462",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=utf-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 10 Nov 2017 14:21:27 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Expires",
+									"value": "Thu, 19 Nov 1981 08:52:00 GMT",
+									"name": "Expires",
+									"description": "Gives the date/time after which the response is considered stale"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100",
+									"name": "Keep-Alive",
+									"description": "Custom header"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache",
+									"name": "Pragma",
+									"description": "Implementation-specific headers that may have various effects anywhere along the request-response chain."
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.27 (Unix) OpenSSL/1.0.2l PHP/7.0.22",
+									"name": "Server",
+									"description": "A name for the server"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.0.22",
+									"name": "X-Powered-By",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Tue Jan 19 2038 04:14:07 GMT+0100 (CET)",
+									"httpOnly": false,
+									"domain": "localhost",
+									"path": "/",
+									"secure": false,
+									"value": "gderc48t2ojn92tpo6m7g0k3g6",
+									"key": "PHPSESSID"
+								}
+							],
+							"responseTime": 841,
+							"body": "{\"access_token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MTAzMjM2ODgsImV4cCI6MTUxMDMyNzI4OCwiZGF0YSI6eyJ1c2VySWQiOjJ9LCJpc3MiOiJsb2NhbGhvc3QifQ.EJ2y8KxYmtzOUBsHiIvErgOBdvDKG27WOUjBP9Thsng\",\"expires_in\":3600,\"refresh_token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MTAzMjM2ODgsImV4cCI6MTUxMTUzMzI4OCwiZGF0YSI6eyJ0eXBlIjoicmVmcmVzaCIsInVzZXJJZCI6MiwidXNlck5hbWUiOiJ0cm9sbCJ9LCJpc3MiOiJsb2NhbGhvc3QifQ.UxaD3lmAuZsdCdmVirMa9UMAVgSZb4V9Zx_K9YTnSNU\"}"
+						},
+						{
+							"id": "42840c47-e694-479d-8e36-9c0c3f937b6b",
+							"name": "Bad credentials",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "troll",
+											"description": "",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "cavernes2",
+											"description": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost/ims-slim/public/api/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"ims-slim",
+										"public",
+										"api",
+										"login"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "X-Requested-With, Content-Type, Accept, Origin, Authorization",
+									"name": "Access-Control-Allow-Headers",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, PATCH, DELETE",
+									"name": "Access-Control-Allow-Methods",
+									"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"key": "Access-Control-Expose-Headers",
+									"value": "Location, Content-Range",
+									"name": "Access-Control-Expose-Headers",
+									"description": "Lets a server whitelist headers that browsers are allowed to access."
+								},
+								{
+									"key": "Access-Control-Max-Age",
+									"value": "3600",
+									"name": "Access-Control-Max-Age",
+									"description": "Indicates how long the results of a preflight request can be cached in seconds."
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-store, no-cache, must-revalidate",
+									"name": "Cache-Control",
+									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+								},
+								{
+									"key": "Connection",
+									"value": "close",
+									"name": "Connection",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"key": "Content-Length",
+									"value": "37",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=utf-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 10 Nov 2017 14:22:24 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Expires",
+									"value": "Thu, 19 Nov 1981 08:52:00 GMT",
+									"name": "Expires",
+									"description": "Gives the date/time after which the response is considered stale"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache",
+									"name": "Pragma",
+									"description": "Implementation-specific headers that may have various effects anywhere along the request-response chain."
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.27 (Unix) OpenSSL/1.0.2l PHP/7.0.22",
+									"name": "Server",
+									"description": "A name for the server"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.0.22",
+									"name": "X-Powered-By",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Tue Jan 19 2038 04:14:07 GMT+0100 (CET)",
+									"httpOnly": false,
+									"domain": "localhost",
+									"path": "/",
+									"secure": false,
+									"value": "gderc48t2ojn92tpo6m7g0k3g6",
+									"key": "PHPSESSID"
+								}
+							],
+							"responseTime": 882,
+							"body": "{\"auth\":[\"Bad username or password\"]}"
+						}
+					]
+				},
+				{
+					"name": "Get user info copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"tests[\"Should return username\"] = jsonData.username !== undefined;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{stage_url}}/{{profile_url}}",
+							"host": [
+								"{{stage_url}}"
+							],
+							"path": [
+								"{{profile_url}}"
+							]
+						},
+						"description": "Get user info based on his token (example of protected route)"
+					},
+					"response": [
+						{
+							"id": "65aa2036-68be-47d4-82fe-ec94c158f716",
+							"name": "Get login info (with Authorization header)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "http://localhost/ims-slim/public/api/users/me",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"ims-slim",
+										"public",
+										"api",
+										"users",
+										"me"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "X-Requested-With, Content-Type, Accept, Origin, Authorization",
+									"name": "Access-Control-Allow-Headers",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, PATCH, DELETE",
+									"name": "Access-Control-Allow-Methods",
+									"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"key": "Access-Control-Expose-Headers",
+									"value": "Location, Content-Range",
+									"name": "Access-Control-Expose-Headers",
+									"description": "Lets a server whitelist headers that browsers are allowed to access."
+								},
+								{
+									"key": "Access-Control-Max-Age",
+									"value": "3600",
+									"name": "Access-Control-Max-Age",
+									"description": "Indicates how long the results of a preflight request can be cached in seconds."
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-store, no-cache, must-revalidate",
+									"name": "Cache-Control",
+									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive",
+									"name": "Connection",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"key": "Content-Length",
+									"value": "224",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=utf-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 10 Nov 2017 14:35:38 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Expires",
+									"value": "Thu, 19 Nov 1981 08:52:00 GMT",
+									"name": "Expires",
+									"description": "Gives the date/time after which the response is considered stale"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100",
+									"name": "Keep-Alive",
+									"description": "Custom header"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache",
+									"name": "Pragma",
+									"description": "Implementation-specific headers that may have various effects anywhere along the request-response chain."
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.27 (Unix) OpenSSL/1.0.2l PHP/7.0.22",
+									"name": "Server",
+									"description": "A name for the server"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.0.22",
+									"name": "X-Powered-By",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Tue Jan 19 2038 04:14:07 GMT+0100 (CET)",
+									"httpOnly": false,
+									"domain": "localhost",
+									"path": "/",
+									"secure": false,
+									"value": "gderc48t2ojn92tpo6m7g0k3g6",
+									"key": "PHPSESSID"
+								}
+							],
+							"responseTime": 494,
+							"body": "{\"id\":1,\"username\":\"troll\",\"email\":\"troll@troll.io\",\"last_name\":null,\"first_name\":null,\"permissions\":{\"user.delete\":0},\"last_login\":\"2017-11-10 15:29:33\",\"created_at\":\"2017-11-10 14:29:33\",\"updated_at\":\"2017-11-10 14:29:33\"}"
+						},
+						{
+							"id": "d691a12f-a889-414c-83fb-1d384d7bc3e6",
+							"name": "No authorization token",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "http://localhost/{{profile_url}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"{{profile_url}}"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"key": "Cache-Control",
+									"value": "no-store, no-cache, must-revalidate",
+									"name": "Cache-Control",
+									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive",
+									"name": "Connection",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"key": "Content-Length",
+									"value": "40",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=utf-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 10 Nov 2017 17:02:29 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Expires",
+									"value": "Thu, 19 Nov 1981 08:52:00 GMT",
+									"name": "Expires",
+									"description": "Gives the date/time after which the response is considered stale"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100",
+									"name": "Keep-Alive",
+									"description": "Custom header"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache",
+									"name": "Pragma",
+									"description": "Implementation-specific headers that may have various effects anywhere along the request-response chain."
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.27 (Unix) OpenSSL/1.0.2l PHP/7.0.22",
+									"name": "Server",
+									"description": "A name for the server"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.0.22",
+									"name": "X-Powered-By",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Tue Jan 19 2038 04:14:07 GMT+0100 (CET)",
+									"httpOnly": false,
+									"domain": "localhost",
+									"path": "/",
+									"secure": false,
+									"value": "gderc48t2ojn92tpo6m7g0k3g6",
+									"key": "PHPSESSID"
+								}
+							],
+							"responseTime": 608,
+							"body": "{\"status\":401,\"message\":\"Unauthorized.\"}"
+						}
+					]
+				},
+				{
+					"name": "Send student convention copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Should return troll\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.convention_data[0].title).to.eql(\"Étudiant\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n  {\n  \"title\": \"Étudiant\",\n  \"inputs\": [{\n    \"label\": \"Prénom\",\n    \"value\": \"Léonard\"\n  }, {\n    \"label\": \"Nom\",\n    \"value\": \"Cherouvrier\"\n  }, {\n    \"label\": \"Numéro de sécurité sociale\",\n    \"value\": \"1776766767678\"\n  }, {\n    \"label\": \"Numéro d'étudiant\",\n    \"value\": \"76776767\"\n  }, {\n    \"label\": \"E-mail\",\n    \"value\": \"leonard\"\n  }, {\n    \"label\": \"Date de naissance\",\n    \"value\": \"20/08/1996\"\n  }, {\n    \"label\": \"Téléphone\",\n    \"value\": \"+33668717002\"\n  }, {\n    \"label\": \"Compagnie d'assurance\",\n    \"value\": \"GMF\"\n  }, {\n    \"label\": \"Numéro de Police\",\n    \"value\": \"344\"\n  }],\n  \"dropdowns\": [{\n    \"label\": \"Promotion\",\n    \"value\": \"Master 1\",\n    \"concerning\": \"Étudiant\"\n  }, {\n    \"label\": \"Genre\",\n    \"value\": \"M\",\n    \"concerning\": \"Étudiant\"\n  }]\n}, {\n  \"title\": \"Entreprise\",\n  \"inputs\": [{\n    \"label\": \"Nom\",\n    \"value\": \"LeDuc\"\n  }, {\n    \"label\": \"Site web\",\n    \"value\": \"http://leduc.com\"\n  }, {\n    \"label\": \"Prénom\",\n    \"value\": \"Hervé\"\n  }, {\n    \"label\": \"Nom\",\n    \"value\": \"Dubreuil\"\n  }, {\n    \"label\": \"E-mail\",\n    \"value\": \"herve@test.io\"\n  }, {\n    \"label\": \"Téléphone\",\n    \"value\": \"+33668717002\"\n  }, {\n    \"label\": \"En qualité de\",\n    \"value\": \"COO\"\n  }],\n  \"dropdowns\": [{\n    \"label\": \"Genre\",\n    \"value\": \"M\",\n    \"concerning\": \"Directeur / Représentant\"\n  }]\n}, {\n  \"title\": \"Stage\",\n  \"inputs\": [{\n    \"label\": \"Date de début\",\n    \"value\": \"20/08/1996\"\n  }, {\n    \"label\": \"Date de fin\",\n    \"value\": \"20/09/1996\"\n  }, {\n    \"label\": \"Durée hebdomadaire (en heures)\",\n    \"value\": \"36\"\n  }, {\n    \"label\": \"Montant de la gratification (en euros)\",\n    \"value\": \"300\"\n  }, {\n    \"label\": \"Intitulé du stage\",\n    \"value\": \"Héhé\"\n  }],\n  \"textareas\": [{\n    \"label\": \"Horaires\",\n    \"value\": \"Lundi au vendredi 10h-20h\"\n  }, {\n    \"label\": \"Présence la nuit, le dimanche, ou les jours fériés (le cas échéant)\",\n    \"value\": \"Non\"\n  }, {\n    \"label\": \"Avantages offerts par l'entreprise (restauration, hébergement, remboursement de frais, ...)\",\n    \"value\": \"Aucun.\"\n  }, {\n    \"label\": \"Description\",\n    \"value\": \"Je pue\"\n  }],\n  \"dropdowns\": [{\n    \"label\": \"Versement\",\n    \"value\": \"Virement\",\n    \"concerning\": \"Versement\"\n  }]\n}, {\n  \"title\": \"Responsables\",\n  \"inputs\": [{\n    \"label\": \"Prénom\",\n    \"value\": \"Hervé\"\n  }, {\n    \"label\": \"Nom\",\n    \"value\": \"Miauou\"\n  }, {\n    \"label\": \"E-mail\",\n    \"value\": \"leonard@test.ommfg\"\n  }, {\n    \"label\": \"Téléphone\",\n    \"value\": \"+33668717002\"\n  }, {\n    \"label\": \"En qualité de\",\n    \"value\": \"Chef\"\n  }, {\n    \"label\": \"Prénom\",\n    \"value\": \"Hervé\"\n  }, {\n    \"label\": \"Nom\",\n    \"value\": \"Miauou\"\n  }, {\n    \"label\": \"E-mail\",\n    \"value\": \"leonard@test.ommfg\"\n  }, {\n    \"label\": \"Téléphone\",\n    \"value\": \"+33668717002\"\n  }, {\n    \"label\": \"En qualité de\",\n    \"value\": \"Chef-bis\"\n  }],\n  \"dropdowns\": [{\n    \"label\": \"Genre\",\n    \"value\": \"Mme\",\n    \"concerning\": \"Encadreur dans l'entreprise\"\n  }, {\n    \"label\": \"Genre\",\n    \"value\": \"M\",\n    \"concerning\": \"Tuteur enseignant\"\n  }]\n}, {\n  \"title\": \"Informations complémentaires\",\n  \"textareas\": [{\n    \"label\": \"N'importe quel type d'information à communiquer si nécessaire\"\n  }]\n}]\n"
+						},
+						"url": {
+							"raw": "{{stage_url}}/student/send/convention",
+							"host": [
+								"{{stage_url}}"
+							],
+							"path": [
+								"student",
+								"send",
+								"convention"
+							]
+						},
+						"description": ""
+					},
+					"response": [
+						{
+							"id": "68a4cca5-daf0-4aa4-b004-760415f69f2d",
+							"name": "Send student convention",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n  {\n  \"title\": \"Étudiant\",\n  \"inputs\": [{\n    \"label\": \"Prénom\",\n    \"value\": \"Léonard\"\n  }, {\n    \"label\": \"Nom\",\n    \"value\": \"Cherouvrier\"\n  }, {\n    \"label\": \"Numéro de sécurité sociale\",\n    \"value\": \"1776766767678\"\n  }, {\n    \"label\": \"Numéro d'étudiant\",\n    \"value\": \"76776767\"\n  }, {\n    \"label\": \"E-mail\",\n    \"value\": \"leonard\"\n  }, {\n    \"label\": \"Date de naissance\",\n    \"value\": \"20/08/1996\"\n  }, {\n    \"label\": \"Téléphone\",\n    \"value\": \"+33668717002\"\n  }, {\n    \"label\": \"Compagnie d'assurance\",\n    \"value\": \"GMF\"\n  }, {\n    \"label\": \"Numéro de Police\",\n    \"value\": \"344\"\n  }],\n  \"dropdowns\": [{\n    \"label\": \"Promotion\",\n    \"value\": \"Master 1\",\n    \"concerning\": \"Étudiant\"\n  }, {\n    \"label\": \"Genre\",\n    \"value\": \"M\",\n    \"concerning\": \"Étudiant\"\n  }]\n}, {\n  \"title\": \"Entreprise\",\n  \"inputs\": [{\n    \"label\": \"Nom\",\n    \"value\": \"LeDuc\"\n  }, {\n    \"label\": \"Site web\",\n    \"value\": \"http://leduc.com\"\n  }, {\n    \"label\": \"Prénom\",\n    \"value\": \"Hervé\"\n  }, {\n    \"label\": \"Nom\",\n    \"value\": \"Dubreuil\"\n  }, {\n    \"label\": \"E-mail\",\n    \"value\": \"herve@test.io\"\n  }, {\n    \"label\": \"Téléphone\",\n    \"value\": \"+33668717002\"\n  }, {\n    \"label\": \"En qualité de\",\n    \"value\": \"COO\"\n  }],\n  \"dropdowns\": [{\n    \"label\": \"Genre\",\n    \"value\": \"M\",\n    \"concerning\": \"Directeur / Représentant\"\n  }]\n}, {\n  \"title\": \"Stage\",\n  \"inputs\": [{\n    \"label\": \"Date de début\",\n    \"value\": \"20/08/1996\"\n  }, {\n    \"label\": \"Date de fin\",\n    \"value\": \"20/09/1996\"\n  }, {\n    \"label\": \"Durée hebdomadaire (en heures)\",\n    \"value\": \"36\"\n  }, {\n    \"label\": \"Montant de la gratification (en euros)\",\n    \"value\": \"300\"\n  }, {\n    \"label\": \"Intitulé du stage\",\n    \"value\": \"Héhé\"\n  }],\n  \"textareas\": [{\n    \"label\": \"Horaires\",\n    \"value\": \"Lundi au vendredi 10h-20h\"\n  }, {\n    \"label\": \"Présence la nuit, le dimanche, ou les jours fériés (le cas échéant)\",\n    \"value\": \"Non\"\n  }, {\n    \"label\": \"Avantages offerts par l'entreprise (restauration, hébergement, remboursement de frais, ...)\",\n    \"value\": \"Aucun.\"\n  }, {\n    \"label\": \"Description\",\n    \"value\": \"Je pue\"\n  }],\n  \"dropdowns\": [{\n    \"label\": \"Versement\",\n    \"value\": \"Virement\",\n    \"concerning\": \"Versement\"\n  }]\n}, {\n  \"title\": \"Responsables\",\n  \"inputs\": [{\n    \"label\": \"Prénom\",\n    \"value\": \"Hervé\"\n  }, {\n    \"label\": \"Nom\",\n    \"value\": \"Miauou\"\n  }, {\n    \"label\": \"E-mail\",\n    \"value\": \"leonard@test.ommfg\"\n  }, {\n    \"label\": \"Téléphone\",\n    \"value\": \"+33668717002\"\n  }, {\n    \"label\": \"En qualité de\",\n    \"value\": \"Chef\"\n  }, {\n    \"label\": \"Prénom\",\n    \"value\": \"Hervé\"\n  }, {\n    \"label\": \"Nom\",\n    \"value\": \"Miauou\"\n  }, {\n    \"label\": \"E-mail\",\n    \"value\": \"leonard@test.ommfg\"\n  }, {\n    \"label\": \"Téléphone\",\n    \"value\": \"+33668717002\"\n  }, {\n    \"label\": \"En qualité de\",\n    \"value\": \"Chef-bis\"\n  }],\n  \"dropdowns\": [{\n    \"label\": \"Genre\",\n    \"value\": \"Mme\",\n    \"concerning\": \"Encadreur dans l'entreprise\"\n  }, {\n    \"label\": \"Genre\",\n    \"value\": \"M\",\n    \"concerning\": \"Tuteur enseignant\"\n  }]\n}, {\n  \"title\": \"Informations complémentaires\",\n  \"textareas\": [{\n    \"label\": \"N'importe quel type d'information à communiquer si nécessaire\"\n  }]\n}]\n"
+								},
+								"url": {
+									"raw": "http://localhost/projetDev/serv/public/student/send/convention",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"projetDev",
+										"serv",
+										"public",
+										"student",
+										"send",
+										"convention"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "X-Requested-With, Content-Type, Accept, Origin, Authorization",
+									"name": "Access-Control-Allow-Headers",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, PATCH, DELETE",
+									"name": "Access-Control-Allow-Methods",
+									"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"key": "Access-Control-Expose-Headers",
+									"value": "Location, Content-Range",
+									"name": "Access-Control-Expose-Headers",
+									"description": "Lets a server whitelist headers that browsers are allowed to access."
+								},
+								{
+									"key": "Access-Control-Max-Age",
+									"value": "3600",
+									"name": "Access-Control-Max-Age",
+									"description": "Indicates how long the results of a preflight request can be cached in seconds."
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-store, no-cache, must-revalidate",
+									"name": "Cache-Control",
+									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive",
+									"name": "Connection",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2636",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=utf-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 10 Nov 2017 19:39:32 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Expires",
+									"value": "Thu, 19 Nov 1981 08:52:00 GMT",
+									"name": "Expires",
+									"description": "Gives the date/time after which the response is considered stale"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100",
+									"name": "Keep-Alive",
+									"description": "Custom header"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache",
+									"name": "Pragma",
+									"description": "Implementation-specific headers that may have various effects anywhere along the request-response chain."
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.27 (Unix) OpenSSL/1.0.2l PHP/7.0.22",
+									"name": "Server",
+									"description": "A name for the server"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.0.22",
+									"name": "X-Powered-By",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Tue Jan 19 2038 04:14:07 GMT+0100 (CET)",
+									"httpOnly": false,
+									"domain": "localhost",
+									"path": "/",
+									"secure": false,
+									"value": "gderc48t2ojn92tpo6m7g0k3g6",
+									"key": "PHPSESSID"
+								}
+							],
+							"responseTime": 334,
+							"body": "{\"convention_data\":[{\"title\":\"\\u00c9tudiant\",\"inputs\":[{\"label\":\"Pr\\u00e9nom\",\"value\":\"L\\u00e9onard\"},{\"label\":\"Nom\",\"value\":\"Cherouvrier\"},{\"label\":\"Num\\u00e9ro de s\\u00e9curit\\u00e9 sociale\",\"value\":\"1776766767678\"},{\"label\":\"Num\\u00e9ro d'\\u00e9tudiant\",\"value\":\"76776767\"},{\"label\":\"E-mail\",\"value\":\"leonard\"},{\"label\":\"Date de naissance\",\"value\":\"20\\/08\\/1996\"},{\"label\":\"T\\u00e9l\\u00e9phone\",\"value\":\"+33668717002\"},{\"label\":\"Compagnie d'assurance\",\"value\":\"GMF\"},{\"label\":\"Num\\u00e9ro de Police\",\"value\":\"344\"}],\"dropdowns\":[{\"label\":\"Promotion\",\"value\":\"Master 1\",\"concerning\":\"\\u00c9tudiant\"},{\"label\":\"Genre\",\"value\":\"M\",\"concerning\":\"\\u00c9tudiant\"}]},{\"title\":\"Entreprise\",\"inputs\":[{\"label\":\"Nom\",\"value\":\"LeDuc\"},{\"label\":\"Site web\",\"value\":\"http:\\/\\/leduc.com\"},{\"label\":\"Pr\\u00e9nom\",\"value\":\"Herv\\u00e9\"},{\"label\":\"Nom\",\"value\":\"Dubreuil\"},{\"label\":\"E-mail\",\"value\":\"herve@test.io\"},{\"label\":\"T\\u00e9l\\u00e9phone\",\"value\":\"+33668717002\"},{\"label\":\"En qualit\\u00e9 de\",\"value\":\"COO\"}],\"dropdowns\":[{\"label\":\"Genre\",\"value\":\"M\",\"concerning\":\"Directeur \\/ Repr\\u00e9sentant\"}]},{\"title\":\"Stage\",\"inputs\":[{\"label\":\"Date de d\\u00e9but\",\"value\":\"20\\/08\\/1996\"},{\"label\":\"Date de fin\",\"value\":\"20\\/09\\/1996\"},{\"label\":\"Dur\\u00e9e hebdomadaire (en heures)\",\"value\":\"36\"},{\"label\":\"Montant de la gratification (en euros)\",\"value\":\"300\"},{\"label\":\"Intitul\\u00e9 du stage\",\"value\":\"H\\u00e9h\\u00e9\"}],\"textareas\":[{\"label\":\"Horaires\",\"value\":\"Lundi au vendredi 10h-20h\"},{\"label\":\"Pr\\u00e9sence la nuit, le dimanche, ou les jours f\\u00e9ri\\u00e9s (le cas \\u00e9ch\\u00e9ant)\",\"value\":\"Non\"},{\"label\":\"Avantages offerts par l'entreprise (restauration, h\\u00e9bergement, remboursement de frais, ...)\",\"value\":\"Aucun.\"},{\"label\":\"Description\",\"value\":\"Je pue\"}],\"dropdowns\":[{\"label\":\"Versement\",\"value\":\"Virement\",\"concerning\":\"Versement\"}]},{\"title\":\"Responsables\",\"inputs\":[{\"label\":\"Pr\\u00e9nom\",\"value\":\"Herv\\u00e9\"},{\"label\":\"Nom\",\"value\":\"Miauou\"},{\"label\":\"E-mail\",\"value\":\"leonard@test.ommfg\"},{\"label\":\"T\\u00e9l\\u00e9phone\",\"value\":\"+33668717002\"},{\"label\":\"En qualit\\u00e9 de\",\"value\":\"Chef\"},{\"label\":\"Pr\\u00e9nom\",\"value\":\"Herv\\u00e9\"},{\"label\":\"Nom\",\"value\":\"Miauou\"},{\"label\":\"E-mail\",\"value\":\"leonard@test.ommfg\"},{\"label\":\"T\\u00e9l\\u00e9phone\",\"value\":\"+33668717002\"},{\"label\":\"En qualit\\u00e9 de\",\"value\":\"Chef-bis\"}],\"dropdowns\":[{\"label\":\"Genre\",\"value\":\"Mme\",\"concerning\":\"Encadreur dans l'entreprise\"},{\"label\":\"Genre\",\"value\":\"M\",\"concerning\":\"Tuteur enseignant\"}]},{\"title\":\"Informations compl\\u00e9mentaires\",\"textareas\":[{\"label\":\"N'importe quel type d'information \\u00e0 communiquer si n\\u00e9cessaire\"}]}]}"
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "Bootstrap",
 			"event": [
 				{
@@ -47,7 +1021,7 @@
 			},
 			"response": [
 				{
-					"id": "d37c4f8e-e858-46c7-a795-543118886ef4",
+					"id": "c1bac23f-0034-4f06-963b-e508b124ef93",
 					"name": "Success",
 					"originalRequest": {
 						"method": "GET",
@@ -234,7 +1208,7 @@
 			},
 			"response": [
 				{
-					"id": "6cea1f6b-dd7f-4418-b858-aebd31e59117",
+					"id": "c4874478-5535-484b-b1fc-4c83e63cd5d6",
 					"name": "Login success",
 					"originalRequest": {
 						"method": "POST",
@@ -381,7 +1355,7 @@
 					"body": "{\"access_token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MTAzMjM2ODgsImV4cCI6MTUxMDMyNzI4OCwiZGF0YSI6eyJ1c2VySWQiOjJ9LCJpc3MiOiJsb2NhbGhvc3QifQ.EJ2y8KxYmtzOUBsHiIvErgOBdvDKG27WOUjBP9Thsng\",\"expires_in\":3600,\"refresh_token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MTAzMjM2ODgsImV4cCI6MTUxMTUzMzI4OCwiZGF0YSI6eyJ0eXBlIjoicmVmcmVzaCIsInVzZXJJZCI6MiwidXNlck5hbWUiOiJ0cm9sbCJ9LCJpc3MiOiJsb2NhbGhvc3QifQ.UxaD3lmAuZsdCdmVirMa9UMAVgSZb4V9Zx_K9YTnSNU\"}"
 				},
 				{
-					"id": "e570b46a-6a15-4d9b-bb39-b75cdd7fc216",
+					"id": "51286629-e858-421b-836a-cc7af96b6cf6",
 					"name": "Bad credentials",
 					"originalRequest": {
 						"method": "POST",
@@ -566,7 +1540,7 @@
 			},
 			"response": [
 				{
-					"id": "97358003-86cc-4840-a958-b2d704619c91",
+					"id": "f3f06dec-29d9-46f1-898a-474499753087",
 					"name": "Get login info (with Authorization header)",
 					"originalRequest": {
 						"method": "GET",
@@ -698,7 +1672,7 @@
 					"body": "{\"id\":1,\"username\":\"troll\",\"email\":\"troll@troll.io\",\"last_name\":null,\"first_name\":null,\"permissions\":{\"user.delete\":0},\"last_login\":\"2017-11-10 15:29:33\",\"created_at\":\"2017-11-10 14:29:33\",\"updated_at\":\"2017-11-10 14:29:33\"}"
 				},
 				{
-					"id": "227bcda0-c251-4af3-a0e9-2ea1cd027a0d",
+					"id": "98a58732-d047-4a90-a8c1-2deaa01f5926",
 					"name": "No authorization token",
 					"originalRequest": {
 						"method": "GET",
@@ -844,7 +1818,7 @@
 			},
 			"response": [
 				{
-					"id": "12191c6d-bb86-485d-8500-8554e9a8450b",
+					"id": "b3d14c47-7104-49ac-bf3e-f161247146e1",
 					"name": "Send student convention",
 					"originalRequest": {
 						"method": "POST",
