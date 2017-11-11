@@ -80,17 +80,56 @@ Manager::schema()->create('convention', function (Blueprint $table) {
     $table->foreign('company_id')->references('id')->on('company');
     $table->foreign('internship_id')->references('id')->on('internship');
 
+
+    /**
+     *
+     */
+
     /**
      * @var Illuminate\Database\Schema\Blueprint $table
      */
     $tableName = $table->getTable();
 
+    $primaryKey = "id";
+
+    $startModel = "<?php \n
+                    namespace App\Ims\/$tableName\Model; \n
+                    class $tableName {\n
+                    protected \$table = \"$tableName\";\n
+                    protected \$primaryKey = \"$primaryKey\";";
+
+    $fillables = [];
+
+    $hayStackProtected = ["integer"];
+    $hayStackFillables = ["receipt_from_student", 'company_validate', 'school_validate', 'student_validate', 'unice_validate', 'send_to_unice', 'return_from_unice', 'notes'];
+
     foreach($table->getColumns() as $column){
         /**
          * @var Illuminate\Support\Fluent $column
          */
-        var_dump($column);
+        if(in_array($column->getAttributes()['name'], $hayStackFillables)){
+            $fillables[] = $column;
+        }
     }
+
+    $startFillables = '$fillable = [';
+
+    foreach($fillables as $fillable){
+        /**
+         * @var Illuminate\Support\Fluent $fillable
+         */
+        $startFillables .= "'" . $fillable->getAttributes()['name'] . "',";
+    }
+
+    $startFillables = substr($startFillables, 0, -1);
+
+    $startFillables .= "];";
+
+    $startModel .= $startFillables;
+
+    $endModel = $startModel;
+
+    $endModel .= "}";
 });
 
 Manager::schema()->create('unice', function (Blueprint $table) {
