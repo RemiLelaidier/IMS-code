@@ -12,6 +12,13 @@ $tables = [
     'access_token',
     'refresh_token',
     'user',
+    'student',
+    'company',
+    'convention',
+    'internship',
+    'unice_people',
+    'company',
+    'company_people'
 ];
 
 Manager::schema()->disableForeignKeyConstraints();

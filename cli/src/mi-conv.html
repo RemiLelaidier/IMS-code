@@ -256,7 +256,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       *
       * @return void
       */
-      _submitStep() {
+      _submitStep(event) {
         let clicked = Polymer.dom(event).localTarget; // Getting our button
         const currentStep = clicked.getAttribute('data-step'); // Getting current step, could be useful (to know when it's the last? :troll:)
 
@@ -278,7 +278,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         } else {
           // @Tool : Uncomment next line to avoid validation and go.
-          //this.stepper._tapNext(); // Going to next step.
+          this.stepper._tapNext(); // Going to next step.
 
           // Ooops, let's show a little material toast !
           this.showToast("Vérifiez votre saisie.");
