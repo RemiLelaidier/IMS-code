@@ -101,11 +101,13 @@ TAG;
         }
 
         $startFillables = "\n\tprotected \$fillable = [\n";
-        foreach($fillables as $fillable){
-            $startFillables .= "\t\t\t\t\t'" . $fillable->getAttributes()['name'] . "',\n";
+        foreach($fillables as $k => $fillable){
+            $startFillables .= "\t\t\t\t\t'" . $fillable->getAttributes()['name'];
+            if($k !== count($fillables)-1){
+                $end = "',\n";
+                $startFillables .= $end;
+            }
         }
-
-        $startFillables = substr($startFillables, 0, -1);
 
         $startFillables .= "\n\t\t\t\t];";
         $startModel .= $startFillables;

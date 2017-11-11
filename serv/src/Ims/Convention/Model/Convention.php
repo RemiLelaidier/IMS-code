@@ -11,6 +11,6 @@ class Convention {
 					'unice_validate',
 					'send_to_unice',
 					'return_from_unice',
-					'notes',
+					'notes
 				];
 }
