@@ -1,14 +1,24 @@
 {
-    "name": "awurth/slim-rest-base",
-    "description": "Boilerplate for building a REST API with Slim PHP micro-framework",
-    "keywords": ["slim", "eloquent", "framework", "boilerplate", "skeleton", "rest", "api"],
-    "homepage": "https://github.com/awurth/slim-rest-base",
-    "license": "MIT",
+    "name": "ims-api",
+    "description": "Internship Management System - API",
+    "keywords": ["ims", "miage"],
+    "homepage": "https://github.com/RemiLelaidier/IMS-code/blob/master/serv/",
+    "license": "GPL",
     "authors": [
         {
             "name": "Alexis Wurth",
             "email": "awurth.dev@gmail.com",
             "homepage": "https://github.com/awurth"
+        },
+        {
+            "name": "Léonard Cherouvrier",
+            "email": "leonard.cherouvrier@etu.unice.fr",
+            "homepage": "https://github.com/ghostfly"
+        },
+        {
+          "name": "Rémi Lelaidier",
+          "email": "remi.lelaidier@etu.unice.fr",
+          "homepage": "https://github.com/RemiLelaidier"
         }
     ],
     "autoload": {

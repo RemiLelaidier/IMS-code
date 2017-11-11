@@ -1,6 +1,7 @@
 {
   "name": "Gestion des stages",
   "short_name": "IMS",
+  "author": "#ProjectStage Team - M1 Miage 2017-2018",
   "description": "Internship Management System - Made by Miagists, for Miagists.",
   "icons": [
     {

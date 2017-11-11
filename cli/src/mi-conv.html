@@ -349,7 +349,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       * @return void
       */
       sendConventionAs(structuredData){
-        this.ironAjax.url = "http://localhost/projetDev/serv/public/student/send/convention";
+        this.ironAjax.url = "http://api.leonard.zone/student/send/convention";
         this.ironAjax.body = JSON.stringify(structuredData);
         this.ironAjax.handleAs = "json";
         this.ironAjax.method = "POST";

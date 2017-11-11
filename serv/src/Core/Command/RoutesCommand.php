@@ -93,7 +93,8 @@ class RoutesCommand extends Command
      */
     public function markdown(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln('# API Routes');
+        $output->writeln('# Internship Management System - Miage Nice');
+        $output->writeln('## API Routes');
         $output->writeln('');
         $url = $this->options['url'];
 

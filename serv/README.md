@@ -1,6 +1,13 @@
 # IMS API
 Made by Miagists for Miagists
 
+## Stage API
+[StageIMS](http://api.leonard.zone)
+
+## Routes described in API.md
+
+Pro-tip : Use postman collection/environment in /assets of the repository
+
 ## Todo
 - General :
     - Database /!\
