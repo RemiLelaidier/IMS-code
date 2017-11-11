@@ -80,7 +80,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               <br>
               <paper-input required class="shortInput" auto-validate pattern="^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/\-]\d{4}$" error-message="Doit être au format JJ/MM/AAAA" label="Date de naissance"></paper-input>
               <paper-input required class="longInput" auto-validate pattern="^\+(?:[0-9]●?){6,14}[0-9]$" label="Téléphone" error-message="Doit être au format international. Ex : +33612233445"></paper-input>
-              <titanium-address-input required label="Adresse" error-message="Adresse invalide" api-key="AIzaSyCTiFwEzAkuXWgFQTr4GGAX5VpYR2aVxzw"></titanium-address-input>
+              <titanium-address-input required label="Adresse" error-message="Adresse invalide, exemple : 16 Rue Michel Ange Paris, Île-de-France 75016" api-key="AIzaSyCTiFwEzAkuXWgFQTr4GGAX5VpYR2aVxzw"></titanium-address-input>
               <p>
                 Pour votre stage, vous devez être couvert contre le risque "responsabilité civile":
               </p>
@@ -97,8 +97,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               <hr>
               <paper-input required class="longInput" label="Nom"></paper-input>
               <paper-input class="shortInput" label="Site web"></paper-input>
-              <titanium-address-input required error-message="Adresse invalide" label="Adresse du siège social" api-key="AIzaSyCTiFwEzAkuXWgFQTr4GGAX5VpYR2aVxzw"></titanium-address-input>
-              <titanium-address-input required error-message="Adresse invalide" label="Adresse du stage" api-key="AIzaSyCTiFwEzAkuXWgFQTr4GGAX5VpYR2aVxzw"></titanium-address-input>
+              <titanium-address-input required error-message="Adresse invalide. Exemple : 16 Rue Michel Ange Paris, Île-de-France 75016" label="Adresse du siège social" api-key="AIzaSyCTiFwEzAkuXWgFQTr4GGAX5VpYR2aVxzw"></titanium-address-input>
+              <titanium-address-input required error-message="Adresse invalide. Exemple : 16 Rue Michel Ange Paris, Île-de-France 75016" label="Adresse du stage" api-key="AIzaSyCTiFwEzAkuXWgFQTr4GGAX5VpYR2aVxzw"></titanium-address-input>
               <h3>Directeur / Représentant</h3>
               <paper-dropdown-menu label="Genre" data-concerning="Directeur / Représentant">
                 <paper-listbox slot="dropdown-content" selected="0">
@@ -282,7 +282,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         } else {
           // @Tool : Uncomment next line to avoid validation and go.
-          //this.stepper._tapNext(); // Going to next step.
+          //this.stepper._tapNext();
 
           // Ooops, let's show a little material toast !
           this.showToast("Vérifiez votre saisie.");
