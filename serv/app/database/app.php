@@ -79,6 +79,18 @@ Manager::schema()->create('convention', function (Blueprint $table) {
     $table->foreign('student_id')->references('id')->on('student');
     $table->foreign('company_id')->references('id')->on('company');
     $table->foreign('internship_id')->references('id')->on('internship');
+
+    /**
+     * @var Illuminate\Database\Schema\Blueprint $table
+     */
+    $tableName = $table->getTable();
+
+    foreach($table->getColumns() as $column){
+        /**
+         * @var Illuminate\Support\Fluent $column
+         */
+        var_dump($column);
+    }
 });
 
 Manager::schema()->create('unice', function (Blueprint $table) {
@@ -110,3 +122,4 @@ Manager::schema()->create('convention_employee', function (Blueprint $table) {
     $table->foreign('convention_id')->references('id')->on('convention');
     $table->foreign('employee_id')->references('id')->on('employee');
 });
+
