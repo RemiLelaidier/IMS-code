@@ -37,7 +37,7 @@
 /* eslint-disable indent, no-unused-vars, no-multiple-empty-lines, max-nested-callbacks, space-before-function-paren, quotes, comma-spacing */
 'use strict';
 
-var precacheConfig = [["bower_components/webcomponentsjs/webcomponents-loader.js","f13bbbbf647b7922575a7894367ddaaf"],["images/favicon.ico","01cbcfa4f21e15002ea997ec21606a67"],["images/logo_miage_thumb.png","d5d33d8ef71cd7d4592a2a5bf5aede3e"],["index.html","a8a9a5eca902f569f779cb532f9b467d"],["manifest.json","6655632f46d4bdf9918a1e4ded73c4e1"],["src/mi-admin.html","b32929c0f4a81793898832cdedeccf01"],["src/mi-app.html","a09de8a96a28cf6776620b2c18747a9c"],["src/mi-conv.html","49591a7b5d7990ae46c5a0469ebf5e50"],["src/mi-view404.html","541870bfcb1c66ab4697e23975218fae"]];
+var precacheConfig = [["bower_components/webcomponentsjs/webcomponents-loader.js","f13bbbbf647b7922575a7894367ddaaf"],["images/favicon.ico","01cbcfa4f21e15002ea997ec21606a67"],["images/logo_miage_thumb.png","d5d33d8ef71cd7d4592a2a5bf5aede3e"],["index.html","a8a9a5eca902f569f779cb532f9b467d"],["manifest.json","e7023f4b044f1bcc1c0143ec9a06f53a"],["src/mi-admin.html","b32929c0f4a81793898832cdedeccf01"],["src/mi-app.html","a09de8a96a28cf6776620b2c18747a9c"],["src/mi-conv.html","bc764d63e8d2d3fa1dc3327410fad919"],["src/mi-view404.html","541870bfcb1c66ab4697e23975218fae"]];
 var cacheName = 'sw-precache-v3--' + (self.registration ? self.registration.scope : '');
 
 
