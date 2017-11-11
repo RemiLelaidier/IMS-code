@@ -1,16 +1,11 @@
-<?php
+<?php 
 
-namespace App\Ims\Convention\Model;
+                    namespace App\Ims\Convention\Model; 
 
-class Convention
-{
-    protected $table = 'convention';
+                    class Convention {
 
-    protected $primaryKey = 'id';
+                    protected $table = "Convention";
 
-    protected $fillable = [
-        'raw_data',
-        'student_id',
-        'entreprise_id'
-    ];
-}
+                    protected $primaryKey = "id";
+
+protected $fillable = ['receipt_from_student','company_validate','school_validate','student_validate','unice_validate','send_to_unice','return_from_unice','notes'];}
