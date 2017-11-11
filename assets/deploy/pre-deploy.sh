@@ -7,8 +7,17 @@ echo "Preparing deploy"
 # Going down
 cd ..
 
+# Stash any changes
+git stash
+
+# Checkout master
+git checkout master
+
 # Tag new release
 git tag -a $1 -m "$1"
+
+# Push new tags
+git push --tags
 
 # Building using polymer-cli
 polymer build
