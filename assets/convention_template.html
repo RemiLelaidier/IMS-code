@@ -1,0 +1,668 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=8">
+	<title>Convention_template</title>
+	<style type="text/css">
+		#page_1 #p1dimg1,#page_1 #p1dimg1 #p1img1{height:989px;width:731px}#page_2,#page_3,#page_4{width:727px;position:relative}#page_1,#page_2,#page_3,#page_4,#page_5,#page_6{position:relative}#page_2 #id_1,#page_2 #id_2,#page_3 #id_1,#page_3 #id_2,#page_4 #id_2,#page_5 #id_1 #id_1_1,#page_5 #id_1 #id_1_2,#page_6 #id_2 #id_2_1,#page_6 #id_2 #id_2_2{float:left;border:none}#page_1 #p1dimg1,#page_6 #p6dimg1{position:absolute;top:0;z-index:-1}#page_6 #p6dimg1,#page_6 #p6dimg1 #p6img1{width:709px;height:781px}#page_1,#page_2,#page_2 #id_1,#page_2 #id_2,#page_3,#page_3 #id_1,#page_3 #id_2,#page_4,#page_4 #id_1,#page_4 #id_2,#page_5,#page_5 #id_1 #id_1_1,#page_5 #id_1 #id_1_2,#page_5 #id_2,#page_6,#page_6 #id_1,#page_6 #id_2,#page_6 #id_2 #id_2_1,#page_6 #id_2 #id_2_2,#page_6 #id_3,.dclr{padding:0;overflow:hidden}.ft10,.ft17,.ft18,.ft3,.ft30,.ft41,.ft43,.ft44,.ft46,.ft50,.ft8,.ft9{text-decoration:underline}body{margin-top:0;margin-left:0}#page_1{margin:35px 0 36px;border:none;width:795px}#page_1 #p1dimg1{left:31px}#page_2{margin:73px 0 37px 68px;border:none}#page_2 #id_1{margin:8px 0 0;width:346px}#page_2 #id_2{margin:0;width:381px}#page_3,#page_4{margin:77px 0 37px 68px;border:none}#page_3 #id_1{margin:4px 0 0;width:342px}#page_3 #id_2{margin:0;width:385px}#page_4 #id_1{float:left;margin:4px 0 0;border:none;width:336px}#page_4 #id_2{margin:0;width:391px}#page_5{margin:80px 0 37px;border:none;width:795px}#page_5 #id_1{margin:0 0 0 64px;padding:0;border:none;width:731px;overflow:hidden}#page_5 #id_1 #id_1_1{margin:2px 0 0;width:341px}#page_5 #id_1 #id_1_2{margin:0;width:390px}#page_5 #id_2{margin:55px 0 0;border:none;width:795px}#page_6{margin:32px 0 40px 47px;border:none;width:748px}#page_6 #id_1{margin:0 0 0 19px;border:none;width:729px}#page_6 #id_2{margin:26px 0 0 8px;border:none;width:740px}#page_6 #id_2 #id_2_1{margin:0;width:305px}#page_6 #id_2 #id_2_2{margin:28px 0 0 32px;width:403px}#page_6 #id_3{margin:74px 0 0 668px;border:none;width:80px}.td2,.td3{border-top:#000 1px solid}.td2,.td4,.td6{border-left:#000 1px solid}.td2,.td3,.td4,.td5,.td6,.td7{border-right:#000 1px solid}.td11,.td12,.td20,.td34,.td6,.td7{border-bottom:#000 1px solid}#page_6 #p6dimg1{left:0}.dclr{clear:both;float:none;height:1px;margin:0}.ft0{font:italic 11px 'Arial Narrow';line-height:13px}.ft1{font:700 12px 'Arial Narrow';line-height:13px}.ft2{font:italic 11px 'Arial Narrow';line-height:14px}.ft3,.ft4{font:italic 700 15px 'Arial Narrow';line-height:17px}.ft5{font:italic 10px 'Arial Narrow';line-height:14px}.ft6{font:1px 'Arial Narrow';line-height:8px}.ft7{font:italic 700 9px 'Times New Roman';line-height:11px}.ft8{font:11px 'Arial Narrow';line-height:13px}.ft9{font:700 8px 'Arial Narrow';line-height:13px}.ft10,.ft11{font:700 11px 'Arial Narrow'}.ft10{line-height:13px}.ft11{line-height:14px}.ft12,.ft18{font:700 11px 'Arial Narrow'}.ft12{line-height:15px}.ft13{font:11px 'Arial Narrow';line-height:15px}.ft14{font:italic 11px 'Arial Narrow';line-height:15px}.ft15{font:700 10px 'Arial Narrow';line-height:14px}.ft16{font:1px 'Arial Narrow';line-height:1px}.ft17{font:11px 'Arial Narrow';line-height:15px}.ft18{line-height:15px}.ft19{font:700 11px 'Arial Narrow';line-height:13px}.ft20{font:700 10px 'Arial Narrow';line-height:13px}.ft21{font:700 6px 'Arial Narrow';line-height:7px}.ft22{font:700 9px 'Arial Narrow';line-height:13px}.ft23{font:700 11px 'Arial Narrow';text-decoration:underline;line-height:14px}.ft24{font:italic 700 11px 'Arial Narrow';line-height:15px}.ft25{font:700 11px Tahoma;line-height:13px}.ft26{font:700 12px Tahoma;line-height:14px}.ft27{font:12px Tahoma;line-height:17px}.ft28,.ft29{font:12px Tahoma}.ft28{line-height:16px}.ft29{line-height:14px}.ft30{font:12px Tahoma;line-height:14px}.ft31,.ft33{font:11px Tahoma}.ft31{line-height:13px}.ft32{font:13px Tahoma;line-height:16px}.ft33{line-height:14px}.ft34{font:11px Tahoma;line-height:16px}.ft35,.ft37{font:700 12px Tahoma}.ft35{line-height:16px}.ft36{font:12px Tahoma;line-height:15px}.ft37{margin-left:7px;line-height:17px}.ft38{font:700 12px Tahoma;line-height:17px}.ft39,.ft41{font:11px Tahoma}.ft39{line-height:17px}.ft40{font:700 12px Tahoma;margin-left:11px;line-height:16px}.ft41{line-height:15px}.ft42{font:11px Tahoma;line-height:15px}.ft43{font:12px Tahoma;line-height:16px}.ft44{font:700 11px Tahoma;line-height:13px}.ft45{font:1px Tahoma;line-height:1px}.ft46{font:700 10px Tahoma;line-height:12px}.ft47{font:700 9px Tahoma;line-height:11px}.ft48{font:700 13px Tahoma;line-height:16px}.ft49{font:700 14px Tahoma;line-height:17px}.ft50{font:700 12px Tahoma;line-height:14px}.ft51{font:700 10px Tahoma;line-height:13px}.ft52{font:10px Tahoma;line-height:13px}.p0{text-align:left;padding-left:536px;margin-top:3px;margin-bottom:0}.p1,.p2,.p3{margin-top:0;margin-bottom:0;text-align:left}.p1{padding-left:37px}.p2{padding-left:536px}.p3{white-space:nowrap}.p4{text-align:left;padding-left:44px;margin-top:24px;margin-bottom:0}.p5,.p6,.p7,.p8{margin-top:0;white-space:nowrap;margin-bottom:0;text-align:left}.p5{padding-left:60px}.p6{padding-left:123px}.p7{padding-left:13px}.p8{padding-left:11px}.p9{text-align:left;padding-left:363px;margin-top:22px;margin-bottom:0}.p10{text-align:left;padding-left:51px;margin-top:16px;margin-bottom:0}.p11,.p12{text-align:right;margin-top:0;margin-bottom:0;white-space:nowrap}.p12{padding-right:54px}.p13,.p14{text-align:left;padding-left:51px}.p13{margin-top:12px;margin-bottom:0}.p14{margin-top:9px;margin-bottom:0}.p15,.p16,.p17{padding-left:42px;text-align:left;margin-bottom:0}.p15{margin-top:45px}.p16{margin-top:3px}.p17{margin-top:4px}.p18{text-align:left;padding-left:52px;margin-top:0;margin-bottom:0;white-space:nowrap}.p19{text-align:left;padding-left:42px;margin-top:5px;margin-bottom:0}.p20,.p21,.p22,.p23,.p24,.p25{text-align:left;margin-top:0;white-space:nowrap}.p20{padding-left:9px;margin-bottom:0}.p21{padding-left:17px;margin-bottom:0}.p22{padding-left:18px;margin-bottom:0}.p23{padding-left:16px;margin-bottom:0}.p24{padding-left:8px;margin-bottom:0}.p25{padding-left:15px;margin-bottom:0}.p26,.p27{padding-left:44px;text-align:left;margin-bottom:0}.p26{margin-top:21px}.p27{margin-top:1px}.p28{text-align:left;padding-left:34px;margin-top:26px;margin-bottom:0}.p29{text-align:right;padding-right:30px;margin-top:25px;margin-bottom:0}.p30{text-align:left;margin-top:0;margin-bottom:0}.p31{text-align:justify;padding-right:29px;margin-top:3px;margin-bottom:0}.p32{text-align:left;margin-top:16px;margin-bottom:0}.p33,.p34{text-align:justify;margin-bottom:0;padding-right:29px}.p33{margin-top:2px}.p34{margin-top:5px}.p35,.p36,.p37,.p38{text-align:left}.p35{margin-top:2px;margin-bottom:0}.p36{margin-top:3px;margin-bottom:0}.p37{margin-top:19px;margin-bottom:0}.p38{margin-top:20px;margin-bottom:0}.p39,.p40,.p41,.p42,.p43{text-align:justify;margin-bottom:0}.p39{padding-right:29px;margin-top:1px}.p40{padding-right:28px;margin-top:3px}.p41{padding-right:54px;margin-top:0}.p42,.p43,.p46,.p47{padding-right:72px}.p42{margin-top:5px}.p43{margin-top:2px}.p44,.p45{text-align:left}.p44{margin-top:17px;margin-bottom:0}.p45{margin-top:18px;margin-bottom:0}.p46,.p47,.p48,.p49,.p50{text-align:justify;margin-bottom:0}.p46{margin-top:3px}.p47{margin-top:15px}.p48{padding-right:67px;margin-top:2px}.p49{padding-right:72px;margin-top:18px}.p50{padding-right:67px;margin-top:16px}.p51,.p52{padding-right:72px;text-align:justify}.p51{margin-top:1px;margin-bottom:0}.p52{margin-top:16px;margin-bottom:0}.p53,.p54,.p55{text-align:left;margin-bottom:0}.p53{margin-top:1px}.p54{padding-left:246px;margin-top:129px}.p67,.p68,.p69,.p73,.p74{padding-left:2px}.p55{padding-right:27px;margin-top:0}.p56{text-align:justify;padding-right:23px;margin-top:2px;margin-bottom:0}.p57,.p58{text-align:justify;padding-right:25px;margin-bottom:0}.p57{margin-top:1px}.p58{margin-top:2px}.p59{text-align:left;margin-top:4px;margin-bottom:0}.p60,.p61{text-align:justify}.p60{padding-right:24px;margin-top:19px;margin-bottom:0}.p61{padding-right:22px;margin-top:0;margin-bottom:0}.p62,.p63{text-align:justify;padding-right:25px;margin-bottom:0}.p62{margin-top:5px}.p63{margin-top:3px}.p64{text-align:left;padding-right:37px;margin-top:19px;margin-bottom:0}.p65,.p66{text-align:justify;margin-top:0;margin-bottom:0}.p65{padding-right:17px}.p66{padding-right:60px}.p67{text-align:left;padding-right:74px;margin-top:28px;margin-bottom:0}.p68{text-align:justify;padding-right:73px;margin-top:1px;margin-bottom:0}.p69,.p70{text-align:left}.p69{padding-right:74px;margin-top:10px;margin-bottom:0}.p70{margin-top:22px;margin-bottom:0}.p71,.p72{text-align:justify;padding-right:73px;margin-bottom:0}.p71{margin-top:2px}.p72{margin-top:0}.p73{text-align:left;margin-top:24px;margin-bottom:0}.p74{text-align:justify;padding-right:71px;margin-top:3px;margin-bottom:0}.p75,.p76{text-align:left}.p75{padding-left:250px;margin-top:127px;margin-bottom:0}.p84,.p85{padding-left:9px}.p76,.p77{margin-top:3px;margin-bottom:0}.p76{padding-right:16px}.p77,.p78{text-align:justify}.p77{padding-right:17px}.p78{padding-right:15px;margin-top:2px;margin-bottom:0}.p79,.p80,.p81{padding-right:16px;text-align:justify;margin-bottom:0}.p79{margin-top:19px}.p80{margin-top:2px}.p81{margin-top:4px}.p82{text-align:justify;padding-right:18px;margin-top:3px;margin-bottom:0}.p83{text-align:justify;padding-right:19px;margin-top:8px;margin-bottom:0}.p84{text-align:left;padding-right:66px;margin-top:0;margin-bottom:0}.p85{text-align:justify;padding-right:72px;margin-top:1px;margin-bottom:0}.p86{text-align:left;padding-left:9px;margin-top:16px;margin-bottom:0}.p87,.p88{text-align:justify;padding-right:72px;margin-bottom:0;padding-left:9px}.p87{margin-top:2px}.p88{margin-top:4px}.p89{text-align:left;padding-left:9px;margin-top:18px;margin-bottom:0}.p90,.p92{padding-left:11px;padding-right:72px;margin-bottom:0}.p90{text-align:justify;margin-top:3px;text-indent:-10px}.p91{text-align:left;margin-top:7px;margin-bottom:0}.p92{text-align:justify;margin-top:2px}.p93,.p94{margin-top:3px;padding-left:11px}.p93{text-align:left;margin-bottom:0}.p94{text-align:justify;padding-right:67px;margin-bottom:0}.p95,.p96{text-align:left;margin-bottom:0}.p95{padding-left:11px;margin-top:2px}.p96{margin-top:5px}.p97{text-align:justify;padding-left:11px;padding-right:68px;margin-top:2px;margin-bottom:0}.p100,.p101,.p98,.p99{padding-left:9px;margin-bottom:0;text-align:left}.p98{margin-top:13px}.p99{margin-top:8px}.p100{margin-top:7px}.p101{margin-top:30px}.p102{text-align:left;padding-left:256px;margin-top:69px;margin-bottom:0}.p103,.p104{text-align:justify;padding-left:4px;padding-right:20px;margin-bottom:0}.p103{margin-top:0}.p104{margin-top:3px}.p105,.p106{text-align:left}.p105{padding-right:82px;margin-top:100px;margin-bottom:0}.p106{margin-top:124px;margin-bottom:0}.p107,.p108{padding-left:9px;margin-top:2px;margin-bottom:0;text-align:left}.p107{padding-right:74px}.p108{padding-right:75px}.p109{text-align:left;margin-top:115px;margin-bottom:0}.p110{text-align:left;padding-left:223px;margin-top:0;margin-bottom:0}.p111{text-align:left;padding-left:355px;margin-top:1px;margin-bottom:0}.p112{text-align:left;padding-left:248px;margin-top:111px;margin-bottom:0}.p113,.p114{text-align:left;padding-left:64px;margin-bottom:0}.p113{margin-top:77px}.p114{margin-top:34px}.p115{text-align:right;padding-right:69px;margin-top:54px;margin-bottom:0}.p116,.p117{text-align:left}.p116{padding-left:400px;margin-top:0;margin-bottom:0}.p117{padding-left:348px;margin-top:2px;margin-bottom:0}.p120,.p123{padding-left:1px;text-align:left;margin-bottom:0}.p118{text-align:left;margin-top:60px;margin-bottom:0}.p119{text-align:left;margin-top:27px;margin-bottom:0}.p120{margin-top:45px}.p121{text-align:left;margin-top:13px;margin-bottom:0}.p122{text-align:left;margin-top:15px;margin-bottom:0}.p123{margin-top:17px}.p124{text-align:left;margin-top:28px;margin-bottom:0}.p125{text-align:left;margin-top:10px;margin-bottom:0}.p126{text-align:left;margin-top:11px;margin-bottom:0}.p127{text-align:left;padding-right:53px;margin-top:10px;margin-bottom:0}.p128{text-align:left;margin-top:29px;margin-bottom:0}.p129{text-align:left;margin-top:8px;margin-bottom:0}.p130{text-align:justify;margin-top:0;margin-bottom:0}.p131,.p132{text-align:left;margin-bottom:0}.p131{padding-left:6px;margin-top:104px}.p132{padding-left:5px;margin-top:0}.td0,.td1,.td2{padding:0;margin:0;vertical-align:bottom}.td0{width:497px}.td1{width:140px}.td2{width:364px}.td3{padding:0;margin:0;width:361px;vertical-align:bottom}.td17,.td18{border-top:#777 1px solid;padding:0;margin:0}.td4{padding:0;margin:0;width:364px;vertical-align:bottom}.td5{padding:0;margin:0;width:361px;vertical-align:bottom}.td6{padding:0;margin:0;width:364px;vertical-align:bottom}.td7{padding:0;margin:0;width:361px;vertical-align:bottom}.td8{padding:0;margin:0;width:354px;vertical-align:bottom}.td9{padding:0;margin:0;width:44px;vertical-align:bottom}.td10{padding:0;margin:0;width:31px;vertical-align:bottom}.td11{padding:0;margin:0;width:45px;vertical-align:bottom}.td12{padding:0;margin:0;width:99px;vertical-align:bottom}.td13{padding:0;margin:0;width:278px;vertical-align:bottom}.td14{padding:0;margin:0;width:300px;vertical-align:bottom}.td15{padding:0;margin:0;width:148px;vertical-align:bottom}.td16{padding:0;margin:0;width:376px;vertical-align:bottom}.td17{border-left:#797979 1px solid;border-right:#797979 1px solid;width:362px;vertical-align:bottom}.td18{border-right:#000 1px solid;width:361px;vertical-align:bottom}.td19,.td20{border-left:#797979 1px solid;border-right:#797979 1px solid;width:362px;padding:0;margin:0;vertical-align:bottom}.td21{padding:0;margin:0;width:88px;vertical-align:bottom}.td22{padding:0;margin:0;width:32px;vertical-align:bottom}.td23{padding:0;margin:0;width:128px;vertical-align:bottom}.td24{padding:0;margin:0;width:48px;vertical-align:bottom}.td25{padding:0;margin:0;width:13px;vertical-align:bottom}.td26{padding:0;margin:0;width:223px;vertical-align:bottom}.td27{padding:0;margin:0;width:79px;vertical-align:bottom}.td28{padding:0;margin:0;width:341px;vertical-align:bottom}.td29{padding:0;margin:0;width:240px;vertical-align:bottom}.td30{padding:0;margin:0;width:299px;vertical-align:bottom}.td31{padding:0;margin:0;width:355px;vertical-align:bottom}.td32{padding:0;margin:0;width:71px;vertical-align:bottom}.td33{padding:0;margin:0;width:120px;vertical-align:bottom}.td34{padding:0;margin:0;width:40px;vertical-align:bottom}.td35{padding:0;margin:0;width:5px;vertical-align:bottom}.tr0{height:17px}.tr1{height:25px}.tr2{height:8px}.tr3{height:15px}.tr4{height:29px}.tr5{height:18px}.tr6{height:19px}.tr7{height:16px}.tr8{height:28px}.tr9{height:24px}.tr10{height:21px}.tr11{height:13px}.tr12{height:14px}.t0{width:637px;margin-left:39px;font:italic 700 15px 'Arial Narrow'}.t1{width:727px;margin-left:35px;margin-top:8px;font:700 11px 'Arial Narrow'}.t2,.t3{margin-left:51px;margin-top:6px;font:700 11px 'Arial Narrow'}.t2{width:573px}.t3{width:578px}.t4{width:524px;margin-left:42px;font:700 6px 'Arial Narrow'}.t5{width:725px;margin-left:35px;margin-top:29px;font:700 10px 'Arial Narrow'}.t6{width:309px;margin-top:2px;font:12px Tahoma}.t7{width:302px;margin-left:9px;font:700 12px Tahoma}.t8,.t9{margin-left:64px;font:11px Tahoma}.t8{width:581px;margin-top:81px}.t9{width:640px;margin-top:96px}.t10{width:591px;margin-top:15px;font:12px Tahoma}
+	</style>
+</head>
+
+<body>
+	<div id="page_1">
+		<div id="p1dimg1">
+			<img src="data:image/jpg;base64,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P/jVH9m3f/Qbv/8AviD/AONVo0UAZ39m3f8A0G7/AP74g/8AjVH9m3f/AEG7/wD74g/+NVo0UAZ39m3f/Qbv/wDviD/41R/Zt3/0G7//AL4g/wDjVaNFAGd/Zt3/ANBu/wD++IP/AI1TX0iWYxifVr2aNJEk8tlhAYqwYZxGDjIHQ1p0UAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUVy/i+ws9T1DwtZ39pBd2smqvvhnjEiNizuSMqeDggH8Ksf8IJ4P/6FTQ//AAXQ/wDxNAHQUVz/APwgng//AKFTQ/8AwXQ//E0f8IJ4P/6FTQ//AAXQ/wDxNAHQUVz/APwgng//AKFTQ/8AwXQ//E0f8IJ4P/6FTQ//AAXQ/wDxNAHQUVz/APwgng//AKFTQ/8AwXQ//E0f8IJ4P/6FTQ//AAXQ/wDxNAHQUVz/APwgng//AKFTQ/8AwXQ//E0f8IJ4P/6FTQ//AAXQ/wDxNAHQUVz/APwgng//AKFTQ/8AwXQ//E0f8IJ4P/6FTQ//AAXQ/wDxNAHQUVz/APwgng//AKFTQ/8AwXQ//E0f8IJ4P/6FTQ//AAXQ/wDxNAHQUVz/APwgng//AKFTQ/8AwXQ//E0f8IJ4P/6FTQ//AAXQ/wDxNAHQUVz/APwgng//AKFTQ/8AwXQ//E0f8IJ4P/6FTQ//AAXQ/wDxNAHQUVz/APwgng//AKFTQ/8AwXQ//E0f8IJ4P/6FTQ//AAXQ/wDxNAHQUVz/APwgng//AKFTQ/8AwXQ//E0f8IJ4P/6FTQ//AAXQ/wDxNAHQUVz/APwgng//AKFTQ/8AwXQ//E0f8IJ4P/6FTQ//AAXQ/wDxNAHQUVz/APwgng//AKFTQ/8AwXQ//E0f8IJ4P/6FTQ//AAXQ/wDxNAHQUVz/APwgng//AKFTQ/8AwXQ//E0f8IJ4P/6FTQ//AAXQ/wDxNAHQUVz/APwgng//AKFTQ/8AwXQ//E0f8IJ4P/6FTQ//AAXQ/wDxNAHQUVz/APwgng//AKFTQ/8AwXQ//E0f8IJ4P/6FTQ//AAXQ/wDxNAHQUVz/APwgng//AKFTQ/8AwXQ//E0f8IJ4P/6FTQ//AAXQ/wDxNAHQUVz/APwgng//AKFTQ/8AwXQ//E0f8IJ4P/6FTQ//AAXQ/wDxNAHQUVz/APwgng//AKFTQ/8AwXQ//E0f8IJ4P/6FTQ//AAXQ/wDxNAHQUVz/APwgng//AKFTQ/8AwXQ//E0f8IJ4P/6FTQ//AAXQ/wDxNAHQUVz/APwgng//AKFTQ/8AwXQ//E0f8IJ4P/6FTQ//AAXQ/wDxNAHQUVz/APwgng//AKFTQ/8AwXQ//E0f8IJ4P/6FTQ//AAXQ/wDxNAHQUVz/APwgng//AKFTQ/8AwXQ//E0f8IJ4P/6FTQ//AAXQ/wDxNAHQUVz/APwgng//AKFTQ/8AwXQ//E0f8IJ4P/6FTQ//AAXQ/wDxNAHQUVz/APwgng//AKFTQ/8AwXQ//E0f8IJ4P/6FTQ//AAXQ/wDxNAHQUVz/APwgng//AKFTQ/8AwXQ//E0f8IJ4P/6FTQ//AAXQ/wDxNAHQUVz/APwgng//AKFTQ/8AwXQ//E0f8IJ4P/6FTQ//AAXQ/wDxNAHQUVz/APwgng//AKFTQ/8AwXQ//E0f8IJ4P/6FTQ//AAXQ/wDxNAHQUVz/APwgng//AKFTQ/8AwXQ//E0f8IJ4P/6FTQ//AAXQ/wDxNAHQUVz/APwgng//AKFTQ/8AwXQ//E0f8IJ4P/6FTQ//AAXQ/wDxNAHQUVz/APwgng//AKFTQ/8AwXQ//E0f8IJ4P/6FTQ//AAXQ/wDxNAHQUVz/APwgng//AKFTQ/8AwXQ//E0f8IJ4P/6FTQ//AAXQ/wDxNAHQUVz/APwgng//AKFTQ/8AwXQ//E0f8IJ4P/6FTQ//AAXQ/wDxNAHQUVz/APwgng//AKFTQ/8AwXQ//E0f8IJ4P/6FTQ//AAXQ/wDxNAHQUVz/APwgng//AKFTQ/8AwXQ//E0f8IJ4P/6FTQ//AAXQ/wDxNAHQUVz/APwgng//AKFTQ/8AwXQ//E0f8IJ4P/6FTQ//AAXQ/wDxNAHQUVz/APwgng//AKFTQ/8AwXQ//E0f8IJ4P/6FTQ//AAXQ/wDxNAHQUVz/APwgng//AKFTQ/8AwXQ//E0f8IJ4P/6FTQ//AAXQ/wDxNAHQUVz/APwgng//AKFTQ/8AwXQ//E0f8IJ4P/6FTQ//AAXQ/wDxNAHQUVz/APwgng//AKFTQ/8AwXQ//E0f8IJ4P/6FTQ//AAXQ/wDxNAHQUVz/APwgng//AKFTQ/8AwXQ//E0f8IJ4P/6FTQ//AAXQ/wDxNAHQUVz/APwgng//AKFTQ/8AwXQ//E0f8IJ4P/6FTQ//AAXQ/wDxNAHQUVz/APwgng//AKFTQ/8AwXQ//E0f8IJ4P/6FTQ//AAXQ/wDxNAHQUVz/APwgng//AKFTQ/8AwXQ//E0f8IJ4P/6FTQ//AAXQ/wDxNAHQUVz/APwgng//AKFTQ/8AwXQ//E0f8IJ4P/6FTQ//AAXQ/wDxNAHQUVz/APwgng//AKFTQ/8AwXQ//E18sfF+ws9M+KWs2dhaQWlrH5GyGCMRouYIycKOBkkn8aAPqfxD/wAhzwn/ANhWT/0iuq6Cuf8AEP8AyHPCf/YVk/8ASK6roKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAK+QPjb/wAle13/ALd//SeOvr+vkD42/wDJXtd/7d//AEnjoA+n/EP/ACHPCf8A2FZP/SK6roK5/wAQ/wDIc8J/9hWT/wBIrqugoAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAr5A+Nv/ACV7Xf8At3/9J46+v6+QPjb/AMle13/t3/8ASeOgD6f8Q/8AIc8J/wDYVk/9Irqugrn/ABD/AMhzwn/2FZP/AEiuq6CgAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACvkD42/8AJXtd/wC3f/0njr6/r5A+Nv8AyV7Xf+3f/wBJ46APp/xD/wAhzwn/ANhWT/0iuq6Cuf8AEP8AyHPCf/YVk/8ASK6roKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKK5vWNY1628VWOl6Xp2m3MFxZT3DNdXjwtujeJcDbG4AxKOxzk/d2/MAdJRXH67rnjDSPD2p6l/Ymhj7HaS3Gf7VmkxsQt937Ou7p03Ln1HWuwoAKKKKACiuf8SatrGm32iW+k2Vjc/b7t7eT7XcvFjEMkgwVRsf6s8kHoBj5tyn2zxh/0AtD/wDBzN/8i0AdBRWX4a1KbWfCukapcLGs97ZQ3EixghQzoGIGSTjJ9TWpQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFfIHxt/5K9rv/AG7/APpP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b/5Fo+2eMP8AoBaH/wCDmb/5FoA6Ciuf+2eMP+gFof8A4OZv/kWj7Z4w/wCgFof/AIOZv/kWgDoKK5/7Z4w/6AWh/wDg5m/+RaPtnjD/AKAWh/8Ag5m/+RaAOgorn/tnjD/oBaH/AODmb/5Fo+2eMP8AoBaH/wCDmb/5FoA6Ciuf+2eMP+gFof8A4OZv/kWj7Z4w/wCgFof/AIOZv/kWgDoKK5/7Z4w/6AWh/wDg5m/+RaPtnjD/AKAWh/8Ag5m/+RaAOgorn/tnjD/oBaH/AODmb/5Fo+2eMP8AoBaH/wCDmb/5FoA6Ciuf+2eMP+gFof8A4OZv/kWj7Z4w/wCgFof/AIOZv/kWgDoKK5/7Z4w/6AWh/wDg5m/+RaPtnjD/AKAWh/8Ag5m/+RaAOgorn/tnjD/oBaH/AODmb/5Fo+2eMP8AoBaH/wCDmb/5FoA6Ciuf+2eMP+gFof8A4OZv/kWj7Z4w/wCgFof/AIOZv/kWgDoKK5/7Z4w/6AWh/wDg5m/+RaPtnjD/AKAWh/8Ag5m/+RaAOgorn/tnjD/oBaH/AODmb/5Fo+2eMP8AoBaH/wCDmb/5FoA6Ciuf+2eMP+gFof8A4OZv/kWj7Z4w/wCgFof/AIOZv/kWgDoKK5/7Z4w/6AWh/wDg5m/+RaPtnjD/AKAWh/8Ag5m/+RaAOgorn/tnjD/oBaH/AODmb/5Fo+2eMP8AoBaH/wCDmb/5FoA6Ciuf+2eMP+gFof8A4OZv/kWj7Z4w/wCgFof/AIOZv/kWgDoKK5/7Z4w/6AWh/wDg5m/+RaPtnjD/AKAWh/8Ag5m/+RaAOgorn/tnjD/oBaH/AODmb/5Fo+2eMP8AoBaH/wCDmb/5FoA6Ciuf+2eMP+gFof8A4OZv/kWj7Z4w/wCgFof/AIOZv/kWgDoKK5/7Z4w/6AWh/wDg5m/+RaPtnjD/AKAWh/8Ag5m/+RaAOgorn/tnjD/oBaH/AODmb/5Fo+2eMP8AoBaH/wCDmb/5FoA6Ciuf+2eMP+gFof8A4OZv/kWj7Z4w/wCgFof/AIOZv/kWgDoKK5/7Z4w/6AWh/wDg5m/+RaPtnjD/AKAWh/8Ag5m/+RaAOgorn/tnjD/oBaH/AODmb/5Fo+2eMP8AoBaH/wCDmb/5FoA6Ciuf+2eMP+gFof8A4OZv/kWj7Z4w/wCgFof/AIOZv/kWgDoKK5/7Z4w/6AWh/wDg5m/+RaPtnjD/AKAWh/8Ag5m/+RaAOgorn/tnjD/oBaH/AODmb/5Fo+2eMP8AoBaH/wCDmb/5FoA6Ciuf+2eMP+gFof8A4OZv/kWj7Z4w/wCgFof/AIOZv/kWgDoKK5/7Z4w/6AWh/wDg5m/+RaPtnjD/AKAWh/8Ag5m/+RaAOgorn/tnjD/oBaH/AODmb/5Fo+2eMP8AoBaH/wCDmb/5FoA6Ciuf+2eMP+gFof8A4OZv/kWj7Z4w/wCgFof/AIOZv/kWgDoKK5/7Z4w/6AWh/wDg5m/+RaPtnjD/AKAWh/8Ag5m/+RaAOgorn/tnjD/oBaH/AODmb/5Fo+2eMP8AoBaH/wCDmb/5FoA6Ciuf+2eMP+gFof8A4OZv/kWj7Z4w/wCgFof/AIOZv/kWgDoK+QPjb/yV7Xf+3f8A9J46+n/tnjD/AKAWh/8Ag5m/+Ra8f8bfBfxh4x8X32v+dodn9q8v9x9rmk27Y1T73kjOduenegD6AooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAMjW21YTWEel3tpbGaVo3NxatMCdjMOA6cYVuM5yVOcAhq32Pxh/0HdD/8E03/AMlVo6h/x+6V/wBfTf8AomWr9AHP/Y/GH/Qd0P8A8E03/wAlUfY/GH/Qd0P/AME03/yVXQUUAc/9j8Yf9B3Q/wDwTTf/ACVR9j8Yf9B3Q/8AwTTf/JVdBRQBz/2Pxh/0HdD/APBNN/8AJVH2Pxh/0HdD/wDBNN/8lV0FFAHP/Y/GH/Qd0P8A8E03/wAlUfY/GH/Qd0P/AME03/yVXQUUAc/9j8Yf9B3Q/wDwTTf/ACVR9j8Yf9B3Q/8AwTTf/JVdBRQBz/2Pxh/0HdD/APBNN/8AJVH2Pxh/0HdD/wDBNN/8lV0FFAHP/Y/GH/Qd0P8A8E03/wAlUfY/GH/Qd0P/AME03/yVXQUUAc/9j8Yf9B3Q/wDwTTf/ACVR9j8Yf9B3Q/8AwTTf/JVdBRQBz/2Pxh/0HdD/APBNN/8AJVH2Pxh/0HdD/wDBNN/8lV0FFAHP/Y/GH/Qd0P8A8E03/wAlUfY/GH/Qd0P/AME03/yVXQUUAc/9j8Yf9B3Q/wDwTTf/ACVR9j8Yf9B3Q/8AwTTf/JVdBRQBz/2Pxh/0HdD/APBNN/8AJVH2Pxh/0HdD/wDBNN/8lV0FFAHP/Y/GH/Qd0P8A8E03/wAlUfY/GH/Qd0P/AME03/yVXQUUAc/9j8Yf9B3Q/wDwTTf/ACVR9j8Yf9B3Q/8AwTTf/JVdBRQBz/2Pxh/0HdD/APBNN/8AJVH2Pxh/0HdD/wDBNN/8lV0FFAHP/Y/GH/Qd0P8A8E03/wAlUfY/GH/Qd0P/AME03/yVXQUUAc/9j8Yf9B3Q/wDwTTf/ACVR9j8Yf9B3Q/8AwTTf/JVdBRQBz/2Pxh/0HdD/APBNN/8AJVH2Pxh/0HdD/wDBNN/8lV0FFAHP/Y/GH/Qd0P8A8E03/wAlUfY/GH/Qd0P/AME03/yVXQUUAc/9j8Yf9B3Q/wDwTTf/ACVR9j8Yf9B3Q/8AwTTf/JVdBRQBz/2Pxh/0HdD/APBNN/8AJVH2Pxh/0HdD/wDBNN/8lV0FFAHP/Y/GH/Qd0P8A8E03/wAlUfY/GH/Qd0P/AME03/yVXQUUAc/9j8Yf9B3Q/wDwTTf/ACVR9j8Yf9B3Q/8AwTTf/JVdBRQBz/2Pxh/0HdD/APBNN/8AJVH2Pxh/0HdD/wDBNN/8lV0FFAHP/Y/GH/Qd0P8A8E03/wAlUfY/GH/Qd0P/AME03/yVXQUUAc/9j8Yf9B3Q/wDwTTf/ACVR9j8Yf9B3Q/8AwTTf/JVdBRQBz/2Pxh/0HdD/APBNN/8AJVH2Pxh/0HdD/wDBNN/8lV0FFAHP/Y/GH/Qd0P8A8E03/wAlUfY/GH/Qd0P/AME03/yVXQUUAc/9j8Yf9B3Q/wDwTTf/ACVR9j8Yf9B3Q/8AwTTf/JVdBRQBz/2Pxh/0HdD/APBNN/8AJVH2Pxh/0HdD/wDBNN/8lV0FFAHP/Y/GH/Qd0P8A8E03/wAlUfY/GH/Qd0P/AME03/yVXQUUAc/9j8Yf9B3Q/wDwTTf/ACVR9j8Yf9B3Q/8AwTTf/JVdBRQBz/2Pxh/0HdD/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"
+			  alt=""></div>
+
+
+		<div class="dclr"></div>
+		<p class="p0 ft0">stage de découverte du milieu professionnel</p>
+		<p class="p1 ft1">Année universitaire :<span id="annee_univ">……………………………</span> </p>
+		<p class="p2 ft2">stage d'initiation au métier</p>
+		<table cellpadding="0" cellspacing="0" class="t0">
+			<tbody>
+				<tr>
+					<td class="tr0 td0">
+						<p class="p3 ft4">Convention de stage pour un public de <span class="ft3">formation initiale en France *</span> entre :</p>
+					</td>
+					<td rowspan="2" class="tr1 td1">
+						<p class="p3 ft5">stage avec mission en responsabilité</p>
+					</td>
+				</tr>
+				<tr>
+					<td class="tr2 td0">
+						<p class="p3 ft6">&nbsp;</p>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<p class="p4 ft7">Nota : pour faciliter la lecture du document, les mots «stagiaire », «enseignantréférent», « tuteur de stage », «représentant légal », « étudiant »sont utilisés aumasculin.</p>
+		<table cellpadding="0" cellspacing="0" class="t1">
+			<tbody>
+				<tr>
+					<td class="tr3 td2">
+						<p class="p5 ft10"><span class="ft8">1.</span>ÉTABLISSEMENT D’ENSEIGNEMENT <span class="ft9">OU </span>DE FORMATION</p>
+					</td>
+					<td class="tr3 td3">
+						<p class="p6 ft10"><span class="ft8">2.</span>ORGANISME D’ACCUEIL</p>
+					</td>
+				</tr>
+				<tr>
+					<td class="tr4 td4">
+						<p class="p7 ft2"><span class="ft11">Nom : …………</span>Université Nice Sophia Antipolis<span class="ft11">………………………………………</span></p>
+					</td>
+					<td class="tr4 td5">
+						<p class="p8 ft11">Nom : <span id="nom_entreprise">………………………………………………………………………………………</span></p>
+					</td>
+				</tr>
+				<tr>
+					<td class="tr5 td4">
+						<p class="p7 ft11">Adresse : </p>
+					</td>
+					<td class="tr5 td5">
+						<p class="p8 ft11">Adresse : <span id="adresse_entreprise">…………………………………………………………………………………</span></p>
+					</td>
+				</tr>
+				<tr>
+					<td class="tr6 td4">
+						<p class="p7 ft12">………………………………………………………………………………………………</p>
+					</td>
+					<td class="tr6 td5">
+						<p class="p8 ft12"><span id="adresse_entreprise_2">……….………………………………………………………………………………………</span></p>
+					</td>
+				</tr>
+				<tr>
+					<td class="tr5 td4">
+						<p class="p7 ft11">Tél :…………………………………………………………………………………………</p>
+					</td>
+					<td class="tr5 td5">
+						<p class="p8 ft11">Représenté par (nom du signataire de la convention) : …………………………</p>
+					</td>
+				</tr>
+				<tr>
+					<td class="tr5 td4">
+						<p class="p7 ft11">Représenté par : …………..…. <span class="ft2">Emmanuel TRIC</span>……………………………………</p>
+					</td>
+					<td class="tr5 td5">
+						<p class="p8 ft11"><span id="representant_entreprise">……….………………………………………………………………………………………</span></p>
+					</td>
+				</tr>
+				<tr>
+					<td class="tr6 td4">
+						<p class="p7 ft14"><span class="ft12">Qualité du représentant : </span><span class="ft13">……..</span>Président de l’Université de Nice<span class="ft12">……</span></p>
+					</td>
+					<td class="tr6 td5">
+						<p class="p8 ft12">Qualité du représentant : <span id="qualite_representant">………………………………………………………………</span></p>
+					</td>
+				</tr>
+				<tr>
+					<td class="tr5 td4">
+						<p class="p7 ft11">Composante : ……………………………………………………………………………</p>
+					</td>
+					<td class="tr5 td5">
+						<p class="p8 ft11">Service dans lequel le stage sera effectué :…………………………………………</p>
+					</td>
+				</tr>
+				<tr>
+					<td class="tr5 td4">
+						<p class="p7 ft12">Tél : …………………………………………………</p>
+					</td>
+					<td class="tr5 td5">
+						<p class="p8 ft11"><span id="service_stage">…………………………………………………………………………………………………</span>..</p>
+					</td>
+				</tr>
+				<tr>
+					<td class="tr6 td4">
+						<p class="p7 ft11">Courriel : …………………………………………………………………………………….</p>
+					</td>
+					<td class="tr6 td5">
+						<p class="p8 ft12">Tél : <span id="tel_entreprise">…………………………………………………</span></p>
+					</td>
+				</tr>
+				<tr>
+					<td class="tr5 td4">
+						<p class="p7 ft11">Adresse : …………………………………………………………………………………….</p>
+					</td>
+					<td class="tr5 td5">
+						<p class="p8 ft11">Courriel : <span id="email_entreprise">………………………………………………………………………..……………</span>.</p>
+					</td>
+				</tr>
+				<tr>
+					<td class="tr5 td4">
+						<p class="p7 ft11">…………………………………………………………………………………………………</p>
+					</td>
+					<td class="tr5 td5">
+						<p class="p8 ft15">Lieu du stage (si diffèrent de l’adresse de l’organisme) : ……………………………</p>
+					</td>
+				</tr>
+				<tr>
+					<td class="tr5 td4">
+						<p class="p3 ft16">&nbsp;</p>
+					</td>
+					<td class="tr5 td5">
+						<p class="p8 ft12"><span id="lieu_stage">…………………………………………………………………………………….……………</span></p>
+					</td>
+				</tr>
+				<tr>
+					<td class="tr2 td6">
+						<p class="p3 ft6">&nbsp;</p>
+					</td>
+					<td class="tr2 td7">
+						<p class="p3 ft6">&nbsp;</p>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<p class="p9 ft18"><span class="ft17">3.</span>LESTAGIAIRE</p>
+		<p class="p10 ft12">Nom de famille : <span id="etu_nom">………………………………………………………………</span> Nom d’usage : <span id="etu_nom_usage">……………………………………………………………………</span></p>
+		<table cellpadding="0" cellspacing="0" class="t2">
+			<tbody>
+				<tr>
+					<td class="tr7 td8">
+						<p class="p3 ft19">Prénom : <span id="etu_prenom">…………………………………………………………….…………</span> Sexe : F</p>
+					</td>
+					<td class="tr7 td9">
+						<p class="p3 ft19">M</p>
+					</td>
+					<td class="tr7 td10">
+						<p class="p3 ft20">Né(e) le</p>
+					</td>
+					<td class="tr3 td11">
+						<p class="p11 ft19"><span id="dob_day"></span>/</p>
+					</td>
+					<td class="tr3 td12">
+						<p class="p12 ft19"><span id="dob_month"></span>/<span id="dob_year"></span></p>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<p class="p13 ft12">Adresse : <span id="etu_adr">…………………………………………………………………………………………………………………………………………………………………</span></p>
+		<table cellpadding="0" cellspacing="0" class="t3">
+			<tbody>
+				<tr>
+					<td class="tr3 td13">
+						<p class="p3 ft11">Tél : <span id="etu_tel">……………………………………………………………………</span></p>
+					</td>
+					<td class="tr3 td14">
+						<p class="p3 ft15">Courriel : <span id="etu_email">…………………………………………………………………………………</span></p>
+					</td>
+				</tr>
+				<tr>
+					<td class="tr8 td13">
+						<p class="p3 ft12">No. Etudiant : <span id="etu_no">………………………………………………….…….</span></p>
+					</td>
+					<td class="tr8 td14">
+						<p class="p3 ft16">&nbsp;</p>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<p class="p14 ft12">Intitulé de la Formation ou du cursus suivi dans l’Établissement d’Enseignement Supérieur et Volume horaire (Annuel ou Semestriel) :</p>
+		<p class="p14 ft12"><span id="etu_formation">……………………………………………………………………………………………………………………………………………………………………………………………………………………</span></p>
+		<p class="p15 ft12"><span class="ft18">SUJET DE STAGE</span><span id="stage_subject">……………………………………………………………………………………………………………………………………….………</span>.</p>
+		<p class="p16 ft12">Dates : du<span id="start_stage">.....................................................</span>au<span id="end_stage">…………………………………</span>..</p>
+		<p class="p17 ft12">Représentant une durée totale de : <span id="stage_duration">…………………………………………………</span>.. (Nombre de Semaines / de Mois (rayer la mention inutile).</p>
+		<table cellpadding="0" cellspacing="0" class="t4">
+			<tbody>
+				<tr>
+					<td class="tr3 td15">
+						<p class="p3 ft15">Et correspondant à : <span id="stage_day_presence">...........................</span></p>
+					</td>
+					<td class="tr3 td16">
+						<p class="p3 ft11">jours de présence effective dans l'organisme d'accueil.</p>
+					</td>
+				</tr>
+				<tr>
+					<td class="tr6 td15">
+						<p class="p3 ft21">Répartition si présence discontinue : <span id="stage_strangeHours">.............................</span></p>
+					</td>
+					<td class="tr6 td16">
+						<p class="p18 ft22"><span id="stage_duration_weekly">nombre d'heures par semaine</span> ou <span id="stage_duration_daily">nombre d'heures par jour</span> (rayer la mention inutile).</p>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<p class="p19 ft12">Commentaire : <span id="stage_comment">…………………………………………………………………………………………………………………………………………………………………………………………</span>..</p>
+		<table cellpadding="0" cellspacing="0" class="t5">
+			<tbody>
+				<tr>
+					<td class="tr5 td17">
+						<p class="p20 ft23">ENCADREMENT DU STAGIAIRE PAR L'ÉTABLISSEMENT D'ENSEIGNEMENT</p>
+					</td>
+					<td class="tr5 td18">
+						<p class="p21 ft23">ENCADREMENT DU STAGIAIRE PAR L'ORGANISME D'ACCUEIL</p>
+					</td>
+				</tr>
+				<tr>
+					<td class="tr1 td19">
+						<p class="p20 ft12">Nom et prénom de l'enseignant référent :</p>
+					</td>
+					<td class="tr1 td5">
+						<p class="p22 ft12">Nom et prénom du tuteur de stage :</p>
+					</td>
+				</tr>
+				<tr>
+					<td class="tr9 td19">
+						<p class="p20 ft15"><span id="unice_name">……………………………………………………………………………………………</span>...................</p>
+					</td>
+					<td class="tr9 td5">
+						<p class="p21 ft11"><span id="employee_name">…………………………………………………………………………………………………</span>..</p>
+					</td>
+				</tr>
+				<tr>
+					<td class="tr9 td19">
+						<p class="p20 ft15">Fonction (ou discipline) : <span id="unice_role">.........................................................................................................</span></p>
+					</td>
+					<td class="tr9 td5">
+						<p class="p23 ft15">Fonction : <span id="employee_role">...............................................................................................................................</span></p>
+					</td>
+				</tr>
+				<tr>
+					<td class="tr1 td19">
+						<p class="p24 ft15">Tél : <span id="unice_tel">………………………………………………………………………………………………</span>..…</p>
+					</td>
+					<td class="tr1 td5">
+						<p class="p21 ft15">Tél : <span id="employee_tel">……………………………………………………………………………………………</span>.…</p>
+					</td>
+				</tr>
+				<tr>
+					<td class="tr9 td19">
+						<p class="p20 ft15">Courriel : <span id="unice_email">……………………………………………………………………………………………</span>.</p>
+					</td>
+					<td class="tr9 td5">
+						<p class="p25 ft15">Courriel : <span id="employee_email">…………………………………………………………………………………………</span>.</p>
+					</td>
+				</tr>
+				<tr>
+					<td class="tr10 td20">
+						<p class="p3 ft16">&nbsp;</p>
+					</td>
+					<td class="tr10 td7">
+						<p class="p3 ft16">&nbsp;</p>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<p class="p26 ft11">Caisse primaire d'assurance maladie à contacter en cas d'accident (lieu de domicile du stagiaire sauf exception) :</p>
+		<p class="p27 ft12">CPAM AT
+			<nobr>–Service</nobr> 34 – 06180 Nice cedex 2</p>
+		<p class="p28 ft24">* France métropolitaine + départements et régions
+			<nobr>d’outre-mer.</nobr>
+		</p>
+		<p class="p29 ft25">Page 1 sur 6</p>
+	</div>
+	<div id="page_2">
+
+
+		<div>
+			<div id="id_1">
+				<p class="p30 ft26">Article 1— Objet de la convention</p>
+				<p class="p31 ft27">La présente convention règle les rapports de l'organisme d'accueil avec l'établissement d'enseignement et le stagiaire.</p>
+				<p class="p32 ft26">Article 2 — Objectif du stage</p>
+				<p class="p33 ft28">Le stage correspond à une période temporaire de mise en situation en milieu professionnel au cours de laquelle l'étudiant(e) acquiert des compétences professionnelles et met en œuvre les acquis de sa formation en vue de l'obtention d'un diplôme ou
+					d'une certification et de favoriser son insertion professionnelle. Le stagiaire se voit confier une ou des missions conformes au projet pédagogique défini par son établissement d'enseignement et approuvées par l'organisme d'accueil.</p>
+				<p class="p34 ft29">Le programme est établi par l'établissement d'enseignement et l'organisme d'accueil en fonction du programme général de la formation dispensée.</p>
+				<p class="p35 ft30">ACTIVITÉS CONFIÉES:</p>
+				<p class="p36 ft29">……………………………………………………………………………………</p>
+				<p class="p36 ft29">……………………………………………………………………………………</p>
+				<p class="p35 ft29">……………………………………………………………………………………</p>
+				<p class="p36 ft29">……………………………………………………………………………………</p>
+				<p class="p35 ft29">……………………………………………………………………………………</p>
+				<p class="p36 ft29">……………………………………………………………………………………</p>
+				<p class="p37 ft30">COMPETENCES À ACQUERIR OU À DEVELOPPER :</p>
+				<p class="p36 ft29">……………………………………………………………………………………</p>
+				<p class="p36 ft29">……………………………………………………………………………………</p>
+				<p class="p35 ft29">……………………………………………………………………………………</p>
+				<p class="p36 ft29">……………………………………………………………………………………</p>
+				<p class="p35 ft29">……………………………………………………………………………………</p>
+				<p class="p36 ft29">……………………………………………………………………………………</p>
+				<p class="p38 ft26">Article 3 — Modalités du stage</p>
+				<p class="p33 ft28">La durée hebdomadaire de présence du stagiaire dans l'organisme d'accueil sera de ………………………. heures sur</p>
+				<p class="p39 ft28">la base d'un temps complet/ temps partiel (rayer la mention inutile),</p>
+				<p class="p39 ft29">Si le stagiaire doit être présent dans l'organisme d'accueil la nuit, le dimanche ou un jour férié, préciser les cas particuliers</p>
+				<p class="p35 ft29">……………………………………………………………………………………</p>
+				<p class="p35 ft29">……………………………………………………………………………………</p>
+				<p class="p36 ft29">……………………………………………………………………………………</p>
+				<p class="p35 ft29">……………………………………………………………………………………</p>
+				<p class="p38 ft26">Article 4 — Accueil et encadrement du stagiaire</p>
+				<p class="p40 ft28">Le stagiaire est suivi par l'enseignant référent désigné dans la présente convention ainsi que par le service de l'établissement en charge des stages. Le tuteur de stage désigné par l'organisme d'accueil dans la présente convention est chargé d'assurer
+					le suivi du stagiaire et d'optimiser les conditions de réalisation du stage conformément aux stipulations pédagogiques définies.</p>
+				<p class="p36 ft29">Le stagiaire est autorisé à revenir dans son établissement</p>
+			</div>
+			<div id="id_2">
+				<p class="p41 ft29">d'enseignement pendant la durée du stage pour y suivre des cours demandés explicitement par le programme, ou pour participer à des réunions ; les dates sont portées à la connaissance de l'organisme d'accueil par l'établissement. L'organisme d'accueil
+					peut autoriser le stagiaire à se déplacer.</p>
+				<p class="p42 ft28">Toute difficulté survenue dans la réalisation et le déroulement du stage, qu'elle soit constatée par le stagiaire ou par le tuteur de stage, doit être portée à la</p>
+				<table cellpadding="0" cellspacing="0" class="t6">
+					<tbody>
+						<tr>
+							<td class="tr3 td21">
+								<p class="p3 ft29">connaissance</p>
+							</td>
+							<td class="tr3 td22">
+								<p class="p3 ft29">de</p>
+							</td>
+							<td class="tr3 td23">
+								<p class="p3 ft29">
+									<nobr>l'enseignant-référent</nobr>
+								</p>
+							</td>
+							<td class="tr3 td24">
+								<p class="p3 ft29">et</p>
+							</td>
+							<td class="tr3 td25">
+								<p class="p3 ft31">de</p>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<p class="p43 ft28">l'établissement d'enseignement afin d'être résolue au plus vite.</p>
+				<p class="p44 ft32">(Voir délibération du CA du 12 mai 2015)</p>
+				<p class="p45 ft29">……………………………………………………………………………………</p>
+				<p class="p36 ft29">……………………………………………………………………………………</p>
+				<p class="p35 ft29">……………………………………………………………………………………</p>
+				<p class="p36 ft29">……………………………………………………………………………………</p>
+				<p class="p37 ft26">Article 5 — Gratification - Avantages</p>
+				<p class="p46 ft28">Lorsque la durée du stage est supérieure à deux mois consécutifs ou non,
+					<nobr>celui-ci</nobr> fait obligatoirement l'objet d'une gratification, sauf pour les stages relevant de l'article L.
+					<nobr>4381-1</nobr> du code de la santé publique.</p>
+				<p class="p43 ft27">Le montant horaire de la gratification est fixé à 15% du plafond horaire de la sécurité sociale défini en application de l'article
+					<nobr>L.241-3</nobr> du code de la sécurité sociale. Une convention de branche ou un accord professionnel peut définir un montant supérieur à ce taux.</p>
+				<p class="p47 ft28">La gratification due par un organisme de droit public ne peut être cumulée avec une rémunération versée par ce même organisme au cours de la période concernée.</p>
+				<p class="p48 ft33">La gratification est due sans préjudice du remboursement des frais engagés par le stagiaire pour effectuer son stage et des avantages offerts, le cas échéant, pour la restauration, l'hébergement et le transport.</p>
+				<p class="p49 ft27">L'organisme peut décider de verser une gratification pour les stages dont la durée est inférieure ou égale à deux mois.</p>
+				<p class="p50 ft34">En cas de suspension ou de résiliation de la présente convention, le montant de la gratification due au stagiaire est proratisé en fonction de la durée du stage effectué.</p>
+				<p class="p51 ft27">La durée donnant droit à gratification s'apprécie compte tenu de la présente convention et de ses avenants éventuels, ainsi que du nombre de jours de présence effective du stagiaire dans l'organisme.</p>
+				<p class="p52 ft29">LE MONTANT DE LA GRATIFICATION est fixé à……………………………… € par heure / jour / mois (rayer</p>
+				<p class="p53 ft29">les mentions inutiles)</p>
+				<p class="p54 ft25">Page 2 sur 6</p>
+			</div>
+		</div>
+	</div>
+	<div id="page_3">
+
+
+		<div>
+			<div id="id_1">
+				<p class="p55 ft35">Article 5 bis
+					<nobr>—Accès</nobr> aux droits des salariés — Avantages <span class="ft28">(Organisme de droit privé) :</span></p>
+				<p class="p56 ft34">Le stagiaire bénéficie des protections et droits mentionnés aux articles
+					<nobr>L.1121-1,</nobr>
+					<nobr>L.1152-1</nobr> et
+					<nobr>L.1153-1</nobr> du code du travail, dans les mêmes conditions que les salariés.</p>
+				<p class="p57 ft28">Le stagiaire a accès au restaurant d'entreprise ou aux
+					<nobr>titres-restaurants</nobr> prévus à l'article
+					<nobr>L.3262-1</nobr> du code du travail, dans les mêmes conditions que les salariés de l'organisme d'accueil. Il bénéficie également de la prise en charge des frais de transport prévue à l'article
+					<nobr>L.3261-2</nobr> du même code.</p>
+				<p class="p58 ft29">Le stagiaire accède aux activités sociales et culturelles mentionnées à l'article
+					<nobr>L.2323-83</nobr> du code du travail dans les mêmes conditions que les salariés.</p>
+				<p class="p53 ft29"><span class="ft30">AUTRES AVANTAGES ACCORDÉS</span>:</p>
+				<p class="p59 ft29">……………………………………………………………………………………</p>
+				<p class="p35 ft29">……………………………………………………………………………………</p>
+				<p class="p36 ft29">……………………………………………………………………………………</p>
+				<p class="p35 ft29">……………………………………………………………………………………</p>
+				<p class="p36 ft29">……………………………………………………………………………………</p>
+				<p class="p60 ft35">Article 5ter — Accès aux droits des agents - Avantages <span class="ft28">(Organisme de droit public) :</span></p>
+				<p class="p61 ft34">Les trajets effectués par le stagiaire d'un organisme de droit public entre leur domicile et leur lieu de stage sont pris en charge dans les conditions fixées par le décret
+					<nobr>n°2010-676</nobr> du 21 juin 2010 instituant une prise en charge partielle du prix des titres d'abonnement correspondant aux déplacements effectués par les agents publics entre leur résidence habituelle et leur lieu de travail.</p>
+				<p class="p62 ft29">Le stagiaire accueilli dans un organisme de droit public et qui effectue une mission dans ce cadre bénéficie de la prise en charge de ses frais de déplacement temporaire selon la réglementation en vigueur.</p>
+				<p class="p57 ft29">Est considéré comme sa résidence administrative le lieu du stage indiqué dans la présente convention. <span class="ft30">AUTRES AVANTAGES ACCORDÉS</span> :</p>
+				<p class="p35 ft29">……………………………………………………………………………………</p>
+				<p class="p36 ft29">……………………………………………………………………………………</p>
+				<p class="p35 ft29">……………………………………………………………………………………</p>
+				<p class="p36 ft29">……………………………………………………………………………………</p>
+				<p class="p35 ft29">……………………………………………………………………………………</p>
+				<p class="p38 ft26">Article 6 — Régime de protection sociale</p>
+				<p class="p63 ft36">Pendant la durée du stage, le stagiaire reste affilié à son régime de Sécurité sociale antérieur.</p>
+				<p class="p64 ft38"><span class="ft25">6.1</span><span class="ft37">Gratification d'un montant maximum de 15% du plafond horaire de la sécurité sociale :</span></p>
+				<p class="p53 ft29">La gratification n'est pas soumise à cotisation sociale.</p>
+				<p class="p63 ft27">Le stagiaire bénéficie de la législation sur les accidents du travail au titre du régime étudiant de l'article
+					<nobr>L.412-8</nobr> 2° du code de la sécurité sociale.</p>
+				<p class="p65 ft39">En cas d 'accident survenant au stagiaire soit au cours d'activités dans l'organisme, soit au cours du trajet, soit sur les lieux rendus utiles pour les besoins du stage, pendant le stage effectué dans les conditions prévues au b du 2e de l'article
+					<nobr>L.418-2,</nobr> l'organisme d'accueil en informe la Direction</p>
+			</div>
+			<div id="id_2">
+				<p class="p66 ft27">des Enseignements et de la Vie Étudiante à l'adresse <a href="mailto:deve@unice.fr">deve@unice.fr </a>(tél : 04 92 07 66 32). La DEVE se charge d'envoyer la déclaration à la Caisse Primaire d'Assurance Maladie Accident du Travail.</p>
+				<p class="p67 ft35"><span class="ft25">6.2</span><span class="ft40">Gratification supérieure à 15% du plafond horaire de la sécurité sociale :</span></p>
+				<p class="p68 ft28">Les cotisations sociales sont calculées sur le différentiel entre le montant de la gratification et 15% du plafond horaire de la Sécurité Sociale. L'étudiant bénéficie de la couverture légale en application des dispositions des articles L.
+					<nobr>411-1</nobr> et suivants du code de la Sécurité Sociale. En cas d'accident survenant au stagiaire soit au cours des activités dans l'organisme, soit au cours du trajet, soit sur des lieux rendus utiles pour les besoins de son stage, pendant le stage
+					effectué dans les conditions prévues au b du 2e de l'article
+					<nobr>L.418-2,</nobr> l'organisme d'accueil effectue toutes les démarches nécessaires auprès de la Caisse Primaire d'Assurance Maladie Accident du Travail et, dans les meilleurs délais, adresse une copie de la déclaration à la Direction des</p>
+				<p class="p69 ft28">Enseignements et de la Vie Étudiante à l'adresse <a href="mailto:deve@unice.fr">deve@unice.fr </a>(tél : 04 92 07 66 32).</p>
+				<p class="p70 ft26">Article 7 — Responsabilité et assurance</p>
+				<p class="p71 ft27">L'organisme d'accueil et le stagiaire déclarent être garantis au titre de la responsabilité civile.</p>
+				<p class="p72 ft28">Lorsque l'organisme d'accueil met un véhicule à la disposition du stagiaire, il lui incombe de vérifier préalablement que la police d'assurance du véhicule couvre son utilisation par un étudiant.</p>
+				<p class="p71 ft29">Lorsque dans le cadre de son stage, l'étudiant utilise son propre véhicule ou un véhicule prêté par un tiers, il déclare expressément à l'assureur dudit véhicule et, le cas échéant, s'acquitte de la prime y afférente.</p>
+				<p class="p73 ft26">Article 8 — Discipline</p>
+				<p class="p74 ft28">Le stagiaire est soumis à la discipline et aux clauses du règlement intérieur qui lui sont applicables et qui sont portées à sa connaissance avant le début du stage, notamment en ce qui concerne les horaires et les règles d'hygiène et de sécurité
+					en vigueur dans l'organisme d'accueil.</p>
+				<p class="p74 ft29">Toute sanction disciplinaire ne peut être décidée que par l'établissement d'enseignement. Dans ce cas, l'organisme d'accueil informe l'enseignant référent et l'établissement des manquements et fournit éventuellement les éléments constitutifs.</p>
+				<p class="p74 ft27">En cas de manquement particulièrement grave à la discipline, l'organisme d'accueil se réserve le droit de mettre fin au stage tout en respectant les dispositions fixées à l'article 9 de la présente convention.</p>
+				<p class="p75 ft25">Page 3 sur 6</p>
+			</div>
+		</div>
+	</div>
+	<div id="page_4">
+
+
+		<div>
+			<div id="id_1">
+				<p class="p30 ft26">Article 9 — Congés — Interruption du stage</p>
+				<p class="p76 ft28">En cas de grossesse, de paternité ou d'adoption, le stagiaire bénéficie de congés et d'autorisations d'absence d'une durée équivalente à celle prévues pour les salariés aux articles
+					<nobr>L.1225-16</nobr> à
+					<nobr>L.1225-28,</nobr>
+					<nobr>L.1225-35,</nobr>
+					<nobr>L.1225-37,</nobr>
+					<nobr>L.1225-46</nobr> du code du travail.</p>
+				<p class="p77 ft28">Pour les stages dont la durée est supérieure à deux mois et dans la limite de la durée maximale de 6 mois, des congés ou autorisations d'absence sont possibles.</p>
+				<p class="p78 ft42"><span class="ft41">NOMBRE DE JOURS DE CONGES AUTORISES</span> / ou modalités des congés et autorisations d'absence durant le stage :</p>
+				<p class="p53 ft29">……………………………………………………………………………………</p>
+				<p class="p35 ft29">……………………………………………………………………………………</p>
+				<p class="p36 ft29">……………………………………………………………………………………</p>
+				<p class="p36 ft29">…………………………………………………………………………………..</p>
+				<p class="p79 ft28">Pour toute autre interruption temporaire du stage (maladie, absence injustifiée...) l'organisme d'accueil avertit l'établissement d'enseignement par écrit.</p>
+				<p class="p80 ft28">Toute interruption du stage, est signalée à tous les signataires de la convention. Une modalité de validation est mise en place le cas échéant par l'établissement. En cas d'accord des parties à la convention, un report de la fin du stage est possible
+					afin de permettre la réalisation de la durée totale du stage prévue initialement. En cas de report, si la fin du stage est antérieure à la fin de l’année universitaire, la convention fait l’objet d’un avenant.</p>
+				<p class="p81 ft29">Un avenant à la convention pourra être établi en cas de prolongation du stage sur demande conjointe de l'organisme d'accueil et du stagiaire, dans le respect de la durée maximale du stage fixée par la loi (6 mois) et dans la mesure où le dernier jour
+					du stage intervient avant la fin de l’année universitaire.</p>
+				<p class="p80 ft29">En cas de volonté d'une des trois parties (organisme d'accueil, stagiaire, établissement d'enseignement) d'arrêter le stage,
+					<nobr>celle-ci</nobr> doit immédiatement en informer les deux autres parties par écrit. Les raisons invoquées seront examinées en étroite concertation. La décision définitive d'arrêt du stage ne sera prise qu'à l'issue de cette phase de concertation.</p>
+				<p class="p38 ft26">Article 10 — Devoir de réserve et confidentialité</p>
+				<p class="p82 ft28">Le devoir de réserve est de rigueur absolue et apprécié par l'organisme d'accueil
+					<nobr>compte-tenu</nobr> de ses spécificités. Le stagiaire prend donc l'engagement de n'utiliser en aucun cas les informations recueillies ou obtenues par lui pour en faire publication, communication à des tiers sans accord préalable de l'organisme d'accueil,
+					y compris le rapport de stage. Cet engagement vaut non seulement pour la durée du stage mais également après son expiration. Le stagiaire s'engage à ne conserver, emporter, ou prendre copie d'aucun document ou logiciel, de quelque nature que ce soit,
+					appartenant à l'organisme d'accueil, sauf accord de ce dernier.</p>
+				<p class="p83 ft29">Dans le cadre de la confidentialité des informations contenues dans le rapport de stage, l'organisme d'accueil</p>
+			</div>
+			<div id="id_2">
+				<p class="p84 ft29">peut demander une restriction de la diffusion du rapport, voire le retrait de certains éléments confidentiels.</p>
+				<p class="p85 ft27">Les personnes amenées à les connaître sont contraintes par le secret professionnel à n'utiliser ni ne divulguer les informations du rapport.</p>
+				<p class="p86 ft26">Article 11 — Propriété intellectuelle</p>
+				<p class="p87 ft28">Conformément au code de la propriété intellectuelle, dans le cas où les activités du stagiaire donnent lieu à la création d'une œuvre protégée par le droit d'auteur ou la propriété industrielle (y compris un logiciel), si l'organisme d'accueil souhaite
+					l'utiliser et que le stagiaire en est d'accord, un contrat devra être signé entre le stagiaire (auteur) et l'organisme d'accueil.</p>
+				<p class="p88 ft29">Le contrat devra alors notamment préciser l'étendue des droits cédés, l'éventuelle exclusivité, la destination, les supports utilisés et la durée de la cession, ainsi que, le cas échéant, le montant de la rémunération due au stagiaire au titre de
+					la cession. Cette clause s'applique quel que soit le statut de l'organisme d'accueil.</p>
+				<p class="p89 ft26">Article 12 — Fin de stage — Rapport - Evaluation</p>
+				<p class="p90 ft28">1)<span class="ft43">Attestation de stage</span> : à l'issue du stage, l'organisme d'accueil délivre une attestation dont le modèle figure en annexe, mentionnant au minimum la durée effective du stage et, le cas échéant, le montant de la gratification
+					perçue. Le stagiaire devra produire cette attestation à l'appui de sa demande éventuelle d'ouverture de droits au régime général d'assurance vieillesse prévue à l'art.
+					<nobr>L.351-17</nobr> du code de la Sécurité Sociale.</p>
+				<p class="p91 ft29">2)<span class="ft30">Qualité du stage</span> : à l’issue du stage, les parties à la</p>
+				<p class="p92 ft28">présente convention sont invitées à formuler une appréciation sur la qualité du stage.</p>
+				<p class="p93 ft29">Le stagiaire transmet au service compétent de</p>
+				<p class="p94 ft28">l’établissement d’enseignement un document dans lequel il évalue la qualité de l’accueil dont il a bénéficié au sein de l’organisme d’accueil. Ce document n’est pas pris en compte dans son évaluation ou dans l’obtention du</p>
+				<p class="p95 ft29">diplôme ou de la certification.</p>
+				<p class="p96 ft29">3)<span class="ft30">Évaluation de l’activité du stagiaire</span> : à l'issue du stage,</p>
+				<p class="p97 ft28">l’organisme d’accueil renseigne une fiche d’évaluation de l’activité du stagiaire qu’il envoie à l’enseignant référent.</p>
+				<p class="p59 ft29">4)<span class="ft30">Modalités d’évaluation pédagogiques</span> : le stagiaire devra</p>
+				<p class="p92 ft27">restituer sa mise en situation professionnelle conformément aux modalités de contrôle continu de sa formation comme suit :</p>
+				<p class="p98 ft29">…………………………………………………………………………………</p>
+				<p class="p99 ft29">…………………………………………………………………………………</p>
+				<p class="p99 ft29">…………………………………………………………………………………</p>
+				<p class="p99 ft29">…………………………………………………………………………………</p>
+				<p class="p100 ft29">…………………………………………………………………………………</p>
+				<p class="p101 ft29"><span class="ft30">NOMBRE D'ECTS (le cas échéant) :</span> …………………………….</p>
+				<p class="p102 ft25">Page 4 sur 6</p>
+			</div>
+		</div>
+	</div>
+	<div id="page_5">
+
+
+		<div id="id_1">
+			<div id="id_1_1">
+				<p class="p103 ft28">Le tuteur de l'organisme d'accueil ou tout membre de l'organisme d'accueil appelé à se rendre dans l'établissement d'enseignement dans le cadre de la préparation, du déroulement et de la validation du stage ne peut prétendre à une quelconque prise
+					en charge ou</p>
+				<p class="p104 ft28">indemnisation de la part de l'établissement d'enseignement.</p>
+				<p class="p105 ft25"><span class="ft44">POUR L'ÉTABLISSEMENT D'ENSEIGNEMENT</span><span class="ft31"> Nom et signature du représentant de l'établissement</span></p>
+				<p class="p106 ft31">A………………………………………… le ……………………………………</p>
+			</div>
+			<div id="id_1_2">
+				<table cellpadding="0" cellspacing="0" class="t7">
+					<tbody>
+						<tr>
+							<td class="tr0 td26">
+								<p class="p3 ft26">Article 13 — Droit applicable</p>
+							</td>
+							<td class="tr0 td27">
+								<p class="p3 ft26">— Tribunaux</p>
+							</td>
+						</tr>
+						<tr>
+							<td class="tr7 td26">
+								<p class="p3 ft26">compétents</p>
+							</td>
+							<td class="tr7 td27">
+								<p class="p3 ft45">&nbsp;</p>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<p class="p107 ft28">La présente convention est régie exclusivement par le droit français.</p>
+				<p class="p108 ft28">Tout litige non résolu par voie amiable sera soumis à la compétence de la juridiction française compétente.</p>
+				<p class="p109 ft44">POUR L'ORGANISME D'ACCUEIL</p>
+				<p class="p53 ft31">Nom et signature du représentant de l'organisme d'accueil</p>
+				<p class="p106 ft31">A………………………………………… le ……………………………………</p>
+			</div>
+		</div>
+		<div id="id_2">
+			<p class="p110 ft44">STAGIAIRE (ET SON REPRESENTANT LEGAL LE CAS ÉCHÉANT)</p>
+			<p class="p111 ft31">Nom et signature</p>
+			<p class="p112 ft31">A………………………………………… le ……………………………………</p>
+			<table cellpadding="0" cellspacing="0" class="t8">
+				<tbody>
+					<tr>
+						<td class="tr3 td28">
+							<p class="p3 ft44">L'enseignant référent du stagiaire</p>
+						</td>
+						<td class="tr3 td29">
+							<p class="p3 ft46">Le tuteur de stage de l'organisme d'accueil</p>
+						</td>
+					</tr>
+					<tr>
+						<td class="tr11 td28">
+							<p class="p3 ft31">Nom et signature</p>
+						</td>
+						<td class="tr11 td29">
+							<p class="p3 ft31">Nom et signature</p>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<table cellpadding="0" cellspacing="0" class="t9">
+				<tbody>
+					<tr>
+						<td class="tr12 td28">
+							<p class="p3 ft31">A………………………………………… le ……………………………………</p>
+						</td>
+						<td class="tr12 td30">
+							<p class="p3 ft31">A………………………………………… le ……………………………………</p>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<p class="p113 ft31">« L’université se réserve le droit de ne pas signer la convention de stage si elle lui a été transmise postérieurement au début du stage. »</p>
+			<p class="p114 ft47">Fiche à annexer à la convention : Attestation de stage (page suivante)</p>
+			<p class="p115 ft25">Page 5 sur 6</p>
+		</div>
+	</div>
+	<div id="page_6">
+		<div id="p6dimg1">
+			<img src="data:image/jpg;base64,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KKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigArn/An/JPPDX/YKtf/AEUtdBXP+BP+SeeGv+wVa/8AopaAOgooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA5/wAG/wDIDuf+wrqX/pbNRR4N/wCQHc/9hXUv/S2aigDoKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAK5/wJ/yTzw1/2CrX/wBFLXQVz/gT/knnhr/sFWv/AKKWgDoKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAOf8ABv8AyA7n/sK6l/6WzUUeDf8AkB3P/YV1L/0tmooA6CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACuf8Cf8k88Nf9gq1/8ARS10Fc//AMIJ4P8A+hU0P/wXQ/8AxNAHQUVz/wDwgng//oVND/8ABdD/APE0f8IJ4P8A+hU0P/wXQ/8AxNAHQUVz/wDwgng//oVND/8ABdD/APE0f8IJ4P8A+hU0P/wXQ/8AxNAHQUVz/wDwgng//oVND/8ABdD/APE0f8IJ4P8A+hU0P/wXQ/8AxNAHQUVz/wDwgng//oVND/8ABdD/APE0f8IJ4P8A+hU0P/wXQ/8AxNAHQUVz/wDwgng//oVND/8ABdD/APE0f8IJ4P8A+hU0P/wXQ/8AxNAHQUVz/wDwgng//oVND/8ABdD/APE0f8IJ4P8A+hU0P/wXQ/8AxNAHQUVz/wDwgng//oVND/8ABdD/APE0f8IJ4P8A+hU0P/wXQ/8AxNAHQUVz/wDwgng//oVND/8ABdD/APE0f8IJ4P8A+hU0P/wXQ/8AxNAHQUVz/wDwgng//oVND/8ABdD/APE0f8IJ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iigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAOE+JH/ADDP+2v/ALJRR8SP+YZ/21/9kooA6zQ/+Rf03/r1i/8AQBV+qGh/8i/pv/XrF/6AKv0AFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAHCfEj/mGf8AbX/2Sij4kf8AMM/7a/8AslFAHWaH/wAi/pv/AF6xf+gCr9UND/5F/Tf+vWL/ANAFX6ACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigDhPiR/zDP+2v/slFHxI/5hn/AG1/9kooA6zQ/wDkX9N/69Yv/QBV+qGh/wDIv6b/ANesX/oAq/QAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAcJ8SP8AmGf9tf8A2Sij4kf8wz/tr/7JRQB1mh/8i/pv/XrF/wCgCr9UND/5F/Tf+vWL/wBAFX6ACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigDhPiR/zDP8Atr/7JRR8SP8AmGf9tf8A2SigDrND/wCRf03/AK9Yv/QBV+qGh/8AIv6b/wBesX/oAq/QAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAcJ8SP+YZ/21/8AZKKPiR/zDP8Atr/7JRQB1mh/8i/pv/XrF/6AKv1Q0P8A5F/Tf+vWL/0AVfoAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAOE+JH/MM/7a/wDslFHxI/5hn/bX/wBkooA6aDR57a3jgh1m/WKJAiLtgOABgDmOpP7Nu/8AoN3/AP3xB/8AG60aKAM7+zbv/oN3/wD3xB/8bo/s27/6Dd//AN8Qf/G60aKAM7+zbv8A6Dd//wB8Qf8Axuj+zbv/AKDd/wD98Qf/AButGigDO/s27/6Dd/8A98Qf/G6P7Nu/+g3f/wDfEH/xutGigDO/s27/AOg3f/8AfEH/AMbo/s27/wCg3f8A/fEH/wAbrRooAzv7Nu/+g3f/APfEH/xuj+zbv/oN3/8A3xB/8brRooAzv7Nu/wDoN3//AHxB/wDG6P7Nu/8AoN3/AP3xB/8AG60aKAM7+zbv/oN3/wD3xB/8bo/s27/6Dd//AN8Qf/G60aKAM7+zbv8A6Dd//wB8Qf8Axuj+zbv/AKDd/wD98Qf/AButGigDO/s27/6Dd/8A98Qf/G6P7Nu/+g3f/wDfEH/xutGigDO/s27/AOg3f/8AfEH/AMbo/s27/wCg3f8A/fEH/wAbrRooAzv7Nu/+g3f/APfEH/xuj+zbv/oN3/8A3xB/8brRooAzv7Nu/wDoN3//AHxB/wDG6P7Nu/8AoN3/AP3xB/8AG60aKAM7+zbv/oN3/wD3xB/8bo/s27/6Dd//AN8Qf/G60aKAM7+zbv8A6Dd//wB8Qf8Axuj+zbv/AKDd/wD98Qf/AButGigDO/s27/6Dd/8A98Qf/G6P7Nu/+g3f/wDfEH/xutGigDO/s27/AOg3f/8AfEH/AMbo/s27/wCg3f8A/fEH/wAbrRooAzv7Nu/+g3f/APfEH/xuj+zbv/oN3/8A3xB/8brRooAzv7Nu/wDoN3//AHxB/wDG6P7Nu/8AoN3/AP3xB/8AG60aKAM7+zbv/oN3/wD3xB/8bo/s27/6Dd//AN8Qf/G60aKAM7+zbv8A6Dd//wB8Qf8Axuj+zbv/AKDd/wD98Qf/AButGigDO/s27/6Dd/8A98Qf/G6P7Nu/+g3f/wDfEH/xutGigDO/s27/AOg3f/8AfEH/AMbo/s27/wCg3f8A/fEH/wAbrRooAzv7Nu/+g3f/APfEH/xuj+zbv/oN3/8A3xB/8brRooAzv7Nu/wDoN3//AHxB/wDG6P7Nu/8AoN3/AP3xB/8AG60aKAM7+zbv/oN3/wD3xB/8bo/s27/6Dd//AN8Qf/G60aKAM7+zbv8A6Dd//wB8Qf8Axuj+zbv/AKDd/wD98Qf/AButGigDO/s27/6Dd/8A98Qf/G6P7Nu/+g3f/wDfEH/xutGigDO/s27/AOg3f/8AfEH/AMbo/s27/wCg3f8A/fEH/wAbrRooAzv7Nu/+g3f/APfEH/xuj+zbv/oN3/8A3xB/8brRooAzv7Nu/wDoN3//AHxB/wDG6P7Nu/8AoN3/AP3xB/8AG60aKAM7+zbv/oN3/wD3xB/8bo/s27/6Dd//AN8Qf/G60aKAM7+zbv8A6Dd//wB8Qf8Axuj+zbv/AKDd/wD98Qf/AButGigDO/s27/6Dd/8A98Qf/G6P7Nu/+g3f/wDfEH/xutGigDO/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H/gSn+NaNFAGd/b+jf8AQXsP/AlP8aP7f0b/AKC9h/4Ep/jWjRQBnf2/o3/QXsP/AAJT/Gj+39G/6C9h/wCBKf41o0UAY9x4q0K1279TgbdnHknzcfXbnH40VzXxK/5hn/bX/wBkooA67Q/+Rf03/r1i/wDQBV+qGh/8i/pv/XrF/wCgCr9ABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQBwXxK/5hn/bX/2Sij4lf8wz/tr/AOyUUAddof8AyL+m/wDXrF/6AKv1Q0P/AJF/Tf8Ar1i/9AFX6ACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigDgviV/wAwz/tr/wCyUUfEr/mGf9tf/ZKKAOu0P/kX9N/69Yv/AEAVfqhof/Iv6b/16xf+gCr9ABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQBwXxK/5hn/AG1/9koo+JX/ADDP+2v/ALJRQB12h/8AIv6b/wBesX/oAq/VDQ/+Rf03/r1i/wDQBV+gAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACuPlsdSvvH2rQxeJdVsrdNPs5UggW3ZFLPcKcCSJsf6sHPU55JAUL2FcfLrEOl+PtWlubPVWhfT7OFJYNKuZ0Z0e4ZgGjjIOBKnfvjqCAAR69puq6ZZ2l0PFes3AGp2CNDItsiur3USMCY4VbBDHgMM9DkEg9pXH6xrEPiC2tdP0+z1U3B1Czm/f6Vc26BIrmOVyXkjVRhEY8nnGBkkA9hQAUUUUAYfjSea18C+Ibi3lkhni0y5eOSNirIwiYggjkEHnNR/8ACPap/wBDnrn/AH5sv/kepPGkE114F8Q29vFJNPLplykccalmdjEwAAHJJPGKj/4TLS/+fXXP/BFe/wDxmgCvocV7Z+MtYsrrWL7Uo10+ylQ3fljYWkuQcLGiLzsXnGTgZOAMdRXN6JKdR8Varq0Nvdx2ctlaWyNdW0luzSRvcM4CSKrYAlT5sYOSASQcdJQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUVj33izw3pl5JZ3/AIg0q0uo8b4Z72ON1yARlScjIIP41X/4Tvwf/wBDXof/AIMYf/iqAOgorn/+E78H/wDQ16H/AODGH/4qj/hO/B//AENeh/8Agxh/+KoA6Ciuf/4Tvwf/ANDXof8A4MYf/iqP+E78H/8AQ16H/wCDGH/4qgDoKK5//hO/B/8A0Neh/wDgxh/+Ko/4Tvwf/wBDXof/AIMYf/iqAOgoqOCeG6t4ri3ljmglQPHJGwZXUjIII4II5zUlABRRRQBwXxK/5hn/AG1/9koo+JX/ADDP+2v/ALJRQB12h/8AIv6b/wBesX/oAq/VDQ/+Rf03/r1i/wDQBV+gAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA4L4lf8wz/tr/7JRR8Sv+YZ/wBtf/ZKKAOu0P8A5F/Tf+vWL/0AVfqhof8AyL+m/wDXrF/6AKv0AFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAHBfEr/AJhn/bX/ANkoo+JX/MM/7a/+yUUAddof/Iv6b/16xf8AoAq/VDQ/+Rf03/r1i/8AQBV+gAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA4L4lf8wz/ALa/+yUUfEr/AJhn/bX/ANkooA67Q/8AkX9N/wCvWL/0AVfqhof/ACL+m/8AXrF/6AKv0AFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAHBfEr/mGf9tf/AGSij4lf8wz/ALa/+yUUAddof/Iv6b/16xf+gCr9UND/AORf03/r1i/9AFX6ACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigDgviV/zDP+2v8A7JRR8Sv+YZ/21/8AZKKAOu0P/kX9N/69Yv8A0AVfqhof/Iv6b/16xf8AoAq/QAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAcF8Sv+YZ/21/9koo+JX/MM/7a/wDslFAHXaH/AMi/pv8A16xf+gCr9UND/wCRf03/AK9Yv/QBV+gAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA4L4lf8AMM/7a/8AslFHxK/5hn/bX/2SigDrtD/5F/Tf+vWL/wBAFX6oaH/yL+m/9esX/oAq/QAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAcF8Sv+YZ/wBtf/ZKKPiV/wAwz/tr/wCyUUAddof/ACL+m/8AXrF/6AKv1Q0P/kX9N/69Yv8A0AVfoAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAOC+JX/MM/7a/+yUUfEr/mGf8AbX/2SigDrtD/AORf03/r1i/9AFX6oaH/AMi/pv8A16xf+gCr9ABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQBwXxK/wCYZ/21/wDZKKPiV/zDP+2v/slFAHXaH/yL+m/9esX/AKAKv1Q0P/kX9N/69Yv/AEAVfoAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAOC+JX/MM/wC2v/slFHxK/wCYZ/21/wDZKKAOmsU1iy0+2tfsli/kRLHu+1uN2ABnHle1T+drH/PjY/8AgY//AMarQooAz/O1j/nxsf8AwMf/AONUedrH/PjY/wDgY/8A8arQooAz/O1j/nxsf/Ax/wD41R52sf8APjY/+Bj/APxqtCigDP8AO1j/AJ8bH/wMf/41R52sf8+Nj/4GP/8AGq0KKAM/ztY/58bH/wADH/8AjVHnax/z42P/AIGP/wDGq0KKAM/ztY/58bH/AMDH/wDjVHnax/z42P8A4GP/APGq0KKAM/ztY/58bH/wMf8A+NUedrH/AD42P/gY/wD8arQooAz/ADtY/wCfGx/8DH/+NUedrH/PjY/+Bj//ABqtCigDP87WP+fGx/8AAx//AI1R52sf8+Nj/wCBj/8AxqtCigDP87WP+fGx/wDAx/8A41R52sf8+Nj/AOBj/wDxqtCigDP87WP+fGx/8DH/APjVHnax/wA+Nj/4GP8A/Gq0KKAM/wA7WP8Anxsf/Ax//jVHnax/z42P/gY//wAarQooAz/O1j/nxsf/AAMf/wCNUedrH/PjY/8AgY//AMarQooAz/O1j/nxsf8AwMf/AONUedrH/PjY/wDgY/8A8arQooAz/O1j/nxs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AGSigDr9C/5F/Tf+vWL/ANAFX6oaF/yL+m/9esX/AKAKv0AFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAHA/Ev/mF/wDbX/2Sij4l/wDML/7a/wDslFAHX6F/yL+m/wDXrF/6AKv1Q0L/AJF/Tf8Ar1i/9AFX6ACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigDgfiX/wAwv/tr/wCyUUfEv/mF/wDbX/2SigDr9C/5F/Tf+vWL/wBAFX6oaF/yL+m/9esX/oAq/QAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAcD8S/wDmF/8AbX/2Sij4l/8AML/7a/8AslFAHX6F/wAi/pv/AF6xf+gCr9UNC/5F/Tf+vWL/ANAFX6ACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigDgfiX/zC/wDtr/7JRR8S/wDmF/8AbX/2SigDr9C/5F/Tf+vWL/0AVfqhoX/Iv6b/ANesX/oAq/QAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAcD8S/8AmF/9tf8A2Sij4l/8wv8A7a/+yUUAdfoX/Iv6b/16xf8AoAq/VDQv+Rf03/r1i/8AQBV+gAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA4H4l/8wv/ALa/+yUUfEv/AJhf/bX/ANkooA6/Qv8AkX9N/wCvWL/0AVfqhoX/ACL+m/8AXrF/6AKv0AFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAHA/Ev/mF/9tf/AGSij4l/8wv/ALa/+yUUAdfoX/Iv6b/16xf+gCr9UNC/5F/Tf+vWL/0AVfoAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAOB+Jf8AzC/+2v8A7JRR8S/+YX/21/8AZKKAOv0L/kX9N/69Yv8A0AVfqhoX/Iv6b/16xf8AoAq/QAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAcD8S/+YX/ANtf/ZKKPiX/AMwv/tr/AOyUUAdfoX/Iv6b/ANesX/oAq/VDQv8AkX9N/wCvWL/0AVfoAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAOB+Jf/ADC/+2v/ALJRR8S/+YX/ANtf/ZKKAOv0L/kX9N/69Yv/AEAVfqhoX/Iv6b/16xf+gCr9ABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQBwPxL/AOYX/wBtf/ZKKPiX/wAwv/tr/wCyUUAdfoX/ACL+m/8AXrF/6AKv1Q0L/kX9N/69Yv8A0AVfoAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiig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"
+			  alt=""></div>
+
+
+		<div class="dclr"></div>
+		<div id="id_1">
+			<p class="p116 ft48">ATTESTATION DE STAGE</p>
+			<p class="p117 ft49">à remettre au stagiaire à l'issue du stage</p>
+			<p class="p118 ft50">ORGANISME D'ACCUEIL</p>
+			<p class="p119 ft29">Nom ou Dénomination sociale …………………………………………………………………………………………………………………………………………….</p>
+			<p class="p119 ft29">Adresse……………………………………………………………………………………………………………………………………………………………………….</p>
+			<p class="p120 ft26">Certifie que</p>
+			<p class="p121 ft50">LE STAGIAIRE</p>
+			<p class="p122 ft31">Nom de famille : ……………………………………………………………………… Nom d’usage : ………………………………………………………………………………</p>
+			<table cellpadding="0" cellspacing="0" class="t10">
+				<tbody>
+					<tr>
+						<td class="tr3 td31">
+							<p class="p3 ft29">Prénom ………………………………………………………… ……… Sexe : F</p>
+						</td>
+						<td class="tr3 td32">
+							<p class="p3 ft29">M</p>
+						</td>
+						<td class="tr3 td33">
+							<p class="p3 ft29">Né(e) le : _______/</p>
+						</td>
+						<td class="tr12 td34">
+							<p class="p3 ft45">&nbsp;</p>
+						</td>
+						<td class="tr3 td35">
+							<p class="p11 ft29">/</p>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<p class="p122 ft31">Adresse ………………………………………………………………………………………………………………………………………………………………………………………</p>
+			<p class="p122 ft29">Courriel ………………………………………………………………………………</p>
+			<p class="p122 ft29"><span class="ft26">ETUDIANT EN </span>(intitulé de la formation ou du cursus de l'enseignement supérieur suivi par le stagiaire) : ……………………………………….</p>
+			<p class="p122 ft29">………………………………………………………………………………………………………………………………………………………………………………………………</p>
+			<p class="p122 ft31"><span class="ft25">AU SEIN DE </span>(nom de l'établissement d'enseignement supérieur ou de l'organisme de formation) : ………………………………………………………</p>
+			<p class="p32 ft29">……………………………………………………………………………………………………………………………………………………………………………………………….</p>
+			<p class="p123 ft26">a effectué un stage prévu dans le cadre de ses études</p>
+			<p class="p124 ft50">DURÉE DU STAGE</p>
+			<p class="p125 ft31">Dates de début et de fin du stage : du………………………………………………… (JJ/MM/AAAA), au ……………………………………………… (JJ/MM/AAAA)</p>
+			<p class="p126 ft29">Représentant une durée totale de ………………………………………… (Nbre de Mois / Nbre de Semaines) (rayer la mention inutile)</p>
+			<p class="p127 ft42">La durée totale du stage est appréciée en tenant compte de la présence effective du stagiaire dans l'organisme, sous réserve des droits à congés et autorisations d'absence prévus à l'article
+				<nobr>L.124-13</nobr> du code de l'éducation (art.
+				<nobr>L.124-18</nobr> du code de l'éducation). Chaque période au moins égale à 7 heures de présence consécutives ou non est considérée comme équivalente à un jour de stage et chaque période au moins égale à 22 jours de présence consécutifs ou non est considérée
+				comme équivalente à un mois.</p>
+			<p class="p128 ft50">MONTANT DE LA GRATIFICATION VERSÉE AU STAGIAIRE</p>
+			<p class="p129 ft29">Le stagiaire a perçu une gratification de stage pour un montant total de …………………………………………………….</p>
+		</div>
+		<div id="id_2">
+			<div id="id_2_1">
+				<p class="p130 ft52"><span class="ft51">L'attestation de stage </span>est indispensable pour pouvoir, sous réserve du versement d'une cotisation, faire prendre en compte le stage dans les droits à retraite. La législation sur les retraites (loi
+					<nobr>n°2014-40</nobr> du 20 janvier 2014) ouvre aux étudiants <span class="ft51">dont le stage a été gratifié </span>la possibilité de faire valider
+					<nobr>celui-ci</nobr> dans la <span class="ft51">limite de deux trimestres, </span>sous réserve du <span class="ft51">versement d'une cotisation. </span>La <span class="ft51">demande est à faire par l'étudiant dans les deux années </span>suivant la fin
+					du stage et sur <span class="ft51">présentation obligatoire de l'attestation de stage </span>mentionnant la durée totale du stage et le montant total de la gratification perçue. Les informations précises sur la cotisation à verser par le stagiaire
+					et sur la procédure à suivre sont à demander auprès de la sécurité sociale (code de la sécurité sociale art.
+					<nobr>L.351-17—</nobr> code de l'éducation
+					<nobr>art.D.124-9).</nobr>
+				</p>
+			</div>
+			<div id="id_2_2">
+				<p class="p30 ft29"><span class="ft26">FAIT A</span>……………………….....…………. <span class="ft26">LE </span>………………………………</p>
+				<p class="p131 ft29">………………………………………………………………………………………….</p>
+				<p class="p132 ft29">Nom, fonction et signature du représentant de l'organisme d'accueil</p>
+			</div>
+		</div>
+		<div id="id_3">
+			<p class="p30 ft25">Page 6 sur 6</p>
+		</div>
+	</div>
+
+
+</body>
+
+</html>
