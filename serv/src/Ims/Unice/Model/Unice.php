@@ -1,6 +1,9 @@
 <?php
-namespace App\Ims\Unice\Model; 
-class Unice {
+namespace App\Ims\Unice\Model;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Unice extends Model{
     protected $table = "unice";
     protected $primaryKey = "id";
 	protected $fillable = [

@@ -1,6 +1,9 @@
 <?php
-namespace App\Ims\Internship\Model; 
-class Internship {
+namespace App\Ims\Internship\Model;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Internship extends Model{
     protected $table = "internship";
     protected $primaryKey = "id";
 	protected $fillable = [
