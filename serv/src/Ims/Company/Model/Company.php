@@ -1,6 +1,9 @@
 <?php
-namespace App\Ims\Company\Model; 
-class Company {
+namespace App\Ims\Company\Model;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Company extends Model{
     protected $table = "company";
     protected $primaryKey = "id";
 	protected $fillable = [

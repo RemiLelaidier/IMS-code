@@ -1,6 +1,9 @@
 <?php
-namespace App\Ims\Convention\Model; 
-class Convention {
+namespace App\Ims\Convention\Model;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Convention extends Model{
     protected $table = "convention";
     protected $primaryKey = "id";
 	protected $fillable = [

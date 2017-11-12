@@ -87,8 +87,11 @@ TAG;
 
         $startModel = <<<TAG
 <?php
-namespace App\Ims\\$tableName\Model; 
-class $tableName {
+namespace App\Ims\\$tableName\Model;
+
+use Illuminate\Database\Eloquent\Model;
+
+class $tableName extends Model{
     protected \$table = "$rawTableName";
     protected \$primaryKey = "$primaryKey";
 TAG;
