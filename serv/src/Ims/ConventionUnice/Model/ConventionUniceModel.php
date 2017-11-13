@@ -1,10 +1,10 @@
 <?php
-namespace App\Ims\ConventionEmployee\Model;
+namespace App\Ims\ConventionUnice\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ConventionEmployee extends Model{
-    protected $table = "convention_employee";
+class ConventionUniceModel extends Model{
+    protected $table = "convention_unice";
     protected $primaryKey = "id";
 	protected $fillable = [
 					'convention_role'
