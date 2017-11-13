@@ -85,7 +85,7 @@ TAG;
 
         $tableName = self::_toCamel($table);
 
-        $modelName = ucfirst($rawTableName) . "Model";
+        $modelName = $tableName . "Model";
 
         $startModel = <<<TAG
 <?php
