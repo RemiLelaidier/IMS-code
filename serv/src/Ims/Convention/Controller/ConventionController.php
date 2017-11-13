@@ -3,10 +3,10 @@
 namespace App\Ims\Convention\Controller;
 
 use App\Core\Controller\Controller;
-use App\Ims\Convention\Model\Convention;
-use App\Ims\Student\Model\Student;
-use App\Ims\Company\Model\Company;
-use App\Ims\Internship\Model\Internship;
+use App\Ims\Convention\Model\ConventionModel;
+use App\Ims\Student\Model\StudentModel;
+use App\Ims\Company\Model\CompanyModel;
+use App\Ims\Internship\Model\InternshipModel;
 use Slim\Http\Request;
 use Slim\Http\Response;
 
@@ -32,8 +32,36 @@ class ConventionController extends Controller
             'data' => $conventionData
         ]);
 
+        // Insert all Datas
+        foreach ($decoded as $section){
+           $this->doActionFor($section);
+        }
+
+        // Insert elements
         return $this->ok($response, [
-            'convention_data' => $decoded
+            'convention_data' => $decoded['etudiant']['name']
         ]);
+    }
+
+    public function doActionFor($section){
+        $name = $section['title'];
+        switch($name){
+            case 'Étudiant' :
+                $this->studentAction($section);
+                break;
+            case 'Entreprise' :
+                $this->companyAction($section);
+                break;
+            case 'Stage' :
+                $this->intershipAction($section);
+        }
+    }
+
+    public function studentAction($section){
+        $student = new Student();
+    }
+
+    public function conventionAction($data){
+
     }
 }

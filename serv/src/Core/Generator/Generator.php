@@ -105,7 +105,7 @@ TAG;
             }
         }
 
-        $startFillables = "\n\tprotected \$fillable = [\n";
+        $startFillables = "\n\tprotected \$fillables = [\n";
         $end = ",\n";
         
         foreach($fillables as $k => $fillable){

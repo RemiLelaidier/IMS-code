@@ -1,12 +1,12 @@
 <?php
-namespace App\Ims\Employee\Model;
+namespace App\Ims\Unice\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Employee extends Model{
-    protected $table = "employee";
+class UniceModel extends Model{
+    protected $table = "unice";
     protected $primaryKey = "id";
-	protected $fillable = [
+	protected $fillables = [
 					'name',
 					'surname',
 					'gender',

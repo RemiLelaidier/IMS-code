@@ -3,10 +3,10 @@ namespace App\Ims\Student\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Student extends Model{
+class StudentModel extends Model{
     protected $table = "student";
     protected $primaryKey = "id";
-	protected $fillable = [
+	protected $fillables = [
 					'name',
 					'surname',
 					'promotion',
