@@ -85,13 +85,15 @@ TAG;
 
         $tableName = self::_toCamel($table);
 
+        $modelName = $rawTableName . "Model";
+
         $startModel = <<<TAG
 <?php
 namespace App\Ims\\$tableName\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class $tableName extends Model{
+class $modelName extends Model{
     protected \$table = "$rawTableName";
     protected \$primaryKey = "$primaryKey";
 TAG;
@@ -133,7 +135,7 @@ TAG;
 
         $original = $fileName;
 
-        $fileName = $isModel ? $fileName : $fileName . "Controller";
+        $fileName = $isModel ? $fileName ."Model" : $fileName . "Controller";
 
         $namespace = $isModel ? "Model" :"Controller";
         $fileName = ucfirst($fileName);
