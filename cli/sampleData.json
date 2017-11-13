@@ -1,39 +1,49 @@
-[
-  {
+[{
   "title": "Étudiant",
   "inputs": [{
+    "id": "student_surname",
     "label": "Prénom",
-    "value": "Léonard"
+    "value": "Troll"
   }, {
+    "id": "student_name",
     "label": "Nom",
-    "value": "Cherouvrier"
+    "value": "Des Cavernes"
   }, {
+    "id": "student_ss",
     "label": "Numéro de sécurité sociale",
-    "value": "1776766767678"
+    "value": "3987787866776"
   }, {
+    "id": "student_unice_number",
     "label": "Numéro d'étudiant",
-    "value": "76776767"
+    "value": "12876767"
   }, {
+    "id": "student_email",
     "label": "E-mail",
-    "value": "leonard"
+    "value": "troll@descavernes.com"
   }, {
+    "id": "student_dob",
     "label": "Date de naissance",
     "value": "20/08/1996"
   }, {
+    "id": "student_phone",
     "label": "Téléphone",
     "value": "+33668717002"
   }, {
+    "id": "student_insurance",
     "label": "Compagnie d'assurance",
-    "value": "GMF"
+    "value": "ING"
   }, {
+    "id": "student_policy",
     "label": "Numéro de Police",
-    "value": "344"
+    "value": "767777777777777777766666"
   }],
   "dropdowns": [{
+    "id": "promotion",
     "label": "Promotion",
     "value": "Master 1",
     "concerning": "Étudiant"
   }, {
+    "id": "student_gender",
     "label": "Genre",
     "value": "M",
     "concerning": "Étudiant"
@@ -41,28 +51,36 @@
 }, {
   "title": "Entreprise",
   "inputs": [{
+    "id": "ent_name",
     "label": "Nom",
-    "value": "LeDuc"
+    "value": "Scaleway"
   }, {
+    "id": "ent_website",
     "label": "Site web",
-    "value": "http://leduc.com"
+    "value": "https://scaleway.com"
   }, {
+    "id": "ent_director_surname",
     "label": "Prénom",
-    "value": "Hervé"
+    "value": "Michel"
   }, {
+    "id": "ent_director_name",
     "label": "Nom",
-    "value": "Dubreuil"
+    "value": "DuSaucisson"
   }, {
+    "id": "ent_director_email",
     "label": "E-mail",
-    "value": "herve@test.io"
+    "value": "michel@scaleway.com"
   }, {
+    "id": "ent_director_phone",
     "label": "Téléphone",
-    "value": "+33668717002"
+    "value": "+336565656565"
   }, {
+    "id": "ent_director_quality",
     "label": "En qualité de",
     "value": "COO"
   }],
   "dropdowns": [{
+    "id": "ent_director_gender",
     "label": "Genre",
     "value": "M",
     "concerning": "Directeur / Représentant"
@@ -70,35 +88,45 @@
 }, {
   "title": "Stage",
   "inputs": [{
+    "id": "internship_dos",
     "label": "Date de début",
-    "value": "20/08/1996"
+    "value": "20/06/1996"
   }, {
+    "id": "internship_doe",
     "label": "Date de fin",
-    "value": "20/09/1996"
+    "value": "20/10/1996"
   }, {
+    "id": "internship_week_hours",
     "label": "Durée hebdomadaire (en heures)",
     "value": "36"
   }, {
+    "id": "internship_remuneration",
     "label": "Montant de la gratification (en euros)",
-    "value": "300"
+    "value": "8000"
   }, {
+    "id": "internship_title",
     "label": "Intitulé du stage",
-    "value": "Héhé"
+    "value": "Développement d'une interface Homme - Machine à Barbe à Papa"
   }],
   "textareas": [{
+    "id": "internship_hours_text",
     "label": "Horaires",
-    "value": "Lundi au vendredi 10h-20h"
+    "value": "H24, il est nogé, lourri, blanchi."
   }, {
+    "id": "internship_extras_text",
     "label": "Présence la nuit, le dimanche, ou les jours fériés (le cas échéant)",
-    "value": "Non"
+    "value": "Oui, tous les soirs :D"
   }, {
+    "id": "internship_advantages",
     "label": "Avantages offerts par l'entreprise (restauration, hébergement, remboursement de frais, ...)",
-    "value": "Aucun."
+    "value": "Machine à Barbe à Papa "
   }, {
+    "id": "internship_description",
     "label": "Description",
-    "value": "Je pue"
+    "value": "Le stagiaire devra développement une solution permettant de communiquer à la voix avec la machine. En utilisant du Javascript."
   }],
   "dropdowns": [{
+    "id": "internship_remuneration_way",
     "label": "Versement",
     "value": "Virement",
     "concerning": "Versement"
@@ -106,41 +134,53 @@
 }, {
   "title": "Responsables",
   "inputs": [{
+    "id": "ent_tutor_surname",
     "label": "Prénom",
-    "value": "Hervé"
+    "value": "John"
   }, {
+    "id": "ent_tutor_name",
     "label": "Nom",
-    "value": "Miauou"
+    "value": "Duff"
   }, {
+    "id": "ent_tutor_email",
     "label": "E-mail",
-    "value": "leonard@test.ommfg"
+    "value": "john@scaleway.com"
   }, {
+    "id": "ent_tutor_phone",
     "label": "Téléphone",
-    "value": "+33668717002"
+    "value": "+33665656565"
   }, {
+    "id": "ent_tutor_quality",
     "label": "En qualité de",
-    "value": "Chef"
+    "value": "CTO"
   }, {
+    "id": "unice_tutor_surname",
     "label": "Prénom",
-    "value": "Hervé"
+    "value": "Andréa"
   }, {
+    "id": "unice_tutor_name",
     "label": "Nom",
-    "value": "Miauou"
+    "value": "Tettamanzi"
   }, {
+    "id": "unice_tutor_email",
     "label": "E-mail",
-    "value": "leonard@test.ommfg"
+    "value": "andrea.tettamanzi@unicce.fr"
   }, {
+    "id": "unice_tutor_phone",
     "label": "Téléphone",
-    "value": "+33668717002"
+    "value": "+33667676767"
   }, {
+    "id": "unice_tutor_quality",
     "label": "En qualité de",
-    "value": "Chef-bis"
+    "value": "Spécialiste BS"
   }],
   "dropdowns": [{
+    "id": "ent_tutor_gender",
     "label": "Genre",
-    "value": "Mme",
+    "value": "M",
     "concerning": "Encadreur dans l'entreprise"
   }, {
+    "id": "unice_tutor_gender",
     "label": "Genre",
     "value": "M",
     "concerning": "Tuteur enseignant"
@@ -148,6 +188,8 @@
 }, {
   "title": "Informations complémentaires",
   "textareas": [{
-    "label": "N'importe quel type d'information à communiquer si nécessaire"
+    "id": "convention_extras",
+    "label": "N'importe quel type d'information à communiquer si nécessaire",
+    "value": "Je suis une info à communiquer si nécessaire"
   }]
 }]
