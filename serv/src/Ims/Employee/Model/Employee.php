@@ -3,7 +3,7 @@ namespace App\Ims\Employee\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class EmployeeModel extends Model{
+class Employee extends Model{
     protected $table = "employee";
     protected $primaryKey = "id";
 	protected $fillable = [

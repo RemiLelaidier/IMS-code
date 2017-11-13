@@ -3,7 +3,7 @@ namespace App\Ims\Convention\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ConventionModel extends Model{
+class Convention extends Model{
     protected $table = "convention";
     protected $primaryKey = "id";
 	protected $fillable = [
