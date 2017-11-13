@@ -301,6 +301,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         [].map.call(forms, function (form) {
           // Getting every field
           let inputs = form.querySelectorAll(`#${form.id} paper-input`);
+          let addresses = form.querySelectorAll(`#${form.id} titanium-address-input`);
           let textareas = form.querySelectorAll(`#${form.id} paper-textarea`);
           let dropdowns = form.querySelectorAll(`#${form.id} paper-dropdown-menu`);
 
@@ -314,6 +315,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             thisForm.textareas = [];
           if(dropdowns.length)
             thisForm.dropdowns = [];
+          if(addresses.length)
+            thisForm.addresses = [];
 
           // Foreach input, we just grab every label + value
           [].map.call(inputs, function(input){
@@ -326,6 +329,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           // Cause inputs are most of the time "gender", we need to know for who => concerning
           [].map.call(dropdowns, function(dropdown){
             thisForm.dropdowns.push({ id: dropdown.id, label: dropdown.label, value: dropdown.value, concerning: dropdown.getAttribute('data-concerning') });
+          });
+
+          // Google powered inputs
+          [].map.call(addresses, function(address){
+            thisForm.addresses.push({ id: address.id, label: address.label, value: address.value });
           });
 
           structuredData.push(thisForm);
