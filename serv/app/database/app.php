@@ -50,6 +50,12 @@ Manager::schema()->create('company', function (Blueprint $table) {
     $table->string('phone');
     $table->string('email');
     $table->string('nationality');
+    $table->string('director_name');
+    $table->string('director_surname');
+    $table->string('director_email');
+    $table->string('director_phone');
+    $table->string('director_quality');
+    $table->string('director_gender');
     $table->string('siren');
     $table->string('notes');
     $table->foreign('people')->references('employee')->on('id');
