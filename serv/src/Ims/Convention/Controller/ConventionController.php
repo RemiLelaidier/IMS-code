@@ -35,8 +35,9 @@ class ConventionController extends Controller
         ]);
 
         $pdfGenerator = new DocumentGenerator($decoded);
-        $pdfGenerator->generateConventionFrom();
+        $pdfGenerator->generateConvention();
 
+        // TODO Rémi : Debug before push on master :p
         // Insert all Datas
         /*foreach ($decoded as $section){
            $this->doActionFor($section);
