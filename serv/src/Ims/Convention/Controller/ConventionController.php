@@ -59,7 +59,7 @@ class ConventionController extends Controller
                 $this->companyAction($section);
                 break;
             case 'Stage' :
-                $this->intershipAction($section);
+                $this->internshipAction($section);
                 break;
             case 'Responsables' :
                 $this->responsablesAction($section);
@@ -142,28 +142,28 @@ class ConventionController extends Controller
                     $company->website = $input['value'];
                     break;
                 case 'ent_director_surname':
-                    // TODO
+                    $company->director_surname = $input['value'];
                     break;
                 case 'ent_director_name' :
-                    // TODO
+                    $company->director_name = $input['value'];
                     break;
                 case 'ent_director_email' :
-                    // TODO
+                    $company->director_email = $input['value'];
                     break;
                 case 'ent_director_phone' :
-                    // TODO
+                    $company->director_phone = $input['value'];
                     break;
                 case 'ent_director_quality' :
-                    // TODO
+                    $company->director_quality = $input['value'];
                     break;
             }
         }
         foreach ($dropdowns as$dropdown){
             if($dropdown['id'] == 'ent_director_gender'){
-                // TODO
+                $company->director_gender = $dropdown['value'];
             }
         }
-        foreach ($adresses as $adress){
+        /*foreach ($adresses as $adress){
             switch ($adress['id']){
                 case 'ent_address' :
                     $company->address = $adress['value'];
@@ -172,11 +172,54 @@ class ConventionController extends Controller
                     // TODO
                     break;
             }
-        }
+        }*/
     }
 
-    private function intershipAction($section){
-
+    private function internshipAction($section){
+        $internship = new InternshipModel();
+        $inputs = $section['inputs'];
+        $dropdowns = $section['dropdowns'];
+        $textareas = $section['textareas'];
+        foreach ($inputs as $input){
+            switch ($input['id']){
+                case 'internship_dos' :
+                    $internship->start = $input['value'];
+                    break;
+                case 'internship_doe' :
+                    $internship->end = $input['value'];
+                    break;
+                case 'internship_week_hours' :
+                    $internship->working_hours = $input['value'];
+                    break;
+                case 'internship_remuneration' :
+                    $internship->income = $input['value'];
+                    break;
+                case 'internship_title' :
+                    $internship->subject = $input['value'];
+                    break;
+            }
+        }
+        foreach ($dropdowns as $dropdown){
+            if($dropdown['id'] == 'internship_remuneration_way'){
+                $internship->payement = $dropdown['value'];
+            }
+        }
+        foreach ($textareas as$textarea){
+            switch ($textarea['id']){
+                case 'internship_hours_text' :
+                    $internship->weekly_duration = $textarea['value'];
+                    break;
+                case 'internship_extras_text' :
+                    $internship->extra_work = $textarea['value'];
+                    break;
+                case 'internship_advantages' :
+                    $internship->advantages = $textarea['value'];
+                    break;
+                case 'internship_description' :
+                    $internship->detail = $textarea['value'];
+                    break;
+            }
+        }
     }
 
     private function responsablesAction($section){
