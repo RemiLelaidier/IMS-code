@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Capsule\Manager;
 use Illuminate\Database\Schema\Blueprint;
-use App\Core\Generator\Generator;
+use App\Core\Generator\EloquentGenerator;
 
 Manager::schema()->create('student', function (Blueprint $table) {
     $table->increments('id');
@@ -34,7 +34,7 @@ Manager::schema()->create('student', function (Blueprint $table) {
         'police'
     ];
 
-    Generator::generate(true, true, [
+    EloquentGenerator::generate(true, true, [
         'fillables' => $fillables,
         'primaryKey' => 'id',
         'table' => $table
@@ -65,7 +65,7 @@ Manager::schema()->create('company', function (Blueprint $table) {
         'notes'
     ];
 
-    Generator::generate(true, true, [
+    EloquentGenerator::generate(true, true, [
         'fillables' => $fillables,
         'primaryKey' => 'id',
         'table' => $table
@@ -92,7 +92,7 @@ Manager::schema()->create('employee', function (Blueprint $table) {
         'quality'
     ];
 
-    Generator::generate(true, true, [
+    EloquentGenerator::generate(true, true, [
         'fillables' => $fillables,
         'primaryKey' => 'id',
         'table' => $table
@@ -136,7 +136,7 @@ Manager::schema()->create('internship', function (Blueprint $table) {
         'notes',
     ];
 
-    Generator::generate(true, true, [
+    EloquentGenerator::generate(true, true, [
         'fillables' => $fillables,
         'primaryKey' => 'id',
         'table' => $table
@@ -172,7 +172,7 @@ Manager::schema()->create('convention', function (Blueprint $table) {
         'notes'
     ];
 
-    Generator::generate(true, false, [
+    EloquentGenerator::generate(true, false, [
         'fillables' => $fillables,
         'primaryKey' => 'id',
         'table' => $table
@@ -200,7 +200,7 @@ Manager::schema()->create('unice', function (Blueprint $table) {
         'quality'
     ];
 
-    Generator::generate(true, true, [
+    EloquentGenerator::generate(true, true, [
         'fillables' => $fillables,
         'primaryKey' => 'id',
         'table' => $table
@@ -219,7 +219,7 @@ Manager::schema()->create('convention_unice', function (Blueprint $table) {
         'convention_role'
     ];
 
-    Generator::generate(true, false, [
+    EloquentGenerator::generate(true, false, [
         'fillables' => $fillables,
         'primaryKey' => 'id',
         'table' => $table
@@ -238,7 +238,7 @@ Manager::schema()->create('convention_employee', function (Blueprint $table) {
         'convention_role'
     ];
 
-    Generator::generate(true, false, [
+    EloquentGenerator::generate(true, false, [
         'fillables' => $fillables,
         'primaryKey' => 'id',
         'table' => $table

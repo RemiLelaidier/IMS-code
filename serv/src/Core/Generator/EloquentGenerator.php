@@ -3,7 +3,7 @@ namespace App\Core\Generator;
 
 use Illuminate\Database\Schema\Blueprint;
 
-class Generator {
+class EloquentGenerator {
 
     /**
      * Generate
