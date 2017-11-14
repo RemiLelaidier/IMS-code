@@ -10,6 +10,8 @@ use App\Ims\Internship\Model\InternshipModel;
 use Slim\Http\Request;
 use Slim\Http\Response;
 
+use App\Core\Generator\DocumentGenerator;
+
 class ConventionController extends Controller
 {
 
@@ -32,14 +34,18 @@ class ConventionController extends Controller
             'data' => $conventionData
         ]);
 
+        $pdfGenerator = new DocumentGenerator($decoded);
+        $pdfGenerator->generateConvention();
+
+        // TODO Rémi : Debug before push on master :p
         // Insert all Datas
-        foreach ($decoded as $section){
+        /*foreach ($decoded as $section){
            $this->doActionFor($section);
-        }
+        }*/
 
         // Insert elements
         return $this->ok($response, [
-            'convention_data' => $decoded['etudiant']['name']
+            'convention_data' => $decoded
         ]);
     }
 
