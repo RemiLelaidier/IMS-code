@@ -42,9 +42,6 @@ class DocumentGenerator {
         $this->document->setValue("internship_daysOrMonth", " ");
         $this->document->setValue("internship_hours_daysOrWeek", " ");
 
-        // TODO : Debug length?
-        $this->document->setValue("internship_description", " ");
-
         // TODO : Calc
         $this->document->setValue("internship_duration", " ");
         $this->document->setValue("internship_presence_days", " ");
@@ -55,6 +52,7 @@ class DocumentGenerator {
             $inputs = $section['inputs'];
             $addresses = $section['addresses'];
             $dropdowns = $section['dropdowns'];
+            $textareas = $section['textareas'];
 
             foreach($inputs as $input){
                 $this->document->setValue($input['id'], $input['value']);
