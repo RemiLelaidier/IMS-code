@@ -78,6 +78,7 @@ class ConventionController extends Controller
         $student = new StudentModel();
         $inputs = $section['inputs'];
         $dropdowns = $section['dropdowns'];
+        $adresses = $section['addresses'];
         foreach ($inputs as $input){
             switch ($input['id']){
                 case 'student_name' :
@@ -119,15 +120,59 @@ class ConventionController extends Controller
                     break;
             }
         }
+        foreach ($adresses as $adress){
+            if ($adress['id'] == 'student_adress'){
+                $student->address = $adress['value'];
+            }
+        }
         $student->save();
     }
 
-    private function conventionAction($data){
-
-    }
-
     private function companyAction($section){
-
+        $company = new CompanyModel();
+        $inputs = $section['inputs'];
+        $dropdowns = $section['dropdowns'];
+        $adresses = $section['addresses'];
+        foreach ($inputs as $input){
+            switch ($input['id']){
+                case 'ent_name' :
+                    $company->name = $input['value'];
+                    break;
+                case 'ent_website' :
+                    $company->website = $input['value'];
+                    break;
+                case 'ent_director_surname':
+                    // TODO
+                    break;
+                case 'ent_director_name' :
+                    // TODO
+                    break;
+                case 'ent_director_email' :
+                    // TODO
+                    break;
+                case 'ent_director_phone' :
+                    // TODO
+                    break;
+                case 'ent_director_quality' :
+                    // TODO
+                    break;
+            }
+        }
+        foreach ($dropdowns as$dropdown){
+            if($dropdown['id'] == 'ent_director_gender'){
+                // TODO
+            }
+        }
+        foreach ($adresses as $adress){
+            switch ($adress['id']){
+                case 'ent_address' :
+                    $company->address = $adress['value'];
+                    break;
+                case 'ent_stage_address' :
+                    // TODO
+                    break;
+            }
+        }
     }
 
     private function intershipAction($section){
