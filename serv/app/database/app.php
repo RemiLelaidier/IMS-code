@@ -6,6 +6,7 @@ use App\Core\Generator\EloquentGenerator;
 
 Manager::schema()->create('student', function (Blueprint $table) {
     $table->increments('id');
+    $table->timestamps();
     $table->string('name');
     $table->string('surname');
     $table->string('promotion');
@@ -43,16 +44,21 @@ Manager::schema()->create('student', function (Blueprint $table) {
 
 Manager::schema()->create('company', function (Blueprint $table) {
     $table->increments('id');
-    $table->unsignedInteger('people');
+    $table->timestamps();
     $table->string('name');
     $table->string('address');
     $table->string('website');
-    $table->string('phone');
-    $table->string('email');
-    $table->string('nationality');
-    $table->string('siren');
-    $table->string('notes');
-    $table->foreign('people')->references('employee')->on('id');
+    $table->string('phone')->nullable();
+    $table->string('email')->nullable();
+    $table->string('nationality')->nullable();
+    $table->string('director_name');
+    $table->string('director_surname');
+    $table->string('director_email');
+    $table->string('director_phone');
+    $table->string('director_quality');
+    $table->string('director_gender');
+    $table->string('siren')->nullable();
+    $table->string('notes')->nullable();
 
     $fillables = [
         'name',
@@ -74,6 +80,7 @@ Manager::schema()->create('company', function (Blueprint $table) {
 
 Manager::schema()->create('employee', function (Blueprint $table) {
     $table->increments('id');
+    $table->timestamps();
     $table->string('name');
     $table->string('surname');
     $table->string('gender');
@@ -81,7 +88,7 @@ Manager::schema()->create('employee', function (Blueprint $table) {
     $table->string('phone');
     $table->string('quality');
     $table->unsignedInteger('company_id');
-    $table->foreign('company_id')->references('company')->on('id');
+    $table->foreign('company_id')->references('id')->on('company');
 
     $fillables = [
         'name',
@@ -103,21 +110,23 @@ Manager::schema()->create('employee', function (Blueprint $table) {
 
 Manager::schema()->create('internship', function (Blueprint $table) {
     $table->increments('id');
-    $table->dateTime('start');
-    $table->dateTime('end');
+    $table->timestamps();
+    $table->string('start');
+    $table->string('end');
     $table->string('address');
     $table->string('working_hours');
     $table->string('weekly_duration');
-    $table->string('extra_work');
+    $table->string('extra_work')->nullable();
     $table->string('income');
     $table->string('payement');
     $table->string('advantages');
     $table->string('subject');
-    $table->string('detail');
-    $table->longText('contract');
+    $table->longText('detail');
+    $table->longText('contract')->nullable();
     $table->longText('endorsement_1')->nullable();
     $table->longText('endorsement_2')->nullable();
-    $table->string('notes');
+    $table->string('notes')->nullable();
+    //
 
     $fillables = [
         'start',
@@ -149,14 +158,14 @@ Manager::schema()->create('convention', function (Blueprint $table) {
     $table->unsignedInteger('student_id');
     $table->unsignedInteger('company_id');
     $table->unsignedInteger('internship_id');
-    $table->dateTime('receipt_from_student')->nullable();
-    $table->dateTime('company_validate')->nullable();
-    $table->dateTime('school_validate')->nullable();
-    $table->dateTime('student_validate')->nullable();
-    $table->dateTime('unice_validate')->nullable();
-    $table->dateTime('send_to_unice')->nullable();
-    $table->dateTime('return_from_unice')->nullable();
-    $table->string('notes');
+    $table->timestamp('receipt_from_student')->useCurrent();
+    $table->timestamp('company_validate')->useCurrent();
+    $table->timestamp('school_validate')->useCurrent();
+    $table->timestamp('student_validate')->useCurrent();
+    $table->timestamp('unice_validate')->useCurrent();
+    $table->timestamp('send_to_unice')->useCurrent();
+    $table->timestamp('return_from_unice')->useCurrent();
+    $table->string('notes')->nullable();
     $table->foreign('student_id')->references('id')->on('student');
     $table->foreign('company_id')->references('id')->on('company');
     $table->foreign('internship_id')->references('id')->on('internship');
@@ -182,14 +191,13 @@ Manager::schema()->create('convention', function (Blueprint $table) {
 
 Manager::schema()->create('unice', function (Blueprint $table) {
     $table->increments('id');
+    $table->timestamps();
     $table->string('name');
     $table->string('surname');
     $table->string('gender');
     $table->string('email');
     $table->string('phone');
     $table->string('quality');
-    $table->unsignedInteger('convention_id');
-    $table->foreign('convention_id')->references('id')->on('convention');
 
     $fillables = [
         'name',
@@ -208,6 +216,7 @@ Manager::schema()->create('unice', function (Blueprint $table) {
 });
 
 Manager::schema()->create('convention_unice', function (Blueprint $table) {
+    $table->timestamps();
     $table->unsignedInteger('convention_id');
     $table->unsignedInteger('unice_id');
     $table->string('convention_role');
@@ -227,6 +236,7 @@ Manager::schema()->create('convention_unice', function (Blueprint $table) {
 });
 
 Manager::schema()->create('convention_employee', function (Blueprint $table) {
+    $table->timestamps();
     $table->unsignedInteger('convention_id');
     $table->unsignedInteger('employee_id');
     $table->string('convention_role');
