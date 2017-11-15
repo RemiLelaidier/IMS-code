@@ -14,7 +14,8 @@ class CoreController extends Controller
                 'login' => $this->path('login'),
                 //'register' => $this->path('register'),
                 'refresh_token' => $this->path('jwt.refresh'),
-                'user' => $this->path('users.me')
+                'user' => $this->path('users.me'),
+                'student' => $this->path('student.convention.send')
             ]
         ]);
     }

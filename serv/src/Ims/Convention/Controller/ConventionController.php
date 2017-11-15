@@ -11,7 +11,6 @@ use App\Ims\Unice\Model\UniceModel;
 use App\Ims\Employee\Model\EmployeeModel;
 use Slim\Http\Request;
 use Slim\Http\Response;
-
 use App\Core\Generator\DocumentGenerator;
 
 class ConventionController extends Controller
@@ -41,6 +40,28 @@ class ConventionController extends Controller
             'data' => $conventionData
         ]);
 
+        /*foreach($decoded as $section){
+            $inputs = $section['inputs'];
+            $addresses = $section['addresses'];
+            $dropdowns = $section['dropdowns'];
+            $textareas = $section['textareas'];
+
+            foreach($inputs as $input){
+                $this->document->setValue($input['id'], $input['value']);
+            }
+
+            foreach($addresses as $address){
+                $this->document->setValue($address['id'], $address['value']);
+            }
+
+            foreach($dropdowns as $dropdown){
+                $this->document->setValue($dropdown['id'], $dropdown['value']);
+            }
+
+            foreach($textareas as $textarea){
+                $this->document->setValue($textarea['id'], $textarea['value']);
+            }
+        }*/
         // TODO Valiation Respect
 
         // Generate PDF
@@ -58,10 +79,13 @@ class ConventionController extends Controller
            $this->doActionFor($section);
         }
         // Save new datas
-        if( !$this->studentModel->save() || !$this->companyModel->save() || !$this->uniceModel->save() ||
-            !$this->employeeModel->save() || !$this->internshipModel->save()){
-            return $this->json($response, 'error', 500);
-        }
+        $this->studentModel->save();
+        $this->companyModel->save();
+        $this->uniceModel->save();
+        $this->employeeModel->company_id = $this->companyModel->id;
+        $this->employeeModel->save();
+        $this->internshipModel->save();
+
         return $this->ok($response, 'convention created');
     }
 
@@ -87,7 +111,6 @@ class ConventionController extends Controller
                 $this->supplementsAction($section);
                 break;
         }
-        $this->internshipModel->save();
     }
 
     /**
@@ -97,7 +120,7 @@ class ConventionController extends Controller
     private function studentAction($section){
         $inputs = $section['inputs'];
         $dropdowns = $section['dropdowns'];
-        $adresses = $section['addresses'];
+        $addresses = $section['addresses'];
         foreach ($inputs as $input){
             switch ($input['id']){
                 case 'student_name' :
@@ -125,7 +148,7 @@ class ConventionController extends Controller
                     $this->studentModel->insurance = $input['value'];
                     break;
                 case 'student_policy' :
-                    $this->studentModel->policy = $input['value'];
+                    $this->studentModel->police = $input['value'];
                     break;
             }
         }
@@ -139,9 +162,9 @@ class ConventionController extends Controller
                     break;
             }
         }
-        foreach ($adresses as $adress){
-            if ($adress['id'] == 'student_adress'){
-                $this->studentModel->address = $adress['value'];
+        foreach ($addresses as $address){
+            if ($address['id'] == 'student_address'){
+                $this->studentModel->address = $address['value'];
             }
         }
     }
@@ -152,7 +175,7 @@ class ConventionController extends Controller
     private function companyAction($section){
         $inputs = $section['inputs'];
         $dropdowns = $section['dropdowns'];
-        $adresses = $section['addresses'];
+        $addresses = $section['addresses'];
         foreach ($inputs as $input){
             switch ($input['id']){
                 case 'ent_name' :
@@ -183,13 +206,13 @@ class ConventionController extends Controller
                 $this->companyModel->director_gender = $dropdown['value'];
             }
         }
-        foreach ($adresses as $adress){
-            switch ($adress['id']){
+        foreach ($addresses as $address){
+            switch ($address['id']){
                 case 'ent_address' :
-                    $this->companyModel->address = $adress['value'];
+                    $this->companyModel->address = $address['value'];
                     break;
                 case 'ent_stage_address' :
-                    $this->internshipModel->address = $adress['value'];
+                    $this->internshipModel->address = $address['value'];
                     break;
             }
         }
@@ -205,10 +228,10 @@ class ConventionController extends Controller
         foreach ($inputs as $input){
             switch ($input['id']){
                 case 'internship_dos' :
-                    $this->internshipModel->start = $input['value'];
+                    $this->internshipModel->start = strtotime($input['value']);
                     break;
                 case 'internship_doe' :
-                    $this->internshipModel->end = $input['value'];
+                    $this->internshipModel->end = strtotime($input['value']);
                     break;
                 case 'internship_week_hours' :
                     $this->internshipModel->working_hours = $input['value'];
