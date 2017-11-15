@@ -126,6 +126,7 @@ Manager::schema()->create('internship', function (Blueprint $table) {
     $table->longText('endorsement_1')->nullable();
     $table->longText('endorsement_2')->nullable();
     $table->string('notes')->nullable();
+    //
 
     $fillables = [
         'start',
