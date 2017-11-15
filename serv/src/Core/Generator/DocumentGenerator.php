@@ -1,7 +1,10 @@
 <?php
 namespace App\Core\Generator;
 
+use App\Security\Exception\TemplateNotFoundException;
+use PhpOffice\PhpWord\Exception\Exception;
 use \PhpOffice\PhpWord\PhpWord;
+use PhpOffice\PhpWord\TemplateProcessor;
 
 /**
  * DocumentGenerator
@@ -11,19 +14,29 @@ use \PhpOffice\PhpWord\PhpWord;
  */
 class DocumentGenerator {
 
-    public function __construct($data){
+    /**
+     * @param array $data
+     * @param string $template 
+     * @param string $destPath
+     */
+    public function __construct($data, $template, $destPath){
         $this->phpWord = new PhpWord();
         $this->model = $data;
         $this->document = null;
+        $this->template = $template;
+        $this->destPath = $destPath;
+        $this->templatePath =__DIR__ . "/../../../../assets/";
     }
 
     /**
      * Debug func, full document ceremony
      */
-    public function generateConvention(){     
-        $templatePath = __DIR__ . "/../../../../assets/convention_template.docx";   
-
-        $this->document = $this->phpWord->loadTemplate($templatePath);
+    public function generateConvention(){
+        try {
+            $this->document = new TemplateProcessor($this->templatePath . $this->template . ".docx");
+        } catch (Exception $e) {
+            throw new TemplateNotFoundException("Document template not found", $e);
+        }
         $this->writeData();
         $this->save();
     }
@@ -49,25 +62,41 @@ class DocumentGenerator {
         // Parsing structured data (reverse logic of MiConv.endCeremony() ^^)
         // foreach dancing \o/
         foreach($this->model as $section){
-            $inputs = $section['inputs'];
-            $addresses = $section['addresses'];
-            $dropdowns = $section['dropdowns'];
-            $textareas = $section['textareas'];
+            $inputs = [];
+            $dropdowns = [];
+            $addresses = [];
+            $textareas = [];
+
+            if(array_key_exists('inputs', $section))
+                $inputs = $section['inputs'];
+
+            if(array_key_exists('addresses', $section))
+                $addresses = $section['addresses'];
+
+            if(array_key_exists('dropdowns', $section))
+                $dropdowns = $section['dropdowns'];
+
+            if(array_key_exists('textareas', $section))
+                $textareas = $section['textareas'];
 
             foreach($inputs as $input){
-                $this->document->setValue($input['id'], $input['value']);
+                if(array_key_exists('value', $input))
+                    $this->document->setValue($input['id'], $input['value']);
             }
 
             foreach($addresses as $address){
-                $this->document->setValue($address['id'], $address['value']);
+                if(array_key_exists('value', $address))
+                    $this->document->setValue($address['id'], $address['value']);
             }
 
             foreach($dropdowns as $dropdown){
-                $this->document->setValue($dropdown['id'], $dropdown['value']);
+                if(array_key_exists('value', $dropdown))
+                    $this->document->setValue($dropdown['id'], $dropdown['value']);
             }
 
             foreach($textareas as $textarea){
-                $this->document->setValue($textarea['id'], $textarea['value']);
+                if(array_key_exists('value', $textarea))
+                    $this->document->setValue($textarea['id'], $textarea['value']);
             }
         }
     }

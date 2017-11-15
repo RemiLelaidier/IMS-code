@@ -65,7 +65,7 @@ class ConventionController extends Controller
         // TODO Valiation Respect
 
         // Generate PDF
-        $pdfGenerator = new DocumentGenerator($decoded);
+        $pdfGenerator = new DocumentGenerator($decoded, "convention_template", null);
         $pdfGenerator->generateConvention();
 
         // Initialize Models
@@ -226,6 +226,10 @@ class ConventionController extends Controller
         $dropdowns = $section['dropdowns'];
         $textareas = $section['textareas'];
         foreach ($inputs as $input){
+
+            if(!array_key_exists('value', $input))
+                continue;
+
             switch ($input['id']){
                 case 'internship_dos' :
                     $this->internshipModel->start = strtotime($input['value']);
@@ -245,11 +249,19 @@ class ConventionController extends Controller
             }
         }
         foreach ($dropdowns as $dropdown){
+
+            if(!array_key_exists('value', $dropdown))
+                continue;
+
             if($dropdown['id'] == 'internship_remuneration_way'){
                 $this->internshipModel->payement = $dropdown['value'];
             }
         }
         foreach ($textareas as$textarea){
+
+            if(!array_key_exists('value', $textarea))
+                continue;
+
             switch ($textarea['id']){
                 case 'internship_hours_text' :
                     $this->internshipModel->weekly_duration = $textarea['value'];
