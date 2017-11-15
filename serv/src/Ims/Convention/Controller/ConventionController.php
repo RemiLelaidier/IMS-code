@@ -15,11 +15,35 @@ use App\Core\Generator\DocumentGenerator;
 
 class ConventionController extends Controller
 {
+    /**
+     * @var StudentModel
+     */
     private $studentModel;
+
+    /**
+     * @var CompanyModel
+     */
     private $companyModel;
+
+    /**
+     * @var UniceModel
+     */
     private $uniceModel;
+
+    /**
+     * @var EmployeeModel
+     */
     private $employeeModel;
+
+    /**
+     * @var InternshipModel
+     */
     private $internshipModel;
+
+    /**
+     * @var array model
+     */
+    private $model;
 
     /**
      * Method submit
@@ -34,7 +58,10 @@ class ConventionController extends Controller
     public function submit(Request $request, Response $response){
         // Decode datas
         $conventionData = $request->getBody()->getContents();
+
         $decoded = json_decode($conventionData, true);
+        $this->model = $decoded;
+
         // Log activity
         $this->logger->debug('New convention on ' . get_class($this) . ":submit", [
             'data' => $conventionData
@@ -76,7 +103,7 @@ class ConventionController extends Controller
            $this->doActionFor($section);
         }
 
-        $this->generateConventionFor($this->studentModel->name . $this->studentModel->surname, $decoded);
+        $this->generateConventionFor($this->studentModel->name . $this->studentModel->surname, $this->model);
 
         // Save new datas
         $this->studentModel->save();
@@ -91,6 +118,8 @@ class ConventionController extends Controller
 
     /**
      * Dispatch actions
+     *
+     * @param $section
      */
     private function doActionFor($section){
         $name = $section['title'];
@@ -115,6 +144,7 @@ class ConventionController extends Controller
 
     /**
      * Register student
+     *
      * @param $section
      */
     private function studentAction($section){
@@ -171,6 +201,8 @@ class ConventionController extends Controller
 
     /**
      * Register company
+     *
+     * @param $section
      */
     private function companyAction($section){
         $inputs = $section['inputs'];
@@ -220,6 +252,8 @@ class ConventionController extends Controller
 
     /**
      * Register internship
+     *
+     * @param $section
      */
     private function internshipAction($section){
         $inputs = $section['inputs'];
@@ -281,6 +315,8 @@ class ConventionController extends Controller
 
     /**
      * Register responsables
+     *
+     * @param $section
      */
     private function responsablesAction($section){
         $inputs = $section['inputs'];
@@ -333,6 +369,8 @@ class ConventionController extends Controller
 
     /**
      * Register extra data
+     *
+     * @param $section
      */
     private function supplementsAction($section){
       $textareas = $section['textareas'];
@@ -343,8 +381,45 @@ class ConventionController extends Controller
       }
     }
 
-    private function generateConventionFor($name, $model){
+    /**
+     * Calculated fields to add in template
+     *
+     * @return array fields for Convention
+     */
+    private function calculatedForConvention(): array {
+        $currentYear = date('Y');
+        $nextYear = $currentYear+1;
+        $finalSchoolYear = $currentYear . "-" . $nextYear;
+
+        return [
+            'school_year' => $finalSchoolYear,
+
+            // TODO XXX : Add in UI
+            'student_usage_name'          => "",
+            "internship_service"          => "",
+            "internship_hours"            => "",
+            "internship_hours_daysOrWeek" => "",
+
+            // TODO XXX : Calc
+            "internship_duration"         => "",
+            "internship_daysOrMonth"      => "",
+            "internship_presence_days"    => ""
+        ];
+    }
+
+    /**
+     * Generate convention and save in assets/Year-PeopleFullName.docx
+     *
+     * @param string $name
+     * @param array $model
+     */
+    private function generateConventionFor(string $name, array $model){
+        $extras = $this->calculatedForConvention();
+
         $pdfGenerator = new DocumentGenerator($model, "convention_template", date('Y') . "-" . $name);
-        $pdfGenerator->generateConvention();
+
+        $pdfGenerator->setExtras($extras);
+
+        $pdfGenerator->writeAndSave();
     }
 }
