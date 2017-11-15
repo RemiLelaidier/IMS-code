@@ -5,26 +5,38 @@ use App\Security\Exception\TemplateNotFoundException;
 use PhpOffice\PhpWord\Exception\Exception;
 use \PhpOffice\PhpWord\PhpWord;
 use PhpOffice\PhpWord\TemplateProcessor;
+use Cocur\Slugify\Slugify;
 
 /**
  * DocumentGenerator
  * 
  * Based on PhpWord (part of PhpOffice)
- * 
+ *
  */
 class DocumentGenerator {
+
+    private $phpWord;
+    private $model;
+    private $template;
+
+    /**
+     * @var TemplateProcessor $document
+     */
+    private $document;
+    private $filename;
+    private $templatePath;
 
     /**
      * @param array $data
      * @param string $template 
      * @param string $destPath
      */
-    public function __construct($data, $template, $destPath){
+    public function __construct($data, $template, $filename){
         $this->phpWord = new PhpWord();
         $this->model = $data;
         $this->document = null;
         $this->template = $template;
-        $this->destPath = $destPath;
+        $this->filename = $filename;
         $this->templatePath =__DIR__ . "/../../../../assets/";
     }
 
@@ -108,9 +120,13 @@ class DocumentGenerator {
      * @return string path to edited document
      */
     private function save():string {
-        $editedPath = __DIR__ . "/../../../../assets/edited.docx";
+        $basePath = dirname(dirname(dirname(dirname(__DIR__))));
 
-        // Todo : define final path
+        $slugify = new Slugify();
+        $this->filename = $slugify->slugify($this->filename);
+
+        $editedPath = $basePath . "/assets/$this->filename.docx";
+
         $this->document->saveAs($editedPath);
 
         return $editedPath;   

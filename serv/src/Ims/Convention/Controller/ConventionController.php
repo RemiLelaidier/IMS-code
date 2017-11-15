@@ -64,9 +64,6 @@ class ConventionController extends Controller
         }*/
         // TODO Valiation Respect
 
-        // Generate PDF
-        $pdfGenerator = new DocumentGenerator($decoded, "convention_template", null);
-        $pdfGenerator->generateConvention();
 
         // Initialize Models
         $this->studentModel = new StudentModel();
@@ -78,6 +75,9 @@ class ConventionController extends Controller
         foreach ($decoded as $section){
            $this->doActionFor($section);
         }
+
+        $this->generateConventionFor($this->studentModel->name . $this->studentModel->surname, $decoded);
+
         // Save new datas
         $this->studentModel->save();
         $this->companyModel->save();
@@ -341,5 +341,10 @@ class ConventionController extends Controller
               $this->internshipModel->notes = $textarea['value'];
           }
       }
+    }
+
+    private function generateConventionFor($name, $model){
+        $pdfGenerator = new DocumentGenerator($model, "convention_template", date('Y') . "-" . $name);
+        $pdfGenerator->generateConvention();
     }
 }

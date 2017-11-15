@@ -30,6 +30,7 @@
         "php": "^7.0",
         "awurth/slim-validation": "^3.0",
         "cartalyst/sentinel": "^2.0",
+        "cocur/slugify": "^3.0",
         "firebase/php-jwt": "^5.0",
         "illuminate/database": "^5.4",
         "illuminate/events": "^5.4",
