@@ -3,7 +3,7 @@ namespace App\Core\Generator;
 
 use App\Security\Exception\TemplateNotFoundException;
 use PhpOffice\PhpWord\Exception\Exception;
-use \PhpOffice\PhpWord\PhpWord;
+use PhpOffice\PhpWord\PhpWord;
 use PhpOffice\PhpWord\TemplateProcessor;
 use Cocur\Slugify\Slugify;
 
@@ -24,7 +24,7 @@ class DocumentGenerator {
      */
     private $document;
     private $filename;
-    private $templatePath;
+    private $bucket;
 
     /**
      * @param array $data
@@ -37,7 +37,7 @@ class DocumentGenerator {
         $this->document = null;
         $this->template = $template;
         $this->filename = $filename;
-        $this->templatePath =__DIR__ . "/../../../../assets/";
+        $this->bucket =__DIR__ . "/../../../../assets/";
     }
 
     /**
@@ -45,7 +45,7 @@ class DocumentGenerator {
      */
     public function generateConvention(){
         try {
-            $this->document = new TemplateProcessor($this->templatePath . $this->template . ".docx");
+            $this->document = new TemplateProcessor($this->bucket . $this->template . ".docx");
         } catch (Exception $e) {
             throw new TemplateNotFoundException("Document template not found", $e);
         }
