@@ -39,11 +39,11 @@ class DocumentGenerator {
         $this->document->setValue("student_usage_name", " ");
         $this->document->setValue("internship_service", " ");
         $this->document->setValue("internship_hours", " ");
-        $this->document->setValue("internship_daysOrMonth", " ");
         $this->document->setValue("internship_hours_daysOrWeek", " ");
 
         // TODO : Calc
         $this->document->setValue("internship_duration", " ");
+        $this->document->setValue("internship_daysOrMonth", " ");
         $this->document->setValue("internship_presence_days", " ");
 
         // Parsing structured data (reverse logic of MiConv.endCeremony() ^^)
