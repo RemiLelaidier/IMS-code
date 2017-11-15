@@ -16,8 +16,8 @@ use App\Core\Generator\DocumentGenerator;
 
 class ConventionController extends Controller
 {
-    private $this->studentModelModel;
-    private $this->companyModelModel;
+    private $studentModel;
+    private $companyModel;
     private $uniceModel;
     private $employeeModel;
     private $internshipModel;
@@ -41,10 +41,12 @@ class ConventionController extends Controller
             'data' => $conventionData
         ]);
 
+        // TODO Valiation Respect
+
+        // Generate PDF
         $pdfGenerator = new DocumentGenerator($decoded);
         $pdfGenerator->generateConvention();
 
-        // TODO Rémi : Debug before push on master :p
         // Initialize Models
         $this->studentModel = new StudentModel();
         $this->companyModel = new CompanyModel();
@@ -56,16 +58,11 @@ class ConventionController extends Controller
            $this->doActionFor($section);
         }
         // Save new datas
-        $this->studentModel->save();
-        $this->companyModel->save();
-        $this->uniceModel->save();
-        $this->employeeModel->save();
-        $this->internshipModel->save();
-
-        // Insert elements
-        return $this->ok($response, [
-            'convention_data' => $decoded
-        ]);
+        if( !$this->studentModel->save() || !$this->companyModel->save() || !$this->uniceModel->save() ||
+            !$this->employeeModel->save() || !$this->internshipModel->save()){
+            return $this->json($response, 'error', 500);
+        }
+        return $this->ok($response, 'convention created');
     }
 
     /**
@@ -86,7 +83,7 @@ class ConventionController extends Controller
             case 'Responsables' :
                 $this->responsablesAction($section);
                 break;
-            case 'Informations complementaires' :
+            case 'Informations complémentaires' :
                 $this->supplementsAction($section);
                 break;
         }
@@ -303,6 +300,11 @@ class ConventionController extends Controller
      * Register extra data
      */
     private function supplementsAction($section){
-      // TODO
+      $textareas = $section['textareas'];
+      foreach ($textareas as $textarea){
+          if($textarea['id'] == 'convention_extras'){
+              $this->internshipModel->notes = $textarea['value'];
+          }
+      }
     }
 }
