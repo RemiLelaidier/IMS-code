@@ -7,6 +7,8 @@ use App\Ims\Convention\Model\ConventionModel;
 use App\Ims\Student\Model\StudentModel;
 use App\Ims\Company\Model\CompanyModel;
 use App\Ims\Internship\Model\InternshipModel;
+use App\Ims\Unice\Model\UniceModel;
+use App\Ims\Employee\Model\EmployeeModel;
 use Slim\Http\Request;
 use Slim\Http\Response;
 
@@ -14,6 +16,11 @@ use App\Core\Generator\DocumentGenerator;
 
 class ConventionController extends Controller
 {
+    private $this->studentModelModel;
+    private $this->companyModelModel;
+    private $uniceModel;
+    private $employeeModel;
+    private $internshipModel;
 
     /**
      * Method submit
@@ -38,10 +45,22 @@ class ConventionController extends Controller
         $pdfGenerator->generateConvention();
 
         // TODO Rémi : Debug before push on master :p
+        // Initialize Models
+        $this->studentModel = new StudentModel();
+        $this->companyModel = new CompanyModel();
+        $this->uniceModel = new UniceModel();
+        $this->employeeModel = new EmployeeModel();
+        $this->internshipModel = new InternshipModel();
         // Insert all Datas
-        /*foreach ($decoded as $section){
+        foreach ($decoded as $section){
            $this->doActionFor($section);
-        }*/
+        }
+        // Save new datas
+        $this->studentModel->save();
+        $this->companyModel->save();
+        $this->uniceModel->save();
+        $this->employeeModel->save();
+        $this->internshipModel->save();
 
         // Insert elements
         return $this->ok($response, [
@@ -49,6 +68,9 @@ class ConventionController extends Controller
         ]);
     }
 
+    /**
+     * Dispatch actions
+     */
     private function doActionFor($section){
         $name = $section['title'];
         switch($name){
@@ -68,165 +90,219 @@ class ConventionController extends Controller
                 $this->supplementsAction($section);
                 break;
         }
+        $this->internshipModel->save();
     }
 
     /**
-     *
+     * Register student
      * @param $section
      */
     private function studentAction($section){
-        $student = new StudentModel();
         $inputs = $section['inputs'];
         $dropdowns = $section['dropdowns'];
         $adresses = $section['addresses'];
         foreach ($inputs as $input){
             switch ($input['id']){
                 case 'student_name' :
-                    $student->name = $input['value'];
+                    $this->studentModel->name = $input['value'];
                     break;
                 case 'student_surname' :
-                    $student->surname = $input['value'];
+                    $this->studentModel->surname = $input['value'];
                     break;
                 case 'student_ss' :
-                    $student->ss = $input['value'];
+                    $this->studentModel->ss = $input['value'];
                     break;
                 case 'student_unice_number' :
-                    $student->num = $input['value'];
+                    $this->studentModel->num = $input['value'];
                     break;
                 case 'student_email' :
-                    $student->email = $input['value'];
+                    $this->studentModel->email = $input['value'];
                     break;
                 case 'student_dob' :
-                    $student->dob = $input['value'];
+                    $this->studentModel->dob = $input['value'];
                     break;
                 case 'student_phone' :
-                    $student->phone = $input['value'];
+                    $this->studentModel->phone = $input['value'];
                     break;
                 case 'student_insurance' :
-                    $student->insurance = $input['value'];
+                    $this->studentModel->insurance = $input['value'];
                     break;
                 case 'student_policy' :
-                    $student->policy = $input['value'];
+                    $this->studentModel->policy = $input['value'];
                     break;
             }
         }
         foreach ($dropdowns as $dropdown){
             switch ($dropdown['id']){
                 case 'student_gender' :
-                    $student->gender = $dropdown['value'];
+                    $this->studentModel->gender = $dropdown['value'];
                     break;
                 case 'promotion' :
-                    $student->promotion = $dropdown['value'];
+                    $this->studentModel->promotion = $dropdown['value'];
                     break;
             }
         }
         foreach ($adresses as $adress){
             if ($adress['id'] == 'student_adress'){
-                $student->address = $adress['value'];
+                $this->studentModel->address = $adress['value'];
             }
         }
-        $student->save();
     }
 
+    /**
+     * Register company
+     */
     private function companyAction($section){
-        $company = new CompanyModel();
         $inputs = $section['inputs'];
         $dropdowns = $section['dropdowns'];
         $adresses = $section['addresses'];
         foreach ($inputs as $input){
             switch ($input['id']){
                 case 'ent_name' :
-                    $company->name = $input['value'];
+                    $this->companyModel->name = $input['value'];
                     break;
                 case 'ent_website' :
-                    $company->website = $input['value'];
+                    $this->companyModel->website = $input['value'];
                     break;
                 case 'ent_director_surname':
-                    $company->director_surname = $input['value'];
+                    $this->companyModel->director_surname = $input['value'];
                     break;
                 case 'ent_director_name' :
-                    $company->director_name = $input['value'];
+                    $this->companyModel->director_name = $input['value'];
                     break;
                 case 'ent_director_email' :
-                    $company->director_email = $input['value'];
+                    $this->companyModel->director_email = $input['value'];
                     break;
                 case 'ent_director_phone' :
-                    $company->director_phone = $input['value'];
+                    $this->companyModel->director_phone = $input['value'];
                     break;
                 case 'ent_director_quality' :
-                    $company->director_quality = $input['value'];
+                    $this->companyModel->director_quality = $input['value'];
                     break;
             }
         }
         foreach ($dropdowns as$dropdown){
             if($dropdown['id'] == 'ent_director_gender'){
-                $company->director_gender = $dropdown['value'];
+                $this->companyModel->director_gender = $dropdown['value'];
             }
         }
-        /*foreach ($adresses as $adress){
+        foreach ($adresses as $adress){
             switch ($adress['id']){
                 case 'ent_address' :
-                    $company->address = $adress['value'];
+                    $this->companyModel->address = $adress['value'];
                     break;
                 case 'ent_stage_address' :
-                    // TODO
+                    $this->internshipModel->address = $adress['value'];
                     break;
             }
-        }*/
+        }
     }
 
+    /**
+     * Register internship
+     */
     private function internshipAction($section){
-        $internship = new InternshipModel();
         $inputs = $section['inputs'];
         $dropdowns = $section['dropdowns'];
         $textareas = $section['textareas'];
         foreach ($inputs as $input){
             switch ($input['id']){
                 case 'internship_dos' :
-                    $internship->start = $input['value'];
+                    $this->internshipModel->start = $input['value'];
                     break;
                 case 'internship_doe' :
-                    $internship->end = $input['value'];
+                    $this->internshipModel->end = $input['value'];
                     break;
                 case 'internship_week_hours' :
-                    $internship->working_hours = $input['value'];
+                    $this->internshipModel->working_hours = $input['value'];
                     break;
                 case 'internship_remuneration' :
-                    $internship->income = $input['value'];
+                    $this->internshipModel->income = $input['value'];
                     break;
                 case 'internship_title' :
-                    $internship->subject = $input['value'];
+                    $this->internshipModel->subject = $input['value'];
                     break;
             }
         }
         foreach ($dropdowns as $dropdown){
             if($dropdown['id'] == 'internship_remuneration_way'){
-                $internship->payement = $dropdown['value'];
+                $this->internshipModel->payement = $dropdown['value'];
             }
         }
         foreach ($textareas as$textarea){
             switch ($textarea['id']){
                 case 'internship_hours_text' :
-                    $internship->weekly_duration = $textarea['value'];
+                    $this->internshipModel->weekly_duration = $textarea['value'];
                     break;
                 case 'internship_extras_text' :
-                    $internship->extra_work = $textarea['value'];
+                    $this->internshipModel->extra_work = $textarea['value'];
                     break;
                 case 'internship_advantages' :
-                    $internship->advantages = $textarea['value'];
+                    $this->internshipModel->advantages = $textarea['value'];
                     break;
                 case 'internship_description' :
-                    $internship->detail = $textarea['value'];
+                    $this->internshipModel->detail = $textarea['value'];
                     break;
             }
         }
     }
 
+    /**
+     * Register responsables
+     */
     private function responsablesAction($section){
-
+        $inputs = $section['inputs'];
+        $dropdowns = $section['dropdowns'];
+        foreach ($inputs as $input) {
+            switch($input['id']){
+                case 'ent_tutor_surname' :
+                    $this->employeeModel->surname = $input['value'];
+                    break;
+                case 'ent_tutor_name' :
+                    $this->employeeModel->name = $input['value'];
+                    break;
+                case 'ent_tutor_email' :
+                    $this->employeeModel->email = $input['value'];
+                    break;
+                case 'ent_tutor_phone' :
+                    $this->employeeModel->phone = $input['value'];
+                    break;
+                case 'ent_tutor_quality' :
+                    $this->employeeModel->quality = $input['value'];
+                    break;
+                case 'unice_tutor_surname' :
+                    $this->uniceModel->surname = $input['value'];
+                    break;
+                case 'unice_tutor_name' :
+                    $this->uniceModel->name = $input['value'];
+                    break;
+                case 'unice_tutor_email' :
+                    $this->uniceModel->email = $input['value'];
+                    break;
+                case 'unice_tutor_phone' :
+                    $this->uniceModel->phone = $input['value'];
+                    break;
+                case 'unice_tutor_quality' :
+                    $this->uniceModel->quality = $input['value'];
+                    break;
+            }
+        }
+        foreach($dropdowns as $dropdown){
+            switch($dropdown['id']){
+              case 'ent_tutor_gender' :
+                  $this->employeeModel->gender = $dropdown['value'];
+                  break;
+              case 'unice_tutor_gender' :
+                  $this->uniceModel->gender = $dropdown['value'];
+                  break;
+            }
+        }
     }
 
+    /**
+     * Register extra data
+     */
     private function supplementsAction($section){
-        
+      // TODO
     }
 }

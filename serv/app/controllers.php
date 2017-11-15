@@ -1,5 +1,6 @@
 <?php
 
+// TODO : Add business logic controllers
 $controllers = [
     'core.controller' => 'App\Core\Controller\CoreController',
     'security.auth.controller' => 'App\Security\Controller\AuthController',
