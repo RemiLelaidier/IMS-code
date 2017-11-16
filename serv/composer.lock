@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "da29a6fba3bd163581d74615189ceef6",
+    "content-hash": "066e396ca23d30d95a9cdaa497663f30",
     "packages": [
         {
             "name": "awurth/slim-validation",
@@ -1766,6 +1766,48 @@
             "time": "2017-05-11T14:25:49+00:00"
         },
         {
+            "name": "skurrier/pdflib",
+            "version": "v1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SkUrRiEr/pdflib.git",
+                "reference": "663b0168c1eef67f9878123f509f2262bd74796e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SkUrRiEr/pdflib/zipball/663b0168c1eef67f9878123f509f2262bd74796e",
+                "reference": "663b0168c1eef67f9878123f509f2262bd74796e",
+                "shasum": ""
+            },
+            "require": {
+                "ext-gd": ">=5.6",
+                "php": ">=5.6",
+                "setasign/fpdf": "~1.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PDFLib\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1"
+            ],
+            "authors": [
+                {
+                    "name": "James Healey",
+                    "email": "jayhealey@gmail.com"
+                },
+                {
+                    "name": "Julian Calaby",
+                    "email": "julian.calaby@gmail.com"
+                }
+            ],
+            "description": "A basic PHP PDF library based on FPDF",
+            "time": "2016-06-30T02:14:19+00:00"
+        },
+        {
             "name": "slim/slim",
             "version": "3.9.0",
             "source": {
@@ -2191,6 +2233,59 @@
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
             "time": "2017-11-10T18:26:04+00:00"
+        },
+        {
+            "name": "tmw/fpdm",
+            "version": "2.9.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/codeshell/fpdm.git",
+                "reference": "125fa8526300fddd4e9a0109a62bc23978414590"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/codeshell/fpdm/zipball/125fa8526300fddd4e9a0109a62bc23978414590",
+                "reference": "125fa8526300fddd4e9a0109a62bc23978414590",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "fpdm.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Olivier Plathey",
+                    "email": "oliver@fpdf.org",
+                    "homepage": "http://www.fpdf.org/",
+                    "role": "Author"
+                },
+                {
+                    "name": "codeshell",
+                    "homepage": "https://github.com/codeshell/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PDF form filling using FPDM Class written by FPDF author Olivier",
+            "homepage": "https://github.com/codeshell/fpdm",
+            "keywords": [
+                "Forms",
+                "fields",
+                "fill",
+                "fpdf",
+                "fpdm",
+                "pdf",
+                "populate"
+            ],
+            "time": "2017-11-10T16:11:20+00:00"
         },
         {
             "name": "zendframework/zend-escaper",

@@ -3,6 +3,7 @@
 namespace App\Ims\Convention\Controller;
 
 use App\Core\Controller\Controller;
+use App\Core\Generator\PDFGenerator;
 use App\Ims\Convention\Model\ConventionModel;
 use App\Ims\Student\Model\StudentModel;
 use App\Ims\Company\Model\CompanyModel;
@@ -415,15 +416,20 @@ class ConventionController extends Controller
      * Generate convention and save in assets/Year-PeopleFullName.docx
      *
      * @param string $name
-     * @param array $model
+     * @param array  $model
+     *
+     * @throws \Exception
      */
     private function generateConventionFor(string $name, array $model){
-        $extras = $this->calculatedForConvention();
+        /*$extras = $this->calculatedForConvention();
 
         $pdfGenerator = new DocumentGenerator($model, "convention_template", date('Y') . "-" . $name);
 
         $pdfGenerator->setExtras($extras);
 
-        $pdfGenerator->writeAndSave();
+        $pdfGenerator->writeAndSave();*/
+
+        $pdfGenerator = new PDFGenerator();
+        $pdfGenerator->start();
     }
 }

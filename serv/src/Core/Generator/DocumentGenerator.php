@@ -210,6 +210,7 @@ class DocumentGenerator {
          */
         $html = IOFactory::createWriter($temp, 'HTML');
         $writer = new Dompdf();
+        $writer->setPaper('A4', 'portrait');
 
         $pdfPath = dirname($this->edited) . "/$this->filename.pdf";
 

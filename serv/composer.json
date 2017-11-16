@@ -41,10 +41,12 @@
         "phpoffice/phpword": "^0.13.0",
         "respect/validation": "^1.1",
         "setasign/fpdf": "^1.8",
+        "skurrier/pdflib": "^1.0",
         "slim/slim": "^3.8",
         "symfony/console": "^3.3",
         "symfony/http-foundation": "^3.3",
-        "symfony/yaml": "^3.3"
+        "symfony/yaml": "^3.3",
+        "tmw/fpdm": "^2.9"
     },
     "config": {
         "sort-packages": true
