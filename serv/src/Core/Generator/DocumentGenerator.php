@@ -12,6 +12,7 @@ use Cocur\Slugify\Slugify;
 
 
 use App\Security\Exception\TemplateNotFoundException;
+use PhpOffice\PhpWord\Writer\HTML;
 
 /**
  * DocumentGenerator
@@ -197,13 +198,16 @@ class DocumentGenerator {
 
     /**
      * @throws Exception
-     * @throws \Mpdf\MpdfException
      */
     public function saveAsPDF(){
         if(!$this->edited)
             throw new Exception("Trying to save as pdf without editing before");
 
         $temp = IOFactory::load($this->edited);
+
+        /**
+         * @var HTML $html
+         */
         $html = IOFactory::createWriter($temp, 'HTML');
         $writer = new Dompdf();
 
