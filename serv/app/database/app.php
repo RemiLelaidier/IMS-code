@@ -67,6 +67,12 @@ Manager::schema()->create('company', function (Blueprint $table) {
         'phone',
         'email',
         'nationality',
+        'director_name',
+        'director_surname',
+        'director_email',
+        'director_phone',
+        'director_quality',
+        'director_gender',
         'siren',
         'notes'
     ];
@@ -96,7 +102,8 @@ Manager::schema()->create('employee', function (Blueprint $table) {
         'gender',
         'email',
         'phone',
-        'quality'
+        'quality',
+        'company_id'
     ];
 
     EloquentGenerator::generate(true, true, [
@@ -126,7 +133,6 @@ Manager::schema()->create('internship', function (Blueprint $table) {
     $table->longText('endorsement_1')->nullable();
     $table->longText('endorsement_2')->nullable();
     $table->string('notes')->nullable();
-    //
 
     $fillables = [
         'start',
@@ -138,6 +144,7 @@ Manager::schema()->create('internship', function (Blueprint $table) {
         'income',
         'payement',
         'advantages',
+        'subject',
         'detail',
         'contract',
         'endorsement_1',
@@ -225,7 +232,9 @@ Manager::schema()->create('convention_unice', function (Blueprint $table) {
     $table->foreign('unice_id')->references('id')->on('unice');
 
     $fillables = [
-        'convention_role'
+        'convention_role',
+        'unice_id',
+        'convention_id'
     ];
 
     EloquentGenerator::generate(true, false, [
@@ -245,6 +254,8 @@ Manager::schema()->create('convention_employee', function (Blueprint $table) {
     $table->foreign('employee_id')->references('id')->on('employee');
 
     $fillables = [
+        'convention_id',
+        'employee_id',
         'convention_role'
     ];
 
