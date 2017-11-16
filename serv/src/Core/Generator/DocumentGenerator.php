@@ -1,10 +1,15 @@
 <?php
 namespace App\Core\Generator;
 
+use App\Security\Exception\GenericException;
+
+use Dompdf\Dompdf;
 use PhpOffice\PhpWord\Exception\Exception;
+use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\PhpWord;
 use PhpOffice\PhpWord\TemplateProcessor;
 use Cocur\Slugify\Slugify;
+
 
 use App\Security\Exception\TemplateNotFoundException;
 
@@ -52,6 +57,11 @@ class DocumentGenerator {
     private $bucket;
 
     /**
+     * @var string path to edited file
+     */
+    private $edited;
+
+    /**
      * @param array  $data
      * @param string $template
      * @param string $filename
@@ -63,6 +73,7 @@ class DocumentGenerator {
         $this->template = $template;
         $this->filename = $filename;
         $this->bucket =__DIR__ . "/../../../../assets/";
+        $this->edited = null;
     }
 
     /**
@@ -143,8 +154,15 @@ class DocumentGenerator {
         } catch (Exception $e) {
             throw new TemplateNotFoundException("Document template not found", $e);
         }
+
         $this->writeData();
-        $this->save();
+        $this->edited = $this->save();
+
+        try {
+            $this->saveAsPDF();
+        } catch (Exception $e) {
+            throw new GenericException("Error while saving as PDF", $e);
+        }
     }
 
     /**
@@ -153,6 +171,47 @@ class DocumentGenerator {
     public function setExtras (array $extras) {
 
         $this->extras = $extras;
+    }
+
+    /**
+     *
+     * @return string path to PDF writer
+     *
+     */
+    public function findPdfWriter(){
+        $directory = __FILE__;
+        $root = null;
+
+        // If not found and dir not root..root?
+        while(is_null($root) && $directory != '/'){
+            $directory = dirname($directory);
+            $composerConfig = $directory . '/composer.json';
+
+            if(file_exists($composerConfig))
+                $root = $directory;
+
+        }
+
+        return $root ."/vendor/dompdf";
+    }
+
+    /**
+     * @throws Exception
+     * @throws \Mpdf\MpdfException
+     */
+    public function saveAsPDF(){
+        if(!$this->edited)
+            throw new Exception("Trying to save as pdf without editing before");
+
+        $temp = IOFactory::load($this->edited);
+        $html = IOFactory::createWriter($temp, 'HTML');
+        $writer = new Dompdf();
+
+        $pdfPath = dirname($this->edited) . "/$this->filename.pdf";
+
+        $writer->loadHtml($html->getContent());
+
+        file_put_contents($pdfPath, $writer->output());
     }
 
 }

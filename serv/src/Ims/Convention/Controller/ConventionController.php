@@ -98,6 +98,7 @@ class ConventionController extends Controller
         $this->uniceModel = new UniceModel();
         $this->employeeModel = new EmployeeModel();
         $this->internshipModel = new InternshipModel();
+
         // Insert all Datas
         foreach ($decoded as $section){
            $this->doActionFor($section);
@@ -109,7 +110,10 @@ class ConventionController extends Controller
         $this->studentModel->save();
         $this->companyModel->save();
         $this->uniceModel->save();
+
+        // Setting relationships
         $this->employeeModel->company_id = $this->companyModel->id;
+
         $this->employeeModel->save();
         $this->internshipModel->save();
 
@@ -291,7 +295,7 @@ class ConventionController extends Controller
                 $this->internshipModel->payement = $dropdown['value'];
             }
         }
-        foreach ($textareas as$textarea){
+        foreach ($textareas as $textarea){
 
             if(!array_key_exists('value', $textarea))
                 continue;
