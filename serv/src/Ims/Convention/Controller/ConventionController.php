@@ -3,6 +3,7 @@
 namespace App\Ims\Convention\Controller;
 
 use App\Core\Controller\Controller;
+use App\Core\Validator\Validator;
 use App\Ims\Convention\Model\ConventionModel;
 use App\Ims\Student\Model\StudentModel;
 use App\Ims\Company\Model\CompanyModel;
@@ -15,11 +16,35 @@ use App\Core\Generator\DocumentGenerator;
 
 class ConventionController extends Controller
 {
+    /**
+     * @var StudentModel
+     */
     private $studentModel;
+
+    /**
+     * @var CompanyModel
+     */
     private $companyModel;
+
+    /**
+     * @var UniceModel
+     */
     private $uniceModel;
+
+    /**
+     * @var EmployeeModel
+     */
     private $employeeModel;
+
+    /**
+     * @var InternshipModel
+     */
     private $internshipModel;
+
+    /**
+     * @var array model
+     */
+    private $model;
 
     /**
      * Method submit
@@ -34,35 +59,21 @@ class ConventionController extends Controller
     public function submit(Request $request, Response $response){
         // Decode datas
         $conventionData = $request->getBody()->getContents();
+
         $decoded = json_decode($conventionData, true);
+        $this->model = $decoded;
+
         // Log activity
         $this->logger->debug('New convention on ' . get_class($this) . ":submit", [
             'data' => $conventionData
         ]);
 
-        /*foreach($decoded as $section){
-            $inputs = $section['inputs'];
-            $addresses = $section['addresses'];
-            $dropdowns = $section['dropdowns'];
-            $textareas = $section['textareas'];
-
-            foreach($inputs as $input){
-                $this->document->setValue($input['id'], $input['value']);
-            }
-
-            foreach($addresses as $address){
-                $this->document->setValue($address['id'], $address['value']);
-            }
-
-            foreach($dropdowns as $dropdown){
-                $this->document->setValue($dropdown['id'], $dropdown['value']);
-            }
-
-            foreach($textareas as $textarea){
-                $this->document->setValue($textarea['id'], $textarea['value']);
-            }
-        }*/
-        // TODO Valiation Respect
+        $validator = new Validator();
+        $validator->validateParams($decoded);
+        $errors = $validator->getErrors();
+        if(!empty($errors)){
+            return $this->json($response, $errors, 400);
+        }
 
 
         // Initialize Models
@@ -71,18 +82,22 @@ class ConventionController extends Controller
         $this->uniceModel = new UniceModel();
         $this->employeeModel = new EmployeeModel();
         $this->internshipModel = new InternshipModel();
+
         // Insert all Datas
         foreach ($decoded as $section){
            $this->doActionFor($section);
         }
 
-        $this->generateConventionFor($this->studentModel->name . $this->studentModel->surname, $decoded);
+        $this->generateConventionFor($this->studentModel->name . $this->studentModel->surname, $this->model);
 
         // Save new datas
         $this->studentModel->save();
         $this->companyModel->save();
         $this->uniceModel->save();
+
+        // Setting relationships
         $this->employeeModel->company_id = $this->companyModel->id;
+
         $this->employeeModel->save();
         $this->internshipModel->save();
 
@@ -91,6 +106,8 @@ class ConventionController extends Controller
 
     /**
      * Dispatch actions
+     *
+     * @param $section
      */
     private function doActionFor($section){
         $name = $section['title'];
@@ -115,6 +132,7 @@ class ConventionController extends Controller
 
     /**
      * Register student
+     *
      * @param $section
      */
     private function studentAction($section){
@@ -171,6 +189,8 @@ class ConventionController extends Controller
 
     /**
      * Register company
+     *
+     * @param $section
      */
     private function companyAction($section){
         $inputs = $section['inputs'];
@@ -220,6 +240,8 @@ class ConventionController extends Controller
 
     /**
      * Register internship
+     *
+     * @param $section
      */
     private function internshipAction($section){
         $inputs = $section['inputs'];
@@ -257,7 +279,7 @@ class ConventionController extends Controller
                 $this->internshipModel->payement = $dropdown['value'];
             }
         }
-        foreach ($textareas as$textarea){
+        foreach ($textareas as $textarea){
 
             if(!array_key_exists('value', $textarea))
                 continue;
@@ -281,6 +303,8 @@ class ConventionController extends Controller
 
     /**
      * Register responsables
+     *
+     * @param $section
      */
     private function responsablesAction($section){
         $inputs = $section['inputs'];
@@ -333,6 +357,8 @@ class ConventionController extends Controller
 
     /**
      * Register extra data
+     *
+     * @param $section
      */
     private function supplementsAction($section){
       $textareas = $section['textareas'];
@@ -343,8 +369,45 @@ class ConventionController extends Controller
       }
     }
 
-    private function generateConventionFor($name, $model){
+    /**
+     * Calculated fields to add in template
+     *
+     * @return array fields for Convention
+     */
+    private function calculatedForConvention(): array {
+        $currentYear = date('Y');
+        $nextYear = $currentYear+1;
+        $finalSchoolYear = $currentYear . "-" . $nextYear;
+
+        return [
+            'school_year' => $finalSchoolYear,
+
+            // TODO XXX : Add in UI
+            'student_usage_name'          => "",
+            "internship_service"          => "",
+            "internship_hours"            => "",
+            "internship_hours_daysOrWeek" => "",
+
+            // TODO XXX : Calc
+            "internship_duration"         => "",
+            "internship_daysOrMonth"      => "",
+            "internship_presence_days"    => ""
+        ];
+    }
+
+    /**
+     * Generate convention and save in assets/Year-PeopleFullName.docx
+     *
+     * @param string $name
+     * @param array $model
+     */
+    private function generateConventionFor(string $name, array $model){
+        $extras = $this->calculatedForConvention();
+
         $pdfGenerator = new DocumentGenerator($model, "convention_template", date('Y') . "-" . $name);
-        $pdfGenerator->generateConvention();
+
+        $pdfGenerator->setExtras($extras);
+
+        $pdfGenerator->writeAndSave();
     }
 }

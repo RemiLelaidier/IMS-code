@@ -93,9 +93,6 @@ namespace App\Ims\\$tableName\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class $modelName extends Model{
-    protected \$table = "$rawTableName";
-    protected \$primaryKey = "$primaryKey";
 TAG;
 
         $fillables = [];
@@ -107,15 +104,39 @@ TAG;
 
         $startFillables = "\n\tprotected \$fillables = [\n";
         $end = ",\n";
-        
+
+        $properties = ["/**"];
+
         foreach($fillables as $k => $fillable){
-            $startFillables .= "\t\t\t\t\t'" . $fillable->getAttributes()['name'] . "'";
+            $attributes = $fillable->getAttributes();
+            $attributeName = $attributes['name'];
+            $attributeType = $attributes['type'];
+
+            $startFillables .= "\t\t\t\t\t'" . $attributeName . "'";
+
+            $property = <<<TAG
+ * @property $attributeType $$attributeName
+TAG;
+            $properties[] = $property;
             if($k !== count($fillables)-1){
                 $startFillables .= $end;
             }
         }
 
         $startFillables .= "\n\t\t\t\t];";
+
+        foreach($properties as $property){
+            $startModel .= "\n" . $property;
+        }
+
+        $startModel .= "\n*/\n";
+
+        $startModel .= <<<TAG
+class $modelName extends Model{
+    protected \$table = "$rawTableName";
+    protected \$primaryKey = "$primaryKey";
+TAG;
+
         $startModel .= $startFillables;
         $endModel = $startModel;
         $endModel .= "\n}";
