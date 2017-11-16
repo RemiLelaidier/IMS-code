@@ -26,15 +26,21 @@ class PDFGenerator {
 
         $fpdf->SetAutoPageBreak(true, 0);
 
+        $fpdf->AddPage();
         $fpdf->AliasNbPages();
         $fpdf->SetFont('Arial', 'B');
 
-        $fpdf->SetXY(99, 794);
+        $template = $this->findBase() . "/assets/outTest.pdf";
 
-        $fpdf->Cell(190, 488, 'This is where we have moved our XY position to', 0, 0, 'L');
+        //$theReturnedFecha = PDFHelper::pdf2text($template, "@SCHOOLYEAR");
+
+        $fpdf->SetXY(2.695, 0.17);
+
+        $fpdf->Cell(190, 30, '2016-2017', 0, 0, 'L');
 
         $dest = $this->findBase() . "/assets/generateTry.pdf";
         $fpdf->Output("F", $dest, true);
+        //$this->merge();
     }
 
     /**
@@ -43,19 +49,20 @@ class PDFGenerator {
     public function merge(){
         $pdf = new FPDI();
 
-        $pdf->setSourceFile("convention.pdf");
+        $pdf->setSourceFile($this->findBase() . "/assets/convention_form.pdf");
         $tplIdxA = $pdf->importPage(1, '/MediaBox');
 
-        $pdf->setSourceFile("Another-Fantastic-Speaker.pdf");
+        $pdf->setSourceFile($this->findBase() . "/assets/generateTry.pdf");
         $tplIdxB = $pdf->importPage(1, '/MediaBox');
 
         $pdf->addPage();
         // place the imported page of the first document:
-        $pdf->useTemplate($tplIdxA, 10, 10, 90);
+        $pdf->useTemplate($tplIdxA);
         // place the imported page of the snd document:
-        $pdf->useTemplate($tplIdxB, 100, 10, 90);
+        $pdf->useTemplate($tplIdxB);
+        $dest = $this->findBase() . "/assets/generateTry.pdf";
 
-        $pdf->Output();
+        $pdf->Output("F", $dest, true);
     }
 
     /**
