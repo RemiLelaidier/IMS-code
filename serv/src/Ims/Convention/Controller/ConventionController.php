@@ -3,6 +3,7 @@
 namespace App\Ims\Convention\Controller;
 
 use App\Core\Controller\Controller;
+use App\Core\Validator\Validator;
 use App\Ims\Convention\Model\ConventionModel;
 use App\Ims\Student\Model\StudentModel;
 use App\Ims\Company\Model\CompanyModel;
@@ -40,29 +41,12 @@ class ConventionController extends Controller
             'data' => $conventionData
         ]);
 
-        /*foreach($decoded as $section){
-            $inputs = $section['inputs'];
-            $addresses = $section['addresses'];
-            $dropdowns = $section['dropdowns'];
-            $textareas = $section['textareas'];
-
-            foreach($inputs as $input){
-                $this->document->setValue($input['id'], $input['value']);
-            }
-
-            foreach($addresses as $address){
-                $this->document->setValue($address['id'], $address['value']);
-            }
-
-            foreach($dropdowns as $dropdown){
-                $this->document->setValue($dropdown['id'], $dropdown['value']);
-            }
-
-            foreach($textareas as $textarea){
-                $this->document->setValue($textarea['id'], $textarea['value']);
-            }
-        }*/
-        // TODO Valiation Respect
+        $validator = new Validator();
+        $validator->validateParams($decoded);
+        $errors = $validator->getErrors();
+        if(!empty($errors)){
+            return $this->json($response, $errors, 400);
+        }
 
         // Generate PDF
         $pdfGenerator = new DocumentGenerator($decoded);
