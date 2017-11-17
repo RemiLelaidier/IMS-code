@@ -404,7 +404,6 @@ class ConventionController extends Controller
      * @throws \Exception
      */
     private function generateConventionFor(string $name, array $model){
-        opcache_reset();
         $extras = $this->calculatedForConvention();
 
         $wordGenerator = new DocumentGenerator($model, "convention/convention_template", date('Y') . "-" . $name, $extras);
