@@ -64,14 +64,14 @@ class PDFGenerator {
         $this->writeFields($conventionFields, $mappedData);
 
         // generated path
-        $generated = $this->findBase() . "/assets/convention/temp.pdf";
+        $generated = $this->findBase() . "/assets/convention/generated/temp.pdf";
         $this->fpdf->Output("F", $generated, true);
 
         // merging original with our blank (only with values, not "background")
         $original = $this->findBase() . "/assets/convention/convention_compatibility.pdf";
 
         // our final merged path
-        $merged = $this->findBase() . "/assets/convention/merged.pdf";
+        $merged = $this->findBase() . "/assets/convention/generated/merged.pdf";
 
         // merge original with our pdf
         $this->merge($original, $generated, $merged);

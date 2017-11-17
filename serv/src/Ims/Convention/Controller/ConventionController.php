@@ -404,16 +404,14 @@ class ConventionController extends Controller
      * @throws \Exception
      */
     private function generateConventionFor(string $name, array $model){
-        /*$extras = $this->calculatedForConvention();
+        opcache_reset();
+        $extras = $this->calculatedForConvention();
 
-        $pdfGenerator = new DocumentGenerator($model, "convention_template", date('Y') . "-" . $name);
-
-        $pdfGenerator->setExtras($extras);
-
-        $pdfGenerator->writeAndSave();*/
-
-        $pdfGenerator = new PDFGenerator();
-        $pdfGenerator->start();
+        $wordGenerator = new DocumentGenerator($model, "convention/convention_template", date('Y') . "-" . $name, $extras);
+        $wordGenerator->writeAndSave('convention/generated');
+        // @Tool : Toggle to preview pdf generation
+        //$pdfGenerator = new PDFGenerator();
+        //$pdfGenerator->start();
     }
 
     private function getValidationRules(){

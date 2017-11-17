@@ -67,13 +67,14 @@ class DocumentGenerator {
      * @param string $template
      * @param string $filename
      */
-    public function __construct(array $data, string $template, string $filename){
+    public function __construct(array $data, string $template, string $filename, array $extras){
         $this->phpWord = new PhpWord();
         $this->model = $data;
         $this->document = null;
         $this->template = $template;
         $this->filename = $filename;
         $this->bucket =__DIR__ . "/../../../../assets/";
+        $this->extras = $extras;
         $this->edited = null;
     }
 
@@ -128,95 +129,37 @@ class DocumentGenerator {
     }
 
     /**
-     * Save current document on disk
-     *
-     * @return string path to edited document
-     */
-    private function save():string {
-        $basePath = dirname(dirname(dirname(dirname(__DIR__))));
-
-        $slugify = new Slugify();
-        $this->filename = $slugify->slugify($this->filename);
-
-        $output = $basePath . "/assets/$this->filename.docx";
-
-        $this->document->saveAs($output);
-
-        return $output;
-    }
-
-    /**
      * Write in document and save on disk
      *
      */
-    public function writeAndSave(){
+    public function writeAndSave($outputDir){
+        $dest = $this->bucket . $this->template . ".docx";
         try {
-            $this->document = new TemplateProcessor($this->bucket . $this->template . ".docx");
+            $this->document = new TemplateProcessor($dest);
         } catch (Exception $e) {
             throw new TemplateNotFoundException("Document template not found", $e);
         }
 
         $this->writeData();
-        $this->edited = $this->save();
-
-        try {
-            $this->saveAsPDF();
-        } catch (Exception $e) {
-            throw new GenericException("Error while saving as PDF", $e);
-        }
+        $this->edited = $this->save($outputDir);
     }
 
     /**
-     * @param array $extras
-     */
-    public function setExtras (array $extras) {
-
-        $this->extras = $extras;
-    }
-
-    /**
+     * Save current document on disk
      *
-     * @return string path to PDF writer
-     *
+     * @return string path to edited document
      */
-    public function findPdfWriter(){
-        $directory = __FILE__;
-        $root = null;
+    private function save($outputDir):string {
+        $basePath = dirname(dirname(dirname(dirname(__DIR__))));
 
-        // If not found and dir not root..root?
-        while(is_null($root) && $directory != '/'){
-            $directory = dirname($directory);
-            $composerConfig = $directory . '/composer.json';
+        $slugify = new Slugify();
+        $this->filename = $slugify->slugify($this->filename);
 
-            if(file_exists($composerConfig))
-                $root = $directory;
+        $output = $basePath . "/assets/$outputDir/$this->filename.docx";
 
-        }
+        $this->document->saveAs($output);
 
-        return $root ."/vendor/dompdf";
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function saveAsPDF(){
-        if(!$this->edited)
-            throw new Exception("Trying to save as pdf without editing before");
-
-        $temp = IOFactory::load($this->edited);
-
-        /**
-         * @var HTML $html
-         */
-        $html = IOFactory::createWriter($temp, 'HTML');
-        $writer = new Dompdf();
-        $writer->setPaper('A4', 'portrait');
-
-        $pdfPath = dirname($this->edited) . "/$this->filename.pdf";
-
-        $writer->loadHtml($html->getContent());
-
-        file_put_contents($pdfPath, $writer->output());
+        return $output;
     }
 
 }
