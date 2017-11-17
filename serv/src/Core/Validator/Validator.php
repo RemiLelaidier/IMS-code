@@ -6,8 +6,6 @@ use Respect\Validation\Validator as Respect;
 
 class Validator {
 
-    // TODO : Extract that, with for example $this->addRule('key', 'value');
-
     private $fields;
 
     private $errors;
