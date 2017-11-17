@@ -1,0 +1,208 @@
+[{
+  "title": "Étudiant",
+  "inputs": [{
+    "id": "student_surname",
+    "label": "Prénom",
+    "value": "Troll"
+  }, {
+    "id": "student_name",
+    "label": "Nom",
+    "value": "Des Cavernes"
+  }, {
+    "id": "student_ss",
+    "label": "Numéro de sécurité sociale",
+    "value": "2878787767676"
+  }, {
+    "id": "student_unice_number",
+    "label": "Numéro d'étudiant",
+    "value": "76767676"
+  }, {
+    "id": "student_email",
+    "label": "E-mail",
+    "value": "troll@icloud.com"
+  }, {
+    "id": "student_dob",
+    "label": "Date de naissance",
+    "value": "20/11/1998"
+  }, {
+    "id": "student_phone",
+    "label": "Téléphone",
+    "value": "+336678787878"
+  }, {
+    "id": "student_insurance",
+    "label": "Compagnie d'assurance",
+    "value": "GMF"
+  }, {
+    "id": "student_policy",
+    "label": "Numéro de Police",
+    "value": "65665646453374"
+  }],
+  "dropdowns": [{
+    "id": "promotion",
+    "label": "Promotion",
+    "value": "Master 2",
+    "concerning": "Étudiant"
+  }, {
+    "id": "student_gender",
+    "label": "Genre",
+    "value": "M",
+    "concerning": "Étudiant"
+  }],
+  "addresses": [{
+    "id": "student_address",
+    "label": "Adresse",
+    "value": "16 Boulevard Michelet Marseille, Provence-Alpes-Côte d'Azur 13008"
+  }]
+}, {
+  "title": "Entreprise",
+  "inputs": [{
+    "id": "ent_name",
+    "label": "Nom",
+    "value": "Xiaomi"
+  }, {
+    "id": "ent_website",
+    "label": "Site web",
+    "value": "https://xiaomi.com"
+  }, {
+    "id": "ent_director_surname",
+    "label": "Prénom",
+    "value": "Yang"
+  }, {
+    "id": "ent_director_name",
+    "label": "Nom",
+    "value": "Tang"
+  }, {
+    "id": "ent_director_email",
+    "label": "E-mail",
+    "value": "yang@xiaomi.jp"
+  }, {
+    "id": "ent_director_phone",
+    "label": "Téléphone",
+    "value": "+3365645454"
+  }, {
+    "id": "ent_director_quality",
+    "label": "En qualité de",
+    "value": "COO"
+  }],
+  "dropdowns": [{
+    "id": "ent_director_gender",
+    "label": "Genre",
+    "value": "M",
+    "concerning": "Directeur / Représentant"
+  }],
+  "addresses": [{
+    "id": "ent_address",
+    "label": "Adresse du siège social",
+    "value": "162 US-1 Norwalk, CT 06854"
+  }, {
+    "id": "ent_stage_address",
+    "label": "Adresse du stage",
+    "value": "162 US-1 Norwalk, CT 06854"
+  }]
+}, {
+  "title": "Stage",
+  "inputs": [{
+    "id": "internship_dos",
+    "label": "Date de début",
+    "value": "01/12/2001"
+  }, {
+    "id": "internship_doe",
+    "label": "Date de fin",
+    "value": "05/04/2002"
+  }, {
+    "id": "internship_week_hours",
+    "label": "Durée hebdomadaire (en heures)",
+    "value": "23"
+  }, {
+    "id": "internship_remuneration",
+    "label": "Montant de la gratification (en euros)",
+    "value": "9000"
+  }, {
+    "id": "internship_title",
+    "label": "Intitulé du stage",
+    "value": "Fabriquer un robot capable de jouer du ukulélé"
+  }],
+  "textareas": [{
+    "id": "internship_hours_text",
+    "label": "Horaires",
+    "value": "9h-17h Lundi, 9h-12h le reste"
+  }, {
+    "id": "internship_extras_text",
+    "label": "Présence la nuit, le dimanche, ou les jours fériés (le cas échéant)"
+  }, {
+    "id": "internship_advantages",
+    "label": "Avantages offerts par l'entreprise (restauration, hébergement, remboursement de frais, ...)",
+    "value": "Piscine chauffée"
+  }, {
+    "id": "internship_description",
+    "label": "Description",
+    "value": "Fabriquer un robot capable de jouer du ukulélé Fabriquer un robot capable de jouer du ukulélé Fabriquer un robot capable de jouer du ukulélé Fabriquer un robot capable de jouer du ukulélé Fabriquer un robot capable de jouer du ukulélé Fabriquer un robot capable de jouer du ukulélé Fabriquer un robot capable de jouer du ukulélé Fabriquer un robot capable de jouer du ukulélé Fabriquer un robot capable de jouer du ukulélé Fabriquer un robot capable de jouer du ukuléléFabriquer un robot capable de jouer du ukuléléFabriquer un robot capable de jouer du ukuléléFabriquer un robot capable de jouer du ukuléléFabriquer un robot capable de jouer du ukuléléFabriquer un robot capable de jouer du ukuléléFabriquer un robot capable de jouer du ukuléléFabriquer un robot capable de jouer du ukuléléFabriquer un robot capable de jouer du ukulélé"
+  }],
+  "dropdowns": [{
+    "id": "internship_remuneration_way",
+    "label": "Versement",
+    "value": "Virement",
+    "concerning": "Versement"
+  }]
+}, {
+  "title": "Responsables",
+  "inputs": [{
+    "id": "ent_tutor_surname",
+    "label": "Prénom",
+    "value": "Yang"
+  }, {
+    "id": "ent_tutor_name",
+    "label": "Nom",
+    "value": "Tang"
+  }, {
+    "id": "ent_tutor_email",
+    "label": "E-mail",
+    "value": "yang@xiaomi.jp"
+  }, {
+    "id": "ent_tutor_phone",
+    "label": "Téléphone",
+    "value": "+336565656"
+  }, {
+    "id": "ent_tutor_quality",
+    "label": "En qualité de",
+    "value": "COO"
+  }, {
+    "id": "unice_tutor_surname",
+    "label": "Prénom",
+    "value": "Andréa"
+  }, {
+    "id": "unice_tutor_name",
+    "label": "Nom",
+    "value": "Tettamanzi"
+  }, {
+    "id": "unice_tutor_email",
+    "label": "E-mail",
+    "value": "andrea.tettamanzi@uncie.fr"
+  }, {
+    "id": "unice_tutor_phone",
+    "label": "Téléphone",
+    "value": "+3354545454"
+  }, {
+    "id": "unice_tutor_quality",
+    "label": "En qualité de",
+    "value": "Rêveur"
+  }],
+  "dropdowns": [{
+    "id": "ent_tutor_gender",
+    "label": "Genre",
+    "value": "M",
+    "concerning": "Encadreur dans l'entreprise"
+  }, {
+    "id": "unice_tutor_gender",
+    "label": "Genre",
+    "value": "M",
+    "concerning": "Tuteur enseignant"
+  }]
+}, {
+  "title": "Informations complémentaires",
+  "textareas": [{
+    "id": "convention_extras",
+    "label": "N'importe quel type d'information à communiquer si nécessaire",
+    "value": "Je n'ai rien envie de communiquer, mais j'écris quand même, sans doute pour troller un coup :D"
+  }]
+}]

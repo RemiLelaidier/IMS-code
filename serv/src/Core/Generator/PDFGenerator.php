@@ -4,71 +4,147 @@ namespace App\Core\Generator;
 
 use FPDI;
 use FPDF;
-use FPDM;
-use PDFLib\PDFLib;
 
 class PDFGenerator {
+
+    /**
+     * @var FPDF $fpdf instance
+     */
+    private $fpdf;
 
     /**
      * @throws \Exception
      */
     public function start(){
-        $fields = array(
-            'name'    => 'My name',
-            'address' => 'My address',
-            'city'    => 'My city',
-            'phone'   => 'My phone number'
-        );
+        opcache_reset();
 
-        $fpdf = new FPDF("P", "pt", "A4");
+        $this->fpdf = new FPDF('P', 'pt', 'A4');
 
-        $fpdf->SetMargins(0, 0, 0);
+        $this->fpdf->SetMargins(10, 10, 10);
 
-        $fpdf->SetAutoPageBreak(true, 0);
+        $this->fpdf->SetAutoPageBreak(true, 0);
 
-        $fpdf->AddPage();
-        $fpdf->AliasNbPages();
-        $fpdf->SetFont('Arial', 'B');
+        $this->fpdf->AddPage();
 
-        $template = $this->findBase() . "/assets/outTest.pdf";
+        $this->fpdf->AliasNbPages();
+        $this->fpdf->SetFont('Arial', 'B', '8');
 
-        //$theReturnedFecha = PDFHelper::pdf2text($template, "@SCHOOLYEAR");
+        // Fields 
+        $fields = $this->findBase() . "/assets/convention/fields.json";
+        $conventionFields = json_decode(file_get_contents($fields), true);
 
-        $fpdf->SetXY(2.695, 0.17);
+        // Data
+        $data = $this->findBase() . "/assets/convention/sample.json";
+        $fakeData = json_decode(file_get_contents($data), true);
 
-        $fpdf->Cell(190, 30, '2016-2017', 0, 0, 'L');
+        // Mapping our fake data
+        $mappedData = [];
+        foreach($fakeData as $data){
+            if(array_key_exists('inputs', $data)){
+                foreach($data['inputs'] as $input){
+                    $mappedData[$input['id']] = $input['value'];
+                }
+            }
+            if(array_key_exists('dropdowns', $data)){
+                foreach($data['dropdowns'] as $dropdown){
+                    $mappedData[$dropdown['id']] = $dropdown['value'];
+                }
+            }
+            if(array_key_exists('addresses', $data)){
+                foreach($data['addresses'] as $address){
+                    $mappedData[$address['id']] = $address['value'];
+                }
+            }
+        }
 
-        $dest = $this->findBase() . "/assets/generateTry.pdf";
-        $fpdf->Output("F", $dest, true);
-        //$this->merge();
+        // TODO : Need to debug width + ReverseYAxis correlation + append data
+        // TODO : Handle many pages ->addPage(); when needed -> process each page one by one
+
+        // writing fields, if value not defined defaults to blank string
+        $this->writeFields($conventionFields, $mappedData);
+
+        // generated path
+        $generated = $this->findBase() . "/assets/convention/temp.pdf";
+        $this->fpdf->Output("F", $generated, true);
+
+        // merging original with our blank (only with values, not "background")
+        $original = $this->findBase() . "/assets/convention/convention_compatibility.pdf";
+
+        // our final merged path
+        $merged = $this->findBase() . "/assets/convention/merged.pdf";
+
+        // merge original with our pdf
+        $this->merge($original, $generated, $merged);
+
+        // clean generated not merged
+        unlink($generated);
     }
 
     /**
+     * Write fields on current pdf with data
+     * @param array $fields
+     * @param array $data
+     * 
+     * @return void
+     */
+    public function writeFields($fields, $data){
+        foreach($fields as $field){
+            // Grabbing key / values
+            $key = array_keys($field)[0];
+            $values = array_values($field)[0];
+
+            // if page is set
+            if(array_key_exists('page', $values) && $values['page'] === 1){
+                // Set with good coords system.
+                $this->fpdf->SetXY($values['llx'], PDFHelper::reverseYAxis($values['lly']));
+ 
+                // Write !
+                if(!array_key_exists($key, $data))
+                    $text = "";
+                else
+                    $text = $data[$key];
+
+                $this->fpdf->Cell(192, 32, utf8_decode($text));
+            }
+        }
+    }
+
+    /**
+     * Merge two PDF (page 1 doc A + page 1 doc B layered)
+     * @param string $pdfA path of pdfA
+     * 
+     * @return Boolean
+     * 
      * @throws \Exception
      */
-    public function merge(){
+    public function merge($pdfA, $pdfB, $dest){
         $pdf = new FPDI();
 
-        $pdf->setSourceFile($this->findBase() . "/assets/convention_form.pdf");
-        $tplIdxA = $pdf->importPage(1, '/MediaBox');
+        $pdf->setSourceFile($pdfA);
+        $pageA = $pdf->importPage(1, '/MediaBox');
 
-        $pdf->setSourceFile($this->findBase() . "/assets/generateTry.pdf");
-        $tplIdxB = $pdf->importPage(1, '/MediaBox');
+        $pdf->setSourceFile($pdfB);
+        $pageB = $pdf->importPage(1, '/MediaBox');
 
         $pdf->addPage();
-        // place the imported page of the first document:
-        $pdf->useTemplate($tplIdxA);
-        // place the imported page of the snd document:
-        $pdf->useTemplate($tplIdxB);
-        $dest = $this->findBase() . "/assets/generateTry.pdf";
+        $pdf->useTemplate($pageA);
+        $pdf->useTemplate($pageB);
 
-        $pdf->Output("F", $dest, true);
+        try {
+            $pdf->Output("F", $dest, true);
+        } catch (Exception $e){
+            // Path not writable, probably
+            return false;
+        }
+
+        return true;
     }
 
     /**
-     *
-     * @return string path to PDF writer
-     *
+     * TODO : REMOVE
+     * 
+     * Debug func
+     * @return string path to base api
      */
     public function findBase(){
         $directory = __FILE__;
