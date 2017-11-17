@@ -69,13 +69,12 @@ class ConventionController extends Controller
             'data' => $conventionData
         ]);
 
-        $validator = new Validator();
+        $validator = new Validator($this->getValidationRules());
         $validator->validateParams($decoded);
         $errors = $validator->getErrors();
         if(!empty($errors)){
             return $this->json($response, $errors, 400);
         }
-
 
         // Initialize Models
         $this->studentModel = new StudentModel();
@@ -415,5 +414,186 @@ class ConventionController extends Controller
 
         $pdfGenerator = new PDFGenerator();
         $pdfGenerator->start();
+    }
+
+    private function getValidationRules(){
+        return [
+            [
+                "key" => "student_surname",
+                "type" => "string"
+            ],
+            [
+                "key" => "student_name",
+                "type" => "string"
+            ],
+            [
+                "key" => "student_ss",
+                "type" => "string"
+            ],
+            [
+                "key" => "student_unice_number",
+                "type" => "intVal"
+            ],
+            [
+                "key" => "student_email",
+                "type" => "email"
+            ],
+            [
+                "key" => "student_phone",
+                "type" => "phone"
+            ],
+            [
+                "key" => "student_insurance",
+                "type" => "string"
+            ],
+            [
+                "key" => "student_policy",
+                "type" => "intVal"
+            ],
+            [
+                "key" => "promotion",
+                "type" => "string"
+            ],
+            [
+                "key" => "student_gender",
+                "type" => "string"
+            ],
+            [
+                "key" => "student_address",
+                "type" => "string"
+            ],
+             [
+                "key" => "ent_name",
+                "type" => "string"
+            ],
+            [
+                "key" => "ent_website",
+                "type" => "url"
+            ],
+            [
+                "key" => "ent_director_surname",
+                "type" => "string"
+            ],
+            [
+                "key" => "ent_director_name",
+                "type" => "string"
+            ],
+            [
+                "key" => "ent_director_email",
+                "type" => "email"
+            ],
+            [
+                "key" => "ent_director_phone",
+                "type" => "phone"
+            ],
+            [
+                "key" => "ent_director_quality",
+                "type" => "string"
+            ],
+            [
+                "key" => "ent_director_gender",
+                "type" => "string"
+            ],
+            [
+                "key" => "ent_address",
+                "type" => "string"
+            ],
+            [
+                "key" => "ent_stage_address",
+                "type" => "string"
+            ],
+            [
+                "key" => "internship_dos",
+                "type" => "date"
+            ],
+            [
+                "key" => "internship_doe",
+                "type" => "date"
+            ],
+            [
+                "key" => "internship_week_hours",
+                "type" => "intVal"
+            ],
+            [
+                "key" => "internship_remuneration",
+                "type" => "intVal"
+            ],
+            [
+                "key" => "internship_title",
+                "type" => "string"
+            ],
+            [
+                "key" => "internship_hours_text",
+                "type" => "string"
+            ],
+            [
+                "key" => "internship_extra_text",
+                "type" => "string"
+            ],
+            [
+                "key" => "internship_advantages",
+                "type" => "string"
+            ],
+            [
+                "key" => "internship_description",
+                "type" => "string"
+            ],
+            [
+                "key" => "internship_remuneration_way",
+                "type" => "string"
+            ],
+            [
+                "key" => "ent_tutor_name",
+                "type" => "string"
+            ],
+            [
+                "key" => "ent_tutor_surname",
+                "type" => "string"
+            ],
+            [
+                "key" => "ent_tutor_email",
+                "type" => "email"
+            ],
+            [
+                "key" => "ent_tutor_phone",
+                "type" => "phone"
+            ],
+            [
+                "key" => "ent_tutor_quality",
+                "type" => "string"
+            ],
+            [
+                "key" => "unice_tutor_name",
+                "type" => "string"
+            ],
+            [
+                "key" => "unice_tutor_surname",
+                "type" => "string"
+            ],
+            [
+                "key" => "unice_tutor_email",
+                "type" => "email"
+            ],
+            [
+                "key" => "unice_tutor_phone",
+                "type" => "phone"
+            ],
+            [
+                "key" => "unice_tutor_quality",
+                "type" => "string"
+            ],
+            [
+                "key" => "ent_tutor_gender",
+                "type" => "string"
+            ],
+            [
+                "key" => "unice_tutor_gender",
+                "type" => "string"
+            ],
+            [
+                "key" => "convention_extras",
+                "type" => "string"
+            ],
+        ];
     }
 }
