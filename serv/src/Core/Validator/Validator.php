@@ -20,7 +20,7 @@ class Validator{
         ],
         3 => [
             "key" => "student_unice_number",
-            "type" => "integer"
+            "type" => "intVal"
         ],
         4 => [
             "key" => "student_email",
@@ -40,7 +40,7 @@ class Validator{
         ],
         8 => [
             "key" => "student_policy",
-            "type" => "integer"
+            "type" => "intVal"
         ],
         9 => [
             "key" => "promotion",
@@ -104,11 +104,11 @@ class Validator{
         ],
         24 => [
             "key" => "internship_week_hours",
-            "type" => "integer"
+            "type" => "intVal"
         ],
         25 => [
             "key" => "internship_remuneration",
-            "type" => "integer"
+            "type" => "intVal"
         ],
         26 => [
             "key" => "internship_title",
@@ -191,7 +191,7 @@ class Validator{
 
     public function __construct(array $fields = []){
         //$this->fields = $fields;
-        $this->errors = null;
+        $this->errors = [];
     }
 
     public function validateParams($params){
@@ -204,10 +204,22 @@ class Validator{
         }
 
         foreach($params as $section){
-            $inputs = $section['inputs'];
-            $addresses = $section['addresses'];
-            $dropdowns = $section['dropdowns'];
-            $textareas = $section['textareas'];
+            $inputs = [];
+            $dropdowns = [];
+            $textareas = [];
+            $addresses = [];
+
+            if(array_key_exists('inputs', $section))
+                $inputs = $section['inputs'];
+
+            if(array_key_exists('dropdowns', $section))
+                $dropdowns = $section['dropdowns'];
+
+            if(array_key_exists('addresses', $section))
+                $addresses = $section['addresses'];
+
+            if(array_key_exists('textareas', $section))
+                $textareas = $section['textareas'];
 
             foreach($inputs as $input){
                 $this->validate($input);
@@ -233,41 +245,47 @@ class Validator{
     }
 
     private function validate($input){
+        $error = false;
         foreach ($this->fields as $field){
             if($input['id'] == $field['key']){
                 switch ($field['type']){
                     case 'string' :
                         if(!Respect::stringType()->validate($input['value'])){
-                            $this->registerError("invalid", $input['id']);
+                            $error = true;
                         }
                         break;
-                    case 'integer' :
+                    case 'intVal' :
                         if(!Respect::intVal()->validate($input['value'])){
-                            $this->registerError("invalid", $input['id']);
+                            $error = true;
                         }
                         break;
                     case 'email' :
                         if(!Respect::email()->validate($input['value'])) {
-                            $this->registerError("invalid", $input['id']);
+                            $error = true;
                         }
                         break;
                     case 'date' :
                         if(!Respect::date()->validate($input['value'])){
-                            $this->registerError("invalid", $input['id']);
+                            $error = true;
                         }
                         break;
                     case 'phone' :
                         if(!Respect::phone()->validate($input['value'])){
-                            $this->registerError("invalid", $input['id']);
+                            $error = true;
                         }
                         break;
                     case 'url' :
                         if(!Respect::url()->validate($input['value'])){
-                            $this->registerError("invalid", $input['id']);
+                            $error = true;
                         }
                         break;
                 }
+
             }
+        }
+
+        if($error){
+            $this->registerError("invalid", $input['id']);
         }
     }
 
