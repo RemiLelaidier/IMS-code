@@ -104,7 +104,7 @@ class PDFGenerator {
                 else
                     $text = $data[$key];
 
-                $this->fpdf->Cell(192, 32, utf8_decode($text));
+                $this->fpdf->Cell($values['width'], $values['height']+20, utf8_decode($text));
             }
         }
     }
