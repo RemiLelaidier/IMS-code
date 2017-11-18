@@ -3,7 +3,7 @@
 namespace App\Ims\Convention\Controller;
 
 use App\Core\Controller\Controller;
-use App\Core\Generator\PDFGenerator;
+use App\Core\Generator\PDF\PDFGenerator;
 use App\Core\Validator\Validator;
 use App\Ims\Convention\Model\ConventionModel;
 use App\Ims\Student\Model\StudentModel;
@@ -420,7 +420,7 @@ class ConventionController extends Controller
 
     private function getMappedFields(){
         $fields = $this->findBase() . "/assets/convention/fields.json";
-        
+
         return json_decode(file_get_contents($fields), true);
     }
 

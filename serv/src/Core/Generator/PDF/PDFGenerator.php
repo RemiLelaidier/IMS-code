@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Generator;
+namespace App\Core\Generator\PDF;
 
 use FPDI;
 use FPDF;
@@ -22,20 +22,6 @@ class PDFGenerator {
 
     /**
      * @var array $fields
-     * 
-     * Field example: (every unit is in Points, according to fpdf setting)
-     * {
-     *   "id": {
-     *      "llx": 364.883, // Lower left x
-     *      "lly": 475.455, // Lower left y
-     *      "urx": 393.256,
-     *      "ury": 491.348,
-     *      "width": 28.373, // pt
-     *      "height": 15.893, // pt
-     *      "page": 1 
-     *   } 
-     * }
-     * 
      */
     private $fields;
 
@@ -49,7 +35,6 @@ class PDFGenerator {
      * 
      * @param array $fields
      * @param array $data
-     * 
      */
     public function __construct($fields, $data){
         $this->fields = $fields;
@@ -62,7 +47,7 @@ class PDFGenerator {
      * @param string $dest
      * 
      * @throws \Exception
-     * 
+     * @return void
      */
     public function start(string $formPath, string $dest) : void {
         $this->fpdf = new FPDF('P', 'pt', 'A4');
@@ -97,7 +82,7 @@ class PDFGenerator {
         }
 
         // writing fields, if value not defined defaults to blank string
-        $this->writeFields($this->fields, $mappedData);
+        $this->writeFields($this->fields, $mappedData, 842, 20);
 
         // generated path
         $generated = "tmp/temp.pdf";
@@ -118,39 +103,33 @@ class PDFGenerator {
      * 
      * @return void
      */
-    public function writeFields(array $fields, array $data) : void {
+    public function writeFields(array $fields, array $data, int $pageSize, int $offset) : void {
         $currentPage = null;
 
         foreach($fields as $field){
-            // Grabbing key / values
-            $key = array_keys($field)[0];
-            $values = array_values($field)[0];
+            $field = Field::fieldFromArray($field);
 
-            if(!$currentPage && array_key_exists('page')){
-                $currentPage = $values['page'];
+            if(!$currentPage){
+                $currentPage = $field->getPage();
             }
 
-            // if page is set
-            if(array_key_exists('page', $values)){
-                if($currentPage == $values['page']-1){
-                    $this->fpdf->AddPage();
-                    $currentPage++;
-                }
+            if($currentPage == $field->getPage()-1){
+                $this->fpdf->AddPage();
+                $currentPage++;
             }
 
             // Set with good coords system.
-            // TODO : Change hardcoded A4 value
-            $this->fpdf->SetXY($values['llx'], PDFHelper::reverseYAxis(842, 20, $values['lly']));
+            $this->fpdf->SetXY($field->getLlx(), PDFHelper::reverseYAxis($pageSize, $offset, $field->getLly()));
  
             // Write !
-            if(!array_key_exists($key, $data))
+            if(!array_key_exists($field->getId(), $data))
                 $text = "";
             else
-                $text = $data[$key];
+                $text = $data[$field->getId()];
 
             // 20 is fpdf offset for new pages
             $offset = 20;
-            $this->fpdf->Cell($values['width'], $values['height']+ $offset, utf8_decode($text));
+            $this->fpdf->Cell($field->getWidth(), $field->getHeight() + $offset, utf8_decode($text));
         }
     }
 
@@ -164,7 +143,7 @@ class PDFGenerator {
      * 
      * @throws \Exception
      */
-    public function merge($pdfA, $pdfB, $dest){
+    public function merge($pdfA, $pdfB, $dest) : bool {
         $pdf = new FPDI();
         $pdf->setSourceFile($pdfA);
 

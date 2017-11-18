@@ -1,19 +1,17 @@
 <?php
 
-namespace App\Core\Generator;
+namespace App\Core\Generator\PDF;
 
 /**
  * PDFHelper
- * 
- * @used in PDFHelper
+ *
  */
 class PDFHelper {
 
     /**
      * As setasign extract gives me coords in reversed -> llx, lly.. Y isn't good
-     * Let's convert it to Fpdf coords
+     * Let's convert it to FPDF coords
      * 
-     * $pageSize - 20
      * @return int $y inverted axis
      */
     public static function reverseYAxis(int $pageSize, int $offset, int $y){
