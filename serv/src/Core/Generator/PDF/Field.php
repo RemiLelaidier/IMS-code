@@ -61,6 +61,11 @@ class Field {
      private $page;
 
     /**
+     * @var string $value
+     */
+     private $value;
+
+    /**
      * @return string
      */
     public function getId (): string {
@@ -125,6 +130,14 @@ class Field {
     }
 
     /**
+     * @return string
+     */
+    public function getValue (): string {
+
+        return $this->value;
+    }
+
+    /**
      * Convert an array to Field
      *
      * @param array $data
@@ -160,8 +173,20 @@ class Field {
      * @throws \Exception
      */
      public static function fieldFromJSON(string $json) : Field {
-        $field = json_encode($json);
+        $field = json_decode($json);
         
         return self::fieldFromArray($field);
      }
+
+    /**
+     * @param string $value
+     *
+     * @return Field
+     */
+    public function setValue (string $value): Field {
+
+        $this->value = $value;
+
+        return $this;
+}
 }

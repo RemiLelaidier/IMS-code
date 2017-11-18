@@ -44,11 +44,6 @@ class PDFGenerator {
     private $size;
 
     /**
-     * @var array $extras
-     */
-    private $extras;
-
-    /**
      * Constructor
      *
      * @param array  $fields
@@ -57,13 +52,12 @@ class PDFGenerator {
      * @param string $unit
      * @param string $size
      */
-    public function __construct($fields, $data, $orientation = 'P', $unit = 'pt', $size = 'A4', $extras = null){
+    public function __construct($fields, $data, $orientation = 'P', $unit = 'pt', $size = 'A4'){
         $this->fields = $fields;
         $this->data   = $data;
         $this->orientation = $orientation;
         $this->unit = $unit;
         $this->size = $size;
-        $this->extras = $extras;
     }
 
     /**
@@ -86,28 +80,9 @@ class PDFGenerator {
         $this->fpdf->AliasNbPages();
         $this->fpdf->SetFont('Arial', 'B', '8');
 
-        // Mapping our fake data
-        $mappedData = [];
-        foreach($this->data as $data){
-            if(array_key_exists('inputs', $data)){
-                foreach($data['inputs'] as $input){
-                    $mappedData[$input['id']] = $input['value'];
-                }
-            }
-            if(array_key_exists('dropdowns', $data)){
-                foreach($data['dropdowns'] as $dropdown){
-                    $mappedData[$dropdown['id']] = $dropdown['value'];
-                }
-            }
-            if(array_key_exists('addresses', $data)){
-                foreach($data['addresses'] as $address){
-                    $mappedData[$address['id']] = $address['value'];
-                }
-            }
-        }
 
         // writing fields, if value not defined defaults to blank string
-        $this->writeFields($this->fields, $mappedData, 841.890);
+        $this->writeFields($this->fields, $this->data, 841.890);
 
         // generated path
         $generated = "tmp/temp.pdf";
@@ -124,7 +99,7 @@ class PDFGenerator {
     /**
      * Write fields on current pdf with data
      *
-     * @param array $fields
+     * @param Field[] $fields
      * @param array $data
      *
      * @param int   $pageSize : 841.890 for A4
@@ -137,15 +112,10 @@ class PDFGenerator {
         $currentPage = null;
 
         foreach($fields as $field){
-            $field = Field::fieldFromArray($field);
-
-            if(!$currentPage){
-                $currentPage = $field->getPage();
-            }
-
-            if($currentPage == $field->getPage()-1){
+            // Keep in mind that due to FPDF limitations, we can't move to previous/next page without hacking FPDF himself..
+            // ensure we are on the good page, but fields HAVE TO be ordered by page number
+            while($this->fpdf->PageNo() != $field->getPage()){
                 $this->fpdf->AddPage();
-                $currentPage++;
             }
 
             // Set with good coords system.
@@ -153,15 +123,13 @@ class PDFGenerator {
  
             // Write !
             if(array_key_exists($field->getId(), $data))
-                $text = $data[$field->getId()];
-            else if(array_key_exists($field->getId(), $this->extras))
-                $text = $this->extras[$field->getId()];
+                $field->setValue($data[$field->getId()]);
             else
-                $text = "";
+                $field->setValue("");
 
             // 20 is fpdf offset for new pages
             $offset = 20;
-            $this->fpdf->Cell($field->getWidth(), $field->getHeight() + $offset, utf8_decode($text));
+            $this->fpdf->Cell($field->getWidth(), $field->getHeight() + $offset, utf8_decode($field->getValue()));
         }
     }
 

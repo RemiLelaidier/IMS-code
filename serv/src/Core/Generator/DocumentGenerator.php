@@ -33,11 +33,6 @@ class DocumentGenerator {
     private $model;
 
     /**
-     * @var array extra values to write in template
-     */
-    private $extras;
-
-    /**
      * @var string template name
      */
     private $template;
@@ -67,14 +62,13 @@ class DocumentGenerator {
      * @param string $template
      * @param string $filename
      */
-    public function __construct(array $data, string $template, string $filename, array $extras){
+    public function __construct(array $data, string $template, string $filename){
         $this->phpWord = new PhpWord();
         $this->model = $data;
         $this->document = null;
         $this->template = $template;
         $this->filename = $filename;
         $this->bucket =__DIR__ . "/../../../../assets/";
-        $this->extras = $extras;
         $this->edited = null;
     }
 
@@ -82,9 +76,6 @@ class DocumentGenerator {
      * Write instance data into document
      */
     private function writeData(){
-        foreach($this->extras as $key => $extra){
-            $this->document->setValue($key, $extra);
-        }
 
         // Parsing structured data (reverse logic of MiConv.endCeremony() ^^)
         // foreach dancing \o/

@@ -3,6 +3,7 @@
 namespace App\Ims\Convention\Controller;
 
 use App\Core\Controller\Controller;
+use App\Core\Generator\PDF\Field;
 use App\Core\Generator\PDF\PDFGenerator;
 use App\Core\Validator\Validator;
 use App\Ims\Student\Model\StudentModel;
@@ -67,7 +68,7 @@ class ConventionController extends Controller
      * @throws \Exception
      */
     public function submit(Request $request, Response $response){
-
+        opcache_reset();
         // Decode datas
         $conventionData = $request->getBody()->getContents();
 
@@ -380,11 +381,29 @@ class ConventionController extends Controller
     }
 
     /**
-     * Calculated fields to add in template
+     * Generate convention and save in assets/Year-PeopleFullName.docx
      *
-     * @return array fields for Convention
+     * @param string $name
+     * @param array  $model
+     *
+     * @throws \Exception
      */
-    private function calculatedForConvention(): array {
+    private function generateConventionFor(string $name, array $model) : void {
+        $wordGenerator = new DocumentGenerator($model, "convention/convention_template", date('Y') . "-" . $name);
+        $wordGenerator->writeAndSave('convention/generated');
+
+        // @Tool : Toggle to preview pdf generation
+        $slugify = new Slugify();
+        $pdfName = $slugify->slugify($name);
+
+        $original = $this->findBase() . "/assets/convention/convention_compatibility.pdf";
+        $merged = $this->findBase() . "/assets/convention/generated/$pdfName.pdf";
+
+        $pdfGenerator = new PDFGenerator($this->getMappedFields(), $this->getConventionModel(), 'P', 'pt', 'A4');
+        $pdfGenerator->start($original, $merged);
+    }
+
+    private function getConventionModel() : array {
         $currentYear = date('Y');
         $nextYear = $currentYear+1;
         $finalSchoolYear = $currentYear . "-" . $nextYear;
@@ -399,63 +418,117 @@ class ConventionController extends Controller
 
         $diff = $dateEnd->diff($dateStart);
 
+        // TODO : Every field with blank value should be completed
+
         return [
-            'school_year'                 => $finalSchoolYear,
             'student_dob_day'             => $dob[0],
             'student_dob_month'           => $dob[1],
             'student_dob_year'            => $dob[2],
-            'student_promotion'           => $this->studentModel->promotion,
-            'ent_tutor_fullname'          => $this->companyModel->director_surname . " " . $this->companyModel->director_name,
-            'unice_tutor_fullname'        => $this->uniceModel->surname . " " . $this->uniceModel->name,
-            'ent_address_2'               => $this->companyModel->address,
-            'student_address'             => $this->studentModel->address,
-            'internship_detail'           => $this->internshipModel->detail,
-            'ent_director_fullname'       => $this->companyModel->director_surname . " " . $this->companyModel->director_name,
+            'student_email'               => $this->studentModel->email,
+            'student_gender_female'       => ($this->studentModel->gender == "M") ? "" : "X",
+            'student_gender_male'         => ($this->studentModel->gender == "M") ? "X" : "",
+            'internship_title'            => $this->internshipModel->subject,
+            'internship_dos'              => date('d/m/Y', $this->internshipModel->start),
+            'internship_doe'              => date('d/m/Y', $this->internshipModel->end),
+            'internship_duration'         => $diff->format('%m'),
+            'school_year'                 => $finalSchoolYear,
 
-            // TODO XXX : Add in UI
+            'internship_type_opt_1'       => "X",
+            'internship_type_opt_2'       => "",
+            'internship_type_opt_3'       => "",
+
+            'ent_name'                    => $this->companyModel->name,
+            'ent_address_2'               => $this->companyModel->address,
+            'ent_director_fullname'       => $this->companyModel->director_surname . " " . $this->companyModel->director_name,
+            'ent_director_quality'        => $this->companyModel->director_quality,
+            'ent_director_phone'          => $this->companyModel->director_phone,
+            'ent_director_email'          => $this->companyModel->director_email,
+            'ent_stage_address'           => $this->internshipModel->address,
+
+            'student_name'                => $this->studentModel->name,
+            'student_surname'             => $this->studentModel->surname,
+            'student_address'             => $this->studentModel->address,
+            'student_phone'               => $this->studentModel->phone,
+            'student_unice_number'        => $this->studentModel->num,
+            'student_formation'           => $this->studentModel->promotion,
+            'internship_detail'           => $this->internshipModel->detail,
+
+            'unice_tutor_fullname'        => $this->uniceModel->surname . " " . $this->uniceModel->name,
+            'ent_tutor_fullname'          => $this->employeeModel->surname . " " . $this->employeeModel->name,
+            'unice_tutor_quality'         => $this->uniceModel->quality,
+            'ent_tutor_quality'           => $this->uniceModel->quality,
+            'unice_tutor_phone'           => $this->uniceModel->phone,
+            'ent_tutor_phone'             => $this->employeeModel->phone,
+            'unice_tutor_email'           => $this->uniceModel->email,
+            'ent_tutor_email'             => $this->employeeModel->email,
+            'student_insurance'           => $this->studentModel->insurance,
+
+            'activity_1'                  => "",
+            'activity_2'                  => "",
+            'activity_3'                  => "",
+            'activity_4'                  => "",
+            'activity_5'                  => "",
+            'activity_6'                  => "",
+
+            'competence_1'                => "",
+            'competence_2'                => "",
+            'competence_3'                => "",
+            'competence_4'                => "",
+            'competence_5'                => "",
+            'competence_6'                => "",
+
+            'extra_1'                     => "",
+            'extra_2'                     => "",
+            'extra_3'                     => "",
+            'extra_4'                     => "",
+
+            'internship_remuneration'     => $this->internshipModel->income,
+            'internship_vacation'         => "",
+            'attest_ent_name'             => $this->companyModel->name,
+            'attest_ent_address'          => $this->companyModel->address,
+            'attest_student_name'         => $this->studentModel->name,
+
+            // TODO : Field is not in fields.json
+            'attest_student_surname'      => $this->studentModel->surname,
+
+            'attest_student_usage_name'   => "",
+
+            'attest_student_dob_day'      => $dob[0],
+            'attest_student_dob_month'    => $dob[1],
+            'attest_student_dob_year'     => $dob[2],
+            'attest_student_address'      => $this->studentModel->address,
+            'attest_student_email'        => $this->studentModel->email,
+            'attest_student_formation'    => $this->studentModel->promotion . " MIAGE",
+            'attest_student_university'   => "Université Nice Sophia-Antipolis",
+
             'student_usage_name'          => "",
             "internship_service"          => "",
             "internship_hours"            => $this->internshipModel->working_hours,
             "internship_hours_daysOrWeek" => ($this->internshipModel->working_hours < 24) ? "jours" : "mois",
 
-            "internship_duration"         => $diff->format('%m'),
             "internship_daysOrMonth"      => ($diff->days > 30) ? "mois" : "jours",
             "internship_presence_days"    => ""
         ];
     }
 
     /**
-     * Generate convention and save in assets/Year-PeopleFullName.docx
+     * Get mappings for convention
      *
-     * @param string $name
-     * @param array  $model
-     *
-     * @throws \Exception
+     * @return array
+     * @throws \Exception : invalid field
      */
-    private function generateConventionFor(string $name, array $model){
-        $extras = $this->calculatedForConvention();
-
-        $wordGenerator = new DocumentGenerator($model, "convention/convention_template", date('Y') . "-" . $name, $extras);
-        $wordGenerator->writeAndSave('convention/generated');
-
-        // @Tool : Toggle to preview pdf generation
-        $slugify = new Slugify();
-        $pdfName = $slugify->slugify($name);
-
-        $original = $this->findBase() . "/assets/convention/convention_compatibility.pdf";
-        $merged = $this->findBase() . "/assets/convention/generated/$pdfName.pdf";
-
-        $pdfGenerator = new PDFGenerator($this->getMappedFields(), $model, 'P', 'pt', 'A4', $extras);
-        $pdfGenerator->start($original, $merged);
-    }
-
-    /**
-     * @return mixed
-     */
-    private function getMappedFields(){
+    private function getMappedFields() : array {
         $fields = $this->findBase() . "/assets/convention/fields.json";
 
-        return json_decode(file_get_contents($fields), true);
+        $fields = json_decode(file_get_contents($fields), true);
+
+        $fieldEntities = [];
+
+        foreach($fields as $field) {
+            $fieldEntities[] = Field::fieldFromArray($field);
+        }
+
+        return $fieldEntities;
     }
 
     /**
@@ -463,7 +536,7 @@ class ConventionController extends Controller
      *
      * @return array
      */
-    private function getValidationRules(){
+    private function getValidationRules() : array {
         return [
             [
                 "key" => "student_surname",
@@ -647,7 +720,7 @@ class ConventionController extends Controller
     /**
      * @return null|string
      */
-    public function findBase(){
+    public function findBase() : ?string {
         $directory = __FILE__;
         $root = null;
 
