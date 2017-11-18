@@ -15,7 +15,7 @@ class PDFHelper {
      * @return int $y inverted axis
      */
     public static function reverseYAxis(int $pageSize, int $offset, int $y){
-        // 822 is the page size in points - 20 (fpdf offset)
+        // 841.890 is the page size in points - 20 (fpdf offset)
         return $pageSize - $offset - $y;
     }
 

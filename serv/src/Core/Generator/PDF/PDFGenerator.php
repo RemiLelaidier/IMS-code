@@ -103,7 +103,7 @@ class PDFGenerator {
         }
 
         // writing fields, if value not defined defaults to blank string
-        $this->writeFields($this->fields, $mappedData, 842);
+        $this->writeFields($this->fields, $mappedData, 841.890);
 
         // generated path
         $generated = "tmp/temp.pdf";
@@ -123,7 +123,7 @@ class PDFGenerator {
      * @param array $fields
      * @param array $data
      *
-     * @param int   $pageSize : 842 for A4
+     * @param int   $pageSize : 841.890 for A4
      * @param int   $offset : 20 (fpdf default)
      *
      * @return void
@@ -195,6 +195,9 @@ class PDFGenerator {
 
         // Done.
         try {
+            /**
+             * @var FPDF $pdf
+             */
             $pdf->Output("F", $dest, true);
         } catch (\Exception $e){
             // Path not writable, probably
