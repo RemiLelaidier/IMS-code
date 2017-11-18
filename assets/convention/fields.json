@@ -417,7 +417,8 @@
     "urx": 285.36,
     "ury": 550.8,
   "width": 234.36,
- "height": 10.8
+ "height": 10.8,
+ "page": 2
 }},
 
 {"activity_2":{
@@ -426,7 +427,8 @@
     "urx": 285.36,
     "ury": 538.32,
   "width": 234.36,
- "height": 10.8
+ "height": 10.8,
+ "page": 2
 }},
 
 {"activity_3":{
@@ -435,7 +437,8 @@
     "urx": 285.48,
     "ury": 525.84,
   "width": 234.48,
- "height": 10.8
+ "height": 10.8,
+ "page": 2
 }},
 
 {"activity_4":{
@@ -444,7 +447,8 @@
     "urx": 285.36,
     "ury": 513.48,
   "width": 234.36,
- "height": 10.8
+ "height": 10.8,
+ "page": 2
 }},
 
 {"activity_5":{
@@ -453,7 +457,8 @@
     "urx": 285.48,
     "ury": 501.12,
   "width": 234.48,
- "height": 10.8
+ "height": 10.8,
+ "page": 2
 }},
 
 {"activity_6":{
@@ -462,7 +467,8 @@
     "urx": 285.36,
     "ury": 488.64,
   "width": 234.36,
- "height": 10.8
+ "height": 10.8,
+ "page": 2
 }},
 
 {"competence_1":{
@@ -471,7 +477,8 @@
     "urx": 285.36,
     "ury": 450.96,
   "width": 234.36,
- "height": 10.56}},
+ "height": 10.56,
+ "page": 2}},
 
 
 {"competence_2":{
@@ -480,7 +487,8 @@
     "urx": 285.36,
     "ury": 438.6,
   "width": 234.36,
- "height": 10.8
+ "height": 10.8,
+ "page": 2
 }},
 
 {"competence_3":{
@@ -489,7 +497,8 @@
     "urx": 285.36,
     "ury": 426.12,
   "width": 234.36,
- "height": 10.8
+ "height": 10.8,
+ "page": 2
 }},
 
 {"competence_4":{
@@ -498,7 +507,8 @@
     "urx": 285.48,
     "ury": 413.64,
   "width": 234.48,
- "height": 10.8
+ "height": 10.8,
+ "page": 2
 }},
 
 {"competence_5":{
@@ -507,7 +517,8 @@
     "urx": 285.48,
     "ury": 401.28,
   "width": 234.48,
- "height": 10.8
+ "height": 10.8,
+ "page": 2
 }},
 
 {"competence_6":{
@@ -516,7 +527,8 @@
     "urx": 285.36,
     "ury": 388.8,
   "width": 234.36,
- "height": 10.8
+ "height": 10.8,
+ "page": 2
 }},
 
 {"extra_1":{
@@ -525,7 +537,8 @@
     "urx": 285.48,
     "ury": 267.48,
   "width": 234.48,
- "height": 9.36
+ "height": 9.36,
+ "page": 2
 }},
 
 {"extra_2":{
@@ -534,7 +547,8 @@
     "urx": 285.48,
     "ury": 256.56,
   "width": 234.48,
- "height": 10.8
+ "height": 10.8,
+ "page": 2
 }},
 
 {"extra_3":{
@@ -543,7 +557,8 @@
     "urx": 285.48,
     "ury": 244.2,
   "width": 234.48,
- "height": 10.8
+ "height": 10.8,
+ "page": 2
 }},
 
 {"extra_4":{
@@ -552,7 +567,8 @@
     "urx": 285.48,
     "ury": 231.72,
   "width": 234.48,
- "height": 10.8
+ "height": 10.8,
+ "page": 2
 }},
 
 {"internship_remuneration":{
@@ -561,7 +577,8 @@
     "urx": 401.398,
     "ury": 156.999,
   "width": 85.369,
- "height": 12.33}},
+ "height": 12.33,
+ "page": 2}},
 
 {"internship_vacation":{
     "llx": 51,
@@ -569,7 +586,8 @@
     "urx": 283.44,
     "ury": 644.536,
   "width": 232.44,
- "height": 43.87}},
+ "height": 43.87,
+ "page": 4}},
 
 
 {"attest_ent_name":{
@@ -578,7 +596,8 @@
     "urx": 543.6,
     "ury": 727.2,
   "width": 378.84,
- "height": 19.92}},
+ "height": 19.92,
+ "page": 6}},
 
 
 {"attest_ent_address":{
@@ -587,7 +606,8 @@
     "urx": 544.92,
     "ury": 696.6,
   "width": 464.64,
- "height": 19.92}},
+ "height": 19.92,
+ "page": 6}},
 
 
 {"attest_student_name":{
@@ -596,7 +616,8 @@
     "urx": 284.28,
     "ury": 610.32,
   "width": 179.4,
- "height": 19.92}},
+ "height": 19.92,
+ "page": 6}},
 
 
 {"attest_student_usage_name":{
@@ -605,7 +626,8 @@
     "urx": 536.64,
     "ury": 610.32,
   "width": 198.96,
- "height": 19.92}},
+ "height": 19.92,
+ "page": 6}},
 
 
 {"Sexe":{
@@ -632,7 +654,8 @@
     "urx": 455.16,
     "ury": 588,
   "width": 36.24,
- "height": 19.92}},
+ "height": 19.92,
+ "page": 6}},
 
 
 {"attest_student_dob_month":{
@@ -641,7 +664,8 @@
     "urx": 489.24,
     "ury": 587.88,
   "width": 30.24,
- "height": 19.92}},
+ "height": 19.92,
+ "page": 6}},
 
 
 {"attest_student_dob_year":{
@@ -650,7 +674,8 @@
     "urx": 539.76,
     "ury": 587.88,
   "width": 47.04,
- "height": 19.92}},
+ "height": 19.92,
+ "page": 6}},
 
 
 {"attest_student_address":{
@@ -659,7 +684,8 @@
     "urx": 548.88,
     "ury": 566.88,
   "width": 469.68,
- "height": 19.8
+ "height": 19.8,
+ "page": 6
 }},
 
 {"attest_student_email":{
@@ -668,7 +694,8 @@
     "urx": 287.28,
     "ury": 545.4,
   "width": 204.72,
- "height": 19.92}},
+ "height": 19.92,
+ "page": 6}},
 
 
 {"attest_student_formation":{
@@ -677,7 +704,8 @@
     "urx": 545.16,
     "ury": 501.96,
   "width": 495.36,
- "height": 19.92}},
+ "height": 19.92,
+ "page": 6}},
 
 
 {"attest_student_university":{
@@ -686,13 +714,5 @@
     "urx": 553.56,
     "ury": 458.64,
   "width": 503.76,
- "height": 19.92}},
-
-
-{"ent_tutor_fullname+ent_tutor_quality":{
-    "llx": 298.08,
-    "lly": 107.52,
-    "urx": 534.48,
-    "ury": 127.44,
-  "width": 236.4,
- "height": 19.92}}]
+ "height": 19.92,
+ "page": 6}}]

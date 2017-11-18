@@ -58,7 +58,7 @@ class ConventionController extends Controller
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
     public function submit(Request $request, Response $response){
-        //opcache_reset();
+        opcache_reset();
         // Decode datas
         $conventionData = $request->getBody()->getContents();
 
@@ -409,10 +409,25 @@ class ConventionController extends Controller
 
         //$wordGenerator = new DocumentGenerator($model, "convention/convention_template", date('Y') . "-" . $name, $extras);
         //$wordGenerator->writeAndSave('convention/generated');
-        
+
         // @Tool : Toggle to preview pdf generation
-        $pdfGenerator = new PDFGenerator();
-        $pdfGenerator->start();
+        $original = $this->findBase() . "/assets/convention/convention_compatibility.pdf";
+        $merged = $this->findBase() . "/assets/convention/generated/merged.pdf";
+
+        $pdfGenerator = new PDFGenerator($this->getMappedFields(), $this->getConventionData());
+        $pdfGenerator->start($original, $merged);
+    }
+
+    private function getMappedFields(){
+        $fields = $this->findBase() . "/assets/convention/fields.json";
+        
+        return json_decode(file_get_contents($fields), true);
+    }
+
+    private function getConventionData(){
+        $data = $this->findBase() . "/assets/convention/sample.json";
+
+        return json_decode(file_get_contents($data), true);
     }
 
     private function getValidationRules(){
@@ -594,5 +609,22 @@ class ConventionController extends Controller
                 "type" => "string"
             ],
         ];
+    }
+
+    public function findBase(){
+        $directory = __FILE__;
+        $root = null;
+
+        // If not found and dir not root..root?
+        while(is_null($root) && $directory != '/'){
+            $directory = dirname($directory);
+            $composerConfig = $directory . '/.watchi';
+
+            if(file_exists($composerConfig))
+                $root = $directory;
+
+        }
+
+        return $root;
     }
 }
