@@ -62,7 +62,7 @@ class ConventionController extends Controller
      */
     public function submit(Request $request, Response $response){
         //opcache_reset();
-        
+
         // Decode datas
         $conventionData = $request->getBody()->getContents();
 
@@ -411,8 +411,8 @@ class ConventionController extends Controller
     private function generateConventionFor(string $name, array $model){
         $extras = $this->calculatedForConvention();
 
-        //$wordGenerator = new DocumentGenerator($model, "convention/convention_template", date('Y') . "-" . $name, $extras);
-        //$wordGenerator->writeAndSave('convention/generated');
+        $wordGenerator = new DocumentGenerator($model, "convention/convention_template", date('Y') . "-" . $name, $extras);
+        $wordGenerator->writeAndSave('convention/generated');
 
         // @Tool : Toggle to preview pdf generation
         $slugify = new Slugify();
@@ -425,22 +425,13 @@ class ConventionController extends Controller
         $pdfGenerator->start($original, $merged);
     }
 
+    /**
+     * @return mixed
+     */
     private function getMappedFields(){
         $fields = $this->findBase() . "/assets/convention/fields.json";
 
         return json_decode(file_get_contents($fields), true);
-    }
-
-    /**
-     * Get every convention data based on our sample
-     * TODO : Change to received data
-     *
-     * @return array
-     */
-    private function getConventionData(){
-        $data = $this->findBase() . "/assets/convention/sample.json";
-
-        return json_decode(file_get_contents($data), true);
     }
 
     /**
@@ -629,6 +620,9 @@ class ConventionController extends Controller
         ];
     }
 
+    /**
+     * @return null|string
+     */
     public function findBase(){
         $directory = __FILE__;
         $root = null;

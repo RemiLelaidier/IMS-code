@@ -127,6 +127,8 @@ class Field {
     /**
      * Convert an array to Field
      *
+     * @param array $data
+     *
      * @return Field
      * @throws \Exception
      */
@@ -151,6 +153,8 @@ class Field {
 
     /**
      * Convert a Json field to Field
+     *
+     * @param string $json
      *
      * @return Field
      * @throws \Exception
