@@ -5,7 +5,6 @@ namespace App\Ims\Convention\Controller;
 use App\Core\Controller\Controller;
 use App\Core\Generator\PDF\PDFGenerator;
 use App\Core\Validator\Validator;
-use App\Ims\Convention\Model\ConventionModel;
 use App\Ims\Student\Model\StudentModel;
 use App\Ims\Company\Model\CompanyModel;
 use App\Ims\Internship\Model\InternshipModel;
@@ -16,6 +15,13 @@ use Slim\Http\Request;
 use Slim\Http\Response;
 use App\Core\Generator\DocumentGenerator;
 
+/**
+ * Class ConventionController
+ * @package App\Ims\Convention\Controller
+ *
+ * TODO : Need to regen fields.json with new form builded using Adobe Acrobat
+ *
+ */
 class ConventionController extends Controller
 {
     /**

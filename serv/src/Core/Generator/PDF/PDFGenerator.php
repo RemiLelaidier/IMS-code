@@ -10,8 +10,6 @@ use FPDF;
  * Fields are generated using : 
  * https://www.setasign.com/products/setapdf-core/demos/find-form-field-coordinates/
  * 
- * TODO : Need to regen fields.json with new form builded using Adobe Acrobat
- *        Handle many pages ->addPage(); when needed -> process each page one by one
  */
 class PDFGenerator {
 
