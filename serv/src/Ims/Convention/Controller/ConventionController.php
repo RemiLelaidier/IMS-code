@@ -100,7 +100,7 @@ class ConventionController extends Controller
            $this->doActionFor($section);
         }
 
-        $this->generateConventionFor($this->studentModel->name . $this->studentModel->surname, $this->model);
+        $this->generateConventionFor($this->studentModel->name . $this->studentModel->surname);
 
         // Save new datas
         $this->studentModel->save();
@@ -390,14 +390,14 @@ class ConventionController extends Controller
      */
     private function generateConventionFor(string $name) : void {
         $wordGenerator = new DocumentGenerator($this->getModelAsTemplateValues(), "convention/convention_template", date('Y') . "-" . $name);
-        $wordGenerator->writeAndSave(dirname(dirname(getcwd())) . "/assets/convention/generated/");
+        $wordGenerator->writeAndSave($this->getAssetsFolder() . "convention/generated/");
 
         // @Tool : Toggle to preview pdf generation
         $slugify = new Slugify();
         $pdfName = $slugify->slugify($name);
 
-        $original = $this->findBase() . "/assets/convention/convention_compatibility.pdf";
-        $merged = $this->findBase() . "/assets/convention/generated/$pdfName.pdf";
+        $original = $this->getAssetsFolder() . "convention/convention_compatibility.pdf";
+        $merged = $this->getAssetsFolder() . "convention/generated/$pdfName.pdf";
 
         $pdfGenerator = new PDFGenerator($this->getMappedFields(), $this->getConventionModel(), 'P', 'pt', 'A4');
         $pdfGenerator->start($original, $merged);
@@ -538,7 +538,7 @@ class ConventionController extends Controller
      * @throws \Exception : invalid field
      */
     private function getMappedFields() : array {
-        $fields = $this->findBase() . "/assets/convention/fields.json";
+        $fields = $this->getAssetsFolder() . "convention/fields.json";
 
         $fields = json_decode(file_get_contents($fields), true);
 
@@ -740,20 +740,7 @@ class ConventionController extends Controller
     /**
      * @return null|string
      */
-    public function findBase() : ?string {
-        $directory = __FILE__;
-        $root = null;
-
-        // If not found and dir not root..root?
-        while(is_null($root) && $directory != '/'){
-            $directory = dirname($directory);
-            $composerConfig = $directory . '/.watchi';
-
-            if(file_exists($composerConfig))
-                $root = $directory;
-
-        }
-
-        return $root;
+    public function getAssetsFolder() : ?string {
+        return dirname(dirname(getcwd())) . "/assets/";
     }
 }
