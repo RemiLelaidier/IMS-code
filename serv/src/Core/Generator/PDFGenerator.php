@@ -16,7 +16,7 @@ class PDFGenerator {
      * @throws \Exception
      */
     public function start(){
-        opcache_reset();
+        //opcache_reset();
 
         $this->fpdf = new FPDF('P', 'pt', 'A4');
 
@@ -110,8 +110,10 @@ class PDFGenerator {
     }
 
     /**
-     * Merge two PDF (page 1 doc A + page 1 doc B layered)
+     * Merge two PDF (doc A and over doc B)
      * @param string $pdfA path of pdfA
+     * @param string $pdfB path of pdfB
+     * @param string $dest 
      * 
      * @return Boolean
      * 
@@ -119,17 +121,29 @@ class PDFGenerator {
      */
     public function merge($pdfA, $pdfB, $dest){
         $pdf = new FPDI();
-
         $pdf->setSourceFile($pdfA);
-        $pageA = $pdf->importPage(1, '/MediaBox');
 
-        $pdf->setSourceFile($pdfB);
-        $pageB = $pdf->importPage(1, '/MediaBox');
+        $pageCount = $pdf->currentParser->getPageCount();   
 
-        $pdf->addPage();
-        $pdf->useTemplate($pageA);
-        $pdf->useTemplate($pageB);
+        for($i = 1; $i <= $pageCount; $i++){
+            $pdf->addPage();   
 
+            // Adding background pdf
+            $pdf->setSourceFile($pdfA);            
+            $pageA = $pdf->importPage($i, '/MediaBox');
+            $pdf->useTemplate($pageA);
+
+            // Looking for file B -> our generated pdf with data
+            $pdf->setSourceFile($pdfB);
+
+            // If page exists on it
+            if($i <= $pdf->currentParser->getPageCount()){
+                $pageB = $pdf->importPage($i, '/MediaBox');            
+                $pdf->useTemplate($pageB);
+            }
+        }
+
+        // Done.
         try {
             $pdf->Output("F", $dest, true);
         } catch (Exception $e){

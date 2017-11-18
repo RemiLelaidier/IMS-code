@@ -58,6 +58,7 @@ class ConventionController extends Controller
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
     public function submit(Request $request, Response $response){
+        //opcache_reset();
         // Decode datas
         $conventionData = $request->getBody()->getContents();
 
@@ -406,11 +407,12 @@ class ConventionController extends Controller
     private function generateConventionFor(string $name, array $model){
         $extras = $this->calculatedForConvention();
 
-        $wordGenerator = new DocumentGenerator($model, "convention/convention_template", date('Y') . "-" . $name, $extras);
-        $wordGenerator->writeAndSave('convention/generated');
+        //$wordGenerator = new DocumentGenerator($model, "convention/convention_template", date('Y') . "-" . $name, $extras);
+        //$wordGenerator->writeAndSave('convention/generated');
+        
         // @Tool : Toggle to preview pdf generation
-        //$pdfGenerator = new PDFGenerator();
-        //$pdfGenerator->start();
+        $pdfGenerator = new PDFGenerator();
+        $pdfGenerator->start();
     }
 
     private function getValidationRules(){
