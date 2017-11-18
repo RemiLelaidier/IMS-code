@@ -125,8 +125,8 @@ class PDFGenerator {
             // Grabbing key / values
             $key = array_keys($field)[0];
             $values = array_values($field)[0];
-            
-            if(!$currentPage){
+
+            if(!$currentPage && array_key_exists('page')){
                 $currentPage = $values['page'];
             }
 
