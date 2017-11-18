@@ -1,18 +1,13 @@
 <?php
 namespace App\Core\Generator\Word;
 
-use App\Security\Exception\GenericException;
-
-use Dompdf\Dompdf;
 use PhpOffice\PhpWord\Exception\Exception;
-use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\PhpWord;
 use PhpOffice\PhpWord\TemplateProcessor;
 use Cocur\Slugify\Slugify;
 
 
 use App\Security\Exception\TemplateNotFoundException;
-use PhpOffice\PhpWord\Writer\HTML;
 
 /**
  * DocumentGenerator
