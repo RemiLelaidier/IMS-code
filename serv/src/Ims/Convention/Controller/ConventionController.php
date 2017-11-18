@@ -11,6 +11,7 @@ use App\Ims\Company\Model\CompanyModel;
 use App\Ims\Internship\Model\InternshipModel;
 use App\Ims\Unice\Model\UniceModel;
 use App\Ims\Employee\Model\EmployeeModel;
+use Cocur\Slugify\Slugify;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use App\Core\Generator\DocumentGenerator;
@@ -50,15 +51,18 @@ class ConventionController extends Controller
     /**
      * Method submit
      * Put all the datas received from the four stages of filling the convention in the database
+     *
      * @param Request  $request
      * @param Response $response
      *
      * @return Response
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
+     * @throws \Exception
      */
     public function submit(Request $request, Response $response){
-        opcache_reset();
+        //opcache_reset();
+        
         // Decode datas
         $conventionData = $request->getBody()->getContents();
 
@@ -411,10 +415,13 @@ class ConventionController extends Controller
         //$wordGenerator->writeAndSave('convention/generated');
 
         // @Tool : Toggle to preview pdf generation
-        $original = $this->findBase() . "/assets/convention/convention_compatibility.pdf";
-        $merged = $this->findBase() . "/assets/convention/generated/merged.pdf";
+        $slugify = new Slugify();
+        $pdfName = $slugify->slugify($name);
 
-        $pdfGenerator = new PDFGenerator($this->getMappedFields(), $this->getConventionData());
+        $original = $this->findBase() . "/assets/convention/convention_compatibility.pdf";
+        $merged = $this->findBase() . "/assets/convention/generated/$pdfName.pdf";
+
+        $pdfGenerator = new PDFGenerator($this->getMappedFields(), $model);
         $pdfGenerator->start($original, $merged);
     }
 
@@ -424,12 +431,23 @@ class ConventionController extends Controller
         return json_decode(file_get_contents($fields), true);
     }
 
+    /**
+     * Get every convention data based on our sample
+     * TODO : Change to received data
+     *
+     * @return array
+     */
     private function getConventionData(){
         $data = $this->findBase() . "/assets/convention/sample.json";
 
         return json_decode(file_get_contents($data), true);
     }
 
+    /**
+     * Get every validation rule for this Entity (Convention)
+     *
+     * @return array
+     */
     private function getValidationRules(){
         return [
             [

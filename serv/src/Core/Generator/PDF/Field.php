@@ -124,11 +124,12 @@ class Field {
         return $this->page;
     }
 
-     /**
-      * Convert an array to Field
-      *
-      * @return Field
-      */
+    /**
+     * Convert an array to Field
+     *
+     * @return Field
+     * @throws \Exception
+     */
      public static function fieldFromArray(array $data) : Field {
         $field = new Field;
         $field->id = array_keys($data)[0];
@@ -148,11 +149,12 @@ class Field {
         return $field;
      }
 
-     /**
-      * Convert a Json field to Field
-      *
-      * @return Field
-      */
+    /**
+     * Convert a Json field to Field
+     *
+     * @return Field
+     * @throws \Exception
+     */
      public static function fieldFromJSON(string $json) : Field {
         $field = json_encode($json);
         
