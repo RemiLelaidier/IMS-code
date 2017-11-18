@@ -46,6 +46,11 @@ class PDFGenerator {
     private $size;
 
     /**
+     * @var array $extras
+     */
+    private $extras;
+
+    /**
      * Constructor
      *
      * @param array  $fields
@@ -54,12 +59,13 @@ class PDFGenerator {
      * @param string $unit
      * @param string $size
      */
-    public function __construct($fields, $data, $orientation = 'P', $unit = 'pt', $size = 'A4'){
+    public function __construct($fields, $data, $orientation = 'P', $unit = 'pt', $size = 'A4', $extras = null){
         $this->fields = $fields;
         $this->data   = $data;
         $this->orientation = $orientation;
         $this->unit = $unit;
         $this->size = $size;
+        $this->extras = $extras;
     }
 
     /**
@@ -148,10 +154,12 @@ class PDFGenerator {
             $this->fpdf->SetXY($field->getLlx(), PDFHelper::reverseYAxis($pageSize, $offset, $field->getLly()));
  
             // Write !
-            if(!array_key_exists($field->getId(), $data))
-                $text = "";
-            else
+            if(array_key_exists($field->getId(), $data))
                 $text = $data[$field->getId()];
+            else if(array_key_exists($field->getId(), $this->extras))
+                $text = $this->extras[$field->getId()];
+            else
+                $text = "";
 
             // 20 is fpdf offset for new pages
             $offset = 20;

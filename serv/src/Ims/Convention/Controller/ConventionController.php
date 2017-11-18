@@ -61,7 +61,6 @@ class ConventionController extends Controller
      * @throws \Exception
      */
     public function submit(Request $request, Response $response){
-        //opcache_reset();
 
         // Decode datas
         $conventionData = $request->getBody()->getContents();
@@ -384,18 +383,37 @@ class ConventionController extends Controller
         $nextYear = $currentYear+1;
         $finalSchoolYear = $currentYear . "-" . $nextYear;
 
+        $dob = explode('/', $this->studentModel->dob);
+
+        $dateStart = new \DateTime();
+        $dateStart->setTimestamp($this->internshipModel->start);
+
+        $dateEnd = new \DateTime();
+        $dateEnd->setTimestamp($this->internshipModel->end);
+
+        $diff = $dateEnd->diff($dateStart);
+
         return [
-            'school_year' => $finalSchoolYear,
+            'school_year'                 => $finalSchoolYear,
+            'student_dob_day'             => $dob[0],
+            'student_dob_month'           => $dob[1],
+            'student_dob_year'            => $dob[2],
+            'student_promotion'           => $this->studentModel->promotion,
+            'ent_tutor_fullname'          => $this->companyModel->director_surname . " " . $this->companyModel->director_name,
+            'unice_tutor_fullname'        => $this->uniceModel->surname . " " . $this->uniceModel->name,
+            'ent_address_2'               => $this->companyModel->address,
+            'student_address'             => $this->studentModel->address,
+            'internship_detail'           => $this->internshipModel->detail,
+            'ent_director_fullname'       => $this->companyModel->director_surname . " " . $this->companyModel->director_name,
 
             // TODO XXX : Add in UI
             'student_usage_name'          => "",
             "internship_service"          => "",
-            "internship_hours"            => "",
-            "internship_hours_daysOrWeek" => "",
+            "internship_hours"            => $this->internshipModel->working_hours,
+            "internship_hours_daysOrWeek" => ($this->internshipModel->working_hours < 24) ? "jours" : "mois",
 
-            // TODO XXX : Calc
-            "internship_duration"         => "",
-            "internship_daysOrMonth"      => "",
+            "internship_duration"         => $diff->format('%m'),
+            "internship_daysOrMonth"      => ($diff->days > 30) ? "mois" : "jours",
             "internship_presence_days"    => ""
         ];
     }
@@ -421,7 +439,7 @@ class ConventionController extends Controller
         $original = $this->findBase() . "/assets/convention/convention_compatibility.pdf";
         $merged = $this->findBase() . "/assets/convention/generated/$pdfName.pdf";
 
-        $pdfGenerator = new PDFGenerator($this->getMappedFields(), $model);
+        $pdfGenerator = new PDFGenerator($this->getMappedFields(), $model, 'P', 'pt', 'A4', $extras);
         $pdfGenerator->start($original, $merged);
     }
 
