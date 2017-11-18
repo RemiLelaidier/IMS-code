@@ -13,11 +13,12 @@ class PDFHelper {
      * As setasign extract gives me coords in reversed -> llx, lly.. Y isn't good
      * Let's convert it to Fpdf coords
      * 
-     * TODO : Bugfix. It's only by chance I think
+     * $pageSize - 20
      * @return int $y inverted axis
      */
-    public static function reverseYAxis(int $y){
-        return 822 - $y;
+    public static function reverseYAxis(int $pageSize, int $offset, int $y){
+        // 822 is the page size in points - 20 (fpdf offset)
+        return $pageSize - $offset - $y;
     }
 
 }

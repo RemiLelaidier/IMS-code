@@ -64,7 +64,7 @@ class PDFGenerator {
      * @throws \Exception
      * 
      */
-    public function start($formPath, $dest){
+    public function start(string $formPath, string $dest) : void {
         $this->fpdf = new FPDF('P', 'pt', 'A4');
 
         $this->fpdf->SetMargins(10, 10, 10);
@@ -108,7 +108,7 @@ class PDFGenerator {
         $this->merge($formPath, $generated, $dest);
 
         // clean generated not merged
-        //unlink($generated);
+        unlink($generated);
     }
 
     /**
@@ -118,26 +118,29 @@ class PDFGenerator {
      * 
      * @return void
      */
-    public function writeFields($fields, $data){
-        $currentPage = -1;
+    public function writeFields(array $fields, array $data) : void {
+        $currentPage = null;
 
         foreach($fields as $field){
             // Grabbing key / values
             $key = array_keys($field)[0];
             $values = array_values($field)[0];
+            
+            if(!$currentPage){
+                $currentPage = $values['page'];
+            }
 
             // if page is set
             if(array_key_exists('page', $values)){
-                if($values['page'] === -1){
-                    $currentPage = $values['page'];
-                } else if($currentPage == $values['page']-1){
-                    $currentPage++;
+                if($currentPage == $values['page']-1){
                     $this->fpdf->AddPage();
+                    $currentPage++;
                 }
             }
 
             // Set with good coords system.
-            $this->fpdf->SetXY($values['llx'], PDFHelper::reverseYAxis($values['lly']));
+            // TODO : Change hardcoded A4 value
+            $this->fpdf->SetXY($values['llx'], PDFHelper::reverseYAxis(842, 20, $values['lly']));
  
             // Write !
             if(!array_key_exists($key, $data))
