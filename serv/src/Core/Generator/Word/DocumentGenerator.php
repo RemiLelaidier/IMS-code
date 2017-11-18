@@ -1,5 +1,5 @@
 <?php
-namespace App\Core\Generator;
+namespace App\Core\Generator\Word;
 
 use App\Security\Exception\GenericException;
 
@@ -68,8 +68,8 @@ class DocumentGenerator {
         $this->document = null;
         $this->template = $template;
         $this->filename = $filename;
-        $this->bucket =__DIR__ . "/../../../../assets/";
         $this->edited = null;
+        $this->bucket = dirname(dirname(getcwd())) . "/assets/";
     }
 
     /**
@@ -77,53 +77,18 @@ class DocumentGenerator {
      */
     private function writeData(){
 
-        // Parsing structured data (reverse logic of MiConv.endCeremony() ^^)
-        // foreach dancing \o/
-        foreach($this->model as $section){
-            $inputs = [];
-            $dropdowns = [];
-            $addresses = [];
-            $textareas = [];
-
-            if(array_key_exists('inputs', $section))
-                $inputs = $section['inputs'];
-
-            if(array_key_exists('addresses', $section))
-                $addresses = $section['addresses'];
-
-            if(array_key_exists('dropdowns', $section))
-                $dropdowns = $section['dropdowns'];
-
-            if(array_key_exists('textareas', $section))
-                $textareas = $section['textareas'];
-
-            foreach($inputs as $input){
-                if(array_key_exists('value', $input))
-                    $this->document->setValue($input['id'], $input['value']);
-            }
-
-            foreach($addresses as $address){
-                if(array_key_exists('value', $address))
-                    $this->document->setValue($address['id'], $address['value']);
-            }
-
-            foreach($dropdowns as $dropdown){
-                if(array_key_exists('value', $dropdown))
-                    $this->document->setValue($dropdown['id'], $dropdown['value']);
-            }
-
-            foreach($textareas as $textarea){
-                if(array_key_exists('value', $textarea))
-                    $this->document->setValue($textarea['id'], $textarea['value']);
-            }
+        foreach ($this->model as $value){
+            $this->document->setValue($value->getId(), $value->getValue());
         }
+
     }
 
     /**
      * Write in document and save on disk
      *
+     * @param string $outputDir
      */
-    public function writeAndSave($outputDir){
+    public function writeAndSave(string $outputDir){
         $dest = $this->bucket . $this->template . ".docx";
         try {
             $this->document = new TemplateProcessor($dest);
@@ -138,19 +103,17 @@ class DocumentGenerator {
     /**
      * Save current document on disk
      *
+     * @param string $atPath
+     *
      * @return string path to edited document
      */
-    private function save($outputDir):string {
-        $basePath = dirname(dirname(dirname(dirname(__DIR__))));
-
+    private function save(string $atPath) : string {
         $slugify = new Slugify();
         $this->filename = $slugify->slugify($this->filename);
 
-        $output = $basePath . "/assets/$outputDir/$this->filename.docx";
+        $this->document->saveAs($atPath . $this->filename . ".docx");
 
-        $this->document->saveAs($output);
-
-        return $output;
+        return $atPath;
     }
 
 }

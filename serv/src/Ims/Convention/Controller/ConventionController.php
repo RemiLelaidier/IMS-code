@@ -5,6 +5,7 @@ namespace App\Ims\Convention\Controller;
 use App\Core\Controller\Controller;
 use App\Core\Generator\PDF\Field;
 use App\Core\Generator\PDF\PDFGenerator;
+use App\Core\Generator\Word\TemplateValue;
 use App\Core\Validator\Validator;
 use App\Ims\Student\Model\StudentModel;
 use App\Ims\Company\Model\CompanyModel;
@@ -14,7 +15,7 @@ use App\Ims\Employee\Model\EmployeeModel;
 use Cocur\Slugify\Slugify;
 use Slim\Http\Request;
 use Slim\Http\Response;
-use App\Core\Generator\DocumentGenerator;
+use App\Core\Generator\Word\DocumentGenerator;
 
 /**
  * Class ConventionController
@@ -389,8 +390,8 @@ class ConventionController extends Controller
      * @throws \Exception
      */
     private function generateConventionFor(string $name, array $model) : void {
-        $wordGenerator = new DocumentGenerator($model, "convention/convention_template", date('Y') . "-" . $name);
-        $wordGenerator->writeAndSave('convention/generated');
+        $wordGenerator = new DocumentGenerator($this->getModelAsTemplateValues(), "convention/convention_template", date('Y') . "-" . $name);
+        $wordGenerator->writeAndSave(dirname(dirname(getcwd())) . "/assets/convention/generated/");
 
         // @Tool : Toggle to preview pdf generation
         $slugify = new Slugify();
@@ -403,6 +404,24 @@ class ConventionController extends Controller
         $pdfGenerator->start($original, $merged);
     }
 
+    /**
+     *
+     * @return array
+     */
+    public function getModelAsTemplateValues() : array {
+        $templateValues = [];
+        $model = $this->getConventionModel();
+
+        foreach($model as $k => $value){
+            $templateValues[] = new TemplateValue($k, $value);
+        }
+
+        return $templateValues;
+    }
+
+    /**
+     * @return array
+     */
     private function getConventionModel() : array {
         $currentYear = date('Y');
         $nextYear = $currentYear+1;
@@ -424,7 +443,9 @@ class ConventionController extends Controller
             'student_dob_day'             => $dob[0],
             'student_dob_month'           => $dob[1],
             'student_dob_year'            => $dob[2],
+            'student_dob'                 => $this->studentModel->dob,
             'student_email'               => $this->studentModel->email,
+            'student_gender'              => ($this->studentModel->gender == "M") ? "Masculin" : "Féminin",
             'student_gender_female'       => ($this->studentModel->gender == "M") ? "" : "X",
             'student_gender_male'         => ($this->studentModel->gender == "M") ? "X" : "",
             'internship_title'            => $this->internshipModel->subject,
