@@ -23,7 +23,7 @@ class DocumentGenerator {
     private $phpWord;
 
     /**
-     * @var array values to write in template
+     * @var TemplateValue[] values to write in template
      */
     private $model;
 

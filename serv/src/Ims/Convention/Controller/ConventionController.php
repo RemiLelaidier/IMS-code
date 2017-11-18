@@ -385,11 +385,10 @@ class ConventionController extends Controller
      * Generate convention and save in assets/Year-PeopleFullName.docx
      *
      * @param string $name
-     * @param array  $model
      *
      * @throws \Exception
      */
-    private function generateConventionFor(string $name, array $model) : void {
+    private function generateConventionFor(string $name) : void {
         $wordGenerator = new DocumentGenerator($this->getModelAsTemplateValues(), "convention/convention_template", date('Y') . "-" . $name);
         $wordGenerator->writeAndSave(dirname(dirname(getcwd())) . "/assets/convention/generated/");
 
