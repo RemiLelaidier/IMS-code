@@ -21,7 +21,7 @@ class PDFGenerator {
     private $fpdf;
 
     /**
-     * @var array $fields
+     * @var Field[] $fields
      */
     private $fields;
 
@@ -31,14 +31,35 @@ class PDFGenerator {
     private $data;
 
     /**
-     * Constructor
-     * 
-     * @param array $fields
-     * @param array $data
+     * @var string $orientation
      */
-    public function __construct($fields, $data){
+    private $orientation;
+
+    /**
+     * @var string $unit
+     */
+    private $unit;
+
+    /**
+     * @var string $size
+     */
+    private $size;
+
+    /**
+     * Constructor
+     *
+     * @param array  $fields
+     * @param array  $data
+     * @param string $orientation
+     * @param string $unit
+     * @param string $size
+     */
+    public function __construct($fields, $data, $orientation = 'P', $unit = 'pt', $size = 'A4'){
         $this->fields = $fields;
         $this->data   = $data;
+        $this->orientation = $orientation;
+        $this->unit = $unit;
+        $this->size = $size;
     }
 
     /**
@@ -50,7 +71,7 @@ class PDFGenerator {
      * @return void
      */
     public function start(string $formPath, string $dest) : void {
-        $this->fpdf = new FPDF('P', 'pt', 'A4');
+        $this->fpdf = new FPDF($this->orientation, $this->unit, $this->size);
 
         $this->fpdf->SetMargins(10, 10, 10);
 
