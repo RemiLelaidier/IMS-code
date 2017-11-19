@@ -70,7 +70,7 @@ class DocumentGenerator {
     /**
      * Write instance data into document
      */
-    private function writeData(){
+    private function writeData() : void {
 
         foreach ($this->model as $value){
             $this->document->setValue($value->getId(), $value->getValue());
@@ -83,7 +83,7 @@ class DocumentGenerator {
      *
      * @param string $outputDir
      */
-    public function writeAndSave(string $outputDir){
+    public function writeAndSave(string $outputDir) : void {
         $dest = $this->bucket . $this->template . ".docx";
         try {
             $this->document = new TemplateProcessor($dest);

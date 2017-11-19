@@ -470,7 +470,7 @@ class ConventionController extends Controller
             'student_address'             => $this->studentModel->address,
             'student_phone'               => $this->studentModel->phone,
             'student_unice_number'        => $this->studentModel->num,
-            'student_formation'           => $this->studentModel->promotion,
+            'student_formation'           => $this->studentModel->promotion . " MIAGE",
             'internship_detail'           => $this->internshipModel->detail,
 
             'unice_tutor_fullname'        => $this->uniceModel->surname . " " . $this->uniceModel->name,
