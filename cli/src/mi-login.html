@@ -1,0 +1,115 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-form/iron-form.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-toast/paper-toast.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="mi-login">
+    <template>
+        <style include="shared-styles">
+            :host {
+                display: block;
+
+                padding: 10px;
+            }
+            .shortInput {
+                display: inline-block;
+                width: 13em;
+            }
+            .longInput {
+                display: inline-block;
+                width: 20em;
+            }
+            .submitAll, .nextStep {
+                float: right;
+            }
+            .nextStep {
+                margin: 1em;
+                padding: 1em;
+            }
+        </style>
+            <iron-form id="formLogin">
+                <form>
+                    <h2 class="loginTitle">Connexion</h2>
+                    <hr>
+                    <br>
+                    <paper-input id="unice_number" required auto-validate pattern="[0-9]{8}" class="shortInput" label="Numéro d'étudiant" error-message="Doit être un numéro d'étudiant valide."></paper-input>
+                    <paper-input id="password" required label="Mot de passe" class="shortInput" type="password"></paper-input>
+                    <br>
+                    <paper-button id="submitLogin" raised class="nextStep">Connexion</paper-button>
+                </form>
+            </iron-form>
+            <br><br>
+            <iron-ajax id="requestBucket" on-response="handleResponse"></iron-ajax>
+    </template>
+
+    <script>
+        class MiLogin extends Polymer.Element {
+            static get is() {
+                return 'mi-login';
+            }
+
+            /**
+             * @function properties()
+             *
+             * MiConv properties
+             * More on : https://www.polymer-project.org/2.0/docs/devguide/properties
+             *
+             * @return Object
+             */
+            static get properties() {
+                return {
+                    server: {
+                        type: String,
+                        value: "http://api.leonard.zone"
+                    },
+                    ironAjax: Object,
+                    toast: Object
+                }
+            }
+
+            /**
+             * @function ready
+             *
+             * When MiConv component gets ready
+             * More on : https://www.polymer-project.org/2.0/docs/about_20#lifecycle-changes
+             *
+             * @return void
+             */
+            ready() {
+                super.ready();
+            }
+
+            _submitLogin(event){
+                console.console.log('Form send !');
+            }
+
+            /**
+             * Handle ironAjax response
+             * @wip
+             *
+             * @return void
+             */
+            handleResponse(data){
+                console.log("🐒 Got response from ironAjax !", data.detail.response);
+            }
+
+        }
+
+        window.customElements.define(MiLogin.is, MiLogin);
+    </script>
+</dom-module>
