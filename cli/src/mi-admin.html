@@ -12,8 +12,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/paper-card/paper-card.html">
 <link rel="import" href="../bower_components/paper-item/paper-item.html">
 <link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
 
+<link rel="import" href="mi-helper.html">
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="mi-admin">
@@ -56,83 +58,44 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <paper-tab>Résolues</paper-tab>
     </paper-tabs> 
     <div>
-      <paper-card class="card-content">
+      <paper-card class="card-content admin">
         <iron-pages selected="{{selected}}">
           <div>
-            <p>Récapitulatif des demandes à résoudre</p>  
+            <h4>Reçues</h4>
             <div role="listbox">
               <paper-item class="student-issue">
                 <paper-item-body>
                   <div>Troll des cavernes</div>
                   <div secondary class="issue-status">En attente de l'entreprise</div>
                 </paper-item-body>
-                <paper-icon-button class="student-action" icon="create" alt="Plus d'informations"></paper-icon-button>
+                <paper-icon-button id="debug" class="student-action" icon="create" alt="Plus d'informations" data-unice="uniceNumber"></paper-icon-button>
               </paper-item>
-
-              <paper-item class="student-issue">
-                  <paper-item-body>
-                    <div>Troll des cavernes</div>
-                    <div secondary class="issue-status">En attente de l'entreprise</div>
-                  </paper-item-body>
-                  <paper-icon-button class="student-action" icon="create" alt="Plus d'informations"></paper-icon-button>                  
-                </paper-item>
-
-              <paper-item class="student-issue">
-                  <paper-item-body>
-                    <div>Troll des cavernes</div>
-                    <div secondary class="issue-status">En attente de l'entreprise</div>
-                  </paper-item-body>
-                  <paper-icon-button class="student-action" icon="create" alt="Plus d'informations"></paper-icon-button>                  
-                </paper-item>
-
-              <paper-item class="student-issue">
-                  <paper-item-body>
-                    <div>Troll des cavernes</div>
-                    <div secondary class="issue-status">En attente de l'entreprise</div>
-                  </paper-item-body>
-                  <paper-icon-button class="student-action" icon="create" alt="Plus d'informations"></paper-icon-button>                  
-                </paper-item>
             </div>
           </div>
           <div>
-            <p>Récapitulatif des demandes résolues</p>
+            <h4>Résolues</h4>
             <div role="listbox">
                 <paper-item class="student-issue">
                   <paper-item-body>
                     <div>Troll des cavernes</div>
                     <div secondary class="issue-status">En attente de l'entreprise</div>
                   </paper-item-body>
-                  <paper-icon-button class="student-action" icon="create" alt="Plus d'informations"></paper-icon-button>
+                  <paper-icon-button class="student-action" icon="create" alt="Plus d'informations" data-unice="uniceNumber"></paper-icon-button>
                 </paper-item>
-  
-                <paper-item class="student-issue">
-                    <paper-item-body>
-                      <div>Troll des cavernes</div>
-                      <div secondary class="issue-status">En attente de l'entreprise</div>
-                    </paper-item-body>
-                    <paper-icon-button class="student-action" icon="create" alt="Plus d'informations"></paper-icon-button>                  
-                  </paper-item>
-  
-                <paper-item class="student-issue">
-                    <paper-item-body>
-                      <div>Troll des cavernes</div>
-                      <div secondary class="issue-status">En attente de l'entreprise</div>
-                    </paper-item-body>
-                    <paper-icon-button class="student-action" icon="create" alt="Plus d'informations"></paper-icon-button>                  
-                  </paper-item>
-  
-                <paper-item class="student-issue">
-                    <paper-item-body>
-                      <div>Troll des cavernes</div>
-                      <div secondary class="issue-status">En attente de l'entreprise</div>
-                    </paper-item-body>
-                    <paper-icon-button class="student-action" icon="create" alt="Plus d'informations"></paper-icon-button>                  
-                  </paper-item>
               </div>
           </div>
         </iron-pages> 
       </paper-card>
     </div>
+    <mi-helper id="helper"></mi-helper>
+    <paper-dialog id="dialog">
+      <h2>[[dialogTitle]]</h2>
+      <p>[[dialogContent]]</p>
+      <div class="buttons">
+        <paper-button dialog-dismiss>Éditer</paper-button>
+        <paper-button dialog-confirm autofocus>Accepter</paper-button>
+      </div>
+    </paper-dialog>
   </template>
 
   <script>
@@ -145,14 +108,38 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           formEtu: Object,
           stepper: Object,
           selected: {
-            type: String,
+            type: Number,
             value: 0,
             notify: true
-          }
+          },
+          dialogTitle: {
+            type: String,
+            notify: true,
+            value: "Null"
+          },
+          dialogContent: {
+            type: String,
+            notify: true,
+            value: "Null"
+          },
+          helper: Object
         }
       }
       ready() {
         super.ready();
+
+        this.helper = this.shadowRoot.querySelector('#helper');
+        this.dialog = this.shadowRoot.querySelector('#dialog');
+
+        this.shadowRoot.querySelector('#debug').addEventListener('click', (event) => {
+          const studentId = event.target.getAttribute('data-unice');
+          // TODO when MiRPC ready : 
+          // Call API to find student info -> authentified call
+          // .then() -> toggle populated
+          this.dialogTitle = "TODO : " + studentId;
+          this.dialogContent = "Call API to find student info.then(populate(this))";
+          this.dialog.toggle();
+        })
       }
     }
 
