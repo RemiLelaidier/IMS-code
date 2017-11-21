@@ -13,6 +13,18 @@ class MiRpc extends Polymer.Element {
 
   ready() {
     super.ready();
+    if(!this.ironAjax){
+      this.ironAjax = document.createElement('iron-ajax');
+      this.ironAjax.id = "requestBucket";
+      document.body.append(this.ironAjax);
+    }
+  }
+
+  connectedCallback(){
+    super.connectedCallback();
+
+    this.ironAjax.addEventListener('response', this._dispatchResponse);
+    this.ironAjax.addEventListener('error', this._dispatchError);
   }
 
   /**
@@ -24,14 +36,6 @@ class MiRpc extends Polymer.Element {
   * @return void
   */
   sendData(url, data, method){
-    if(!this.ironAjax){
-      this.ironAjax = document.createElement('iron-ajax');
-      this.ironAjax.id = "requestBucket";
-      document.body.append(this.ironAjax);
-      // Callaback ;)
-      this.ironAjax.addEventListener('response', this._handleResponse);
-      this.ironAjax.addEventListener('error', this._handleError);
-    }
     this.ironAjax.url = this.server + url;
     this.ironAjax.body = JSON.stringify(data);
     this.ironAjax.handleAs = "json";
@@ -39,12 +43,15 @@ class MiRpc extends Polymer.Element {
     this.ironAjax.generateRequest();
   }
 
-  _handleResponse(data){
-    console.log("handleResponse: ", data.detail);
+  _dispatchResponse(data){
+    // Bubbling ? -> https://www.sitepoint.com/event-bubbling-javascript/
+    const event = new CustomEvent('rpcResponse', {detail: data, bubbles: true});
+    this.dispatchEvent(event);
   }
 
-  _handleError(data){
-    console.log("handleError: ", data.detail);
+  _dispatchError(data){
+    const event = new CustomEvent('rpcError', {detail: data, bubbles: true});
+    this.dispatchEvent(event);
   }
 }
 

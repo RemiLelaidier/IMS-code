@@ -86,7 +86,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     value: "/admin/login"
                   },
                   rpc : Object,
-                  ironAjax: Object,
                   helper: Object
                 }
             }
@@ -101,9 +100,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
              */
             ready() {
                 super.ready();
-                this.rpc = this.shadowRoot.getElementById('rpc');
+
                 this.helper = this.shadowRoot.getElementById('helper');
-                this.ironAjax = this.shadowRoot.getElementById('requestBucket');
+                this.rpc = this.shadowRoot.getElementById('rpc');
+
+                // Listening for MiRPC service
+                window.addEventListener('rpcError', (event) => this._onRpcError(event));
+                window.addEventListener('rpcResponse', (event) => this._onRpcResponse(event));
+            }
+
+            attached(){
+                super.attached();
             }
 
             /**
@@ -133,13 +140,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             }
 
             /**
-             * Handle ironAjax response
-             * @wip
+             * @function _onRpcResponse
+             *
+             * When MiRPC send a response event
              *
              * @return void
              */
-            handleResponse(data){
-                console.log("🐒 Got response from ironAjax !", data.detail.response);
+            _onRpcResponse(event){
+                console.log("🐒 Got response from miRpc !", event.detail);
+            }
+
+            /**
+             * @function _onRpcError
+             *
+             * When MiRPC send an error event
+             *
+             * @return void
+             */
+            _onRpcError(event){
+                console.log("error retrieved miRpc :", event.detail)
             }
 
         }

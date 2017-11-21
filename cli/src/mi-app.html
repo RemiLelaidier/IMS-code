@@ -15,7 +15,7 @@
 
 <link rel="import" href="mi-icons.html">
 
-<link rel="lazy-import" href="mi-conv.html">
+<link rel="lazy-import" href="mi-home.html">
 <link rel="lazy-import" href="mi-login.html">
 <link rel="lazy-import" href="mi-admin.html">
 <link rel="lazy-import" href="mi-view404.html">
@@ -72,6 +72,9 @@
       a:visited paper-icon-button {
         color: #fff;
       }
+      div[main-title] {
+        margin-left: 1em;
+      }
     </style>
 
     <app-location
@@ -92,9 +95,9 @@
 
         <app-header slot="header" condenses reveals effects="waterfall">
           <app-toolbar>
+            <div class="logoMiage"><a name="convention" class="homeBtn"><img class="logoMiageDetail" src="/images/logo_miage_thumb.png" alt="Miage Nice"></a></div>              
             <div main-title>Gestion des stages</div>
-            <paper-icon-button id="loginBtn" icon="perm-identity"></paper-icon-button>
-            <div class="logoMiage"><a name="convention" class="homeBtn"><img class="logoMiageDetail" src="/images/logo_miage_thumb.png" alt="Miage Nice"></a></div>
+            <paper-icon-button id="loginBtn" icon="perm-identity"></paper-icon-button>            
           </app-toolbar>
         </app-header>
 
@@ -103,7 +106,7 @@
             attr-for-selected="name"
             fallback-selection="view404"
             role="main">
-          <mi-conv name="conv"></mi-conv>
+          <mi-conv name="home"></mi-conv>
           <mi-login name="login"></mi-login>
           <mi-admin name="admin"></mi-admin>
           <mi-view404 name="view404"></mi-view404>
@@ -149,16 +152,12 @@
         // as our code is processed in ES5 after, it doesn't matter, we can use ES6 features now.
 
         this.shadowRoot.querySelector('.homeBtn').addEventListener('click', (homeLink) => {
-          this.redirectTo('conv')
+          this.set('route.path', 'home');
         });
 
         this.shadowRoot.querySelector('#loginBtn').addEventListener('click', (event) => {
-          this.redirectTo('login');
+          this.set('route.path', 'login');
         });
-      }
-
-      redirectTo(page){
-        this.page = page;
       }
 
       _routePageChanged(page) {
@@ -167,7 +166,7 @@
         if (page == "admin"){
           // Check auth in that case
         }
-        this.page = page || 'conv';
+        this.page = page || 'home';
       }
 
       _pageChanged(page) {
