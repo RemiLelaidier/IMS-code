@@ -18,6 +18,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/paper-card/paper-card.html">
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 
+<link rel="import" href="mi-helper.html">
+
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="mi-login">
@@ -46,16 +48,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <form>
                     <paper-card id="loginForm">
                         <div class="card-content">
-                            <paper-input id="unice_number" required auto-validate pattern="[0-9]{8}" class="shortInput" label="Numéro Unice" error-message="Doit être un numéro d'étudiant valide."></paper-input>           
+                            <paper-input id="unice_number" required auto-validate pattern="[0-9]{8}" class="shortInput" label="Numéro Unice" error-message="Doit être un numéro d'étudiant valide."></paper-input>
                             <paper-input id="password" required label="Mot de passe" class="shortInput" type="password"></paper-input>
                         </div>
                         <div class="card-actions">
-                            <paper-button id="submitLogin" raised>Connexion</paper-button>
+                            <paper-button id="submitLogin" on-click="_submitLogin" raised>Connexion</paper-button>
                         </div>
                     </paper-card>
                 </form>
             </iron-form>
             <br><br>
+            <mi-helper id="helper"></mi-helper>
             <iron-ajax id="requestBucket" on-response="handleResponse"></iron-ajax>
     </template>
 
@@ -75,11 +78,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
              */
             static get properties() {
                 return {
-                    server: {
-                        type: String,
-                        value: "http://api.leonard.zone"
-                    },
-                    ironAjax: Object
+                  authUrl: {
+                    type: String,
+                    value: "/admin/login"
+                  },
+                  server: {
+                      type: String,
+                      value: "http://api.leonard.zone"
+                  },
+                  ironAjax: Object,
+                  helper: Object
                 }
             }
 
@@ -93,6 +101,49 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
              */
             ready() {
                 super.ready();
+                this.helper = this.shadowRoot.getElementById('helper');
+                this.ironAjax = this.shadowRoot.getElementById('requestBucket');
+            }
+
+            /**
+             * @function _submitLogin
+             *
+             * When login form is submit
+             *
+             * @return void
+             */
+            _submitLogin(event){
+                let clicked = Polymer.dom(event).localTarget;
+                let form = clicked.parentElement.parentElement.parentElement.parentElement;
+
+                // If form is valid
+                if(form.validate()){
+                  let userInput = form.querySelector('#unice_number');
+                  let passInput = form.querySelector('#password');
+
+                  let structuredData = {
+                    username: userInput.value,
+                    password: passInput.value };
+                  this.sendCredentials(structuredData);
+                }
+                else{
+                  this.helper.showToast("Vérifiez votre saisie");
+                }
+            }
+
+            /**
+            * @function sendCredentials
+            * @param structuredData : username & password
+            * Response in : handleResponse
+            *
+            * @return void
+            */
+            sendCredentials(structuredData){
+              this.ironAjax.url = this.server + this.authUrl;
+              this.ironAjax.body = JSON.stringify(structuredData);
+              this.ironAjax.handleAs = "json";
+              this.ironAjax.method = "POST";
+              this.ironAjax.generateRequest();
             }
 
             /**
