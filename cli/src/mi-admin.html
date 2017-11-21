@@ -9,6 +9,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
 
 <link rel="import" href="shared-styles.html">
 
@@ -20,16 +24,114 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         padding: 10px;
       }
+
+      .card-content {
+        --paper-card-header-text: {
+          border-bottom: 1px solid #000;
+        };
+      }
+
+      #tabs {
+        --paper-tabs-selection-bar-color:#92d12d;
+        --paper-tabs-container: {
+          width: 100%;
+          background: #8ba0ab;
+          color: #fff;
+        }
+      }
+
+      .student-issue .issue-status {
+        font-size: 0.8em;
+        margin-left: 20px;
+      }
+
+      .student-issue .student-action {
+        position: absolute;
+        right: 0;
+      }
     </style>
 
+    <paper-tabs id="tabs" selected="{{selected}}">
+      <paper-tab>Reçues</paper-tab>
+      <paper-tab>Résolues</paper-tab>
+    </paper-tabs> 
     <div>
-      <h1>Admin Panel</h1>
-      <p>Récapitulatif des demandes à traiter</p>
+      <paper-card class="card-content">
+        <iron-pages selected="{{selected}}">
+          <div>
+            <p>Récapitulatif des demandes à résoudre</p>  
+            <div role="listbox">
+              <paper-item class="student-issue">
+                <paper-item-body>
+                  <div>Troll des cavernes</div>
+                  <div secondary class="issue-status">En attente de l'entreprise</div>
+                </paper-item-body>
+                <paper-icon-button class="student-action" icon="create" alt="Plus d'informations"></paper-icon-button>
+              </paper-item>
 
-      <h2>Demandes en attente</h2>
-      <hr>
-      <h2>Demandes traitées</h2>
-      <p>Ominisearch?</p>
+              <paper-item class="student-issue">
+                  <paper-item-body>
+                    <div>Troll des cavernes</div>
+                    <div secondary class="issue-status">En attente de l'entreprise</div>
+                  </paper-item-body>
+                  <paper-icon-button class="student-action" icon="create" alt="Plus d'informations"></paper-icon-button>                  
+                </paper-item>
+
+              <paper-item class="student-issue">
+                  <paper-item-body>
+                    <div>Troll des cavernes</div>
+                    <div secondary class="issue-status">En attente de l'entreprise</div>
+                  </paper-item-body>
+                  <paper-icon-button class="student-action" icon="create" alt="Plus d'informations"></paper-icon-button>                  
+                </paper-item>
+
+              <paper-item class="student-issue">
+                  <paper-item-body>
+                    <div>Troll des cavernes</div>
+                    <div secondary class="issue-status">En attente de l'entreprise</div>
+                  </paper-item-body>
+                  <paper-icon-button class="student-action" icon="create" alt="Plus d'informations"></paper-icon-button>                  
+                </paper-item>
+            </div>
+          </div>
+          <div>
+            <p>Récapitulatif des demandes résolues</p>
+            <div role="listbox">
+                <paper-item class="student-issue">
+                  <paper-item-body>
+                    <div>Troll des cavernes</div>
+                    <div secondary class="issue-status">En attente de l'entreprise</div>
+                  </paper-item-body>
+                  <paper-icon-button class="student-action" icon="create" alt="Plus d'informations"></paper-icon-button>
+                </paper-item>
+  
+                <paper-item class="student-issue">
+                    <paper-item-body>
+                      <div>Troll des cavernes</div>
+                      <div secondary class="issue-status">En attente de l'entreprise</div>
+                    </paper-item-body>
+                    <paper-icon-button class="student-action" icon="create" alt="Plus d'informations"></paper-icon-button>                  
+                  </paper-item>
+  
+                <paper-item class="student-issue">
+                    <paper-item-body>
+                      <div>Troll des cavernes</div>
+                      <div secondary class="issue-status">En attente de l'entreprise</div>
+                    </paper-item-body>
+                    <paper-icon-button class="student-action" icon="create" alt="Plus d'informations"></paper-icon-button>                  
+                  </paper-item>
+  
+                <paper-item class="student-issue">
+                    <paper-item-body>
+                      <div>Troll des cavernes</div>
+                      <div secondary class="issue-status">En attente de l'entreprise</div>
+                    </paper-item-body>
+                    <paper-icon-button class="student-action" icon="create" alt="Plus d'informations"></paper-icon-button>                  
+                  </paper-item>
+              </div>
+          </div>
+        </iron-pages> 
+      </paper-card>
     </div>
   </template>
 
@@ -41,7 +143,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       static get properties() {
         return {
           formEtu: Object,
-          stepper: Object
+          stepper: Object,
+          selected: {
+            type: String,
+            value: 0,
+            notify: true
+          }
         }
       }
       ready() {
