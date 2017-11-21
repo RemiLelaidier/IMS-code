@@ -19,6 +19,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 
 <link rel="import" href="mi-helper.html">
+<link rel="import" href="mi-rpc.html">
 
 <link rel="import" href="shared-styles.html">
 
@@ -58,6 +59,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 </form>
             </iron-form>
             <br><br>
+
+            <mi-rpc id="rpc"></mi-rpc>
             <mi-helper id="helper"></mi-helper>
             <iron-ajax id="requestBucket" on-response="handleResponse"></iron-ajax>
     </template>
@@ -82,10 +85,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     type: String,
                     value: "/admin/login"
                   },
-                  server: {
-                      type: String,
-                      value: "http://api.leonard.zone"
-                  },
+                  rpc : Object,
                   ironAjax: Object,
                   helper: Object
                 }
@@ -101,6 +101,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
              */
             ready() {
                 super.ready();
+                this.rpc = this.shadowRoot.getElementById('rpc');
                 this.helper = this.shadowRoot.getElementById('helper');
                 this.ironAjax = this.shadowRoot.getElementById('requestBucket');
             }
@@ -124,26 +125,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                   let structuredData = {
                     username: userInput.value,
                     password: passInput.value };
-                  this.sendCredentials(structuredData);
+                  this.rpc.sendData(this.authUrl, structuredData, "POST");
                 }
                 else{
                   this.helper.showToast("Vérifiez votre saisie");
                 }
-            }
-
-            /**
-            * @function sendCredentials
-            * @param structuredData : username & password
-            * Response in : handleResponse
-            *
-            * @return void
-            */
-            sendCredentials(structuredData){
-              this.ironAjax.url = this.server + this.authUrl;
-              this.ironAjax.body = JSON.stringify(structuredData);
-              this.ironAjax.handleAs = "json";
-              this.ironAjax.method = "POST";
-              this.ironAjax.generateRequest();
             }
 
             /**

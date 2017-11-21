@@ -1,0 +1,48 @@
+<script>
+/**
+* NEED CALLABACK for handleResponse
+*/
+class MiRpc extends Polymer.Element {
+
+  static get properties(){
+    return {
+      server: {
+        type: String,
+        value: "http://api.leonard.zone"
+      },
+      ironAjax: Object
+    }
+  }
+
+  ready() {
+    super.ready();
+  }
+
+  /**
+  * @function sendData
+  * @param url : url to the api functionnality
+  * @param data : structured data
+  * @param method : http method
+  *
+  * @return void
+  */
+  sendData(url, data, method){
+    if(!this.ironAjax){
+      this.ironAjax = document.createElement('iron-ajax');
+      this.ironAjax.id = "requestBucket";
+      document.body.append(this.ironAjax);
+    }
+    this.ironAjax.url = this.server + url;
+    this.ironAjax.body = JSON.stringify(data);
+    this.ironAjax.handleAs = "json";
+    this.ironAjax.method = method;
+    this.ironAjax.generateRequest();
+  }
+
+  _handleResponse(data){
+    // TODO
+  }
+}
+
+customElements.define('mi-rpc', MiRpc);
+</script>
