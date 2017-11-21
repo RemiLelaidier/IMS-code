@@ -17,7 +17,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/paper-input/paper-textarea.html">
 <link rel="import" href="../bower_components/paper-toast/paper-toast.html">
 <link rel="import" href="../bower_components/paper-card/paper-card.html">
-<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../bower_components/app-storage/app-localstorage/app-localstorage-document.html">
 
 <link rel="import" href="mi-helper.html">
@@ -102,9 +101,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         <mi-rpc id="rpc"></mi-rpc>
         <mi-helper id="helper"></mi-helper>
-        <iron-ajax id="requestBucket" on-response="handleResponse"></iron-ajax>
 
-        <app-localstorage-document id="localStorage" key="auth" data="{{token}}"></app-localstorage-document>
+        <app-localstorage-document id="localStorage" key="token" data="{{token}}"></app-localstorage-document>
     </template>
 
     <script>
