@@ -33,6 +33,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         };
       }
 
+      .card-content.admin {
+        padding: 0;
+      }
+
       #tabs {
         --paper-tabs-selection-bar-color:#92d12d;
         --paper-tabs-container: {
@@ -42,14 +46,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
       }
 
+      .student-issue {
+        padding-top: .5em;
+      }
+
       .student-issue .issue-status {
-        font-size: 0.8em;
+        font-size: .8em;
         margin-left: 20px;
       }
 
       .student-issue .student-action {
         position: absolute;
-        right: 0;
+        right: .5em;
       }
     </style>
 
@@ -60,27 +68,32 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <div>
       <paper-card class="card-content admin">
         <iron-pages selected="{{selected}}">
-          <div>
-            <h4>Reçues</h4>
+          <div class="issues-waiting">
             <div role="listbox">
               <paper-item class="student-issue">
                 <paper-item-body>
-                  <div>Troll des cavernes</div>
+                  <div>Ned Vizzini</div>
                   <div secondary class="issue-status">En attente de l'entreprise</div>
                 </paper-item-body>
                 <paper-icon-button id="debug" class="student-action" icon="create" alt="Plus d'informations" data-unice="uniceNumber"></paper-icon-button>
               </paper-item>
-            </div>
-          </div>
-          <div>
-            <h4>Résolues</h4>
-            <div role="listbox">
-                <paper-item class="student-issue">
+              <paper-item class="student-issue">
                   <paper-item-body>
-                    <div>Troll des cavernes</div>
+                    <div>Roi Balthazar</div>
                     <div secondary class="issue-status">En attente de l'entreprise</div>
                   </paper-item-body>
-                  <paper-icon-button class="student-action" icon="create" alt="Plus d'informations" data-unice="uniceNumber"></paper-icon-button>
+                  <paper-icon-button id="debug" class="student-action" icon="create" alt="Plus d'informations" data-unice="uniceNumber"></paper-icon-button>
+                </paper-item>
+            </div>
+          </div>
+          <div class="issues-resolved">
+            <div role="listbox">
+                <paper-item class="student-issue" disabled>
+                  <paper-item-body>
+                    <div>Serge Miranda</div>
+                    <div secondary class="issue-status">Archivée</div>
+                  </paper-item-body>
+                  <paper-icon-button class="student-action" icon="assignment-ind" alt="Plus d'informations" data-unice="uniceNumber"></paper-icon-button>
                 </paper-item>
               </div>
           </div>
