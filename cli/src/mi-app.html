@@ -10,6 +10,7 @@
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
 
 <link rel="import" href="mi-icons.html">
 
@@ -64,6 +65,12 @@
       .loginMenu{
         margin-right: 30px
       }
+
+      a paper-icon-button,
+      a:active paper-icon-button,
+      a:visited paper-icon-button {
+        color: #fff;
+      }
     </style>
 
     <app-location
@@ -84,14 +91,13 @@
 
         <app-header slot="header" condenses reveals effects="waterfall">
           <app-toolbar>
-            <paper-icon-button icon="my-icons:menu" drawer-toggle></paper-icon-button>
             <div main-title>Gestion des stages</div>
-            <div class="loginMenu"><a name="login" href="[[rootPath]]login">Connexion</a></div>
-            <div class="logoMiage"><a name="convention" href="[[rootPath]]"><img class="logoMiageDetail" src="/images/logo_miage_thumb.png" alt="Miage Nice"></a></div>
+            <paper-icon-button id="loginBtn" icon="perm-identity"></paper-icon-button>
+            <div class="logoMiage"><a name="convention" class="homeBtn"><img class="logoMiageDetail" src="/images/logo_miage_thumb.png" alt="Miage Nice"></a></div>
           </app-toolbar>
         </app-header>
 
-        <iron-pages
+        <iron-pages id="pages"
             selected="[[page]]"
             attr-for-selected="name"
             fallback-selection="view404"
@@ -128,6 +134,30 @@
         return [
           '_routePageChanged(routeData.page)',
         ];
+      }
+      
+      ready(){
+        super.ready();
+        
+        this.setListeners();
+      }
+
+      setListeners(){
+        // Note that we are using arrow functions coz' this is passed, so we don't have to do something like :
+        // let self = this;
+        // as our code is processed in ES5 after, it doesn't matter, we can use ES6 features now.
+
+        this.shadowRoot.querySelector('.homeBtn').addEventListener('click', (homeLink) => {
+          this.redirectTo('conv')
+        });
+
+        this.shadowRoot.querySelector('#loginBtn').addEventListener('click', (event) => {
+          this.redirectTo('login');
+        });
+      }
+
+      redirectTo(page){
+        this.page = page;
       }
 
       _routePageChanged(page) {
