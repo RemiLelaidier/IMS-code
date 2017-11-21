@@ -9,15 +9,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../bower_components/iron-form/iron-form.html">
-<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
-<link rel="import" href="../bower_components/paper-stepper/paper-stepper.html">
-<link rel="import" href="../bower_components/paper-item/paper-item.html">
-<link rel="import" href="../bower_components/paper-input/paper-input.html">
-<link rel="import" href="../bower_components/paper-input/paper-textarea.html">
-<link rel="import" href="../bower_components/paper-toast/paper-toast.html">
-<link rel="import" href="../bower_components/paper-card/paper-card.html">
-<link rel="import" href="../bower_components/app-storage/app-localstorage/app-localstorage-document.html">
 
 <link rel="import" href="mi-helper.html">
 <link rel="import" href="mi-rpc.html">
@@ -149,7 +140,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                         notify: true
                     },
                     localStorage: {
-                        type: Object
+                        type: Object,
+                        value: {},
+                        notify: true
                     },
                     logName: {
                         type: String,
@@ -173,6 +166,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 this.rpc = this.shadowRoot.getElementById('rpc');
                 this.dialog = this.shadowRoot.getElementById('dialog');
                 this.localStorage = this.shadowRoot.getElementById('localStorage');
+
+                if(!this.token)
+                    this.token = "";
 
                 // Listening for MiRPC service
                 window.addEventListener('rpcError', (event) => this._onRpcError(event));
@@ -217,7 +213,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
              * @return void
              */
             _onRpcResponse(event) {
-                this.localStorage.saveValue({"token": event.detail.response});
+                this.localStorage.token = {"token": event.detail.response};
                 this.helper.showToast("Vous êtes connecté !");
                 console.log(this.logName, "you are logged in, token set:", event.detail.response);
             }
