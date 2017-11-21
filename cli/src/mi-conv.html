@@ -22,6 +22,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/titanium-address-input/titanium-address-input.html">
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 
+<link rel="import" href="mi-helper.html">
+
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="mi-conv">
@@ -204,7 +206,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 				<paper-step></paper-step>
 				<paper-step></paper-step>
 			</paper-stepper>
-
+      <mi-helper id="helper"></mi-helper>
       <iron-ajax id="requestBucket" on-response="handleResponse"></iron-ajax>
   </template>
 
@@ -231,7 +233,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           formEtu: Object,
           stepper: Object,
           ironAjax: Object,
-          toast: Object
+          helper: Object
         }
       }
 
@@ -249,6 +251,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         this.stepper = this.shadowRoot.getElementById('stepper');
         this.formEtu = this.shadowRoot.getElementById('formEtu');
         this.ironAjax = this.shadowRoot.getElementById('requestBucket');
+        this.helper = this.shadowRoot.getElementById('helper');
       }
 
       /**
@@ -283,7 +286,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           //this.stepper._tapNext();
 
           // Ooops, let's show a little material toast !
-          this.showToast("Vérifiez votre saisie.");
+          this.helper.showToast("Vérifiez votre saisie.");
         }
       }
 
@@ -346,7 +349,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         // Send everything
         this.sendConventionAs(structuredData);
 
-        this.showToast("Merci d'avoir complété le formulaire, vous recevrez un e-mail après validation des informations.");
+        this.helper.showToast("Merci d'avoir complété le formulaire, vous recevrez un e-mail après validation des informations.");
 
         return structuredData;
       }
@@ -365,25 +368,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         this.ironAjax.handleAs = "json";
         this.ironAjax.method = "POST";
         this.ironAjax.generateRequest();
-      }
-
-      /**
-      * @function showToast
-      * @param text
-      *
-      * Create + append a paper-toast on the fly
-      * Populate text attribute
-      *
-      * @return void
-      */
-      showToast(text){
-          if(!this.toast) {
-              this.toast = document.createElement('paper-toast');
-              document.body.appendChild(this.toast);
-          }
-
-          this.toast.text = text;
-          this.toast.open();
       }
 
       /**

@@ -1,0 +1,42 @@
+<script>
+/**
+* Generic helper for **UI** elements
+*/
+class MiHelper extends Polymer.Element {
+
+  static get properties(){
+    return {
+      toast: Object
+    }
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+  }
+
+  ready() {
+    super.ready();
+  }
+
+/**
+  * @function showToast
+  * @param text
+  *
+  * Create + append a paper-toast on the fly
+  * Populate text attribute
+  *
+  * @return void
+  */
+  showToast(text){
+    if(!this.toast) {
+      this.toast = document.createElement('paper-toast');
+      document.body.appendChild(this.toast);
+    }
+
+    this.toast.text = text;
+    this.toast.open();
+  }
+}
+
+customElements.define('mi-helper', MiHelper);
+</script>
