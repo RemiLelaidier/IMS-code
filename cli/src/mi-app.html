@@ -12,6 +12,8 @@
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../bower_components/paper-menu-button/paper-menu-button.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
 
 <link rel="import" href="mi-icons.html">
 
@@ -72,8 +74,15 @@
       a:visited paper-icon-button {
         color: #fff;
       }
+
       div[main-title] {
         margin-left: 1em;
+      }
+
+      #debugMenu {
+        --paper-menu-button-dropdown: {
+          color: #000;
+        }
       }
     </style>
 
@@ -97,7 +106,13 @@
           <app-toolbar>
             <div class="logoMiage"><a name="convention" class="homeBtn"><img class="logoMiageDetail" src="/images/logo_miage_thumb.png" alt="Miage Nice"></a></div>              
             <div main-title>Gestion des stages</div>
-            <paper-icon-button id="loginBtn" icon="perm-identity"></paper-icon-button>            
+            <paper-menu-button id="debugMenu" horizontal-align="right" horizontal-offset="50">
+                <paper-icon-button icon="bug-report" slot="dropdown-trigger" alt="menu"></paper-icon-button>
+                <paper-listbox slot="dropdown-content">               
+                  <paper-item on-click="x_goToAdmin">Admin panel</paper-item>
+                </paper-listbox>
+            </paper-menu-button>    
+            <paper-icon-button id="loginBtn" icon="perm-identity"></paper-icon-button>        
           </app-toolbar>
         </app-header>
 
@@ -142,8 +157,21 @@
       
       ready(){
         super.ready();
-        
+      }
+
+      connectedCallback(){
+        super.connectedCallback();
+
         this.setListeners();
+        this.checkDebugMenu();
+      }
+
+      checkDebugMenu(){
+        if(window.location.origin.includes('beta')){
+          this.shadowRoot.querySelector('#debugMenu').style.display = "none";
+        } else {
+          this.shadowRoot.querySelector('#debugMenu').style.display = "block";
+        }
       }
 
       setListeners(){
@@ -181,6 +209,10 @@
 
       _showPage404() {
         this.page = 'view404';
+      }
+
+      x_goToAdmin(){
+        this.set('route.path', 'admin');
       }
     }
 
