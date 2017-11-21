@@ -40,10 +40,11 @@ class MiRpc extends Polymer.Element {
   }
 
   _handleResponse(data){
-    console.log("handleResponse: ", data);
+    console.log("handleResponse: ", data.detail);
   }
+
   _handleError(data){
-    console.log("handleError: ", data);
+    console.log("handleError: ", data.detail);
   }
 }
 
