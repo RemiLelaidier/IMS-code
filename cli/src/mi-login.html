@@ -14,6 +14,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/paper-stepper/paper-stepper.html">
 <link rel="import" href="../bower_components/paper-item/paper-item.html">
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-input/paper-textarea.html">
 <link rel="import" href="../bower_components/paper-toast/paper-toast.html">
 <link rel="import" href="../bower_components/paper-card/paper-card.html">
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
@@ -26,43 +27,81 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <dom-module id="mi-login">
     <template>
         <style include="shared-styles">
-            :host {
+             :host {
                 display: block;
 
                 padding: 10px;
             }
+
             #password {
                 display: block;
             }
 
             #loginForm {
-                width: 100%;
+                padding: 20px;
+                width: 30em;
             }
+
             #submitLogin {
                 float: right;
                 padding: 1em;
                 margin: 1em;
             }
         </style>
-            <h2 class="loginTitle">Connexion</h2>
-            <iron-form id="formLogin">
-                <form>
-                    <paper-card id="loginForm">
-                        <div class="card-content">
-                            <paper-input id="unice_number" required auto-validate pattern="[0-9]{8}" class="shortInput" label="Numéro Unice" error-message="Doit être un numéro d'étudiant valide."></paper-input>
-                            <paper-input id="password" required label="Mot de passe" class="shortInput" type="password"></paper-input>
-                        </div>
-                        <div class="card-actions">
-                            <paper-button id="submitLogin" on-click="_submitLogin" raised>Connexion</paper-button>
-                        </div>
-                    </paper-card>
-                </form>
-            </iron-form>
-            <br><br>
+        <h2 class="loginTitle">Connexion</h2>
+        <div class="grid">
+            <div class="row mid">
+                <iron-form id="formLogin">
+                    <form>
+                        <paper-card id="loginForm">
+                            <div class="card-content">
+                                <paper-input id="unice_number" required auto-validate pattern="[0-9]{8}" class="shortInput" label="Numéro Unice" error-message="Doit être un numéro d'étudiant valide."></paper-input>
+                                <paper-input id="password" required label="Mot de passe" class="shortInput" type="password"></paper-input>
+                            </div>
+                            <div class="card-actions">
+                                <paper-button id="submitLogin" on-click="_submitLogin" raised>Connexion</paper-button>
+                            </div>
+                        </paper-card>
+                    </form>
+                </iron-form>
+            </div>
+            <div>
+                <paper-card>
+                    <div class="card-actions">
+                        <p>Des problèmes de connexion ?</p>
+                        <paper-button on-click="_openResetPass">Réinitialiser</paper-button>
+                        <paper-button on-click="_openContactUs">Nous contacter</paper-button>
+                    </div>
+                </paper-card>
+            </div>
+        </div>
 
-            <mi-rpc id="rpc"></mi-rpc>
-            <mi-helper id="helper"></mi-helper>
-            <iron-ajax id="requestBucket" on-response="handleResponse"></iron-ajax>
+        <paper-dialog id="dialog">
+            <h2>[[dialogTitle]]</h2>
+            <p>[[dialogContent]]</p>
+            <template is="dom-if" if="{{dialogContactUs}}">
+                    <iron-form>
+                    <form>
+                        <paper-input id="unice_number" required auto-validate pattern="[0-9]{8}" class="shortInput" label="Numéro Unice" error-message="Doit être un numéro d'étudiant valide."></paper-input>
+                        <paper-textarea id="contactUs-text" required label="Message" error-message="Doit être rempli"></paper-textarea>
+                    </form>
+                </iron-form>
+            </template>
+            <template is="dom-if" if="{{dialogResetPass}}">
+                    <iron-form>
+                    <form>
+                        <paper-input id="studentEmail" required auto-validate pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"  class="shortInput" label="E-mail" error-message="Doit être un e-mail valide"></paper-input>
+                    </form>
+                </iron-form>
+            </template>
+            <div class="buttons">
+                <paper-button dialog-confirm autofocus>Ok</paper-button>
+            </div>
+        </paper-dialog>
+
+        <mi-rpc id="rpc"></mi-rpc>
+        <mi-helper id="helper"></mi-helper>
+        <iron-ajax id="requestBucket" on-response="handleResponse"></iron-ajax>
     </template>
 
     <script>
@@ -81,12 +120,33 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
              */
             static get properties() {
                 return {
-                  authUrl: {
-                    type: String,
-                    value: "/admin/login"
-                  },
-                  rpc : Object,
-                  helper: Object
+                    authUrl: {
+                        type: String,
+                        value: "/admin/login"
+                    },
+                    rpc: Object,
+                    helper: Object,
+                    dialog: Object,
+                    dialogTitle: {
+                        type: String,
+                        value: "Nil",
+                        notify: true
+                    },
+                    dialogContent: {
+                        type: String,
+                        value: "Nil",
+                        notify: true
+                    },
+                    dialogContactUs: {
+                        type: Boolean,
+                        value: false,
+                        notify: true
+                    },
+                    dialogResetPass: {
+                        type: Boolean,
+                        value: false,
+                        notify: true
+                    }
                 }
             }
 
@@ -103,13 +163,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
                 this.helper = this.shadowRoot.getElementById('helper');
                 this.rpc = this.shadowRoot.getElementById('rpc');
+                this.dialog = this.shadowRoot.getElementById('dialog');
 
                 // Listening for MiRPC service
                 window.addEventListener('rpcError', (event) => this._onRpcError(event));
                 window.addEventListener('rpcResponse', (event) => this._onRpcResponse(event));
             }
 
-            attached(){
+            attached() {
                 super.attached();
             }
 
@@ -120,22 +181,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
              *
              * @return void
              */
-            _submitLogin(event){
+            _submitLogin(event) {
                 let clicked = Polymer.dom(event).localTarget;
                 let form = clicked.parentElement.parentElement.parentElement.parentElement;
 
                 // If form is valid
-                if(form.validate()){
-                  let userInput = form.querySelector('#unice_number');
-                  let passInput = form.querySelector('#password');
+                if (form.validate()) {
+                    let userInput = form.querySelector('#unice_number');
+                    let passInput = form.querySelector('#password');
 
-                  let structuredData = {
-                    username: userInput.value,
-                    password: passInput.value };
-                  this.rpc.sendData(this.authUrl, structuredData, "POST");
-                }
-                else{
-                  this.helper.showToast("Vérifiez votre saisie");
+                    let structuredData = {
+                                            username: userInput.value,
+                                            password: passInput.value
+                                         };
+                    this.rpc.sendData(this.authUrl, structuredData, "POST");
+                } else {
+                    this.helper.showToast("Vérifiez votre saisie");
                 }
             }
 
@@ -146,7 +207,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
              *
              * @return void
              */
-            _onRpcResponse(event){
+            _onRpcResponse(event) {
                 console.log("🐒 Got response from miRpc !", event.detail);
             }
 
@@ -157,8 +218,29 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
              *
              * @return void
              */
-            _onRpcError(event){
-                console.log("error retrieved miRpc :", event.detail)
+            _onRpcError(event) {
+                console.log("error retrieved miRpc :", event.detail);
+            }
+
+            _openContactUs(event) {
+                // Ensure if contact us was opened before that everything is re-toggled
+                this.dialogResetPass = false;
+                this.dialogContactUs = true;
+
+                this._fireDialog("Nous contacter", "Pour tout contact, merci de remplir le formulaire ci-dessous");
+            }
+
+            _openResetPass(event) {
+                this.dialogContactUs = false; // same as top but inverted
+                this.dialogResetPass = true;
+
+                this._fireDialog("Réinitialiser le mot de passe", "Merci de fournir l'e-mail écrit sur la convention de stage");
+            }
+
+            _fireDialog(title, content){
+                this.dialogTitle = title;
+                this.dialogContent = content;
+                this.dialog.open();
             }
 
         }
