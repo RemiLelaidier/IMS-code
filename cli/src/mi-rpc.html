@@ -37,6 +37,7 @@ class MiRpc extends Polymer.Element {
   */
   sendData(url, data, method){
     this.ironAjax.url = this.server + url;
+    this.ironAjax.contentType = "application/json";
     this.ironAjax.body = JSON.stringify(data);
     this.ironAjax.handleAs = "json";
     this.ironAjax.method = method;
@@ -45,12 +46,12 @@ class MiRpc extends Polymer.Element {
 
   _dispatchResponse(data){
     // Bubbling ? -> https://www.sitepoint.com/event-bubbling-javascript/
-    const event = new CustomEvent('rpcResponse', {detail: data, bubbles: true});
+    const event = new CustomEvent('rpcResponse', {detail: data.detail, bubbles: true});
     this.dispatchEvent(event);
   }
 
   _dispatchError(data){
-    const event = new CustomEvent('rpcError', {detail: data, bubbles: true});
+    const event = new CustomEvent('rpcError', {detail: data.detail, bubbles: true});
     this.dispatchEvent(event);
   }
 }

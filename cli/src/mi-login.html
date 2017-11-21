@@ -18,6 +18,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/paper-toast/paper-toast.html">
 <link rel="import" href="../bower_components/paper-card/paper-card.html">
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/app-storage/app-localstorage/app-localstorage-document.html">
 
 <link rel="import" href="mi-helper.html">
 <link rel="import" href="mi-rpc.html">
@@ -102,6 +103,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <mi-rpc id="rpc"></mi-rpc>
         <mi-helper id="helper"></mi-helper>
         <iron-ajax id="requestBucket" on-response="handleResponse"></iron-ajax>
+
+        <app-localstorage-document id="localStorage" key="auth" data="{{token}}"></app-localstorage-document>
     </template>
 
     <script>
@@ -146,6 +149,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                         type: Boolean,
                         value: false,
                         notify: true
+                    },
+                    localStorage: {
+                        type: Object
+                    },
+                    logName: {
+                        type: String,
+                        value: "🐦 MiRPC::"
                     }
                 }
             }
@@ -164,6 +174,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 this.helper = this.shadowRoot.getElementById('helper');
                 this.rpc = this.shadowRoot.getElementById('rpc');
                 this.dialog = this.shadowRoot.getElementById('dialog');
+                this.localStorage = this.shadowRoot.getElementById('localStorage');
 
                 // Listening for MiRPC service
                 window.addEventListener('rpcError', (event) => this._onRpcError(event));
@@ -208,7 +219,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
              * @return void
              */
             _onRpcResponse(event) {
-                console.log("🐒 Got response from miRpc !", event.detail);
+                this.localStorage.saveValue({"token": event.detail.response});
+                this.helper.showToast("Vous êtes connecté !");
+                console.log(this.logName, "you are logged in, token set:", event.detail.response);
             }
 
             /**
@@ -219,7 +232,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
              * @return void
              */
             _onRpcError(event) {
-                console.log("error retrieved miRpc :", event.detail);
+                this.helper.showToast("Erreur de connexion");
+                console.warn(this.logName, event.detail.error);
             }
 
             _openContactUs(event) {
