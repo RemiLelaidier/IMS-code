@@ -265,6 +265,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       constructor(){
         super();
+
+       /*
+        * "What is this?" => 
+        * http://robdodson.me/interoperable-custom-elements/
+        * https://developers.google.com/web/fundamentals/web-components/shadowdom
+        */
         this._shadowRoot = this.attachShadow({mode: 'open'});
         this._shadowRoot.addEventListener('rpcError', (event) => this._onRpcError(event));
         this._shadowRoot.addEventListener('rpcResponse', (event) => this._onRpcResponse(event));
