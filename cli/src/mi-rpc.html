@@ -4,7 +4,7 @@
 /**
 * MiRPC
 * Used to make calls on API
-* 
+*
 */
 class MiRpc extends Polymer.Element {
 
@@ -55,12 +55,22 @@ class MiRpc extends Polymer.Element {
   _dispatchResponse(data){
     // Bubbling ? -> https://www.sitepoint.com/event-bubbling-javascript/
     const event = new CustomEvent('rpcResponse', {detail: data.detail, bubbles: true});
+    this.determineApiRoute(event);
+    debugger;
     this.dispatchEvent(event);
   }
 
   _dispatchError(data){
     const event = new CustomEvent('rpcError', {detail: data.detail, bubbles: true});
+    this.determineApiRoute(event);
     this.dispatchEvent(event);
+  }
+
+  determineApiRoute(event){
+    var str = event.detail.url;
+    var explode = str.split("/");
+    var apiRoute = explode[explode.length - 1];
+    event.detail.apiRoute = apiRoute;
   }
 }
 

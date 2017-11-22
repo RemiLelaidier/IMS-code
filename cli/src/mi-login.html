@@ -93,7 +93,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <mi-rpc id="rpc"></mi-rpc>
         <mi-helper id="helper"></mi-helper>
 
-        <app-location route="{{route}}"></app-location>        
+        <app-location route="{{route}}"></app-location>
         <app-localstorage-document id="localStorage" key="token" data="{{token}}"></app-localstorage-document>
     </template>
 
@@ -116,6 +116,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     authUrl: {
                         type: String,
                         value: "/admin/login"
+                    },
+                    contactUrl: {
+                        type: String,
+                        value: "/contact"
+                    },
+                    resetUrl: {
+                        type: String,
+                        value: "/reset"
                     },
                     rpc: Object,
                     helper: Object,
@@ -276,7 +284,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             _dialogAction(){
                 if(this.dialogResetPass){
-                    // This.rpc.sendData....
+                    //this.rpc.sendData(this.resetUrl)
                 } else {
                     //this.rpc.sendData()
                 }
