@@ -67,7 +67,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             </div>
         </div>
 
-        <paper-dialog id="dialog">
+        <paper-dialog id="dialog" modal>
             <h2>[[dialogTitle]]</h2>
             <p>[[dialogContent]]</p>
             <template is="dom-if" if="{{dialogContactUs}}">
@@ -264,6 +264,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             }
 
             _fireDialog(title, content){
+                // Workaround, iron-backdrop is defined on body, so paperDialog needs to be on body
+                // more info : https://github.com/PolymerElements/paper-dialog/issues/79
+                var body = document.querySelector('body');
+                Polymer.dom(body).appendChild(this.dialog);
+
                 this.dialogTitle = title;
                 this.dialogContent = content;
                 this.dialog.open();
