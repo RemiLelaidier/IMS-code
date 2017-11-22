@@ -86,7 +86,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 </iron-form>
             </template>
             <div class="buttons">
-                <paper-button dialog-confirm autofocus>Ok</paper-button>
+                <paper-button dialog-confirm autofocus on-click="_dialogAction">Ok</paper-button>
             </div>
         </paper-dialog>
 
@@ -273,6 +273,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 this.dialogContent = content;
                 this.dialog.open();
             }
+
+            _dialogAction(){
+                if(this.dialogResetPass){
+                    // This.rpc.sendData....
+                } else {
+                    //this.rpc.sendData()
+                }
+            }
+
+
 
         }
 
