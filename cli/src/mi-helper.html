@@ -37,6 +37,40 @@ class MiHelper extends Polymer.Element {
     this.toast.text = text;
     this.toast.open();
   }
+
+  createDialog(title, content, actions){
+    let titleElem, contentElem;
+    let actionsHolder = document.createElement('div');
+    actionsHolder.className = "buttons";
+
+    actions.map((action) => {
+      actionsHolder.appendChild(action);
+    });
+
+    if(!this.dialog){
+      this.dialog = document.createElement('paper-dialog');
+
+      titleElem = document.createElement('h2');
+      titleElem.className = 'dialogTitle';
+
+      contentElem = document.createElement('p');
+      contentElem.className = 'dialogContent';
+          
+      this.dialog.appendChild(titleElem);
+      this.dialog.appendChild(contentElem);
+    } else {
+      titleElem = this.dialog.shadowRoot.querySelector('.dialogTitle');
+      contentElem = this.dialog.shadowRoot.querySelector('.dialogContent');
+      this.dialog.shadowRoot.querySelector('.buttons').remove();
+    }
+
+    this.dialog.appendChild(actionsHolder);
+
+    titleElem.innerHTML = title;
+    contentElem.innerHTML = content;
+
+    return this.dialog;
+  }
 }
 
 customElements.define('mi-helper', MiHelper);

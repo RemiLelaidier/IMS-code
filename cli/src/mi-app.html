@@ -25,6 +25,7 @@
 <link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
 
 <link rel="import" href="mi-icons.html">
+<link rel="import" href="mi-helper.html">
 
 <link rel="lazy-import" href="mi-home.html">
 <link rel="lazy-import" href="mi-login.html">
@@ -138,6 +139,8 @@
         </iron-pages>
       </app-header-layout>
     </app-drawer-layout>
+
+    <mi-helper id="helper"></mi-helper>    
   </template>
 
   <script>
@@ -151,6 +154,7 @@
             reflectToAttribute: true,
             observer: '_pageChanged',
           },
+          helper: Object,
           routeData: Object,
           subroute: String,
           // This shouldn't be neccessary, but the Analyzer isn't picking up
@@ -167,6 +171,7 @@
       
       ready(){
         super.ready();
+        this.helper = this.shadowRoot.getElementById('helper');
       }
 
       connectedCallback(){
@@ -226,6 +231,20 @@
       }
 
       x_clearLocalStorage(){
+        let actionClearStorage = document.createElement('paper-button');
+        actionClearStorage.innerHTML = "Clear";
+        actionClearStorage.addEventListener('click', (event) => this._doClearLocalStorage());
+
+        let dialog = this.helper.createDialog("Are you sure ?", 
+                               "Your page will be reload and localStorage cleared.",
+                               [actionClearStorage]
+        );
+        this.shadowRoot.appendChild(dialog);
+        dialog.open();
+      }
+
+      _doClearLocalStorage() {
+        this.set('route.path', 'home');
         localStorage.clear();
         window.location.reload()
       }
