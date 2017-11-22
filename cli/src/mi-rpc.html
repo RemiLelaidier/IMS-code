@@ -1,5 +1,8 @@
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 
+<template>
+  <app-localstorage-document id="storage" key="token" data="{{token}}"></app-localstorage-document>
+</template>
 <script>
 /**
 * MiRPC
@@ -13,6 +16,11 @@ class MiRpc extends Polymer.Element {
       server: {
         type: String,
         value: "http://api.leonard.zone"
+      },
+      localStorage: {
+          type: Object,
+          value: {},
+          notify: true
       },
       ironAjax: Object
     }
@@ -40,10 +48,18 @@ class MiRpc extends Polymer.Element {
   * @param url : url to the api functionnality
   * @param data : structured data
   * @param method : http method
+  * @param auth : authenticated call
   *
   * @return void
   */
-  sendData(url, data, method){
+  sendData(url, method, data = [], auth = false){
+    console.log(this.localStorage);
+    debugger;
+    if(auth){
+      this.ironAjax.headers = {
+        Authorization: 'Bearer ' + this.localStorage.getStoredValue("token")
+      };
+    }
     this.ironAjax.url = this.server + url;
     this.ironAjax.contentType = "application/json";
     this.ironAjax.body = JSON.stringify(data);
@@ -54,22 +70,21 @@ class MiRpc extends Polymer.Element {
 
   _dispatchResponse(data){
     // Bubbling ? -> https://www.sitepoint.com/event-bubbling-javascript/
-    const event = new CustomEvent('rpcResponse', {detail: data.detail, bubbles: true});
+    let event = new CustomEvent('rpcResponse', {detail: data.detail, bubbles: true});
     this.determineApiRoute(event);
-    debugger;
     this.dispatchEvent(event);
   }
 
   _dispatchError(data){
-    const event = new CustomEvent('rpcError', {detail: data.detail, bubbles: true});
+    let event = new CustomEvent('rpcError', {detail: data.detail, bubbles: true});
     this.determineApiRoute(event);
     this.dispatchEvent(event);
   }
 
   determineApiRoute(event){
-    var str = event.detail.url;
-    var explode = str.split("/");
-    var apiRoute = explode[explode.length - 1];
+    let str = event.detail.url;
+    let explode = str.split("/");
+    let apiRoute = explode[explode.length - 1];
     event.detail.apiRoute = apiRoute;
   }
 }

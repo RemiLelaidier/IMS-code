@@ -117,6 +117,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                         type: String,
                         value: "/admin/login"
                     },
+                    userInfoUrl: {
+                        type: String,
+                        value: "/admin/users/me"
+                    },
                     contactUrl: {
                         type: String,
                         value: "/contact"
@@ -207,7 +211,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             _submitLogin(event) {
                 let clicked = Polymer.dom(event).localTarget;
                 let form = clicked.parentElement.parentElement.parentElement.parentElement;
-
                 if(!this.token){
                     // If form is valid
                     if (form.validate()) {
@@ -218,7 +221,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                                                 username: userInput.value,
                                                 password: passInput.value
                                             };
-                        this.rpc.sendData(this.authUrl, structuredData, "POST");
+                        this.rpc.sendData(this.authUrl, "POST", structuredData, false);
                     } else {
                         this.helper.showToast("Vérifiez votre saisie");
                     }
@@ -236,12 +239,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
              * @return void
              */
             _onRpcResponse(event) {
-                event.detail.response.dateSet = Date.now();
-                this.token = event.detail.response;
-                this.localStorage.saveValue("token").then((response) => {
-                    this.helper.showToast("Vous êtes connecté !");
-                    console.log(this.logName, "you are logged in, token set:", event.detail.response);
-                });
+                let apiRoute = event.detail.apiRoute;
+                debugger;
+                switch (apiRoute) {
+                  case "login":
+                    this._saveToken(event);
+                    break;
+                  case "me":
+                    this._saveUserInfo(event);
+                  default:
+
+                }
+
             }
 
             /**
@@ -254,6 +263,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             _onRpcError(event) {
                 this.helper.showToast("Erreur de connexion");
                 console.warn(this.logName, event.detail.error);
+            }
+
+            _saveToken(event){
+              event.detail.response.dateSet = Date.now();
+              this.token = event.detail.response;
+              this.localStorage.saveValue("token").then((response) => {
+                  this.helper.showToast("Vous êtes connecté !");
+                  console.log(this.logName, "token set:", event.detail.response);
+                  console.log("getting user info");
+                  this.rpc.sendData(this.userInfoUrl)
+              });
+            }
+
+            _saveUserInfo(event){
+              console.log("Get user info");
             }
 
             _openContactUs(event) {

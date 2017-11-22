@@ -267,7 +267,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         super();
 
        /*
-        * "What is this?" => 
+        * "What is this?" =>
         * http://robdodson.me/interoperable-custom-elements/
         * https://developers.google.com/web/fundamentals/web-components/shadowdom
         */
@@ -426,7 +426,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
        * @return void
        */
       sendConventionAs(structuredData) {
-        this.rpc.sendData("/student/send/convention", JSON.stringify(structuredData), "POST");
+        this.rpc.sendData("/student/send/convention", "POST", structuredData);
       }
 
       /**
