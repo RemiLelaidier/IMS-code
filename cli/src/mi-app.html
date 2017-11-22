@@ -119,6 +119,7 @@
                 <paper-icon-button icon="bug-report" slot="dropdown-trigger" alt="menu"></paper-icon-button>
                 <paper-listbox slot="dropdown-content">               
                   <paper-item on-click="x_goToAdmin">Admin panel</paper-item>
+                  <paper-item on-click="x_clearLocalStorage">Clear localStorage</paper-item>
                 </paper-listbox>
             </paper-menu-button>    
             <paper-icon-button id="loginBtn" icon="perm-identity"></paper-icon-button>        
@@ -222,6 +223,11 @@
 
       x_goToAdmin(){
         this.set('route.path', 'admin');
+      }
+
+      x_clearLocalStorage(){
+        localStorage.clear();
+        window.location.reload()
       }
     }
 
