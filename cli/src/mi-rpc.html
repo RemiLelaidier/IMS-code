@@ -1,4 +1,9 @@
 <script>
+/**
+* MiRPC
+* Used to make calls on API
+* 
+*/
 class MiRpc extends Polymer.Element {
 
   static get properties(){
@@ -7,6 +12,7 @@ class MiRpc extends Polymer.Element {
         type: String,
         value: "http://api.leonard.zone"
       },
+      _shadowRoot: Object,
       ironAjax: Object
     }
   }
@@ -22,9 +28,10 @@ class MiRpc extends Polymer.Element {
 
   connectedCallback(){
     super.connectedCallback();
+    this.attachShadow({ mode: 'open' });
 
-    this.ironAjax.addEventListener('response', this._dispatchResponse);
-    this.ironAjax.addEventListener('error', this._dispatchError);
+    this.ironAjax.addEventListener('response', (event) => this._dispatchResponse(event));
+    this.ironAjax.addEventListener('error', (event) => this._dispatchError(event));
   }
 
   /**

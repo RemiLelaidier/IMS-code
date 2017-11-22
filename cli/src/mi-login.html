@@ -147,8 +147,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     logName: {
                         type: String,
                         value: "🦃 MiLogin::"
+                    },
+                    _shadowRoot: {
+                        type: Object
                     }
                 }
+            }
+
+            constructor(){
+                super();
+                this._shadowRoot = this.attachShadow({mode: 'open'});
+
+                // Listening for MiRPC service
+                this._shadowRoot.addEventListener('rpcError', (event) => this._onRpcError(event));
+                this._shadowRoot.addEventListener('rpcResponse', (event) => this._onRpcResponse(event));
+            }
+
+            connectedCallback(){
+                super.connectedCallback();
             }
 
             /**
@@ -169,10 +185,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
                 if(!this.token)
                     this.token = "";
-
-                // Listening for MiRPC service
-                window.addEventListener('rpcError', (event) => this._onRpcError(event));
-                window.addEventListener('rpcResponse', (event) => this._onRpcResponse(event));
             }
 
             attached() {

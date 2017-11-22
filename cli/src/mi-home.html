@@ -253,11 +253,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           formEtu: Object,
           stepper: Object,
           helper: Object,
+          _shadowRoot: {
+            type: Object
+          },
           logName: {
             type: String,
             value: "MiConv"
           }
         }
+      }
+
+      constructor(){
+        super();
+        this._shadowRoot = this.attachShadow({mode: 'open'});
+        this._shadowRoot.addEventListener('rpcError', (event) => this._onRpcError(event));
+        this._shadowRoot.addEventListener('rpcResponse', (event) => this._onRpcResponse(event));
       }
 
       /**
@@ -275,10 +285,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         this.formEtu = this.shadowRoot.getElementById('formEtu');
         this.rpc = this.shadowRoot.getElementById('rpc');
         this.helper = this.shadowRoot.getElementById('helper');
+      }
 
-        // Listening for MiRPC service
-        window.addEventListener('rpcError', (event) => this._onRpcError(event));
-        window.addEventListener('rpcResponse', (event) => this._onRpcResponse(event));
+      connectedCallback(){
+        super.connectedCallback();
       }
 
       /**
@@ -310,7 +320,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         } else {
           // @Tool : Uncomment next line to avoid validation and go.
-          //this.stepper._tapNext();
+          this.stepper._tapNext();
 
           // Ooops, let's show a little material toast !
           this.helper.showToast("Vérifiez votre saisie.");
