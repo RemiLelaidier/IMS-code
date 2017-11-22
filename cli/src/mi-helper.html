@@ -7,7 +7,8 @@ class MiHelper extends Polymer.Element {
 
   static get properties(){
     return {
-      toast: Object
+      toast: Object,
+      dialog: Object
     }
   }
 
@@ -21,7 +22,7 @@ class MiHelper extends Polymer.Element {
 
 /**
   * @function showToast
-  * @param text
+  * @param text : string
   *
   * Create + append a paper-toast on the fly
   * Populate text attribute
@@ -38,34 +39,54 @@ class MiHelper extends Polymer.Element {
     this.toast.open();
   }
 
+/**
+  * @function createDialog
+  *
+  * @param title : string
+  * @param content : string
+  * @param actions : PaperButton[]
+  *
+  * Create a simple paper dialog (useful for alerts)
+  * Event listeners needs to be set before and passed as an array containing every paper-button node
+  *
+  * @return PaperDialog dialog
+  */
   createDialog(title, content, actions){
     let titleElem, contentElem;
     let actionsHolder = document.createElement('div');
     actionsHolder.className = "buttons";
 
+    // iterate through actions, and append as paperDialogActions
     actions.map((action) => {
       actionsHolder.appendChild(action);
     });
 
     if(!this.dialog){
+      // Create a new <paper-dialog>
       this.dialog = document.createElement('paper-dialog');
-
+      
+      // Defining title, content..
       titleElem = document.createElement('h2');
       titleElem.className = 'dialogTitle';
 
       contentElem = document.createElement('p');
       contentElem.className = 'dialogContent';
           
+      // Append cause we want to have it displayed
       this.dialog.appendChild(titleElem);
       this.dialog.appendChild(contentElem);
     } else {
+      // Get current dialog
       titleElem = this.dialog.shadowRoot.querySelector('.dialogTitle');
       contentElem = this.dialog.shadowRoot.querySelector('.dialogContent');
+      // Just remove every previous action
       this.dialog.shadowRoot.querySelector('.buttons').remove();
     }
 
+    // append our new actions
     this.dialog.appendChild(actionsHolder);
 
+    // Replace title, content
     titleElem.innerHTML = title;
     contentElem.innerHTML = content;
 
