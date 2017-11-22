@@ -56,32 +56,25 @@ class MiHelper extends Polymer.Element {
     let actionsHolder = document.createElement('div');
     actionsHolder.className = "buttons";
 
+    // Create a new <paper-dialog>
+    this.dialog = document.createElement('paper-dialog');
+    this.dialog.id = "dialog-alert";
+      
+    // Defining title, content..
+    titleElem = document.createElement('h2');
+    titleElem.className = 'dialogTitle';
+
+    contentElem = document.createElement('p');
+    contentElem.className = 'dialogContent';
+          
+    // Append cause we want to have it displayed
+    this.dialog.appendChild(titleElem);
+    this.dialog.appendChild(contentElem);
+
     // iterate through actions, and append as paperDialogActions
     actions.map((action) => {
       actionsHolder.appendChild(action);
     });
-
-    if(!this.dialog){
-      // Create a new <paper-dialog>
-      this.dialog = document.createElement('paper-dialog');
-      
-      // Defining title, content..
-      titleElem = document.createElement('h2');
-      titleElem.className = 'dialogTitle';
-
-      contentElem = document.createElement('p');
-      contentElem.className = 'dialogContent';
-          
-      // Append cause we want to have it displayed
-      this.dialog.appendChild(titleElem);
-      this.dialog.appendChild(contentElem);
-    } else {
-      // Get current dialog
-      titleElem = this.dialog.shadowRoot.querySelector('.dialogTitle');
-      contentElem = this.dialog.shadowRoot.querySelector('.dialogContent');
-      // Just remove every previous action
-      this.dialog.shadowRoot.querySelector('.buttons').remove();
-    }
 
     // append our new actions
     this.dialog.appendChild(actionsHolder);

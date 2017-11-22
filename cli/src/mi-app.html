@@ -235,6 +235,9 @@
         actionClearStorage.innerHTML = "Clear";
         actionClearStorage.addEventListener('click', (event) => this._doClearLocalStorage());
 
+        const alertHere = this.shadowRoot.querySelector('paper-dialog#dialog-alert');
+        (alertHere) ? alertHere.remove() : null; 
+
         let dialog = this.helper.createDialog("Are you sure ?", 
                                "Your page will be reload and localStorage cleared.",
                                [actionClearStorage]
