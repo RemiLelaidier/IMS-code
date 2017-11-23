@@ -1,3 +1,4 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
 
 <script>
 /**
@@ -59,14 +60,14 @@ class MiHelper extends Polymer.Element {
     // Create a new <paper-dialog>
     this.dialog = document.createElement('paper-dialog');
     this.dialog.id = "dialog-alert";
-      
+
     // Defining title, content..
     titleElem = document.createElement('h2');
     titleElem.className = 'dialogTitle';
 
     contentElem = document.createElement('p');
     contentElem.className = 'dialogContent';
-          
+
     // Append cause we want to have it displayed
     this.dialog.appendChild(titleElem);
     this.dialog.appendChild(contentElem);
