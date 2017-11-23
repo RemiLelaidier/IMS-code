@@ -12,7 +12,7 @@ class MiRpc extends Polymer.Element {
     return {
       server: {
         type: String,
-        value: "http://api.leonard.zone"
+        value: "http://127.0.0.1/IMS-code/serv/public"
       },
       ironAjax: Object
     }
@@ -43,7 +43,14 @@ class MiRpc extends Polymer.Element {
   *
   * @return void
   */
-  sendData(url, data, method){
+  sendData(url, method, data = [], auth = false){
+    debugger;
+    if (auth) {
+      const token = localStorage.getItem("authToken");
+      this.ironAjax.headers = {
+        "Authorization": "Bearer " + token
+      }
+    }
     this.ironAjax.url = this.server + url;
     this.ironAjax.contentType = "application/json";
     this.ironAjax.body = JSON.stringify(data);

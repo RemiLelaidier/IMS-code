@@ -116,6 +116,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                         type: String,
                         value: "/admin/login"
                     },
+                    userUrl: {
+                        type: String,
+                        value: "/admin/users/me"
+                    },
                     contactUrl: {
                         type: String,
                         value: "/contact"
@@ -218,7 +222,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                                                 username: userInput.value,
                                                 password: passInput.value
                                             };
-                        this.rpc.sendData(this.authUrl, structuredData, "POST");
+                        this.rpc.sendData(this.authUrl, "POST", structuredData);
                     } else {
                         this.helper.showToast("Vérifiez votre saisie");
                     }
@@ -236,13 +240,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
              * @return void
              */
             _onRpcResponse(event) {
-                const response = event.detail.data.response;
-                localStorage.setItem('authToken', response.access_token);
-                localStorage.setItem('expiresIn', response.expires_in);
-                localStorage.setItem('refreshToken', response.refresh_token);
-                localStorage.setItem('dateSet', Date.now());
-
-                this.helper.showToast("Vous êtes connecté !");
+              debugger;
+              const route = event.detail.route;
+                if(route === this.authUrl)
+                  this._saveToken(event);
+                else if (route === this.userUrl){
+                  console.log(event);
+                  this.helper.showToast("Vous êtes connecté !");
+                }
+                else
+                  this.helper.showToast("Action illégale");
             }
 
             /**
@@ -255,6 +262,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             _onRpcError(event) {
                 this.helper.showToast("Erreur de connexion");
                 console.warn(this.logName, event.detail.error);
+            }
+
+            _saveToken(event){
+              const response = event.detail.data.response;
+              localStorage.setItem('authToken', response.access_token);
+              localStorage.setItem('expiresIn', response.expires_in);
+              localStorage.setItem('refreshToken', response.refresh_token);
+              localStorage.setItem('dateSet', Date.now());
+              this.rpc.sendData(this.userUrl, "GET", [], true);
             }
 
             _openContactUs(event) {
