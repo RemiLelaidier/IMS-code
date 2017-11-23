@@ -233,7 +233,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     }
                 } else {
                     this.helper.showToast("Vous êtes déjà connecté");
-                    this.set('route.path', 'home');
+                    this.set('route.path', 'student');
                 }
             }
 
@@ -245,15 +245,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
              * @return void
              */
             _onRpcResponse(event) {
-              const route = event.detail.route;
-                if(route === this.authUrl)
+                const route = event.detail.route;
+                if(route === this.authUrl){
                   this._saveToken(event);
-                else if (route === this.userUrl){
+                } else if (route === this.userUrl){
                   this.helper.showToast("Vous êtes connecté !");
-                  this._redirectToPage(event);
+                  const userPermissions = event.detail.data.response.permissions['user.delete'];
+                  this._redirectToPage(userPermissions);
+                } else {
+                    this.helper.showToast("Action indéfinie");
                 }
-                else
-                  this.helper.showToast("Action illégale");
             }
 
             /**
@@ -277,9 +278,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               this.rpc.sendData(this.userUrl, "GET", [], true);
             }
 
-            _redirectToPage(event){
-              const response = event.detail.data.response;
-              if(response.permissions['user.delete'] === 0)
+            _redirectToPage(permissions){
+              if(permissions === 0)
                 this.set('route.path', 'student');
               else
                 this.set('route.path', 'admin');
