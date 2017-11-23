@@ -10,6 +10,7 @@
        display: block;
        padding: 10px;
      }
+
      #tabs{
        --paper-tabs-selection-bar-color: var(--app-tabs-bar-color);
        --paper-tabs-container: {
@@ -18,9 +19,18 @@
          color: #fff;
        }
      }
+     .card-content {
+        --paper-card-header-text: {
+          border-bottom: 1px solid #000;
+        };
+      }
+
+      .card-content {
+        padding: 0;
+      }
     </style>
 
-    <paper-tabs id="tabs" selected="{{selected}}" scrollable>
+    <paper-tabs id="tabs" selected="{{selected}}">
       <paper-tab>Infos</paper-tab>
       <paper-tab>Suivi</paper-tab>
       <paper-tab>Compte étudiant</paper-tab>
