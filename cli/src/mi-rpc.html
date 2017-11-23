@@ -54,13 +54,17 @@ class MiRpc extends Polymer.Element {
 
   _dispatchResponse(data){
     // Bubbling ? -> https://www.sitepoint.com/event-bubbling-javascript/
-    const event = new CustomEvent('rpcResponse', {detail: data.detail, route: data.detail.url.replace(this.server, ''), bubbles: true});
+    const event = new CustomEvent('rpcResponse', {detail: {data:data.detail, route: this._getApiRoute(data.detail.url)}, bubbles: true});
     this.dispatchEvent(event);
   }
 
   _dispatchError(data){
-    const event = new CustomEvent('rpcError', {detail: data.detail, route: data.detail.url.replace(this.server, ''), bubbles: true});
+    const event = new CustomEvent('rpcError', {detail: {data:data.detail, route: this._getApiRoute(data.detail.url)}, bubbles: true});
     this.dispatchEvent(event);
+  }
+
+  _getApiRoute(url){
+    return url.replace(this.server, '');
   }
 }
 

@@ -236,13 +236,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
              * @return void
              */
             _onRpcResponse(event) {
-                event.detail.response.dateSet = Date.now();
-                const response = event.detail.response;
+                const response = event.detail.data;
                 localStorage.setItem('authToken', response.access_token);
                 localStorage.setItem('expiresIn', response.expires_in);
                 localStorage.setItem('refreshToken', response.refresh_token);
-                localStorage.setItem('dateSet', response.dateSet);
-                debugger;
+                localStorage.setItem('dateSet', Date.now());
 
                 this.helper.showToast("Vous êtes connecté !");
             }
