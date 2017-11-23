@@ -236,7 +236,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
              * @return void
              */
             _onRpcResponse(event) {
-                const response = event.detail.data;
+                const response = event.detail.data.response;
                 localStorage.setItem('authToken', response.access_token);
                 localStorage.setItem('expiresIn', response.expires_in);
                 localStorage.setItem('refreshToken', response.refresh_token);
