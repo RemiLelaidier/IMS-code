@@ -83,7 +83,7 @@ class DocumentGenerator {
      *
      * @param string $outputDir
      */
-    public function writeAndSave(string $outputDir) : void {
+    public function writeAndSave(string $outputDir) {
         $dest = $this->bucket . $this->template . ".docx";
         try {
             $this->document = new TemplateProcessor($dest);

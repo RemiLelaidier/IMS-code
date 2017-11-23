@@ -388,7 +388,7 @@ class ConventionController extends Controller
      *
      * @throws \Exception
      */
-    private function generateConventionFor(string $name) : void {
+    private function generateConventionFor(string $name) {
         $wordGenerator = new DocumentGenerator($this->getModelAsTemplateValues(), "convention/convention_template", date('Y') . "-" . $name);
         $wordGenerator->writeAndSave($this->getAssetsFolder() . "convention/generated/");
 
@@ -740,7 +740,7 @@ class ConventionController extends Controller
     /**
      * @return null|string
      */
-    public function getAssetsFolder() : ?string {
+    public function getAssetsFolder() : string {
         return dirname(dirname(getcwd())) . "/assets/";
     }
 }
