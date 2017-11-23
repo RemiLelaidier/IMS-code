@@ -44,7 +44,6 @@ class MiRpc extends Polymer.Element {
   * @return void
   */
   sendData(url, method, data = [], auth = false){
-    debugger;
     if (auth) {
       const token = localStorage.getItem("authToken");
       this.ironAjax.headers = {
