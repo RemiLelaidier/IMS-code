@@ -50,18 +50,34 @@ class MiRpc extends Polymer.Element {
   * @return void
   */
   sendData(url, method, data = [], auth = false){
+    // If authenticated request to API
     if (auth) {
       const token = localStorage.getItem("authToken");
       this.ironAjax.headers = {
         "Authorization": "Bearer " + token
       }
     }
-    this.ironAjax.url = this.server + url;
+    // Build the request
+    const fullUrl = this.server + url;
+    this.ironAjax.url = fullUrl;
     this.ironAjax.contentType = "application/json";
     this.ironAjax.body = JSON.stringify(data);
     this.ironAjax.handleAs = "json";
     this.ironAjax.method = method;
-    this.ironAjax.generateRequest();
+    // Resolve the request
+    let request = this.ironAjax.generateRequest();
+    request.completes.then(function(req) {
+      console.log("Call to " + fullUrl + " succesful");
+
+    }, function(rejected) {
+      // Failed request, argument is an object
+      let req = rejected.request;
+      let error = rejected.error;
+      console.log("Promise rejected, request : " + req);
+      console.log("Promise rejected, error : " + error);
+  }
+);
+
   }
 
   _dispatchResponse(data){
