@@ -273,7 +273,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             }
 
             _redirectToPage(event){
-              debugger;
               const response = event.detail.data.response;
               if(response.permissions['user.delete'] === 0)
                 this.set('route.path', 'student');
