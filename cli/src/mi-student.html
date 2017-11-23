@@ -1,0 +1,22 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="mi-student">
+  <template>
+    <style include="shared-styles">
+    </style>
+
+    <h1>Hello Student</h1>
+  </template>
+
+  <script>
+    class MiStudent extends Polymer.Element {
+      static get is(){
+        return 'mi-student';
+      }
+    }
+
+    window.customElements.define(MiStudent.is, MiStudent);
+  </script>
+</dom-module>

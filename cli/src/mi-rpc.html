@@ -28,10 +28,10 @@ class MiRpc extends Polymer.Element {
 
   ready() {
     super.ready();
+
     if(!this.ironAjax){
-      this.ironAjax = document.createElement('iron-ajax');
-      this.ironAjax.id = "requestBucket";
-      document.body.append(this.ironAjax);
+        this.ironAjax = document.createElement('iron-ajax');
+        this.ironAjax.id = "miRPC";
     }
   }
 
@@ -53,12 +53,11 @@ class MiRpc extends Polymer.Element {
   * @return void
   */
   sendData(url, method, data = [], auth = false){
-    console.log(this.localStorage);
-    debugger;
-    if(auth){
+    if (auth) {
+      const token = localStorage.getItem("authToken");
       this.ironAjax.headers = {
-        Authorization: 'Bearer ' + this.localStorage.getStoredValue("token")
-      };
+        "Authorization": "Bearer " + token
+      }
     }
     this.ironAjax.url = this.server + url;
     this.ironAjax.contentType = "application/json";
@@ -70,22 +69,17 @@ class MiRpc extends Polymer.Element {
 
   _dispatchResponse(data){
     // Bubbling ? -> https://www.sitepoint.com/event-bubbling-javascript/
-    let event = new CustomEvent('rpcResponse', {detail: data.detail, bubbles: true});
-    this.determineApiRoute(event);
+    const event = new CustomEvent('rpcResponse', {detail: {data:data.detail, route: this._getApiRoute(data.detail.url)}, bubbles: true});
     this.dispatchEvent(event);
   }
 
   _dispatchError(data){
-    let event = new CustomEvent('rpcError', {detail: data.detail, bubbles: true});
-    this.determineApiRoute(event);
+    const event = new CustomEvent('rpcError', {detail: {data:data.detail, route: this._getApiRoute(data.detail.url)}, bubbles: true});
     this.dispatchEvent(event);
   }
 
-  determineApiRoute(event){
-    let str = event.detail.url;
-    let explode = str.split("/");
-    let apiRoute = explode[explode.length - 1];
-    event.detail.apiRoute = apiRoute;
+  _getApiRoute(url){
+    return url.replace(this.server, '');
   }
 }
 

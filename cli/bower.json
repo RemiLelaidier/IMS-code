@@ -29,7 +29,6 @@
     "paper-tabs": "^2.0.0",
     "paper-dialog": "PolymerElements/paper-dialog#^2.0.0",
     "paper-menu-button": "^2.0.0",
-    "app-storage": "^2.0.2",
     "web-animations-js": "^2.3.1"
   },
   "resolutions": {

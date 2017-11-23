@@ -94,7 +94,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <mi-helper id="helper"></mi-helper>
 
         <app-location route="{{route}}"></app-location>
-        <app-localstorage-document id="localStorage" key="token" data="{{token}}"></app-localstorage-document>
     </template>
 
     <script>
@@ -117,7 +116,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                         type: String,
                         value: "/admin/login"
                     },
-                    userInfoUrl: {
+                    userUrl: {
                         type: String,
                         value: "/admin/users/me"
                     },
@@ -150,11 +149,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     dialogResetPass: {
                         type: Boolean,
                         value: false,
-                        notify: true
-                    },
-                    localStorage: {
-                        type: Object,
-                        value: {},
                         notify: true
                     },
                     logName: {
@@ -194,7 +188,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 this.helper = this.shadowRoot.getElementById('helper');
                 this.rpc = this.shadowRoot.getElementById('rpc');
                 this.dialog = this.shadowRoot.getElementById('dialog');
-                this.localStorage = this.shadowRoot.getElementById('localStorage');
             }
 
             attached() {
@@ -209,9 +202,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
              * @return void
              */
             _submitLogin(event) {
-                let clicked = Polymer.dom(event).localTarget;
-                let form = clicked.parentElement.parentElement.parentElement.parentElement;
-                if(!this.token){
+                // Get if already logged in
+                const tokenDate = localStorage.getItem('dateSet');
+                const expires = localStorage.getItem('expiresIn') * 1000;
+
+                const timeout = parseInt(tokenDate) + parseInt(expires);
+                const isExpired = Date.now() > new Date(timeout);
+
+                if(isExpired || expires == 0){
+                    // get our form to permit validate
+                    const form = this.shadowRoot.querySelector('#formLogin');
+
                     // If form is valid
                     if (form.validate()) {
                         let userInput = form.querySelector('#unice_number');
@@ -221,7 +222,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                                                 username: userInput.value,
                                                 password: passInput.value
                                             };
-                        this.rpc.sendData(this.authUrl, "POST", structuredData, false);
+                        this.rpc.sendData(this.authUrl, "POST", structuredData);
                     } else {
                         this.helper.showToast("Vérifiez votre saisie");
                     }
@@ -239,18 +240,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
              * @return void
              */
             _onRpcResponse(event) {
-                let apiRoute = event.detail.apiRoute;
-                debugger;
-                switch (apiRoute) {
-                  case "login":
-                    this._saveToken(event);
-                    break;
-                  case "me":
-                    this._saveUserInfo(event);
-                  default:
-
+              const route = event.detail.route;
+                if(route === this.authUrl)
+                  this._saveToken(event);
+                else if (route === this.userUrl){
+                  this.helper.showToast("Vous êtes connecté !");
+                  this._redirectToPage(event);
                 }
-
+                else
+                  this.helper.showToast("Action illégale");
             }
 
             /**
@@ -266,18 +264,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             }
 
             _saveToken(event){
-              event.detail.response.dateSet = Date.now();
-              this.token = event.detail.response;
-              this.localStorage.saveValue("token").then((response) => {
-                  this.helper.showToast("Vous êtes connecté !");
-                  console.log(this.logName, "token set:", event.detail.response);
-                  console.log("getting user info");
-                  this.rpc.sendData(this.userInfoUrl)
-              });
+              const response = event.detail.data.response;
+              localStorage.setItem('authToken', response.access_token);
+              localStorage.setItem('expiresIn', response.expires_in);
+              localStorage.setItem('refreshToken', response.refresh_token);
+              localStorage.setItem('dateSet', Date.now());
+              this.rpc.sendData(this.userUrl, "GET", [], true);
             }
 
-            _saveUserInfo(event){
-              console.log("Get user info");
+            _redirectToPage(event){
+              debugger;
+              const response = event.detail.data.response;
+              if(response.permissions['user.delete'] === 0)
+                this.set('route.path', 'student');
+              else
+                this.set('route.path', 'admin');
             }
 
             _openContactUs(event) {
@@ -313,9 +314,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     //this.rpc.sendData()
                 }
             }
-
-
-
         }
 
         window.customElements.define(MiLogin.is, MiLogin);

@@ -21,7 +21,6 @@
 <link rel="import" href="../bower_components/iron-form/iron-form.html">
 <link rel="import" href="../bower_components/paper-input/paper-textarea.html">
 <link rel="import" href="../bower_components/paper-toast/paper-toast.html">
-<link rel="import" href="../bower_components/app-storage/app-localstorage/app-localstorage-document.html">
 <link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
 <link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
 
@@ -30,6 +29,7 @@
 
 <link rel="lazy-import" href="mi-home.html">
 <link rel="lazy-import" href="mi-login.html">
+<link rel="lazy-import" href="mi-student.html">
 <link rel="lazy-import" href="mi-admin.html">
 <link rel="lazy-import" href="mi-view404.html">
 
@@ -115,16 +115,16 @@
 
         <app-header slot="header" condenses reveals effects="waterfall">
           <app-toolbar>
-            <div class="logoMiage"><a name="convention" class="homeBtn"><img class="logoMiageDetail" src="/images/logo_miage_thumb.png" alt="Miage Nice"></a></div>              
+            <div class="logoMiage"><a name="convention" class="homeBtn"><img class="logoMiageDetail" src="/images/logo_miage_thumb.png" alt="Miage Nice"></a></div>
             <div main-title>Gestion des stages</div>
             <paper-menu-button id="debugMenu" horizontal-align="right" horizontal-offset="50">
                 <paper-icon-button icon="bug-report" slot="dropdown-trigger" alt="menu"></paper-icon-button>
-                <paper-listbox slot="dropdown-content">               
+                <paper-listbox slot="dropdown-content">
                   <paper-item on-click="x_goToAdmin">Admin panel</paper-item>
                   <paper-item on-click="x_clearLocalStorage">Clear localStorage</paper-item>
                 </paper-listbox>
-            </paper-menu-button>    
-            <paper-icon-button id="loginBtn" icon="perm-identity"></paper-icon-button>        
+            </paper-menu-button>
+            <paper-icon-button id="loginBtn" icon="perm-identity"></paper-icon-button>
           </app-toolbar>
         </app-header>
 
@@ -135,13 +135,14 @@
             role="main">
           <mi-conv name="home"></mi-conv>
           <mi-login name="login"></mi-login>
+          <mi-student name="student"></mi-student>
           <mi-admin name="admin"></mi-admin>
           <mi-view404 name="view404"></mi-view404>
         </iron-pages>
       </app-header-layout>
     </app-drawer-layout>
 
-    <mi-helper id="helper"></mi-helper>    
+    <mi-helper id="helper"></mi-helper>
   </template>
 
   <script>
@@ -169,7 +170,7 @@
           '_routePageChanged(routeData.page)',
         ];
       }
-      
+
       ready(){
         super.ready();
         this.helper = this.shadowRoot.getElementById('helper');
@@ -237,9 +238,9 @@
         actionClearStorage.addEventListener('click', (event) => this._doClearLocalStorage());
 
         const alertHere = this.shadowRoot.querySelector('paper-dialog#dialog-alert');
-        (alertHere) ? alertHere.remove() : null; 
+        (alertHere) ? alertHere.remove() : null;
 
-        let dialog = this.helper.createDialog("Are you sure ?", 
+        let dialog = this.helper.createDialog("Are you sure ?",
                                "Your page will be reload and localStorage cleared.",
                                [actionClearStorage]
         );
