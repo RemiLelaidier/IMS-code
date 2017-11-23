@@ -240,7 +240,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
              * @return void
              */
             _onRpcResponse(event) {
-              debugger;
               const route = event.detail.route;
                 if(route === this.authUrl)
                   this._saveToken(event);
