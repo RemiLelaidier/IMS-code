@@ -244,8 +244,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 if(route === this.authUrl)
                   this._saveToken(event);
                 else if (route === this.userUrl){
-                  console.log(event);
                   this.helper.showToast("Vous êtes connecté !");
+                  this._redirectToPage(event);
                 }
                 else
                   this.helper.showToast("Action illégale");
@@ -270,6 +270,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               localStorage.setItem('refreshToken', response.refresh_token);
               localStorage.setItem('dateSet', Date.now());
               this.rpc.sendData(this.userUrl, "GET", [], true);
+            }
+
+            _redirectToPage(event){
+              debugger;
+              const response = event.detail.data.response;
+              if(response.permissions['user.delete'] === 0)
+                this.set('route.path', 'student');
+              else
+                this.set('route.path', 'admin');
             }
 
             _openContactUs(event) {
