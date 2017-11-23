@@ -208,6 +208,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
                 const timeout = parseInt(tokenDate) + parseInt(expires);
                 const isExpired = Date.now() > new Date(timeout);
+                const refreshToken = localStorage.getItem('refreshToken');
+
+                // should work
+                this.rpc.sendData('/admin/auth/refresh', 'POST', { refresh_token:  refreshToken});
+                debugger;
 
                 if(isExpired || expires == 0){
                     // get our form to permit validate

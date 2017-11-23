@@ -68,7 +68,7 @@ class PDFGenerator {
      * @throws \Exception
      * @return void
      */
-    public function start(string $formPath, string $dest) : void {
+    public function start(string $formPath, string $dest) {
         $this->fpdf = new FPDF($this->orientation, $this->unit, $this->size);
 
         $this->fpdf->SetMargins(10, 10, 10);
@@ -108,7 +108,7 @@ class PDFGenerator {
      * @return void
      * @throws \Exception
      */
-    public function writeFields(array $fields, array $data, int $pageSize, int $offset = 20) : void {
+    public function writeFields(array $fields, array $data, int $pageSize, int $offset = 20) {
         $currentPage = null;
 
         foreach($fields as $field){
