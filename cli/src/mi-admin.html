@@ -19,7 +19,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <style include="shared-styles">
       :host {
         display: block;
-
         padding: 10px;
       }
 
@@ -34,7 +33,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       #tabs {
-        --paper-tabs-selection-bar-color:#92d12d;
+        --paper-tabs-selection-bar-color: var(--app-tabs-bar-color);
         --paper-tabs-container: {
           width: 100%;
           background: #8ba0ab;
@@ -60,7 +59,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <paper-tabs id="tabs" selected="{{selected}}">
       <paper-tab>Reçues</paper-tab>
       <paper-tab>Résolues</paper-tab>
-    </paper-tabs> 
+    </paper-tabs>
     <div>
       <paper-card class="card-content admin">
         <iron-pages selected="{{selected}}">
@@ -93,7 +92,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 </paper-item>
               </div>
           </div>
-        </iron-pages> 
+        </iron-pages>
       </paper-card>
     </div>
     <mi-helper id="helper"></mi-helper>
@@ -142,7 +141,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         this.shadowRoot.querySelector('#debug').addEventListener('click', (event) => {
           const studentId = event.target.getAttribute('data-unice');
-          // TODO when MiRPC ready : 
+          // TODO when MiRPC ready :
           // Call API to find student info -> authentified call
           // .then() -> toggle populated
           this.dialogTitle = "TODO : " + studentId;
