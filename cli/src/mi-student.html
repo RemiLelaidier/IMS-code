@@ -20,17 +20,41 @@
      }
     </style>
 
-    <paper-tabs id="tabs" selected="0" scrollable>
+    <paper-tabs id="tabs" selected="{{selected}}" scrollable>
       <paper-tab>Infos</paper-tab>
       <paper-tab>Suivi</paper-tab>
       <paper-tab>Compte étudiant</paper-tab>
     </paper-tabs>
+    <div>
+      <paper-card class="card-content">
+        <iron-pages selected={{selected}}>
+          <div class="student-info">
+            {{Student Info}}
+          </div>
+          <div class="student-monitoring">
+            {{Student monitoring}}
+          </div>
+          <div class="student-account">
+            {{Student Account}}
+          </div>
+        </iron-pages>
+      </paper-card>
+    </div>
   </template>
 
   <script>
     class MiStudent extends Polymer.Element {
       static get is(){
         return 'mi-student';
+      }
+      static get properties(){
+        return {
+          selected: {
+            type: Number,
+            value: 0,
+            notify: true
+          }
+        }
       }
     }
 
