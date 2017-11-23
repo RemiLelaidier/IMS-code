@@ -149,6 +149,7 @@ class Manager
             try {
                 $accessToken->save();
             } catch (QueryException $e) {
+                throw $e;
             }
         }
 
@@ -194,6 +195,7 @@ class Manager
             try {
                 $refreshToken->save();
             } catch (QueryException $e) {
+                throw $e;
             }
         }
 
@@ -215,6 +217,7 @@ class Manager
                 return User::find($decoded->data->userId);
             }
         } catch (ExpiredException $e) {
+            throw $e;
         }
 
         return null;

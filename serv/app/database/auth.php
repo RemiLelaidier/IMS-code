@@ -30,7 +30,7 @@ Manager::schema()->create('access_token', function (Blueprint $table) {
 Manager::schema()->create('refresh_token', function (Blueprint $table) {
     $table->increments('id');
     $table->unsignedInteger('user_id');
-    $table->string('token')->unique();
+    $table->string('token', 500)->unique();
     $table->unsignedInteger('expires_at');
     $table->foreign('user_id')->references('id')->on('user');
 });
