@@ -79,6 +79,7 @@ class MiRpc extends Polymer.Element {
       
       // Bubbling ? -> https://www.sitepoint.com/event-bubbling-javascript/
       this.dispatchEvent(event);
+      resolve();
     });
   }
 
@@ -92,6 +93,7 @@ class MiRpc extends Polymer.Element {
       }
 
       this.dispatchEvent(event);
+      resolve();
     });
   }
 
