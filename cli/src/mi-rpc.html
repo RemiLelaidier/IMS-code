@@ -1,5 +1,6 @@
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 
+<iron-ajax id="miRPC"></iron-ajax>
 <script>
 /**
 * MiRPC
@@ -20,10 +21,10 @@ class MiRpc extends Polymer.Element {
 
   ready() {
     super.ready();
+
     if(!this.ironAjax){
-      this.ironAjax = document.createElement('iron-ajax');
-      this.ironAjax.id = "requestBucket";
-      document.body.append(this.ironAjax);
+        this.ironAjax = document.createElement('iron-ajax');
+        this.ironAjax.id = "miRPC";
     }
   }
 

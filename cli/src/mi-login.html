@@ -94,7 +94,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <mi-helper id="helper"></mi-helper>
 
         <app-location route="{{route}}"></app-location>
-        <app-localstorage-document id="localStorage" key="token" data="{{token}}"></app-localstorage-document>
     </template>
 
     <script>
@@ -148,11 +147,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                         value: false,
                         notify: true
                     },
-                    localStorage: {
-                        type: Object,
-                        value: {},
-                        notify: true
-                    },
                     logName: {
                         type: String,
                         value: "🦃 MiLogin::"
@@ -190,7 +184,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 this.helper = this.shadowRoot.getElementById('helper');
                 this.rpc = this.shadowRoot.getElementById('rpc');
                 this.dialog = this.shadowRoot.getElementById('dialog');
-                this.localStorage = this.shadowRoot.getElementById('localStorage');
             }
 
             attached() {
@@ -205,10 +198,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
              * @return void
              */
             _submitLogin(event) {
-                let clicked = Polymer.dom(event).localTarget;
-                let form = clicked.parentElement.parentElement.parentElement.parentElement;
+                // Get if already logged in
+                const tokenDate = localStorage.getItem('dateSet');
+                const expires = localStorage.getItem('expiresIn') * 1000;
 
-                if(!this.token){
+                const timeout = parseInt(tokenDate) + parseInt(expires);
+                const isExpired = Date.now() > new Date(timeout);
+
+                if(isExpired || expires == 0){
+                    // get our form to permit validate
+                    const form = this.shadowRoot.querySelector('#formLogin');
+
                     // If form is valid
                     if (form.validate()) {
                         let userInput = form.querySelector('#unice_number');
@@ -237,11 +237,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
              */
             _onRpcResponse(event) {
                 event.detail.response.dateSet = Date.now();
-                this.token = event.detail.response;
-                this.localStorage.saveValue("token").then((response) => {
-                    this.helper.showToast("Vous êtes connecté !");
-                    console.log(this.logName, "you are logged in, token set:", event.detail.response);
-                });
+                const response = event.detail.response;
+                localStorage.setItem('authToken', response.access_token);
+                localStorage.setItem('expiresIn', response.expires_in);
+                localStorage.setItem('refreshToken', response.refresh_token);
+                localStorage.setItem('dateSet', response.dateSet);
+                debugger;
+
+                this.helper.showToast("Vous êtes connecté !");
             }
 
             /**
