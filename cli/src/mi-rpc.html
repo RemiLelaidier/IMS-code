@@ -1,8 +1,5 @@
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 
-<template>
-  <app-localstorage-document id="storage" key="token" data="{{token}}"></app-localstorage-document>
-</template>
 <script>
 /**
 * MiRPC
@@ -15,7 +12,7 @@ class MiRpc extends Polymer.Element {
     return {
       server: {
         type: String,
-        value: "http://api.leonard.zone"
+        value: "http://127.0.0.1/rem/IMS-code/serv/public"
       },
       localStorage: {
           type: Object,
