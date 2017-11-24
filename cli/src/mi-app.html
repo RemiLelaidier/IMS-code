@@ -174,7 +174,12 @@
           // This shouldn't be neccessary, but the Analyzer isn't picking up
           // Polymer.Element#rootPath
           rootPath: String,
-          serverPath: String
+          serverPath: String,
+          ok: Boolean,
+          loaded: {
+            type: Boolean,
+            value: false
+          }
         };
       }
 
@@ -189,6 +194,7 @@
         this.helper = this.shadowRoot.getElementById('helper');
         this.rpc = this.shadowRoot.getElementById('rpc');
         this.loading = this.shadowRoot.getElementById('loading');
+        this.loaded = true;
       }
 
       connectedCallback(){
@@ -237,8 +243,10 @@
       }
 
       _checkRights(){
-        this.loading.open();
-        if(this.ok && this._retrieveTokExpStatus()){
+        if(this.loaded)
+          this.loading.open();
+        if(this.ok && this._retrieveTokExpStatus() && this.loaded){
+          this.loading.close();
           return true;
         }
         
@@ -246,6 +254,7 @@
           // sendData return his ironRequest, who expose his completes promise -> chaining directly
           this.rpc.sendData('/admin/users/me', "GET", [], true).completes.then((request) => {
             if(request.response.permissions['user.delete'] === 1){
+              this.ok = true;
               this.loading.close();
               this._routePageChanged('admin');
             } else {
@@ -259,7 +268,7 @@
       }
 
       _routePageChanged(page) {
-        if(page == "login" && this._retrieveTokenState()){
+        if(page == "login" && this._retrieveTokenState() && this.loaded){
           this.set('route.path', 'student');
 
           this.loading.open();
@@ -268,7 +277,8 @@
         // intercept if promise not resolved, we call again that method after resolution, so let's redirect to this page :D
         if(page == "admin" && !this.ok){
           this.set('route.path', this.page);
-          this.loading.open();
+          if(this.loaded)
+            this.loading.open();
         }
 
         this.page = page || 'home';
@@ -276,8 +286,9 @@
 
       _unauthorizedRedirect(){
         // TODO : do some logging ?
-        this.set('route.path', 'student');
-        this.loading.close();
+        this.set('route.path', this.page);
+        if(this.loaded)
+          this.loading.close();
 
         if(this.helper)
           this.helper.showToast("Bad guy.");
@@ -287,7 +298,7 @@
         if (page == "admin"){
           this._checkRights();
         }
-        if(this.loading)
+        if(this.loaded)
           this.loading.close();
         // Load page import on demand. Show 404 page if fails
         var resolvedPageUrl = this.resolveUrl('mi-' + page + '.html');
