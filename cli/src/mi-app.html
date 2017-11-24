@@ -26,6 +26,7 @@
 
 <link rel="import" href="mi-icons.html">
 <link rel="import" href="mi-helper.html">
+<link rel="import" href="mi-rpc.html">
 
 <link rel="lazy-import" href="mi-home.html">
 <link rel="lazy-import" href="mi-login.html">
@@ -143,6 +144,7 @@
     </app-drawer-layout>
 
     <mi-helper id="helper"></mi-helper>
+    <mi-rpc id="rpc"></mi-rpc>
   </template>
 
   <script>
@@ -157,6 +159,7 @@
             observer: '_pageChanged',
           },
           helper: Object,
+          rpc: Object,
           routeData: Object,
           subroute: String,
           // This shouldn't be neccessary, but the Analyzer isn't picking up
@@ -175,6 +178,7 @@
       ready(){
         super.ready();
         this.helper = this.shadowRoot.getElementById('helper');
+        this.rpc = this.shadowRoot.getElementById('rpc');
       }
 
       connectedCallback(){
@@ -206,13 +210,45 @@
         });
       }
 
+      _retrieveTokenState(){
+        const token = localStorage.getItem('authToken');
+        if(token !== null){
+          return true;
+        }
+        return false;
+      }
+
+      _checkRights(){
+        if(this.rpc){
+          this.rpc.sendData('/admin/users/me', "GET", [], true).completes.then((request) => {
+            if(request.response.permissions['user.delete'] === 1){
+              return true;
+            }
+            return false;
+          });
+        } else {
+          console.log("context not ready");
+        }
+      }
+
       _routePageChanged(page) {
+        if(page == "login" && this._retrieveTokenState()){
+          this.set('route.path', 'student');
+        }
         // If no page was found in the route data, page will be an empty string.
         // Default to 'conv' in that case.
+        
         if (page == "admin"){
-          // Check auth in that case
+          this._checkRights() ? this.set('route.path', 'admin') : this._unauthorizedRedirect();
         }
+        
         this.page = page || 'home';
+      }
+
+      _unauthorizedRedirect(){
+        // TODO : do some logging ?
+        this.set('route.path', 'student');
+        this.helper.showToast("Bad guy.");
       }
 
       _pageChanged(page) {

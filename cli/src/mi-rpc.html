@@ -62,7 +62,7 @@ class MiRpc extends Polymer.Element {
     this.ironAjax.handleAs = "json";
     this.ironAjax.method = method;
 
-    this.ironAjax.generateRequest();
+    return this.ironAjax.generateRequest();
   }
 
   _refresh(){
@@ -87,7 +87,7 @@ class MiRpc extends Polymer.Element {
     return new Promise((resolve, reject) => {
       const event = new CustomEvent('rpcError', {detail: {data:data.detail, route: this._getApiRoute(data.detail.url)}, bubbles: true});
 
-      if(data.detail.response.status === 401){
+      if(data.detail.response && data.detail.response.status === 401){
         this._refresh();
         this._retry(data);
       }
@@ -98,7 +98,10 @@ class MiRpc extends Polymer.Element {
   }
 
   _getApiRoute(url){
-    return url.replace(this.serverPath, '');
+    if(url)
+      return url.replace(this.serverPath, '');
+    
+    return null;
   }
 }
 
