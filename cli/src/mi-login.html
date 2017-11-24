@@ -227,6 +227,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                                                 username: userInput.value,
                                                 password: passInput.value
                                             };
+                        this.helper.toggleLoading();
                         this.rpc.sendData(this.authUrl, "POST", structuredData);
                     } else {
                         this.helper.showToast("Vérifiez votre saisie");
@@ -249,6 +250,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 if(route === this.authUrl){
                   this._saveToken(event);
                 } else if (route === this.userUrl){
+                  this.helper.toggleLoading();
                   this.helper.showToast("Vous êtes connecté !");
                   const userPermissions = event.detail.data.response.permissions['user.delete'];
                   this._redirectToPage(userPermissions);

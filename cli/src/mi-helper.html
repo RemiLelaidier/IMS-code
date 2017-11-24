@@ -9,7 +9,8 @@ class MiHelper extends Polymer.Element {
   static get properties(){
     return {
       toast: Object,
-      dialog: Object
+      dialog: Object,
+      loadingLoaded: Boolean
     }
   }
 
@@ -38,6 +39,30 @@ class MiHelper extends Polymer.Element {
 
     this.toast.text = text;
     this.toast.open();
+  }
+
+  toggleLoading(){
+    if(this.dialog && this.loadingLoaded){
+      this.dialog.toggle();
+    } else {
+      this._doCreateLoading();
+      this.dialog.open();
+    }
+  }
+
+  _doCreateLoading(){
+    this.dialog = document.createElement('paper-dialog');
+    this.dialog.modal = true;
+    const title = document.createElement('h2');
+    title.innerHTML = "Chargement en cours";
+    const spinner = document.createElement('paper-spinner-lite'); 
+    spinner.active = true;
+    spinner.className = "thin";
+    this.dialog.appendChild(title);
+    this.dialog.appendChild(spinner);
+    this.dialog.id = "loading";
+    document.body.appendChild(this.dialog);
+    this.loadingLoaded = true;
   }
 
 /**
