@@ -23,6 +23,7 @@
 <link rel="import" href="../bower_components/paper-toast/paper-toast.html">
 <link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
 <link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../bower_components/paper-spinner/paper-spinner-lite.html">
 
 <link rel="import" href="mi-icons.html">
 <link rel="import" href="mi-helper.html">
@@ -96,6 +97,10 @@
           color: #000;
         }
       }
+      #loading {
+        display: flex;
+        align-items: end;
+      }
     </style>
 
     <app-location
@@ -145,6 +150,10 @@
 
     <mi-helper id="helper"></mi-helper>
     <mi-rpc id="rpc"></mi-rpc>
+    <paper-dialog id="loading">
+      <h2>Chargement en cours</h2>
+      <paper-spinner-lite active class="thin"></paper-spinner-lite>    
+    </paper-dialog>
   </template>
 
   <script>
@@ -179,6 +188,7 @@
         super.ready();
         this.helper = this.shadowRoot.getElementById('helper');
         this.rpc = this.shadowRoot.getElementById('rpc');
+        this.loading = this.shadowRoot.getElementById('loading');
       }
 
       connectedCallback(){
@@ -224,6 +234,7 @@
           this.rpc.sendData('/admin/users/me', "GET", [], true).completes.then((request) => {
             if(request.response.permissions['user.delete'] === 1){
               this.ok = true;
+              this.loading.close();
               this._routePageChanged('admin');
             } else {
               this._unauthorizedRedirect();
@@ -240,11 +251,7 @@
           this.set('route.path', 'student');
         }
         // If no page was found in the route data, page will be an empty string.
-        // Default to 'conv' in that case.
-        
-        if (page == "admin"){
-          !this.ok ? this._checkRights() : null;
-        }
+        // Default to 'conv' in that case
 
         this.page = page || 'home';
       }
@@ -252,12 +259,19 @@
       _unauthorizedRedirect(){
         // TODO : do some logging ?
         this.set('route.path', 'student');
+        this.loading.close();
 
         if(this.helper)
           this.helper.showToast("Bad guy.");
       }
 
       _pageChanged(page) {
+        if (page == "admin"){
+          !this.ok ? this._checkRights() : this.page = 'login';
+          this.loading.open();
+          return;
+        }
+
         // Load page import on demand. Show 404 page if fails
         var resolvedPageUrl = this.resolveUrl('mi-' + page + '.html');
         Polymer.importHref(
