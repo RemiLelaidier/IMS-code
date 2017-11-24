@@ -116,8 +116,12 @@
       <app-header-layout has-scrolling-region>
 
         <app-header slot="header" condenses reveals effects="waterfall">
-          <app-toolbar>
-            <div class="logoMiage"><a name="convention" class="homeBtn"><img class="logoMiageDetail" src="/images/logo_miage_thumb.png" alt="Miage Nice"></a></div>
+          <app-toolbar id="toolbar">
+            <div class="logoMiage">
+              <a name="convention" class="homeBtn">
+                <img class="logoMiageDetail" src="/images/logo_miage_thumb.png" alt="Miage Nice">
+              </a>
+            </div>
             <div main-title>Gestion des stages</div>
             <paper-menu-button id="debugMenu" horizontal-align="right" horizontal-offset="50">
                 <paper-icon-button icon="bug-report" slot="dropdown-trigger" alt="menu"></paper-icon-button>
@@ -224,12 +228,24 @@
         return false;
       }
 
+      _retrieveTokExpStatus(){
+        const tokenDate = localStorage.getItem('dateSet');
+        const expires = localStorage.getItem('expiresIn') * 1000;
+
+        const timeout = parseInt(tokenDate) + parseInt(expires);
+        return Date.now() > new Date(timeout);
+      }
+
       _checkRights(){
-        if(this.rpc){
+        this.loading.open();
+        if(this.ok && this._retrieveTokExpStatus()){
+          return true;
+        }
+        
+        if(this.rpc && !this.ok){
           // sendData return his ironRequest, who expose his completes promise -> chaining directly
           this.rpc.sendData('/admin/users/me', "GET", [], true).completes.then((request) => {
             if(request.response.permissions['user.delete'] === 1){
-              this.ok = true;
               this.loading.close();
               this._routePageChanged('admin');
             } else {
@@ -245,9 +261,15 @@
       _routePageChanged(page) {
         if(page == "login" && this._retrieveTokenState()){
           this.set('route.path', 'student');
+
+          this.loading.open();
         }
-        // If no page was found in the route data, page will be an empty string.
-        // Default to 'conv' in that case
+
+        // intercept if promise not resolved, we call again that method after resolution
+        if(page == "admin" && !this.ok){
+          this.set('route.path', 'home');
+          this.loading.open();
+        }
 
         this.page = page || 'home';
       }
@@ -263,11 +285,10 @@
 
       _pageChanged(page) {
         if (page == "admin"){
-          !this.ok ? this._checkRights() : this.page = 'login';
-          this.loading.open();
-          return;
+          this._checkRights();
         }
-
+        if(this.loading)
+          this.loading.close();
         // Load page import on demand. Show 404 page if fails
         var resolvedPageUrl = this.resolveUrl('mi-' + page + '.html');
         Polymer.importHref(
@@ -275,6 +296,7 @@
             null,
             this._showPage404.bind(this),
             true);
+          
       }
 
       _showPage404() {
