@@ -220,14 +220,18 @@
 
       _checkRights(){
         if(this.rpc){
+          // sendData return his ironRequest, who expose his completes promise -> chaining directly
           this.rpc.sendData('/admin/users/me', "GET", [], true).completes.then((request) => {
             if(request.response.permissions['user.delete'] === 1){
-              return true;
+              this.ok = true;
+              this._routePageChanged('admin');
+            } else {
+              this._unauthorizedRedirect();
             }
-            return false;
           });
         } else {
-          console.log("context not ready");
+          // As we are calling that in routePageChanged, MiApp could be in a dirty state (component reload -> notReady() )
+          console.warn("Can't call checkRights, miRPC not ready");
         }
       }
 
@@ -239,16 +243,18 @@
         // Default to 'conv' in that case.
         
         if (page == "admin"){
-          this._checkRights() ? this.set('route.path', 'admin') : this._unauthorizedRedirect();
+          !this.ok ? this._checkRights() : null;
         }
-        
+
         this.page = page || 'home';
       }
 
       _unauthorizedRedirect(){
         // TODO : do some logging ?
         this.set('route.path', 'student');
-        this.helper.showToast("Bad guy.");
+
+        if(this.helper)
+          this.helper.showToast("Bad guy.");
       }
 
       _pageChanged(page) {
