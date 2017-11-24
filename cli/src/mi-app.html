@@ -265,9 +265,9 @@
           this.loading.open();
         }
 
-        // intercept if promise not resolved, we call again that method after resolution
+        // intercept if promise not resolved, we call again that method after resolution, so let's redirect to this page :D
         if(page == "admin" && !this.ok){
-          this.set('route.path', 'home');
+          this.set('route.path', this.page);
           this.loading.open();
         }
 
