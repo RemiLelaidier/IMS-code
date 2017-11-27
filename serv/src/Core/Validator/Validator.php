@@ -68,35 +68,39 @@ class Validator {
     private function validate($input){
         $error = false;
         foreach ($this->fields as $field){
+            $value = "";
+            if(array_key_exists('value', $input))
+                $value = $input['value'];
+
             if($input['id'] == $field['key']){
                 switch ($field['type']){
                     case 'string' :
-                        if(!Respect::stringType()->validate($input['value'])){
+                        if(!Respect::stringType()->validate($value)){
                             $error = true;
                         }
                         break;
                     case 'intVal' :
-                        if(!Respect::intVal()->validate($input['value'])){
+                        if(!Respect::intVal()->validate($value)){
                             $error = true;
                         }
                         break;
                     case 'email' :
-                        if(!Respect::email()->validate($input['value'])) {
+                        if(!Respect::email()->validate($value)) {
                             $error = true;
                         }
                         break;
                     case 'date' :
-                        if(!Respect::date()->validate($input['value'])){
+                        if(!Respect::date()->validate($value)){
                             $error = true;
                         }
                         break;
                     case 'phone' :
-                        if(!Respect::phone()->validate($input['value'])){
+                        if(!Respect::phone()->validate($value)){
                             $error = true;
                         }
                         break;
                     case 'url' :
-                        if(!Respect::url()->validate($input['value'])){
+                        if(!Respect::url()->validate($value)){
                             $error = true;
                         }
                         break;
