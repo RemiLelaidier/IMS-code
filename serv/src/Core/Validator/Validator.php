@@ -106,7 +106,10 @@ class Validator {
         }
 
         if($error){
-            $value = $input['value'];
+            $value = "undefined";
+            if(array_key_exists('value', $input))
+                $value = $input['value'];
+            
             $this->registerError("invalid value : $value", $input['id']);
         }
     }
