@@ -128,6 +128,7 @@
                 <paper-listbox slot="dropdown-content">
                   <paper-item on-click="x_goToAdmin">Admin panel</paper-item>
                   <paper-item on-click="x_clearLocalStorage">Clear localStorage</paper-item>
+                  <paper-item on-click="x_refreshToken">Refresh auth token</paper-item>
                 </paper-listbox>
             </paper-menu-button>
             <paper-icon-button id="loginBtn" icon="perm-identity"></paper-icon-button>
@@ -300,6 +301,7 @@
         }
         if(this.loaded)
           this.loading.close();
+
         // Load page import on demand. Show 404 page if fails
         var resolvedPageUrl = this.resolveUrl('mi-' + page + '.html');
         Polymer.importHref(
@@ -307,7 +309,24 @@
             null,
             this._showPage404.bind(this),
             true);
-          
+      }
+
+      _refreshTokenState(){
+        const refreshToken = localStorage.getItem('refreshToken');
+
+        this.rpc.sendData('/admin/auth/refresh', 'POST', { refresh_token:  refreshToken}).completes.then((request) => {
+          if(request.response){
+              const refreshToken = request.response;
+              localStorage.setItem('authToken', refreshToken.access_token);
+              localStorage.setItem('expiresIn', refreshToken.expires_in);
+              localStorage.setItem('refreshToken', refreshToken.refresh_token);
+              localStorage.setItem('dateSet', Date.now());
+              this.rpc.sendData('/admin/users/me', "GET", [], true).completes.then((request) => {
+                if(request.response.email)
+                  this.helper.showToast('Refresh done');
+              });
+          }
+        });
       }
 
       _showPage404() {
@@ -316,6 +335,10 @@
 
       x_goToAdmin(){
         this.set('route.path', 'admin');
+      }
+
+      x_refreshToken(){
+        this._refreshTokenState();
       }
 
       x_clearLocalStorage(){
