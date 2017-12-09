@@ -2,6 +2,7 @@
 
 namespace App\Ims\Convention\Controller;
 
+use Illuminate\Database\Eloquent\Model;
 use App\Core\Controller\Controller;
 use App\Core\Generator\PDF\Field;
 use App\Core\Generator\PDF\PDFGenerator;
@@ -154,47 +155,47 @@ class ConventionController extends Controller
         foreach ($inputs as $input){
             switch ($input['id']){
                 case 'student_name' :
-                    $this->studentModel->name = $input['value'];
+                    $this->saveValue($this->studentModel, 'name', $input);
                     break;
                 case 'student_surname' :
-                    $this->studentModel->surname = $input['value'];
+                    $this->saveValue($this->studentModel, 'surname', $input);
                     break;
                 case 'student_ss' :
-                    $this->studentModel->ss = $input['value'];
+                    $this->saveValue($this->studentModel, 'ss', $input);
                     break;
                 case 'student_unice_number' :
-                    $this->studentModel->num = $input['value'];
+                    $this->saveValue($this->studentModel, 'num', $input);
                     break;
                 case 'student_email' :
-                    $this->studentModel->email = $input['value'];
+                    $this->saveValue($this->studentModel, 'email', $input);
                     break;
                 case 'student_dob' :
-                    $this->studentModel->dob = $input['value'];
+                    $this->saveValue($this->studentModel, 'dob', $input);
                     break;
                 case 'student_phone' :
-                    $this->studentModel->phone = $input['value'];
+                    $this->saveValue($this->studentModel, 'phone', $input);
                     break;
                 case 'student_insurance' :
-                    $this->studentModel->insurance = $input['value'];
+                    $this->saveValue($this->studentModel, 'insurance', $input);
                     break;
                 case 'student_policy' :
-                    $this->studentModel->police = $input['value'];
+                    $this->saveValue($this->studentModel, 'police', $input);
                     break;
             }
         }
         foreach ($dropdowns as $dropdown){
             switch ($dropdown['id']){
                 case 'student_gender' :
-                    $this->studentModel->gender = $dropdown['value'];
+                    $this->saveValue($this->studentModel, 'gender', $dropdown);
                     break;
                 case 'promotion' :
-                    $this->studentModel->promotion = $dropdown['value'];
+                    $this->saveValue($this->studentModel, 'promotion', $dropdown);
                     break;
             }
         }
         foreach ($addresses as $address){
             if ($address['id'] == 'student_address'){
-                $this->studentModel->address = $address['value'];
+                $this->saveValue($this->studentModel, 'address', $address);
             }
         }
     }
@@ -211,40 +212,40 @@ class ConventionController extends Controller
         foreach ($inputs as $input){
             switch ($input['id']){
                 case 'ent_name' :
-                    $this->companyModel->name = $input['value'];
+                    $this->saveValue($this->companyModel, 'name', $input);
                     break;
                 case 'ent_website' :
-                    $this->companyModel->website = $input['value'];
+                    $this->saveValue($this->companyModel, 'website', $input);
                     break;
                 case 'ent_director_surname':
-                    $this->companyModel->director_surname = $input['value'];
+                    $this->saveValue($this->companyModel, 'director_surname', $input);
                     break;
                 case 'ent_director_name' :
-                    $this->companyModel->director_name = $input['value'];
+                    $this->saveValue($this->companyModel, 'director_name', $input);
                     break;
                 case 'ent_director_email' :
-                    $this->companyModel->director_email = $input['value'];
+                    $this->saveValue($this->companyModel, 'director_email', $input);
                     break;
                 case 'ent_director_phone' :
-                    $this->companyModel->director_phone = $input['value'];
+                    $this->saveValue($this->companyModel, 'director_phone', $input);
                     break;
                 case 'ent_director_quality' :
-                    $this->companyModel->director_quality = $input['value'];
+                    $this->saveValue($this->companyModel, 'director_quality', $input);
                     break;
             }
         }
         foreach ($dropdowns as$dropdown){
             if($dropdown['id'] == 'ent_director_gender'){
-                $this->companyModel->director_gender = $dropdown['value'];
+                $this->saveValue($this->companyModel, 'director_gender', $dropdown);
             }
         }
         foreach ($addresses as $address){
             switch ($address['id']){
                 case 'ent_address' :
-                    $this->companyModel->address = $address['value'];
+                    $this->saveValue($this->companyModel, 'address', $address);
                     break;
                 case 'ent_stage_address' :
-                    $this->internshipModel->address = $address['value'];
+                    $this->saveValue($this->internshipModel, 'address', $address);
                     break;
             }
         }
@@ -259,6 +260,7 @@ class ConventionController extends Controller
         $inputs = $section['inputs'];
         $dropdowns = $section['dropdowns'];
         $textareas = $section['textareas'];
+
         foreach ($inputs as $input){
 
             if(!array_key_exists('value', $input))
@@ -266,19 +268,19 @@ class ConventionController extends Controller
 
             switch ($input['id']){
                 case 'internship_dos' :
-                    $this->internshipModel->start = strtotime($input['value']);
+                    $this->internshipModel->start = strtotime($this->convertToAmericanDate($input['value']));
                     break;
                 case 'internship_doe' :
-                    $this->internshipModel->end = strtotime($input['value']);
+                    $this->internshipModel->end = strtotime($this->convertToAmericanDate($input['value']));
                     break;
-                case 'internship_week_hours' :
-                    $this->internshipModel->working_hours = $input['value'];
+               case 'internship_week_hours' :
+                   $this->saveValue($this->internshipModel, 'working_hours', $input);
                     break;
                 case 'internship_remuneration' :
-                    $this->internshipModel->income = $input['value'];
+                    $this->saveValue($this->internshipModel, 'income', $input);
                     break;
                 case 'internship_title' :
-                    $this->internshipModel->subject = $input['value'];
+                    $this->saveValue($this->internshipModel, 'subject', $input);
                     break;
             }
         }
@@ -288,7 +290,7 @@ class ConventionController extends Controller
                 continue;
 
             if($dropdown['id'] == 'internship_remuneration_way'){
-                $this->internshipModel->payement = $dropdown['value'];
+                $this->saveValue($this->internshipModel, 'payement', $dropdown);
             }
         }
         foreach ($textareas as $textarea){
@@ -298,16 +300,16 @@ class ConventionController extends Controller
 
             switch ($textarea['id']){
                 case 'internship_hours_text' :
-                    $this->internshipModel->weekly_duration = $textarea['value'];
+                    $this->saveValue($this->internshipModel, 'weekly_duration', $textarea);
                     break;
                 case 'internship_extras_text' :
-                    $this->internshipModel->extra_work = $textarea['value'];
+                    $this->saveValue($this->internshipModel, 'extra_work', $textarea);
                     break;
                 case 'internship_advantages' :
-                    $this->internshipModel->advantages = $textarea['value'];
+                    $this->saveValue($this->internshipModel, 'advantages', $textarea);
                     break;
                 case 'internship_description' :
-                    $this->internshipModel->detail = $textarea['value'];
+                    $this->saveValue($this->internshipModel, 'detail', $textarea);
                     break;
             }
         }
@@ -321,47 +323,48 @@ class ConventionController extends Controller
     private function responsablesAction($section){
         $inputs = $section['inputs'];
         $dropdowns = $section['dropdowns'];
+
         foreach ($inputs as $input) {
             switch($input['id']){
                 case 'ent_tutor_surname' :
-                    $this->employeeModel->surname = $input['value'];
+                    $this->saveValue($this->employeeModel, 'surname', $input);
                     break;
                 case 'ent_tutor_name' :
-                    $this->employeeModel->name = $input['value'];
+                    $this->saveValue($this->employeeModel, 'name', $input);
                     break;
                 case 'ent_tutor_email' :
-                    $this->employeeModel->email = $input['value'];
+                    $this->saveValue($this->employeeModel, 'email', $input);
                     break;
                 case 'ent_tutor_phone' :
-                    $this->employeeModel->phone = $input['value'];
+                    $this->saveValue($this->employeeModel, 'phone', $input);
                     break;
                 case 'ent_tutor_quality' :
-                    $this->employeeModel->quality = $input['value'];
+                    $this->saveValue($this->employeeModel, 'quality', $input);
                     break;
                 case 'unice_tutor_surname' :
-                    $this->uniceModel->surname = $input['value'];
+                    $this->saveValue($this->uniceModel, 'surname', $input);
                     break;
                 case 'unice_tutor_name' :
-                    $this->uniceModel->name = $input['value'];
+                    $this->saveValue($this->uniceModel, 'name', $input);
                     break;
                 case 'unice_tutor_email' :
-                    $this->uniceModel->email = $input['value'];
+                    $this->saveValue($this->uniceModel, 'email', $input);
                     break;
                 case 'unice_tutor_phone' :
-                    $this->uniceModel->phone = $input['value'];
+                    $this->saveValue($this->uniceModel, 'phone', $input);
                     break;
                 case 'unice_tutor_quality' :
-                    $this->uniceModel->quality = $input['value'];
+                    $this->saveValue($this->uniceModel, 'quality', $input);
                     break;
             }
         }
         foreach($dropdowns as $dropdown){
             switch($dropdown['id']){
               case 'ent_tutor_gender' :
-                  $this->employeeModel->gender = $dropdown['value'];
+                  $this->saveValue($this->employeeModel, 'gender', $dropdown);
                   break;
               case 'unice_tutor_gender' :
-                  $this->uniceModel->gender = $dropdown['value'];
+                  $this->saveValue($this->uniceModel, 'gender', $dropdown);
                   break;
             }
         }
@@ -376,7 +379,7 @@ class ConventionController extends Controller
       $textareas = $section['textareas'];
       foreach ($textareas as $textarea){
           if($textarea['id'] == 'convention_extras'){
-              $this->internshipModel->notes = $textarea['value'];
+              $this->saveValue($this->internshipModel, 'notes', $textarea);
           }
       }
     }
@@ -389,10 +392,9 @@ class ConventionController extends Controller
      * @throws \Exception
      */
     private function generateConventionFor(string $name) {
-        $wordGenerator = new DocumentGenerator($this->getModelAsTemplateValues(), "convention/convention_template", date('Y') . "-" . $name);
-        $wordGenerator->writeAndSave($this->getAssetsFolder() . "convention/generated/");
+        /*$wordGenerator = new DocumentGenerator($this->getModelAsTemplateValues(), "convention/convention_template", date('Y') . "-" . $name);
+        $wordGenerator->writeAndSave($this->getAssetsFolder() . "convention/generated/");*/
 
-        // @Tool : Toggle to preview pdf generation
         $slugify = new Slugify();
         $pdfName = $slugify->slugify($name);
 
@@ -474,13 +476,13 @@ class ConventionController extends Controller
             'internship_detail'           => $this->internshipModel->detail,
 
             'unice_tutor_fullname'        => $this->uniceModel->surname . " " . $this->uniceModel->name,
-            'ent_tutor_fullname'          => $this->employeeModel->surname . " " . $this->employeeModel->name,
+            //'ent_tutor_fullname'          => $this->employeeModel->surname . " " . $this->employeeModel->name,
             'unice_tutor_quality'         => $this->uniceModel->quality,
-            'ent_tutor_quality'           => $this->uniceModel->quality,
+            //'ent_tutor_quality'           => $this->employeeModel->quality,
             'unice_tutor_phone'           => $this->uniceModel->phone,
-            'ent_tutor_phone'             => $this->employeeModel->phone,
+            //'ent_tutor_phone'             => $this->employeeModel->phone,
             'unice_tutor_email'           => $this->uniceModel->email,
-            'ent_tutor_email'             => $this->employeeModel->email,
+            //'ent_tutor_email'             => $this->employeeModel->email,
             'student_insurance'           => $this->studentModel->insurance,
 
             'activity_1'                  => "",
@@ -742,5 +744,25 @@ class ConventionController extends Controller
      */
     public function getAssetsFolder() : string {
         return dirname(dirname(getcwd())) . "/assets/";
+    }
+
+    public function convertToAmericanDate($dateFR) : string {
+        $date = explode("/", $dateFR);
+
+        return $date[2].'-'.$date[1].'-'.$date[0];
+    }
+
+    /**
+     * @param Model  $model
+     * @param string $key
+     * @param array  $data
+     */
+    private function saveValue (Model $model, string $key, array $data): void {
+        $value = "";
+        if (array_key_exists('value', $data)) {
+            $value = $data['value'];
+        }
+
+        $model->$key = $value;
     }
 }

@@ -132,7 +132,7 @@ class Field {
     /**
      * @return string
      */
-    public function getValue (): string {
+    public function getValue (): ?string {
 
         return $this->value;
     }
@@ -183,7 +183,7 @@ class Field {
      *
      * @return Field
      */
-    public function setValue (string $value): Field {
+    public function setValue (?string $value): ?Field {
 
         $this->value = $value;
 
