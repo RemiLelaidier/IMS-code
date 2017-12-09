@@ -82,12 +82,12 @@ class ConventionController extends Controller
             'data' => $conventionData
         ]);
 
-        $validator = new Validator($this->getValidationRules());
+        /*$validator = new Validator($this->getValidationRules());
         $validator->validateParams($decoded);
         $errors = $validator->getErrors();
         if(!empty($errors)){
             return $this->json($response, $errors, 400);
-        }
+        }*/
 
         // Initialize Models
         $this->studentModel = new StudentModel();
@@ -398,7 +398,7 @@ class ConventionController extends Controller
         $slugify = new Slugify();
         $pdfName = $slugify->slugify($name);
 
-        $original = $this->getAssetsFolder() . "convention/convention_compatibility.pdf";
+        $original = $this->getAssetsFolder() . "convention/convention_compatibility_abroad_convert.pdf";
         $merged = $this->getAssetsFolder() . "convention/generated/$pdfName.pdf";
 
         $pdfGenerator = new PDFGenerator($this->getMappedFields(), $this->getConventionModel(), 'P', 'pt', 'A4');
@@ -476,13 +476,13 @@ class ConventionController extends Controller
             'internship_detail'           => $this->internshipModel->detail,
 
             'unice_tutor_fullname'        => $this->uniceModel->surname . " " . $this->uniceModel->name,
-            //'ent_tutor_fullname'          => $this->employeeModel->surname . " " . $this->employeeModel->name,
+            'ent_tutor_fullname'          => $this->employeeModel->surname . " " . $this->employeeModel->name,
             'unice_tutor_quality'         => $this->uniceModel->quality,
-            //'ent_tutor_quality'           => $this->employeeModel->quality,
+            'ent_tutor_quality'           => $this->employeeModel->quality,
             'unice_tutor_phone'           => $this->uniceModel->phone,
-            //'ent_tutor_phone'             => $this->employeeModel->phone,
+            'ent_tutor_phone'             => $this->employeeModel->phone,
             'unice_tutor_email'           => $this->uniceModel->email,
-            //'ent_tutor_email'             => $this->employeeModel->email,
+            'ent_tutor_email'             => $this->employeeModel->email,
             'student_insurance'           => $this->studentModel->insurance,
 
             'activity_1'                  => "",
@@ -540,7 +540,7 @@ class ConventionController extends Controller
      * @throws \Exception : invalid field
      */
     private function getMappedFields() : array {
-        $fields = $this->getAssetsFolder() . "convention/fields.json";
+        $fields = $this->getAssetsFolder() . "convention/fields_abroad.json";
 
         $fields = json_decode(file_get_contents($fields), true);
 

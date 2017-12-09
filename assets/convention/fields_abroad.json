@@ -1,0 +1,527 @@
+[{"school_year": 
+     {"llx": 102.24,
+     "lly": 771.48,
+     "urx": 185.04,
+     "ury": 783.84,
+   "width": 82.8,
+  "height": 12.36,
+  "page": 1
+}},
+
+{"internship_type_opt_1": 
+     {"llx": 419.28,
+     "lly": 780.72,
+     "urx": 428.64,
+     "ury": 790.56,
+   "width": 9.36,
+  "height": 9.8399,
+"page": 1}},
+
+
+{"internship_type_opt_2": 
+     {"llx": 419.28,
+     "lly": 763.44,
+     "urx": 428.64,
+     "ury": 773.28,
+   "width": 9.36,
+  "height": 9.8399,
+"page":1}},
+
+
+{"internship_type_opt_3": 
+     {"llx": 419.28,
+     "lly": 745.2,
+     "urx": 428.64,
+     "ury": 755.04,
+   "width": 9.36,
+  "height": 9.8399,
+"page": 1}},
+
+
+{"ent_name": 
+     {"llx": 331.08,
+     "lly": 669.84,
+     "urx": 546.6,
+     "ury": 682.2,
+   "width": 215.52,
+  "height": 12.36,
+  "page": 1
+}},
+
+{"ent_address_1": 
+     {"llx": 340.8,
+     "lly": 656.16,
+     "urx": 543.12,
+     "ury": 668.52,
+   "width": 202.32,
+  "height": 12.36,
+  "page": 1
+}},
+
+{"ent_address_2": 
+     {"llx": 309.24,
+     "lly": 642.48,
+     "urx": 546.24,
+     "ury": 654.6,
+   "width": 237,
+  "height": 12.12,
+  "page": 1
+}},
+
+{"ent_director_fullname": 
+     {"llx": 309.24,
+     "lly": 614.88,
+     "urx": 546.24,
+     "ury": 627.12,
+   "width": 237,
+  "height": 12.24,
+  "page": 1
+}},
+
+{"ent_director_quality": 
+     {"llx": 391.92,
+     "lly": 601.2,
+     "urx": 548.52,
+     "ury": 613.56,
+   "width": 156.6,
+  "height": 12.36,
+  "page": 1
+}},
+
+{"internship_service": 
+     {"llx": 309.24,
+     "lly": 573.6,
+     "urx": 546.12,
+     "ury": 585.84,
+   "width": 236.88,
+  "height": 12.24,
+  "page": 1
+}},
+
+{"ent_director_phone": 
+     {"llx": 324.48,
+     "lly": 559.92,
+     "urx": 444.6,
+     "ury": 572.28,
+   "width": 120.12,
+  "height": 12.36,
+  "page": 1
+}},
+
+{"ent_director_email": 
+     {"llx": 339.72,
+     "lly": 546.12,
+     "urx": 548.4,
+     "ury": 558.48,
+   "width": 208.68,
+  "height": 12.36,
+  "page": 1
+}},
+
+{"ent_stage_address": 
+     {"llx": 309.24,
+     "lly": 518.64,
+     "urx": 544.68,
+     "ury": 530.88,
+   "width": 235.44,
+  "height": 12.24,
+  "page": 1
+}},
+
+{"student_name": 
+     {"llx": 90.48,
+     "lly": 463.189,
+     "urx": 247.2,
+     "ury": 475.549,
+   "width": 156.72,
+  "height": 12.36,
+  "page": 1
+}},
+
+{"student_usage_name": 
+     {"llx": 297.12,
+     "lly": 463.68,
+     "urx": 466.92,
+     "ury": 476.04,
+   "width": 169.8,
+  "height": 12.36,
+  "page": 1
+}},
+
+{"student_surname": 
+     {"llx": 68.7129,
+     "lly": 445.728,
+     "urx": 245.789,
+     "ury": 458.088,
+   "width": 177.0761,
+  "height": 12.36,
+  "page": 1
+}},
+
+{"student_gender_female": 
+     {"llx": 283.68,
+     "lly": 442.92,
+     "urx": 292.92,
+     "ury": 452.76,
+   "width": 9.24,
+  "height": 9.84,
+  "page": 1
+}},
+
+{"student_gender_male": 
+     {"llx": 314.28,
+     "lly": 442.92,
+     "urx": 323.64,
+     "ury": 452.76,
+   "width": 9.36,
+  "height": 9.84,
+  "page": 1
+}},
+
+{"student_dob_day": 
+     {"llx": 363.357,
+     "lly": 443.885,
+     "urx": 391.729,
+     "ury": 458.252,
+   "width": 28.372,
+  "height": 14.367,
+"page": 1}},
+
+
+{"student_dob_month": 
+     {"llx": 394.972,
+     "lly": 443.725,
+     "urx": 423.344,
+     "ury": 457.074,
+   "width": 28.372,
+  "height": 13.349,
+"page": 1}},
+
+
+{"student_dob_year": 
+     {"llx": 429.522,
+     "lly": 444.091,
+     "urx": 467.563,
+     "ury": 457.44,
+   "width": 38.041,
+  "height": 13.349,
+"page": 1}},
+
+
+{"student_address": 
+     {"llx": 69.84,
+     "lly": 426.96,
+     "urx": 467.88,
+     "ury": 439.32,
+   "width": 398.04,
+  "height": 12.36,
+  "page":1
+}},
+
+{"student_phone": 
+     {"llx": 53.52,
+     "lly": 408.48,
+     "urx": 211.56,
+     "ury": 420.84,
+   "width": 158.04,
+  "height": 12.36,
+  "page":1
+}},
+
+{"student_email": 
+     {"llx": 267,
+     "lly": 408.48,
+     "urx": 481.92,
+     "ury": 420.84,
+   "width": 214.92,
+  "height": 12.36,
+  "page":1
+}},
+
+{"student_unice_number": 
+     {"llx": 79.32,
+     "lly": 390.12,
+     "urx": 215.52,
+     "ury": 402.48,
+   "width": 136.2,
+  "height": 12.36,
+  "page": 1
+}},
+
+{"student_formation": 
+     {"llx": 38.4,
+     "lly": 353.4,
+     "urx": 543.72,
+     "ury": 365.76,
+   "width": 505.32,
+  "height": 12.36,
+  "page": 1
+}},
+
+{"internship_title": 
+     {"llx": 90.8911,
+     "lly": 314.94,
+     "urx": 536.988,
+     "ury": 326.282,
+   "width": 446.0969,
+  "height": 11.342,
+"page": 1}},
+
+
+{"internship_dos": 
+     {"llx": 65.1396,
+     "lly": 296.812,
+     "urx": 154.58,
+     "ury": 312.196,
+   "width": 89.4404,
+  "height": 15.384,
+"page": 1}},
+
+
+{"internship_duration": 
+     {"llx": 130.851,
+     "lly": 278.823,
+     "urx": 213.676,
+     "ury": 294.207,
+   "width": 82.825,
+  "height": 15.384,
+"page": 1}},
+
+
+{"internship_doe": 
+     {"llx": 167.492,
+     "lly": 297.143,
+     "urx": 256.933,
+     "ury": 312.527,
+   "width": 89.441,
+  "height": 15.384,
+"page": 1}},
+
+
+{"internship_presence_days": 
+     {"llx": 91.4112,
+     "lly": 261.011,
+     "urx": 138.104,
+     "ury": 276.395,
+   "width": 46.6928,
+  "height": 15.384,
+"page":1 }},
+
+
+{"internship_detail": 
+     {"llx": 77.16,
+     "lly": 223.44,
+     "urx": 549.72,
+     "ury": 235.8,
+   "width": 472.56,
+  "height": 12.36,
+  "page": 1
+}},
+
+{"unice_tutor_fullname": 
+     {"llx": 31.44,
+     "lly": 142.92,
+     "urx": 279.36,
+     "ury": 155.28,
+   "width": 247.92,
+  "height": 12.36,
+  "page": 1
+}},
+
+{"ent_tutor_fullname": 
+     {"llx": 311.64,
+     "lly": 142.92,
+     "urx": 556.8,
+     "ury": 155.28,
+   "width": 245.16,
+  "height": 12.36,
+  "page": 1
+}},
+
+{"unice_tutor_quality": 
+     {"llx": 106.44,
+     "lly": 124.56,
+     "urx": 277.44,
+     "ury": 136.92,
+   "width": 171,
+  "height": 12.36,
+  "page": 1
+}},
+
+{"ent_tutor_quality": 
+     {"llx": 344.16,
+     "lly": 124.56,
+     "urx": 550.56,
+     "ury": 136.92,
+   "width": 206.4,
+  "height": 12.36,
+  "page": 1
+}},
+
+{"unice_tutor_phone": 
+     {"llx": 46.32,
+     "lly": 106.2,
+     "urx": 166.68,
+     "ury": 118.56,
+   "width": 120.36,
+  "height": 12.36,
+  "page": 1
+}},
+
+{"ent_tutor_phone": 
+     {"llx": 326.88,
+     "lly": 106.2,
+     "urx": 447.12,
+     "ury": 118.56,
+   "width": 120.24,
+  "height": 12.36,
+  "page": 1
+}},
+
+{"unice_tutor_email": 
+     {"llx": 61.2,
+     "lly": 87.84,
+     "urx": 265.32,
+     "ury": 100.2,
+   "width": 204.12,
+  "height": 12.36,
+  "page": 1
+}},
+
+{"ent_tutor_email": 
+     {"llx": 339.24,
+     "lly": 87.84,
+     "urx": 555.84,
+     "ury": 100.2,
+   "width": 216.6,
+  "height": 12.36,
+  "page": 1
+}},
+{"internship_remuneration": 
+     {"llx": 327.733,
+     "lly": 594.538,
+     "urx": 416.665,
+     "ury": 606.36,
+   "width": 88.932,
+  "height": 11.822,
+  "page": 2}},
+
+{"attest_ent_name": 
+     {"llx": 166.32,
+     "lly": 707.28,
+     "urx": 482.28,
+     "ury": 727.44,
+   "width": 315.96,
+  "height": 20.16,
+  "page": 6
+}},
+
+{"attest_ent_address": 
+     {"llx": 80.76,
+     "lly": 676.68,
+     "urx": 484.2,
+     "ury": 696.84,
+   "width": 403.44,
+  "height": 20.16,
+  "page": 6
+}},
+
+{"attest_student_gender_female": 
+     {"llx": 381.6,
+     "lly": 589.68,
+     "urx": 390.96,
+     "ury": 599.52,
+   "width": 9.36,
+  "height": 9.84,
+  "page": 6
+
+}},
+{"attest_student_gender_male": 
+     {"llx": 403.56,
+     "lly": 589.68,
+     "urx": 412.8,
+     "ury": 599.52,
+   "width": 9.24,
+  "height": 9.84,
+  "page": 6
+
+}},
+{"attest_student_dob_day": 
+     {"llx": 473.64,
+     "lly": 589.92,
+     "urx": 499.44,
+     "ury": 610.08,
+   "width": 25.8,
+  "height": 20.16,
+  "page": 6
+}},
+
+{"attest_student_dob_month": 
+     {"llx": 503.4,
+     "lly": 589.8,
+     "urx": 523.56,
+     "ury": 609.96,
+   "width": 20.16,
+  "height": 20.16,
+  "page": 6
+}},
+
+{"attest_student_dob_year": 
+     {"llx": 527.04,
+     "lly": 589.8,
+     "urx": 564.36,
+     "ury": 609.96,
+   "width": 37.32,
+  "height": 20.16,
+  "page": 6
+}},
+
+{"attest_student_address": 
+     {"llx": 79.56,
+     "lly": 568.92,
+     "urx": 551.16,
+     "ury": 588.72,
+   "width": 471.6,
+  "height": 19.8,
+  "page": 6
+
+}},
+
+{"attest_student_email": 
+     {"llx": 82.92,
+     "lly": 547.08,
+     "urx": 288.36,
+     "ury": 567.24,
+   "width": 205.44,
+  "height": 20.16,
+  "page": 6
+}},
+
+{"attest_student_formation": 
+     {"llx": 49.8,
+     "lly": 503.64,
+     "urx": 553.32,
+     "ury": 523.8,
+   "width": 503.52,
+  "height": 20.16,
+  "page": 6
+}},
+
+{"attest_student_university": 
+     {"llx": 49.8,
+     "lly": 460.2,
+     "urx": 553.56,
+     "ury": 480.12,
+   "width": 503.76,
+  "height": 19.92,
+  "page": 6
+}},
+
+{"attest_total_remuneration": 
+     {"llx": 313.68,
+     "lly": 252.6,
+     "urx": 456.72,
+     "ury": 272.76,
+   "width": 143.04,
+  "height": 20.16,
+"page": 6}}]
